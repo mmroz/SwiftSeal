@@ -12,7 +12,6 @@
 		E410F08A23C93304001957A0 /* ASLComplexType.mm in Sources */ = {isa = PBXBuildFile; fileRef = E410F08823C93304001957A0 /* ASLComplexType.mm */; };
 		E410F08C23C93666001957A0 /* ASLComplexType_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = E410F08B23C93666001957A0 /* ASLComplexType_Internal.h */; };
 		E410F08E23C93D33001957A0 /* ASLCKKSEncoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E410F08D23C93D33001957A0 /* ASLCKKSEncoderTests.swift */; };
-		E410F09123C96265001957A0 /* ASLBatchEncoder.h in Headers */ = {isa = PBXBuildFile; fileRef = E410F08F23C96265001957A0 /* ASLBatchEncoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E410F09223C96265001957A0 /* ASLBatchEncoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = E410F09023C96265001957A0 /* ASLBatchEncoder.mm */; };
 		E410F09523CA1A3D001957A0 /* ASLDecryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = E410F09323CA1A3D001957A0 /* ASLDecryptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E410F09623CA1A3D001957A0 /* ASLDecryptor.mm in Sources */ = {isa = PBXBuildFile; fileRef = E410F09423CA1A3D001957A0 /* ASLDecryptor.mm */; };
@@ -101,6 +100,9 @@
 		E4B0954923BD0AE300FF780D /* ASLPlainTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B0954823BD0AE300FF780D /* ASLPlainTextTests.swift */; };
 		E4B0954C23BD5B3700FF780D /* ASLCipherText.h in Headers */ = {isa = PBXBuildFile; fileRef = E4B0954A23BD5B3700FF780D /* ASLCipherText.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E4B0954D23BD5B3700FF780D /* ASLCipherText.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4B0954B23BD5B3700FF780D /* ASLCipherText.mm */; };
+		E4B6485724174070002038B1 /* ASLBigUInt_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = E4B6485624173F73002038B1 /* ASLBigUInt_Internal.h */; };
+		E4B64859241DCF1E002038B1 /* ASLBatchEncoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B64858241DCF1E002038B1 /* ASLBatchEncoderTests.swift */; };
+		E4B6485B241DD129002038B1 /* ASLBatchEncoder.h in Headers */ = {isa = PBXBuildFile; fileRef = E4B6485A241DD129002038B1 /* ASLBatchEncoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E4BA55A223B8131F0067EBBC /* NSString+CXXAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = E4BA55A023B8131F0067EBBC /* NSString+CXXAdditions.h */; };
 		E4BA55A323B8131F0067EBBC /* NSString+CXXAdditions.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4BA55A123B8131F0067EBBC /* NSString+CXXAdditions.mm */; };
 		E4BA55AE23B8F23D0067EBBC /* ASLSmallModulusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BA55AD23B8F23D0067EBBC /* ASLSmallModulusTests.swift */; };
@@ -138,7 +140,6 @@
 		E410F08823C93304001957A0 /* ASLComplexType.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLComplexType.mm; sourceTree = "<group>"; };
 		E410F08B23C93666001957A0 /* ASLComplexType_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLComplexType_Internal.h; sourceTree = "<group>"; };
 		E410F08D23C93D33001957A0 /* ASLCKKSEncoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLCKKSEncoderTests.swift; sourceTree = "<group>"; };
-		E410F08F23C96265001957A0 /* ASLBatchEncoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLBatchEncoder.h; sourceTree = "<group>"; };
 		E410F09023C96265001957A0 /* ASLBatchEncoder.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLBatchEncoder.mm; sourceTree = "<group>"; };
 		E410F09323CA1A3D001957A0 /* ASLDecryptor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLDecryptor.h; sourceTree = "<group>"; };
 		E410F09423CA1A3D001957A0 /* ASLDecryptor.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLDecryptor.mm; sourceTree = "<group>"; };
@@ -236,6 +237,9 @@
 		E4B0954A23BD5B3700FF780D /* ASLCipherText.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLCipherText.h; sourceTree = "<group>"; };
 		E4B0954B23BD5B3700FF780D /* ASLCipherText.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLCipherText.mm; sourceTree = "<group>"; };
 		E4B0955323BD7CB400FF780D /* ASLSealContext_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLSealContext_Internal.h; sourceTree = "<group>"; };
+		E4B6485624173F73002038B1 /* ASLBigUInt_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLBigUInt_Internal.h; sourceTree = "<group>"; };
+		E4B64858241DCF1E002038B1 /* ASLBatchEncoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLBatchEncoderTests.swift; sourceTree = "<group>"; };
+		E4B6485A241DD129002038B1 /* ASLBatchEncoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLBatchEncoder.h; sourceTree = "<group>"; };
 		E4BA55A023B8131F0067EBBC /* NSString+CXXAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+CXXAdditions.h"; sourceTree = "<group>"; };
 		E4BA55A123B8131F0067EBBC /* NSString+CXXAdditions.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSString+CXXAdditions.mm"; sourceTree = "<group>"; };
 		E4BA55AD23B8F23D0067EBBC /* ASLSmallModulusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLSmallModulusTests.swift; sourceTree = "<group>"; };
@@ -296,6 +300,7 @@
 		E4271A1123B7F86500B08B37 /* AppleSealTests */ = {
 			isa = PBXGroup;
 			children = (
+				E4B64858241DCF1E002038B1 /* ASLBatchEncoderTests.swift */,
 				E4271A1223B7F86500B08B37 /* ASLBigUIntTests.swift */,
 				E4BA55AD23B8F23D0067EBBC /* ASLSmallModulusTests.swift */,
 				E43CA28223BA2BA4004EB5D8 /* ASLSealContextTests.swift */,
@@ -327,8 +332,9 @@
 		E4271A2C23B7FEDE00B08B37 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				E410F08F23C96265001957A0 /* ASLBatchEncoder.h */,
+				E4B6485A241DD129002038B1 /* ASLBatchEncoder.h */,
 				E410F09023C96265001957A0 /* ASLBatchEncoder.mm */,
+				E4B6485624173F73002038B1 /* ASLBigUInt_Internal.h */,
 				E4271A3823B8071D00B08B37 /* ASLBigUInt.h */,
 				E4271A3923B8071D00B08B37 /* ASLBigUInt.mm */,
 				E410F0A723CA6775001957A0 /* ASLCipherText_Internal.h */,
@@ -446,10 +452,10 @@
 				E43CA28823BA765B004EB5D8 /* ASLMemoryPoolHandle.h in Headers */,
 				E47C295F23D4AE8000AC70C9 /* ASLGaloisKeys_Internal.h in Headers */,
 				E453865A23C25C61001EADB8 /* ASLCKKSEncoder.h in Headers */,
+				E4B6485724174070002038B1 /* ASLBigUInt_Internal.h in Headers */,
 				E43CA27823B99AA9004EB5D8 /* ASLSealContextData.h in Headers */,
 				E4B0954C23BD5B3700FF780D /* ASLCipherText.h in Headers */,
 				E47C293823D3548700AC70C9 /* ASLGaloisKeys.h in Headers */,
-				E410F09123C96265001957A0 /* ASLBatchEncoder.h in Headers */,
 				E453865523C1F9EC001EADB8 /* ASLEncryptionParameters_Internal.h in Headers */,
 				E43CA2A523BBBAD0004EB5D8 /* ASLMemoryManagerProfileThreadLocal.h in Headers */,
 				E4BA55B523B900D70067EBBC /* ASLSmallModulus.h in Headers */,
@@ -462,6 +468,7 @@
 				E43CA29723BA9F7E004EB5D8 /* ASLMemoryManagerProfileGlobal.h in Headers */,
 				E47C295D23D4AC8600AC70C9 /* ASLRelinearizationKeys_Internal.h in Headers */,
 				E43CA27E23B99DC3004EB5D8 /* ASLEncryptionParameters.h in Headers */,
+				E4B6485B241DD129002038B1 /* ASLBatchEncoder.h in Headers */,
 				E410F0B323CBFE92001957A0 /* ASLEvaluator.h in Headers */,
 				E4271A1523B7F86500B08B37 /* AppleSeal.h in Headers */,
 				E47C293E23D35C5200AC70C9 /* ASLIntegerEncoder.h in Headers */,
@@ -664,6 +671,7 @@
 				E410F09C23CA2F88001957A0 /* ASLSecretKeyTests.swift in Sources */,
 				E47C293B23D3554A00AC70C9 /* ASLGaloisKeysTests.swift in Sources */,
 				E43CA28C23BA7C8E004EB5D8 /* ASLMemoryPoolHandleTests.swift in Sources */,
+				E4B64859241DCF1E002038B1 /* ASLBatchEncoderTests.swift in Sources */,
 				E43CA28323BA2BA4004EB5D8 /* ASLSealContextTests.swift in Sources */,
 				E43CA2A823BBBB68004EB5D8 /* ASLMemoryManagerProfileThreadLocalTests.swift in Sources */,
 				E47C293523D33F7700AC70C9 /* ASLRelinearizationKeysTests.swift in Sources */,

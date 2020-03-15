@@ -24,6 +24,7 @@ FOUNDATION_EXPORT const unsigned char AppleSealVersionString[];
 #import <AppleSeal/ASLMemoryManagerProfileFixed.h>
 #import <AppleSeal/ASLMemoryManagerProfileThreadLocal.h>
 #import <AppleSeal/ASLMemoryManager.h>
+#import <AppleSeal/ASLBatchEncoder.h>
 #import <AppleSeal/ASLParametersIdType.h>
 #import <AppleSeal/ASLPlainText.h>
 #import <AppleSeal/ASLCipherText.h>

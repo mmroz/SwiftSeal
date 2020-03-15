@@ -18,10 +18,10 @@
 #define SEAL_USE_INTRIN
 /* #undef SEAL_USE__UMUL128 */
 /* #undef SEAL_USE__BITSCANREVERSE64 */
-#define SEAL_USE___BUILTIN_CLZLL
+/* #undef SEAL_USE___BUILTIN_CLZLL */
 #define SEAL_USE___INT128
-#define SEAL_USE__ADDCARRY_U64
-#define SEAL_USE__SUBBORROW_U64
+/* #undef SEAL_USE__ADDCARRY_U64 */
+/* #undef SEAL_USE__SUBBORROW_U64 */
 /* #undef SEAL_USE_MSGSL */
 /* #undef SEAL_USE_MSGSL_SPAN */
 #define SEAL_USE_ZLIB

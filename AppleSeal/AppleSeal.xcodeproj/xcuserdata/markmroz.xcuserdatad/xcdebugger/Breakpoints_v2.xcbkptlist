@@ -47,5 +47,69 @@
             stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "79B2A228-7B6E-4C79-83D2-3EFCF46303F3"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AppleSeal/Classes/ASLBigUInt.mm"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
+            landmarkName = "-dividingRemainderWithBigUIntModulus:remainder:error:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E8A970B3-C744-4C1E-9D99-AD1FFED5DD05"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AppleSeal/Classes/ASLBigUInt.mm"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "210"
+            endingLineNumber = "210"
+            landmarkName = "-dividingRemainderWithBigUIntModulus:remainder:error:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E8A970B3-C744-4C1E-9D99-AD1FFED5DD05 - bd5a836c619f2fd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[ASLBigUInt dividingRemainderWithBigUIntModulus:remainder:error:]"
+                  moduleName = "AppleSeal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/markmroz/Desktop/SwiftSeal/AppleSeal/AppleSeal/Classes/ASLBigUInt.mm"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "210"
+                  endingLineNumber = "210"
+                  offsetFromSymbolStart = "453">
+               </Location>
+               <Location
+                  uuid = "E8A970B3-C744-4C1E-9D99-AD1FFED5DD05 - bd5a836c619f2fd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[ASLBigUInt dividingRemainderWithBigUIntModulus:remainder:error:]"
+                  moduleName = "AppleSeal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/markmroz/Desktop/SwiftSeal/AppleSeal/AppleSeal/Classes/ASLBigUInt.mm"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "210"
+                  endingLineNumber = "210"
+                  offsetFromSymbolStart = "601">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

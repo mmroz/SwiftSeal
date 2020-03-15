@@ -27,33 +27,33 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)init NS_UNAVAILABLE;
 
 +(BOOL)isMetaDataValidForPlainText:(ASLPlainText*)plainText
-							context:(ASLSealContext*)context
-				  allowPureKeyLevel:(BOOL)allowPureKeyLevel;
+                           context:(ASLSealContext*)context
+                 allowPureKeyLevel:(BOOL)allowPureKeyLevel;
 
 +(BOOL)isMetaDataValidForPlainText:(ASLPlainText*)plainText
-							context:(ASLSealContext*)context;
+                           context:(ASLSealContext*)context;
 
 +(BOOL)isMetaDataValidForCipherText:(ASLCipherText*)cipherText
-							 context:(ASLSealContext*)context
-				   allowPureKeyLevel:(BOOL)allowPureKeyLevel;
+                            context:(ASLSealContext*)context
+                  allowPureKeyLevel:(BOOL)allowPureKeyLevel;
 
 +(BOOL)isMetaDataValidForCipherText:(ASLCipherText*)cipherText
-							 context:(ASLSealContext*)context;
+                            context:(ASLSealContext*)context;
 
 +(BOOL)isMetaDataValidForSecretKey:(ASLSecretKey*)secretKey
-							context:(ASLSealContext*)context;
+                           context:(ASLSealContext*)context;
 
 +(BOOL)isMetaDataValidForPublicKey:(ASLPublicKey*)publicKey
-							context:(ASLSealContext*)context;
+                           context:(ASLSealContext*)context;
 
 +(BOOL)isMetaDataValidForKSwitchKeys:(ASLKSwitchKeys*)kSwitchKeys
-							  context:(ASLSealContext*)context;
+                             context:(ASLSealContext*)context;
 
 +(BOOL)isMetaDataValidForRelinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
-									  context:(ASLSealContext*)context;
+                                     context:(ASLSealContext*)context;
 
 +(BOOL)isMetaDataValidForGaloisKeys:(ASLGaloisKeys*)galoisKeys
-							 context:(ASLSealContext*)context;
+                            context:(ASLSealContext*)context;
 
 +(BOOL)isBufferValidForPlainText:(ASLPlainText*)plainText;
 
@@ -70,46 +70,46 @@ NS_ASSUME_NONNULL_BEGIN
 +(BOOL)isBufferValidForGaloisKeys:(ASLGaloisKeys*)galoisKeys;
 
 +(BOOL)isDataValidForPlainText:(ASLPlainText*)plainText
-						context:(ASLSealContext*)context;
+                       context:(ASLSealContext*)context;
 
 +(BOOL)isDataValidForCipherText:(ASLCipherText*)cipherText
-						 context:(ASLSealContext*)context;
+                        context:(ASLSealContext*)context;
 
 +(BOOL)isDataValidForSecretKey:(ASLSecretKey*)secretKey
-						context:(ASLSealContext*)context;
+                       context:(ASLSealContext*)context;
 
 +(BOOL)isDataValidForPublicKey:(ASLPublicKey*)publicKey
-						context:(ASLSealContext*)context;
+                       context:(ASLSealContext*)context;
 
 +(BOOL)isDataValidForKSwitchKeys:(ASLKSwitchKeys*)kSwitchKeys
-						  context:(ASLSealContext*)context;
+                         context:(ASLSealContext*)context;
 
 +(BOOL)isDataValidForRelinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
-								  context:(ASLSealContext*)context;
+                                 context:(ASLSealContext*)context;
 
 +(BOOL)isDataValidForGaloisKeys:(ASLGaloisKeys*)galoisKeys
-						 context:(ASLSealContext*)context;
+                        context:(ASLSealContext*)context;
 
 +(BOOL)isValidForPlainText:(ASLPlainText*)plainText
-					context:(ASLSealContext*)context;
+                   context:(ASLSealContext*)context;
 
 +(BOOL)isValidForCipherText:(ASLCipherText*)cipherText
-					 context:(ASLSealContext*)context;
+                    context:(ASLSealContext*)context;
 
 +(BOOL)isValidForSecretKey:(ASLSecretKey*)secretKey
-					context:(ASLSealContext*)context;
+                   context:(ASLSealContext*)context;
 
 +(BOOL)isValidForPublicKey:(ASLPublicKey*)publicKey
-					context:(ASLSealContext*)context;
+                   context:(ASLSealContext*)context;
 
 +(BOOL)isValidForKSwitchKeys:(ASLKSwitchKeys*)kSwitchKeys
-					  context:(ASLSealContext*)context;
+                     context:(ASLSealContext*)context;
 
 +(BOOL)isValidForRelinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
-							  context:(ASLSealContext*)context;
+                             context:(ASLSealContext*)context;
 
 +(BOOL)isValidForGaloisKeys:(ASLGaloisKeys*)galoisKeys
-					 context:(ASLSealContext*)context;
+                    context:(ASLSealContext*)context;
 
 @end
 

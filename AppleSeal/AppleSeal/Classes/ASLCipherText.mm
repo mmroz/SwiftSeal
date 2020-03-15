@@ -19,8 +19,6 @@
 #import "ASLSealContextData_Internal.h"
 #import "ASLSealContext_Internal.h"
 
-NSString * const ASLCipherTextErrorDomain = @"ASLCipherTextErrorDomain";
-
 @implementation ASLCipherText {
 	seal::Ciphertext _cipherText;
 }
@@ -47,7 +45,7 @@ NSString * const ASLCipherTextErrorDomain = @"ASLCipherTextErrorDomain";
 
 + (instancetype _Nullable)cipherTextWithContext:(ASLSealContext *)context
 								   parametersId:(ASLParametersIdType *)parametersId
-								   sizeCapacity:(size_t)size_capacity
+								   sizeCapacity:(size_t)sizeCapacity
 										   pool:(ASLMemoryPoolHandle *)pool
 										  error:(NSError **)error {
 	NSParameterAssert(context != nil);
@@ -58,7 +56,7 @@ NSString * const ASLCipherTextErrorDomain = @"ASLCipherTextErrorDomain";
 		std::copy(std::begin(parametersId->block),
 				  std::end(parametersId->block),
 				  sealParametersId.begin());
-		seal::Ciphertext const cipherText = seal::Ciphertext(context.sealContext, sealParametersId, size_capacity, pool.memoryPoolHandle);
+		seal::Ciphertext const cipherText = seal::Ciphertext(context.sealContext, sealParametersId, sizeCapacity, pool.memoryPoolHandle);
 		return [[ASLCipherText alloc] initWithCipherText:cipherText];
 	} catch (std::invalid_argument const &e) {
 		if (error != nil) {
@@ -72,7 +70,7 @@ NSString * const ASLCipherTextErrorDomain = @"ASLCipherTextErrorDomain";
 }
 
 + (instancetype _Nullable)cipherTextWithContext:(ASLSealContext *)context
-								   sizeCapacity:(size_t)size_capacity
+								   sizeCapacity:(size_t)sizeCapacity
 								   parametersId:(ASLParametersIdType *)parametersId
 										  error:(NSError **)error {
 	NSParameterAssert(context != nil);
@@ -82,7 +80,7 @@ NSString * const ASLCipherTextErrorDomain = @"ASLCipherTextErrorDomain";
 		std::copy(std::begin(parametersId->block),
 				  std::end(parametersId->block),
 				  sealParametersId.begin());
-		seal::Ciphertext const cipherText = seal::Ciphertext(context.sealContext, sealParametersId, size_capacity);
+		seal::Ciphertext const cipherText = seal::Ciphertext(context.sealContext, sealParametersId, sizeCapacity);
 		return [[ASLCipherText alloc] initWithCipherText:cipherText];
 	} catch (std::invalid_argument const &e) {
 		if (error != nil) {
@@ -251,6 +249,10 @@ NSString * const ASLCipherTextErrorDomain = @"ASLCipherTextErrorDomain";
 }
 
 #pragma mark - Properies
+
+- (NSInteger)intArray {
+    return _cipherText.int_array()
+}
 
 - (size_t)coefficientModulusCount {
 	return _cipherText.coeff_mod_count();
