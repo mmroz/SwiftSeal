@@ -12,10 +12,31 @@
 #import <AppleSeal/ASLParametersIdType.h>
 #import <AppleSeal/ASLSealContextData.h>
 
+/*!
+Represents a standard security level according to the HomomorphicEncryption.org
+security standard. The value sec_level_type::none signals that no standard
+security level should be imposed. The value sec_level_type::tc128 provides
+a very high level of security and is the default security level enforced by
+Microsoft SEAL when constructing a SEALContext object. Normal users should not
+have to specify the security level explicitly anywhere.
+*/
+
 typedef NS_CLOSED_ENUM(NSInteger, ASLSecurityLevel) {
+    /*!
+    No security level specified.
+    */
 	None = 0,
+    /*!
+    128-bit security level according to HomomorphicEncryption.org standard.
+    */
 	TC128,
+    /*!
+    192-bit security level according to HomomorphicEncryption.org standard.
+    */
 	TC192,
+    /*!
+    256-bit security level according to HomomorphicEncryption.org standard.
+    */
 	TC256,
 };
 

@@ -79,7 +79,6 @@ typedef NS_CLOSED_ENUM(NSInteger, ASLEncryptorErrorCode) {
 
 //  TODO - add save and load function
 
-
 // TODO - fix naming of this
 
 - (BOOL)setPublicKey:(ASLPublicKey *)publicKey

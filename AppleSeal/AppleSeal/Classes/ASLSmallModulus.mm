@@ -83,6 +83,11 @@ NSString * const ASLSmallModulusErrorDomain = @"ASLSmallModulusErrorDomain";
 
 #pragma mark - NSObject
 
+- (NSString *)debugDescription
+{
+    return [NSString stringWithFormat:@"<%@: %p> %f", [self class], self, static_cast<double>(self.uint64Value)];
+}
+
 - (BOOL)isEqual:(id)object {
 	if (self == object) {
 	  return YES;

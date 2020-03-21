@@ -19,63 +19,73 @@
 #import "ASLCipherText_Internal.h"
 #import "ASLPlainText.h"
 #import "ASLPlainText_Internal.h"
-
-NSString * const ASLDecryptorErrorDomain = @"ASLDecryptorErrorDomain";
+#import "NSString+CXXAdditions.h"
+#import "NSError+CXXAdditions.h"
 
 @implementation ASLDecryptor {
-	seal::Decryptor* _decryptor;
+    seal::Decryptor* _decryptor;
 }
 
 #pragma mark - Initialization
 
-// TODO - refactor error handling here
-
 + (instancetype)decryptorWithContext:(ASLSealContext *)context
-						   secretKey:(ASLSecretKey *)secretKey
-							   error:(NSError **)error {
-	try {
-		seal::Decryptor* decryptor = new seal::Decryptor(context.sealContext, secretKey.sealSecretKey);
-		return [[ASLDecryptor alloc] initWithDecryptor:decryptor];
-	} catch (std::invalid_argument const &e) {
-		if (error != nil) {
-			NSString * const whichParameter = [NSString stringWithUTF8String:e.what()];
-			*error = [[NSError alloc] initWithDomain:ASLDecryptorErrorDomain
-												code:ASLDecryptorErrorCodeInvalidParameter
-											userInfo:@{NSDebugDescriptionErrorKey : whichParameter}];
-		}
-		return nil;
-	}
+                           secretKey:(ASLSecretKey *)secretKey
+                               error:(NSError **)error {
+    try {
+        seal::Decryptor* decryptor = new seal::Decryptor(context.sealContext, secretKey.sealSecretKey);
+        return [[ASLDecryptor alloc] initWithDecryptor:decryptor];
+    } catch (std::invalid_argument const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealInvalidParameter:e];
+        }
+        return nil;
+    }
+    return nil;
 }
 
 - (instancetype)initWithDecryptor:(seal::Decryptor *)decryptor {
-	self = [super init];
-	if (self == nil) {
-		return nil;
-	}
-	_decryptor = decryptor;
-	return self;
+    self = [super init];
+    if (self == nil) {
+        return nil;
+    }
+    _decryptor = decryptor;
+    return self;
 }
 
 - (void)dealloc {
-	delete _decryptor;
-	_decryptor = nullptr;
+    delete _decryptor;
+    _decryptor = nullptr;
 }
 
 #pragma mark - Public Methods
 
-// TODO - add error handling
 - (BOOL)decrypt:(ASLCipherText *)encrypted
-destination:(ASLPlainText *)destination
-		  error:(NSError **)error {
-	auto sealPlainText = destination.sealPlainText;
-	_decryptor->decrypt(encrypted.sealCipherText, sealPlainText);
-	return true;
+    destination:(ASLPlainText *)destination
+          error:(NSError **)error {
+    auto sealPlainText = destination.sealPlainText;
+    try {
+        _decryptor->decrypt(encrypted.sealCipherText, sealPlainText);
+        return YES;
+    } catch (std::invalid_argument const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealInvalidParameter:e];
+        }
+        return NO;
+    }
+    return NO;
 }
 
-// TODO - add error handling
-- (int)invariantNoiseBudget:(ASLCipherText *)cipherText
-					  error:(NSError **)error {
-	return _decryptor->invariant_noise_budget(cipherText.sealCipherText);
+- (NSNumber *)invariantNoiseBudget:(ASLCipherText *)cipherText
+                             error:(NSError **)error {
+    try {
+        return [[NSNumber alloc]initWithInt:_decryptor->invariant_noise_budget(cipherText.sealCipherText)];
+    } catch (std::invalid_argument const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealInvalidParameter:e];
+        }
+        return nil;
+    }
+    return nil;
 }
 
 @end

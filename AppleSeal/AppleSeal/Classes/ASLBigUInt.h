@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  @class ASLBigUInt
  
- @brief The ASLBigUInt class and rapper for biguint.h
+ @brief The ASLBigUInt class and wrapper for biguint
  
  @discussion Represents an unsigned integer with a specified bit width.
  Represents an unsigned integer with a specified bit width. Non-const
