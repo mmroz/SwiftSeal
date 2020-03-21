@@ -31,7 +31,6 @@ class ASLCipherTextTests: XCTestCase {
 	
 	func testCreateWithParametersAndPool() {
 		XCTAssertThrowsError(try ASLCipherText(context: context(), parametersId: parameterTypePointer(), pool: memoryPoolHandle()))
-		
 	}
 	
 	func testCreateWithParametersSizeAndPool() {
@@ -49,7 +48,67 @@ class ASLCipherTextTests: XCTestCase {
 		XCTAssertThrowsError(try ASLCipherText(context: context(), sizeCapacity: 3, parametersId: parameterTypePointer()))
 		XCTAssertThrowsError(try ASLCipherText(context: context(), sizeCapacity: .max, parametersId: parameterTypePointer()))
 	}
+    
+    func testSize() throws {
+        let cipherText = ASLCipherText()
+        XCTAssertEqual(cipherText.size, 0)
+    }
+    
+    func testReturnToPool() {
+        let cipherText = ASLCipherText()
+        cipherText.returnMemoryToPool()
+    }
+    
+    func testCorefficentAtIndex() throws {
+        // TODO
+//        let cipherText = ASLCipherText()
+//        try cipherText.polynomialCoefficient(at: 0)
+    }
 	
+    func testIntArray() {
+        // TODO
+    }
+    
+    func testCoefficientModulusCount() {
+        let cipherText = ASLCipherText()
+        XCTAssertEqual(cipherText.coefficientModulusCount, 0)
+    }
+    
+    func testPolynomialModulusCount() {
+        let cipherText = ASLCipherText()
+        XCTAssertEqual(cipherText.polynomialModulusDegree, 0)
+    }
+    
+    func testSizeCapacity() {
+        let cipherText = ASLCipherText()
+        XCTAssertEqual(cipherText.sizeCapacity, 0)
+    }
+    
+    func testTransparent() {
+        let cipherText = ASLCipherText()
+        XCTAssertTrue(cipherText.isTransparent)
+    }
+    
+    func testNNTForm() {
+        let cipherText = ASLCipherText()
+        XCTAssertFalse(cipherText.isNntForm)
+    }
+    
+    func testParametersId() {
+        let cipherText = ASLCipherText()
+        XCTAssertEqual(cipherText.parametersId, ASLParametersIdType(block: (0, 0, 0, 0)))
+    }
+    
+    func testScale() {
+        let cipherText = ASLCipherText()
+        XCTAssertEqual(cipherText.scale, 1.0)
+    }
+    
+    func testPool() {
+        let cipherText = ASLCipherText()
+        XCTAssertEqual(cipherText.pool, ASLMemoryPoolHandle.global())
+    }
+    
 	func testCreateWithCopy() {
 //		let otherCipherText = try! ASLCipherText(context: context(), sizeCapacity: -1, parametersId: parameterTypePointer())
 //		XCTAssertThrowsError(try ASLCipherText(cipherText: otherCipherText, pool: memoryPoolHandle()))

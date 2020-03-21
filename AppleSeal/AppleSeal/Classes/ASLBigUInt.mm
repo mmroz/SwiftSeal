@@ -31,6 +31,7 @@
         }
         return nil;
     }
+    return nil;
 }
 
 + (instancetype)bigUIntWithHexValue:(NSString *)hexValue error:(NSError **)error {
@@ -48,6 +49,7 @@
         }
         return nil;
     }
+    return nil;
 }
 + (instancetype)bigUIntWithBitCount:(NSInteger)bitCount
                                   scalarValue:(uint64_t)value
@@ -61,6 +63,7 @@
         }
         return nil;
     }
+    return nil;
 }
 
 + (instancetype)bigUIntWithBitCount:(NSInteger)bitCount
@@ -75,6 +78,7 @@
         }
         return nil;
     }
+    return nil;
 }
 
 + (instancetype)bigUIntWithBitCount:(NSInteger)bitCount
@@ -94,6 +98,7 @@
         }
         return nil;
     }
+    return nil;
 }
 
 #pragma mark - NSObject

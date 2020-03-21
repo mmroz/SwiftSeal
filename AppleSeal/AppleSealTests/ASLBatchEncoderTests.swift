@@ -46,7 +46,6 @@ class ASLBatchEncoderTests: XCTestCase {
     func testEncoderWithPlainTextWithUnsignedValues() throws {
         let batchEncoder = try createValidEncoder()
         
-        
         let plainText = try ASLPlainText(coefficientCount: 2)
         try batchEncoder.encode(withUnsignedValues: [1], destination: plainText)
     }

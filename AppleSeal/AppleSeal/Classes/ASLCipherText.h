@@ -54,15 +54,15 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  Constructs an empty ciphertext with capacity 2. In addition to the
  capacity, the allocation size is determined by the encryption parameters
- with given parms_id.
+ with given parametersId.
  
  @param context The SEALContext
- @param parametersId The parms_id corresponding to the encryption
+ @param parametersId The parametersId corresponding to the encryption
  parameters to be used
  @param pool The MemoryPoolHandle pointing to a valid memory pool
  @throws ASLSealErrorCodeInvalidParameter if the context is not set or encryption
  parameters are not valid
- @throws ASLSealErrorCodeInvalidParameter if parms_id is not valid for the encryption
+ @throws ASLSealErrorCodeInvalidParameter if parametersId is not valid for the encryption
  parameters
  @throws ASLSealErrorCodeInvalidParameter if pool is uninitialized
  */
@@ -74,14 +74,14 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  Constructs an empty ciphertext with capacity 2. In addition to the
  capacity, the allocation size is determined by the encryption parameters
- with given parms_id.
+ with given parametersId.
  
  @param context The SEALContext
- @param parametersId The parms_id corresponding to the encryption
+ @param parametersId The parametersId corresponding to the encryption
  parameters to be used
  @throws ASLSealErrorCodeInvalidParameter if the context is not set or encryption
  parameters are not valid
- @throws ASLSealErrorCodeInvalidParameter if parms_id is not valid for the encryption
+ @throws ASLSealErrorCodeInvalidParameter if parametersId is not valid for the encryption
  parameters
  */
 + (instancetype _Nullable)cipherTextWithContext:(ASLSealContext *)context
@@ -94,15 +94,15 @@ NS_ASSUME_NONNULL_BEGIN
  encryption parameters.
  
  @param context The SEALContext
- @param parametersId The parms_id corresponding to the encryption
+ @param parametersId The parametersId corresponding to the encryption
  parameters to be used
  @param sizeCapacity The capacity
  @param pool The MemoryPoolHandle pointing to a valid memory pool
  @throws ASLSealErrorCodeInvalidParameter if the context is not set or encryption
  parameters are not valid
- @throws ASLSealErrorCodeInvalidParameter if parms_id is not valid for the encryption
+ @throws ASLSealErrorCodeInvalidParameter if parametersId is not valid for the encryption
  parameters
- @throws ASLSealErrorCodeInvalidParameter if size_capacity is less than 2 or too large
+ @throws ASLSealErrorCodeInvalidParameter if sizeCapacity is less than 2 or too large
  @throws ASLSealErrorCodeInvalidParameter if pool is uninitialized
  */
 + (instancetype _Nullable)cipherTextWithContext:(ASLSealContext *)context
@@ -117,14 +117,14 @@ NS_ASSUME_NONNULL_BEGIN
  encryption parameters.
  
  @param context The SEALContext
- @param parametersId The parms_id corresponding to the encryption
+ @param parametersId The parametersId corresponding to the encryption
  parameters to be used
  @param sizeCapacity The capacity
  @throws ASLSealErrorCodeInvalidParameter if the context is not set or encryption
  parameters are not valid
- @throws ASLSealErrorCodeInvalidParameter if parms_id is not valid for the encryption
+ @throws ASLSealErrorCodeInvalidParameter if parametersId is not valid for the encryption
  parameters
- @throws ASLSealErrorCodeInvalidParameter if size_capacity is less than 2 or too large
+ @throws ASLSealErrorCodeInvalidParameter if sizeCapacity is less than 2 or too large
  */
 + (instancetype _Nullable)cipherTextWithContext:(ASLSealContext *)context
                                    sizeCapacity:(size_t)sizeCapacity
@@ -148,17 +148,17 @@ NS_ASSUME_NONNULL_BEGIN
  Allocates enough memory to accommodate the backing array of a ciphertext
  with given capacity. In addition to the capacity, the allocation size is
  determined by the encryption parameters corresponing to the given
- parms_id.
+ parametersId.
  
  @param context The SEALContext
- @param parametersId The parms_id corresponding to the encryption
+ @param parametersId The parametersId corresponding to the encryption
  parameters to be used
  @param sizeCapacity The capacity
  @throws ASLSealErrorCodeInvalidParameter if the context is not set or encryption
  parameters are not valid
- @throws ASLSealErrorCodeInvalidParameter if parms_id is not valid for the encryption
+ @throws ASLSealErrorCodeInvalidParameter if parametersId is not valid for the encryption
  parameters
- @throws ASLSealErrorCodeInvalidParameter if size_capacity is less than 2 or too large
+ @throws ASLSealErrorCodeInvalidParameter if sizeCapacity is less than 2 or too large
  */
 - (BOOL)reserve:(ASLSealContext *)context
    parametersId:(ASLParametersIdType)parametersId
@@ -175,7 +175,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param sizeCapacity The capacity
  @throws ASLSealErrorCodeInvalidParameter if the context is not set or encryption
  parameters are not valid
- @throws ASLSealErrorCodeInvalidParameter if size_capacity is less than 2 or too large
+ @throws ASLSealErrorCodeInvalidParameter if sizeCapacity is less than 2 or too large
  */
 - (BOOL)reserve:(ASLSealContext *)context
    sizeCapacity:(size_t)sizeCapacity
@@ -187,7 +187,7 @@ NS_ASSUME_NONNULL_BEGIN
  determined by the current encryption parameters.
  
  @param sizeCapacity The capacity
- @throws ASLSealErrorCodeInvalidParameter if size_capacity is less than 2 or too large
+ @throws ASLSealErrorCodeInvalidParameter if sizeCapacity is less than 2 or too large
  @throws ASLSealErrorCodeLogicError if the encryption parameters are not
  */
 - (BOOL)reserve:(size_t)sizeCapacity
@@ -196,7 +196,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  Resizes the ciphertext to given size, reallocating if the capacity
  of the ciphertext is too small. The ciphertext parameters are
- determined by the given SEALContext and parms_id.
+ determined by the given SEALContext and parametersId.
  
  This function is mainly intended for internal use and is called
  automatically by functions such as Evaluator::multiply and
@@ -204,12 +204,12 @@ NS_ASSUME_NONNULL_BEGIN
  to manually resize a ciphertext.
  
  @param context The SEALContext
- @param parametersId The parms_id corresponding to the encryption
+ @param parametersId The parametersId corresponding to the encryption
  parameters to be used
  @param size The new size
  @throws ASLSealErrorCodeInvalidParameter if the context is not set or encryption
  parameters are not valid
- @throws ASLSealErrorCodeInvalidParameter if parms_id is not valid for the encryption
+ @throws ASLSealErrorCodeInvalidParameter if parametersId is not valid for the encryption
  parameters
  @throws ASLSealErrorCodeInvalidParameter if size is less than 2 or too large
  */
@@ -272,7 +272,7 @@ NS_ASSUME_NONNULL_BEGIN
  @throws NSRangeException if index is less than 0 or bigger
  than the size of the ciphertext
  */
-- (uint64_t)polynomialCoefficientAtIndex:(size_t)index
+- (NSNumber * _Nullable)polynomialCoefficientAtIndex:(size_t)index
                                    error:(NSError **)error;
 
 /*!
