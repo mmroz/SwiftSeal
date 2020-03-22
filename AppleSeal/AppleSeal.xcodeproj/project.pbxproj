@@ -19,7 +19,7 @@
 		E410F09A23CA2485001957A0 /* ASLSecretKey.mm in Sources */ = {isa = PBXBuildFile; fileRef = E410F09823CA2485001957A0 /* ASLSecretKey.mm */; };
 		E410F09C23CA2F88001957A0 /* ASLSecretKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E410F09B23CA2F88001957A0 /* ASLSecretKeyTests.swift */; };
 		E410F09E23CA3125001957A0 /* ASLSecretKey_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = E410F09D23CA3125001957A0 /* ASLSecretKey_Internal.h */; };
-		E410F0A123CA5F08001957A0 /* ASLEncryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = E410F09F23CA5F08001957A0 /* ASLEncryptor.h */; };
+		E410F0A123CA5F08001957A0 /* ASLEncryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = E410F09F23CA5F08001957A0 /* ASLEncryptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E410F0A223CA5F08001957A0 /* ASLEncryptor.mm in Sources */ = {isa = PBXBuildFile; fileRef = E410F0A023CA5F08001957A0 /* ASLEncryptor.mm */; };
 		E410F0A523CA6292001957A0 /* ASLPublicKey.h in Headers */ = {isa = PBXBuildFile; fileRef = E410F0A323CA6292001957A0 /* ASLPublicKey.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E410F0A623CA6292001957A0 /* ASLPublicKey.mm in Sources */ = {isa = PBXBuildFile; fileRef = E410F0A423CA6292001957A0 /* ASLPublicKey.mm */; };
@@ -109,6 +109,7 @@
 		E4BA55B323B8F5840067EBBC /* ASLSmallModulus.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4BA55B123B8F5840067EBBC /* ASLSmallModulus.mm */; };
 		E4BA55B523B900D70067EBBC /* ASLSmallModulus.h in Headers */ = {isa = PBXBuildFile; fileRef = E4BA55B023B8F5840067EBBC /* ASLSmallModulus.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E4FFD41924268A6D00D4BDA7 /* ASLDecryptorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FFD41824268A6D00D4BDA7 /* ASLDecryptorTests.swift */; };
+		E4FFD41B24279AA000D4BDA7 /* ASLEncryptorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FFD41A24279AA000D4BDA7 /* ASLEncryptorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -247,6 +248,7 @@
 		E4BA55B023B8F5840067EBBC /* ASLSmallModulus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLSmallModulus.h; sourceTree = "<group>"; };
 		E4BA55B123B8F5840067EBBC /* ASLSmallModulus.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLSmallModulus.mm; sourceTree = "<group>"; };
 		E4FFD41824268A6D00D4BDA7 /* ASLDecryptorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLDecryptorTests.swift; sourceTree = "<group>"; };
+		E4FFD41A24279AA000D4BDA7 /* ASLEncryptorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLEncryptorTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,6 +330,7 @@
 				E47C296423D4B32E00AC70C9 /* ASLValidityCheckerTests.swift */,
 				E4271A1423B7F86500B08B37 /* Info.plist */,
 				E4FFD41824268A6D00D4BDA7 /* ASLDecryptorTests.swift */,
+				E4FFD41A24279AA000D4BDA7 /* ASLEncryptorTests.swift */,
 			);
 			path = AppleSealTests;
 			sourceTree = "<group>";
@@ -673,6 +676,7 @@
 				E47C295523D470BF00AC70C9 /* ASLPlainModulusTests.swift in Sources */,
 				E4FFD41924268A6D00D4BDA7 /* ASLDecryptorTests.swift in Sources */,
 				E410F09C23CA2F88001957A0 /* ASLSecretKeyTests.swift in Sources */,
+				E4FFD41B24279AA000D4BDA7 /* ASLEncryptorTests.swift in Sources */,
 				E47C293B23D3554A00AC70C9 /* ASLGaloisKeysTests.swift in Sources */,
 				E43CA28C23BA7C8E004EB5D8 /* ASLMemoryPoolHandleTests.swift in Sources */,
 				E4B64859241DCF1E002038B1 /* ASLBatchEncoderTests.swift in Sources */,

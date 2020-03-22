@@ -39,3 +39,4 @@ FOUNDATION_EXPORT const unsigned char AppleSealVersionString[];
 #import <AppleSeal/ASLPlainModulus.h>
 #import <AppleSeal/ASLValidityChecker.h>
 #import <AppleSeal/ASLDecryptor.h>
+#import <AppleSeal/ASLEncryptor.h>

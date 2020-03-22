@@ -14,13 +14,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /*!
- 
  @class ASLBatchEncoder
  
- @brief The ASLBatchEncoder class and rapper for batchencoder.h
+ @brief The ASLBatchEncoder class and wrapper for batchencoder.h
  
- @discussion  Provides functionality for CRT batching. If the polynomial modulus degree is N, and
- the plaintext modulus is a prime number T such that T is congruent to 1 modulo 2N,
+ @discussion Provides functionality for CRT batching. If the polynomial modulus degree is N, and the plaintext modulus is a prime number T such that T is congruent to 1 modulo 2N,
  then BatchEncoder allows the plaintext elements to be viewed as 2-by-(N/2)
  matrices of integers modulo T. Homomorphic operations performed on such encrypted
  matrices are applied coefficient (slot) wise, enabling powerful SIMD functionality

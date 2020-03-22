@@ -93,7 +93,7 @@ NS_ASSUME_NONNULL_BEGIN
  Creates a zero-initialized BigUInt of the specified bit width. Represents an unsigned integer with
  a specified bit width. This method returns the current temperature in the selected city, expressed in either Fahrenheit or Celsious degrees.
  
- @param  bitCount  The bit width.
+ @param bitCount  The bit width.
  @throws ASL_SealInvalidParameter if  if bitCount is negative.
  */
 
@@ -106,8 +106,8 @@ NS_ASSUME_NONNULL_BEGIN
  returned by to_string() and must consist of only the characters 0-9, A-F,
  or a-f, most-significant nibble first.
  
- @param  hexValue  The hexadecimal integer string specifying the initial value.
- @throws  ASL_SealInvalidParameter if hexValue does not adhere to the expected format.
+ @param hexValue  The hexadecimal integer string specifying the initial value.
+ @throws ASL_SealInvalidParameter if hexValue does not adhere to the expected format.
  */
 
 + (instancetype _Nullable)bigUIntWithHexValue:(NSString *)hexValue

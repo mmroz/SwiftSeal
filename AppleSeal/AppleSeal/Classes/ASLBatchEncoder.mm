@@ -20,8 +20,6 @@
 #import "NSString+CXXAdditions.h"
 #import "NSError+CXXAdditions.h"
 
-NSString * const ASLBatchEncoderErrorDomain = @"ASLBatchEncodertErrorDomain";
-
 @implementation ASLBatchEncoder {
     seal::BatchEncoder* _batchEncoder;
 }
