@@ -211,7 +211,7 @@ NS_ASSUME_NONNULL_BEGIN
  returns false. Otherwise, returns true. This function only checks the size of
  the data buffer and not the RelinKeys data itself.
  
- @param in The RelinKeys to check
+ @param relinearizationKeys The RelinKeys to check
  */
 +(BOOL)isBufferValidForRelinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys;
 
@@ -259,7 +259,7 @@ NS_ASSUME_NONNULL_BEGIN
  false. Otherwise, returns true. This function can be slow, as it checks the
  correctness of the entire secret key data buffer.
  
- @param secretKey The secret key to check
+ @param secretKey The ASLSecretKey to check
  @param context The SEALContext
  */
 +(BOOL)isDataValidForSecretKey:(ASLSecretKey*)secretKey
@@ -272,7 +272,7 @@ NS_ASSUME_NONNULL_BEGIN
  false. Otherwise, returns true. This function can be slow, as it checks the
  correctness of the entire public key data buffer.
  
- @param publicKey The public key to check
+ @param publicKey The ASLPublicKey to check
  @param context The SEALContext
  */
 +(BOOL)isDataValidForPublicKey:(ASLPublicKey*)publicKey
@@ -285,7 +285,7 @@ NS_ASSUME_NONNULL_BEGIN
  false. Otherwise, returns true. This function can be slow, as it checks the
  correctness of the entire KSwitchKeys data buffer.
  
- @param in The KSwitchKeys to check
+ @param kSwitchKeys The ASLKSwitchKeys to check
  @param context The SEALContext
  */
 +(BOOL)isDataValidForKSwitchKeys:(ASLKSwitchKeys*)kSwitchKeys
