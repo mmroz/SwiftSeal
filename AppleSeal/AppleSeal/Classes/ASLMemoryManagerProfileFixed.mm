@@ -15,8 +15,7 @@
 #import "ASLMemoryManagerProfile_Internal.h"
 #import "ASLMemoryPoolHandle.h"
 #import "ASLMemoryPoolHandle_Internal.h"
-
-NSString * const ASLMemoryManagerProfileFixedErrorDomain = @"ASLMemoryManagerProfileFixedErrorDomain";
+#import "NSError+CXXAdditions.h"
 
 @implementation ASLMemoryManagerProfileFixed {
 	std::unique_ptr<seal::MMProfFixed> _memoryManagerProfile;
@@ -35,10 +34,7 @@ NSString * const ASLMemoryManagerProfileFixedErrorDomain = @"ASLMemoryManagerPro
 		return [[ASLMemoryManagerProfileFixed alloc] initWithMemoryManagerProfileFixed:std::move(memoryManagerProfileFixed)];
 	} catch (std::invalid_argument const &e) {
 		if (error != nil) {
-			NSString * const whichParameter = [NSString stringWithUTF8String:e.what()];
-			*error = [[NSError alloc] initWithDomain:ASLMemoryManagerProfileFixedErrorDomain
-												code:ASLMemoryManagerProfileFixedInvalidParameter
-											userInfo:@{NSDebugDescriptionErrorKey : whichParameter}];
+            *error = [NSError ASL_SealInvalidParameter:e];
 		}
 		return nil;
 	}

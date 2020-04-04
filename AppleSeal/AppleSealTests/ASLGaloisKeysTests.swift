@@ -9,6 +9,12 @@
 import AppleSeal
 import XCTest
 
+extension ASLGaloisKeys {
+    func hasKey(_ galoisElement: NSNumber) throws -> Bool {
+        return try Bool(truncating: hasKey(galoisElement))
+    }
+}
+
 class ASLGaloisKeysTests: XCTestCase {
 	
 	func testDefaultInitializer() {
@@ -17,12 +23,12 @@ class ASLGaloisKeysTests: XCTestCase {
 	
 	func testHasKey() {
 		let galoisKeys = ASLGaloisKeys()
-		XCTAssertFalse(galoisKeys.hasKey(3))
+        XCTAssertFalse(try galoisKeys.hasKey(3))
 	}
 	
-	func testGetIndex() {
+	func testGetIndex() throws {
 		let galoisKeys = ASLGaloisKeys()
-		XCTAssertEqual(galoisKeys.getIndex(5), 2)
+		XCTAssertEqual(try galoisKeys.getIndex(5), 2)
 	}
 	
 	func testKey() {

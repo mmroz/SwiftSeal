@@ -16,6 +16,7 @@
 #import "ASLMemoryPoolHandle_Internal.h"
 #import "ASLCipherText_Internal.h"
 #import "ASLPublicKey_Internal.h"
+#import "NSError+CXXAdditions.h"
 
 static seal::compr_mode_type sealComprModeTypeFromASLCompressionModeType(ASLCompressionModeType compressionModeType) {
 	switch(compressionModeType) {
@@ -25,8 +26,6 @@ static seal::compr_mode_type sealComprModeTypeFromASLCompressionModeType(ASLComp
 			return seal::compr_mode_type::deflate;
 	}
 }
-
-NSString * const ASLPublicKeyErrorDomain = @"ASLPublicKeyErrorDomain";
 
 @implementation ASLPublicKey {
 	seal::PublicKey _publicKey;
@@ -84,21 +83,16 @@ NSString * const ASLPublicKeyErrorDomain = @"ASLPublicKeyErrorDomain";
 		return _publicKey.save_size(sealComprModeTypeFromASLCompressionModeType(compressionModeType));
 	} catch (std::invalid_argument const &e) {
 		if (error != nil) {
-			NSString * const whichParameter = [NSString stringWithUTF8String:e.what()];
-			*error = [[NSError alloc] initWithDomain:ASLPublicKeyErrorDomain
-												code:ASLPublicKeyErrorCodeInvalidParameter
-											userInfo:@{NSDebugDescriptionErrorKey : whichParameter}];
+            *error = [NSError ASL_SealInvalidParameter:e];
 		}
 		return 0;
 	}  catch (std::logic_error const &e) {
 		if (error != nil) {
-			NSString * const whichParameter = [NSString stringWithUTF8String:e.what()];
-			*error = [[NSError alloc] initWithDomain:ASLPublicKeyErrorDomain
-												code:ASLPublicKeyErrorCodeLogicError
-											userInfo:@{NSDebugDescriptionErrorKey : whichParameter}];
+            *error = [NSError ASL_SealLogicError:e];
 		}
 		return 0;
 	}
+    return 0;
 }
 
 #pragma mark - NSCopying

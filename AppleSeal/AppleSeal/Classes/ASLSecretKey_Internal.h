@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign, readonly) seal::SecretKey sealSecretKey;
 
+- (instancetype)initWithSecretKey:(seal::SecretKey)secretKey;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -66,7 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
  Dynamic memory allocations in the process are allocated from the memory
  pool pointed to by the given MemoryPoolHandle.
  
- @param values TheNSArray of ComplexDouble's to encode
+ @param values The NSArray of ComplexDouble's to encode
  @param parametersId parametersId determining the encryption parameters to
  be used by the result plaintext
  @param scale Scaling parameter defining encoding precision
@@ -94,7 +94,7 @@ NS_ASSUME_NONNULL_BEGIN
  Dynamic memory allocations in the process are allocated from the memory
  pool pointed to by the given MemoryPoolHandle.
  
- @param values TheNSArray of ComplexDouble's to encode
+ @param values The NSArray of ComplexDouble's to encode
  @param parametersId parametersId determining the encryption parameters to
  be used by the result plaintext
  @param scale Scaling parameter defining encoding precision

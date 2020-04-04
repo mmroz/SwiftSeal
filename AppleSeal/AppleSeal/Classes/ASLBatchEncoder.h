@@ -115,7 +115,7 @@ NS_ASSUME_NONNULL_BEGIN
  to by the given MemoryPoolHandle.
  
  @param plainText The matrix of integers modulo plaintext modulus to batch
- @throws std::invalid_argument if plain is not valid for the encryption parameters
+ @throws ASLSealErrorCodeInvalidParameter if plain is not valid for the encryption parameters
  @throws ASLSealErrorCodeInvalidParameter if plain is in NTT form
  @throws ASLSealErrorCodeInvalidParameter if pool is uninitialized
  */
@@ -136,7 +136,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @param plainText The matrix of integers modulo plaintext modulus to batch
  @param pool The MemoryPoolHandle pointing to a valid memory pool
- @throws std::invalid_argument if plain is not valid for the encryption parameters
+ @throws ASLSealErrorCodeInvalidParameter if plain is not valid for the encryption parameters
  @throws ASLSealErrorCodeInvalidParameter if plain is in NTT form
  @throws ASLSealErrorCodeInvalidParameter if pool is uninitialized
  */
@@ -173,7 +173,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @param plainText The plaintext polynomial to unbatch
  @param signedDestination The matrix to be overwritten with the values in the slots
- @throws std::invalid_argument if plain is not valid for the encryption parameters
+ @throws ASLSealErrorCodeInvalidParameter if plain is not valid for the encryption parameters
  @throws ASLSealErrorCodeInvalidParameter if plain is in NTT form
  @throws ASLSealErrorCodeInvalidParameter if pool is uninitialized
  */

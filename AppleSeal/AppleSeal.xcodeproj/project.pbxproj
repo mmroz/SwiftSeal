@@ -93,6 +93,8 @@
 		E47C296523D4B32E00AC70C9 /* ASLValidityCheckerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47C296423D4B32E00AC70C9 /* ASLValidityCheckerTests.swift */; };
 		E47C296823D4B88200AC70C9 /* NSError+CXXAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = E47C296623D4B88200AC70C9 /* NSError+CXXAdditions.h */; };
 		E47C296923D4B88200AC70C9 /* NSError+CXXAdditions.mm in Sources */ = {isa = PBXBuildFile; fileRef = E47C296723D4B88200AC70C9 /* NSError+CXXAdditions.mm */; };
+		E47D97B6242E6CE90006FD07 /* ASLIntegerEncoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47D97B5242E6CE90006FD07 /* ASLIntegerEncoderTests.swift */; };
+		E47D97B824304B600006FD07 /* ASLKeyGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E47D97B724304B600006FD07 /* ASLKeyGeneratorTests.swift */; };
 		E4B0954023BC4AA000FF780D /* ASLParametersIdType.h in Headers */ = {isa = PBXBuildFile; fileRef = E4B0953E23BC4AA000FF780D /* ASLParametersIdType.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E4B0954323BC4F0100FF780D /* ASLParmsIdTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B0954223BC4F0100FF780D /* ASLParmsIdTypeTests.swift */; };
 		E4B0954623BCE2D800FF780D /* ASLPlainText.h in Headers */ = {isa = PBXBuildFile; fileRef = E4B0954423BCE2D800FF780D /* ASLPlainText.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -110,6 +112,7 @@
 		E4BA55B523B900D70067EBBC /* ASLSmallModulus.h in Headers */ = {isa = PBXBuildFile; fileRef = E4BA55B023B8F5840067EBBC /* ASLSmallModulus.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E4FFD41924268A6D00D4BDA7 /* ASLDecryptorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FFD41824268A6D00D4BDA7 /* ASLDecryptorTests.swift */; };
 		E4FFD41B24279AA000D4BDA7 /* ASLEncryptorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FFD41A24279AA000D4BDA7 /* ASLEncryptorTests.swift */; };
+		E4FFD41D242AFD0E00D4BDA7 /* ASLEvaluatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FFD41C242AFD0E00D4BDA7 /* ASLEvaluatorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -231,6 +234,8 @@
 		E47C296423D4B32E00AC70C9 /* ASLValidityCheckerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLValidityCheckerTests.swift; sourceTree = "<group>"; };
 		E47C296623D4B88200AC70C9 /* NSError+CXXAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSError+CXXAdditions.h"; sourceTree = "<group>"; };
 		E47C296723D4B88200AC70C9 /* NSError+CXXAdditions.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSError+CXXAdditions.mm"; sourceTree = "<group>"; };
+		E47D97B5242E6CE90006FD07 /* ASLIntegerEncoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLIntegerEncoderTests.swift; sourceTree = "<group>"; };
+		E47D97B724304B600006FD07 /* ASLKeyGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLKeyGeneratorTests.swift; sourceTree = "<group>"; };
 		E4B0953E23BC4AA000FF780D /* ASLParametersIdType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLParametersIdType.h; sourceTree = "<group>"; };
 		E4B0954223BC4F0100FF780D /* ASLParmsIdTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLParmsIdTypeTests.swift; sourceTree = "<group>"; };
 		E4B0954423BCE2D800FF780D /* ASLPlainText.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLPlainText.h; sourceTree = "<group>"; };
@@ -249,6 +254,7 @@
 		E4BA55B123B8F5840067EBBC /* ASLSmallModulus.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLSmallModulus.mm; sourceTree = "<group>"; };
 		E4FFD41824268A6D00D4BDA7 /* ASLDecryptorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLDecryptorTests.swift; sourceTree = "<group>"; };
 		E4FFD41A24279AA000D4BDA7 /* ASLEncryptorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLEncryptorTests.swift; sourceTree = "<group>"; };
+		E4FFD41C242AFD0E00D4BDA7 /* ASLEvaluatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLEvaluatorTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -331,6 +337,9 @@
 				E4271A1423B7F86500B08B37 /* Info.plist */,
 				E4FFD41824268A6D00D4BDA7 /* ASLDecryptorTests.swift */,
 				E4FFD41A24279AA000D4BDA7 /* ASLEncryptorTests.swift */,
+				E4FFD41C242AFD0E00D4BDA7 /* ASLEvaluatorTests.swift */,
+				E47D97B5242E6CE90006FD07 /* ASLIntegerEncoderTests.swift */,
+				E47D97B724304B600006FD07 /* ASLKeyGeneratorTests.swift */,
 			);
 			path = AppleSealTests;
 			sourceTree = "<group>";
@@ -667,6 +676,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E47D97B824304B600006FD07 /* ASLKeyGeneratorTests.swift in Sources */,
 				E43CA29423BA9E9F004EB5D8 /* ASLMemoryManagerProfileGlobalTests.swift in Sources */,
 				E4B0954323BC4F0100FF780D /* ASLParmsIdTypeTests.swift in Sources */,
 				E47C294F23D3C33C00AC70C9 /* ASLCoefficientModulusTests.swift in Sources */,
@@ -679,6 +689,7 @@
 				E4FFD41B24279AA000D4BDA7 /* ASLEncryptorTests.swift in Sources */,
 				E47C293B23D3554A00AC70C9 /* ASLGaloisKeysTests.swift in Sources */,
 				E43CA28C23BA7C8E004EB5D8 /* ASLMemoryPoolHandleTests.swift in Sources */,
+				E47D97B6242E6CE90006FD07 /* ASLIntegerEncoderTests.swift in Sources */,
 				E4B64859241DCF1E002038B1 /* ASLBatchEncoderTests.swift in Sources */,
 				E43CA28323BA2BA4004EB5D8 /* ASLSealContextTests.swift in Sources */,
 				E43CA2A823BBBB68004EB5D8 /* ASLMemoryManagerProfileThreadLocalTests.swift in Sources */,
@@ -686,6 +697,7 @@
 				E453865723C2509F001EADB8 /* ASLSealContextDataTests.swift in Sources */,
 				E4B0954923BD0AE300FF780D /* ASLPlainTextTests.swift in Sources */,
 				E43CA29E23BBAE49004EB5D8 /* ASLMemoryManagerProfileFixedTests.swift in Sources */,
+				E4FFD41D242AFD0E00D4BDA7 /* ASLEvaluatorTests.swift in Sources */,
 				E4BA55AE23B8F23D0067EBBC /* ASLSmallModulusTests.swift in Sources */,
 				E47C292F23D3348C00AC70C9 /* ASLKSwitchKeysTests.swift in Sources */,
 				E43CA2AE23BBCB7A004EB5D8 /* ASLMemoryManagerTests.swift in Sources */,

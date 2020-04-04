@@ -28,4 +28,11 @@ NSString * const ASLSealErrorErrorDomain = @"ASLSealErrorErrorDomain";
 									userInfo:@{NSDebugDescriptionErrorKey : whichParameter}];
 }
 
++ (instancetype)ASL_SealRuntimeError:(const std::exception &)exception {
+    NSString * const whichParameter = [NSString stringWithUTF8String:exception.what()];
+    return [[NSError alloc] initWithDomain:ASLSealErrorErrorDomain
+                                        code:ASLSealErrorCodeRuntimeError
+                                    userInfo:@{NSDebugDescriptionErrorKey : whichParameter}];
+}
+
 @end

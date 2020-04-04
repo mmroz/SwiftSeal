@@ -12,49 +12,90 @@
 
 #import "ASLPublicKey_Internal.h"
 #import "ASLGaloisKeys_Internal.h"
+#import "NSString+CXXAdditions.h"
+#import "NSError+CXXAdditions.h"
 
 @implementation ASLGaloisKeys  {
-	seal::GaloisKeys _galoisKeys;
+    seal::GaloisKeys _galoisKeys;
 }
 
 #pragma mark - initializers
 
 - (instancetype)init {
-	self = [super init];
-	if (!self) {
-		return nil;
-	}
-	
-	_galoisKeys = seal::GaloisKeys();
-	
-	return self;
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+    _galoisKeys = seal::GaloisKeys();
+    return self;
 }
 
 #pragma mark - Public Methods
 
-- (size_t)getIndex:(NSNumber *)index {
-	NSParameterAssert(index.intValue >= 2);
-	return _galoisKeys.get_index(index.intValue);
+-(NSNumber *)getIndex:(NSNumber*)galoisElement
+            error:(NSError **)error {
+    NSParameterAssert(galoisElement != nil);
+    NSParameterAssert(galoisElement.intValue >= 2);
+    
+    try {
+        return [[NSNumber alloc] initWithUnsignedLongLong:_galoisKeys.get_index(galoisElement.intValue)];
+    } catch (std::invalid_argument const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealInvalidParameter:e];
+        }
+        return nil;
+    }
 }
 
-- (BOOL)hasKey:(NSNumber *)key {
-	NSParameterAssert(key.intValue >= 2);
-	return _galoisKeys.has_key(key.intValue);
+-(NSNumber *)hasKey:(NSNumber*)galoisElement
+        error:(NSError **)error {
+    NSParameterAssert(galoisElement != nil);
+    NSParameterAssert(galoisElement.intValue >= 2);
+    try {
+        return [[NSNumber alloc]initWithBool:_galoisKeys.has_key(galoisElement.intValue)];
+    } catch (std::invalid_argument const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealInvalidParameter:e];
+        }
+        return nil;
+    }
 }
 
-- (NSArray<ASLPublicKey *> *)keyWithKeyPower:(NSNumber *)keyPower {
-	NSMutableArray * publicKeyVector = [[NSMutableArray alloc] init];
-	for (seal::PublicKey const & publicKey: _galoisKeys.key(keyPower.intValue)) {
-		ASLPublicKey* aslPublicKey = [[ASLPublicKey alloc] initWithPublicKey:publicKey];
-		[publicKeyVector addObject:aslPublicKey];
-	}
-	return publicKeyVector;
+-(NSArray<ASLPublicKey*>*)key:(NSNumber*)galoisElement
+                        error:(NSError **)error {
+    NSParameterAssert(galoisElement != nil);
+    NSParameterAssert(galoisElement.intValue >= 2);
+    try {
+        NSMutableArray * publicKeyVector = [[NSMutableArray alloc] init];
+        for (seal::PublicKey const & publicKey: _galoisKeys.key(galoisElement.intValue)) {
+            ASLPublicKey* aslPublicKey = [[ASLPublicKey alloc] initWithPublicKey:publicKey];
+            [publicKeyVector addObject:aslPublicKey];
+        }
+        return publicKeyVector;
+    } catch (std::invalid_argument const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealInvalidParameter:e];
+        }
+        return nil;
+    }
 }
+
 
 #pragma mark - ASLGaloisKeys_Internal
 
 - (seal::GaloisKeys)sealGaloisKeys {
-	return _galoisKeys;
+    return _galoisKeys;
+}
+
+- (instancetype)initWithGaloisKeys:(seal::GaloisKeys)sealGaloisKeys {
+    self = [super init];
+       if (self == nil) {
+           return nil;
+       }
+       
+       _galoisKeys = std::move(sealGaloisKeys);
+
+       return self;
 }
 
 @end

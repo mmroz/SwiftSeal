@@ -12,52 +12,96 @@
 
 #import "ASLPublicKey_Internal.h"
 #import "ASLRelinearizationKeys_Internal.h"
+#import "NSError+CXXAdditions.h"
 
 @implementation ASLRelinearizationKeys {
-	seal::RelinKeys _relinearizationKeys;
+    seal::RelinKeys _relinearizationKeys;
 }
 
 #pragma mark - initializers
 
 - (instancetype)init {
-	self = [super init];
-	if (!self) {
-		return nil;
-	}
-	
-	_relinearizationKeys = seal::RelinKeys();
-	
-	return self;
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+    
+    _relinearizationKeys = seal::RelinKeys();
+    
+    return self;
 }
 
 #pragma mark - Public Methods
 
-- (size_t)getIndex:(NSNumber *)index {
-	NSParameterAssert(index.intValue >= 2);
-	return _relinearizationKeys.get_index(index.intValue);
+- (NSNumber *)getIndex:(size_t)index
+                 error:(NSError **)error; {
+    NSParameterAssert(index >= 2);
+    
+    try {
+        return [[NSNumber alloc]initWithFloat:_relinearizationKeys.get_index(index)];
+    } catch (std::invalid_argument const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealInvalidParameter:e];
+        }
+        return nil;
+    }
+    return nil;
 }
 
-- (BOOL)hasKey:(NSNumber *)key {
-	NSParameterAssert(key.intValue >= 2);
-	return _relinearizationKeys.has_key(key.intValue);
+- (NSNumber *)hasKey:(size_t)key
+               error:(NSError **)error;{
+    NSParameterAssert(key >= 2);
+    
+    try {
+        return [[NSNumber alloc]initWithBool:_relinearizationKeys.has_key(key)];
+    } catch (std::invalid_argument const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealInvalidParameter:e];
+        }
+        return nil;
+    }
+    return nil;
 }
 
-- (NSArray<ASLPublicKey *> *)keyWithKeyPower:(NSNumber *)keyPower {
-	NSMutableArray * publicKeyVector = [[NSMutableArray alloc] init];
-	for (seal::PublicKey const & publicKey: _relinearizationKeys.key(keyPower.intValue)) {
-		ASLPublicKey* aslPublicKey = [[ASLPublicKey alloc] initWithPublicKey:publicKey];
-		[publicKeyVector addObject:aslPublicKey];
-	}
-	return publicKeyVector;
+- (NSArray<ASLPublicKey *> *)keyWithKeyPower:(size_t)keyPower
+                                       error:(NSError **)error;{
+    NSMutableArray * publicKeyVector = [[NSMutableArray alloc] init];
+    NSParameterAssert(keyPower >= 2);
+    
+    try {
+        for (seal::PublicKey const & publicKey:
+             _relinearizationKeys.key(keyPower)) {
+            ASLPublicKey* aslPublicKey = [[ASLPublicKey alloc] initWithPublicKey:publicKey];
+            [publicKeyVector addObject:aslPublicKey];
+        }
+        return publicKeyVector;
+    } catch (std::invalid_argument const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealInvalidParameter:e];
+        }
+        return nil;
+    }
+    return nil;
 }
 
 #pragma mark - ASLRelinearizationKeys_Internal.h
 
 - (seal::RelinKeys)sealRelinKeys {
-	return _relinearizationKeys;
+    return _relinearizationKeys;
 }
 
-// TODO - do I need  to re-implement the base class methods?
+- (instancetype)initWithRelinearizationKeys:(seal::RelinKeys)relinearizationKeys {
+    self = [super init];
+    if (self == nil) {
+        return nil;
+    }
+    
+    _relinearizationKeys = std::move(relinearizationKeys);
+    
+    return self;
+}
+
+
 
 
 @end

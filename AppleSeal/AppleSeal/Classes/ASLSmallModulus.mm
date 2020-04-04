@@ -54,17 +54,6 @@ NSString * const ASLSmallModulusErrorDomain = @"ASLSmallModulusErrorDomain";
 	return [self initWithSmallModulus:encodedSmallModulus];
 }
 
-- (instancetype)initWithSmallModulus:(seal::SmallModulus)smallModulus {
-	self = [super init];
-	if (self == nil) {
-		return nil;
-	}
-	
-	_smallModulus = std::move(smallModulus);
-
-	return self;
-}
-
 #pragma mark - NSCoding
 
 - (void)encodeWithCoder:(NSCoder *)coder {
@@ -163,6 +152,17 @@ NSString * const ASLSmallModulusErrorDomain = @"ASLSmallModulusErrorDomain";
 
 - (seal::SmallModulus)smallModulus {
 	return _smallModulus;
+}
+
+- (instancetype)initWithSmallModulus:(seal::SmallModulus)smallModulus {
+    self = [super init];
+    if (self == nil) {
+        return nil;
+    }
+    
+    _smallModulus = std::move(smallModulus);
+
+    return self;
 }
 
 @end

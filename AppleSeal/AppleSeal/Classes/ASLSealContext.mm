@@ -15,109 +15,53 @@
 #import "ASLSealContextData.h"
 #import "ASLSealContextData_Internal.h"
 #import "ASLSealContext_Internal.h"
+#import "ASLMemoryPoolHandle.h"
 #import "ASLEncryptionParameters_Internal.h"
-
-NSString * const ASLSealContextErrorDomain = @"ASLSealContextErrorDomain";
+#import "NSError+CXXAdditions.h"
 
 static seal::sec_level_type sealSecurityLevelFromASLSecurityLevel(ASLSecurityLevel securityLevel) {
-	switch(securityLevel) {
-		case None:
-			return seal::sec_level_type::none;
-		case TC128:
-			return seal::sec_level_type::tc128;
-		case TC192:
-			return seal::sec_level_type::tc192;
-		case TC256:
-			return seal::sec_level_type::tc256;
-	}
+    switch(securityLevel) {
+        case None:
+            return seal::sec_level_type::none;
+        case TC128:
+            return seal::sec_level_type::tc128;
+        case TC192:
+            return seal::sec_level_type::tc192;
+        case TC256:
+            return seal::sec_level_type::tc256;
+    }
 }
 
 @implementation ASLSealContext {
-	std::shared_ptr<seal::SEALContext> _sealContext;
+    std::shared_ptr<seal::SEALContext> _sealContext;
 }
 
 #pragma mark - Initialization
 
 + (instancetype _Nullable)sealContextWithEncrytionParameters:(ASLEncryptionParameters *)encrytionParameters
-											  expandModChain:(BOOL)expandModChain
-											   securityLevel:(ASLSecurityLevel)securityLevel
-													   error:(NSError **)error {
-	try {
-		return [[ASLSealContext alloc] initWithEncryptionParameters:encrytionParameters.sealEncryptionParams
-													 expandModChain:expandModChain
-													  securityLevel:sealSecurityLevelFromASLSecurityLevel(securityLevel)];
-	} catch (std::invalid_argument const &e) {
-		if (error != nil) {
-			NSString * const whichParameter = [NSString stringWithUTF8String:e.what()];
-			*error = [[NSError alloc] initWithDomain:ASLSealContextErrorDomain
-												code:ASLSealContextErrorCodeInvalidParameter
-											userInfo:@{NSDebugDescriptionErrorKey : whichParameter}];
-		}
-		return nil;
-	}
-}
-
-+ (instancetype _Nullable)sealContextWithEncrytionParameters:(ASLEncryptionParameters *)encrytionParameters
-											   securityLevel:(ASLSecurityLevel)securityLevel
-													   error:(NSError **)error {
-	NSParameterAssert(encrytionParameters != nil);
-	try {
-		return [[ASLSealContext alloc] initWithEncryptionParameters:encrytionParameters.sealEncryptionParams
-													  securityLevel:sealSecurityLevelFromASLSecurityLevel(securityLevel)];
-	} catch (std::invalid_argument const &e) {
-		if (error != nil) {
-			NSString * const whichParameter = [NSString stringWithUTF8String:e.what()];
-			*error = [[NSError alloc] initWithDomain:ASLSealContextErrorDomain
-												code:ASLSealContextErrorCodeInvalidParameter
-											userInfo:@{NSDebugDescriptionErrorKey : whichParameter}];
-		}
-		return nil;
-	}
-}
-
-+ (instancetype _Nullable)sealContextWithEncrytionParameters:(ASLEncryptionParameters *)encrytionParameters
-											  expandModChain:(BOOL)expandModChain
-													   error:(NSError **)error {
-	NSParameterAssert(encrytionParameters != nil);
-	try {
-		return [[ASLSealContext alloc] initWithEncryptionParameters:encrytionParameters.sealEncryptionParams
-													 expandModChain:expandModChain];
-	} catch (std::invalid_argument const &e) {
-		if (error != nil) {
-			NSString * const whichParameter = [NSString stringWithUTF8String:e.what()];
-			*error = [[NSError alloc] initWithDomain:ASLSealContextErrorDomain
-												code:ASLSealContextErrorCodeInvalidParameter
-											userInfo:@{NSDebugDescriptionErrorKey : whichParameter}];
-		}
-		return nil;
-	}
-}
-
-+ (instancetype _Nullable)sealContextWithEncrytionParameters:(ASLEncryptionParameters *)encrytionParameters
-													   error:(NSError **)error {
-	NSParameterAssert(encrytionParameters != nil);
-	try {
-		return [[ASLSealContext alloc] initWithEncryptionParameters:encrytionParameters.sealEncryptionParams];
-	} catch (std::invalid_argument const &e) {
-		if (error != nil) {
-			NSString * const whichParameter = [NSString stringWithUTF8String:e.what()];
-			*error = [[NSError alloc] initWithDomain:ASLSealContextErrorDomain
-												code:ASLSealContextErrorCodeInvalidParameter
-											userInfo:@{NSDebugDescriptionErrorKey : whichParameter}];
-		}
-		return nil;
-	}
+  expandModChain:(BOOL)expandModChain
+   securityLevel:(ASLSecurityLevel)securityLevel
+memoryPoolHandle:(ASLMemoryPoolHandle*)pool
+                                                       error:(NSError **)error {
+    try {
+        return [[ASLSealContext alloc] initWithEncryptionParameters:encrytionParameters.sealEncryptionParams expandModChain:expandModChain securityLevel:sealSecurityLevelFromASLSecurityLevel(securityLevel)];
+    }  catch (std::invalid_argument const &e) {
+           if (error != nil) {
+               *error = [NSError ASL_SealInvalidParameter:e];
+           }
+           return nil;
+       }
 }
 
 - (instancetype)init {
-	self = [super init];
-	if (!self) {
-		return nil;
-	}
-	
-	seal::EncryptionParameters const parameters = seal::EncryptionParameters();
-	_sealContext = seal::SEALContext::Create(parameters);
-	return self;
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+    
+    seal::EncryptionParameters const parameters = seal::EncryptionParameters();
+    _sealContext = seal::SEALContext::Create(parameters);
+    return self;
 }
 
 #pragma mark - Properties
@@ -125,104 +69,106 @@ static seal::sec_level_type sealSecurityLevelFromASLSecurityLevel(ASLSecurityLev
 // TODO - impletment
 
 - (ASLSealContextData *)keyContextData {
-	return [[ASLSealContextData alloc] initWithSEALContextData:_sealContext->key_context_data()];
+    return [[ASLSealContextData alloc] initWithSEALContextData:_sealContext->key_context_data()];
 }
 
 - (ASLSealContextData *)firstContextData {
-	return [[ASLSealContextData alloc] initWithSEALContextData:_sealContext->first_context_data()];
+    return [[ASLSealContextData alloc] initWithSEALContextData:_sealContext->first_context_data()];
 }
 
 - (ASLSealContextData *)lastContextData {
-	return [[ASLSealContextData alloc] initWithSEALContextData:_sealContext->last_context_data()];
+    return [[ASLSealContextData alloc] initWithSEALContextData:_sealContext->last_context_data()];
 }
 
 - (ASLParametersIdType)keyParameterIds {
-	auto const parameters = _sealContext->key_parms_id();
-	return ASLParametersIdTypeMake(parameters[0], parameters[1], parameters[2], parameters[3]);
+    auto const parameters = _sealContext->key_parms_id();
+    return ASLParametersIdTypeMake(parameters[0], parameters[1], parameters[2], parameters[3]);
 }
 
 - (ASLParametersIdType)firstParameterIds {
-	auto const parameters = _sealContext->first_parms_id();
-	return ASLParametersIdTypeMake(parameters[0], parameters[1], parameters[2], parameters[3]);
+    auto const parameters = _sealContext->first_parms_id();
+    return ASLParametersIdTypeMake(parameters[0], parameters[1], parameters[2], parameters[3]);
 }
 
 - (ASLParametersIdType)lastParameterIds {
-	auto const parameters = _sealContext->last_parms_id();
-	return ASLParametersIdTypeMake(parameters[0], parameters[1], parameters[2], parameters[3]);
+    auto const parameters = _sealContext->last_parms_id();
+    return ASLParametersIdTypeMake(parameters[0], parameters[1], parameters[2], parameters[3]);
 }
 
 - (BOOL)isAllowedKeySwitching {
-	return _sealContext->using_keyswitching();
+    return _sealContext->using_keyswitching();
 }
 
 - (BOOL)isValidEncrytionParameters {
-	return _sealContext->parameters_set();
+    return _sealContext->parameters_set();
 }
 
 #pragma mark - Public Methods
 
 - (ASLSealContextData *)contextData:(ASLParametersIdType)parametersId
-							  error:(NSError **)error {
-	// TODO - add the error case here
-	seal::parms_id_type sealParametersId = {};
-	std::copy(std::begin(parametersId.block),
-			  std::end(parametersId.block),
-			  sealParametersId.begin());
-	return [[ASLSealContextData alloc] initWithSEALContextData:_sealContext->get_context_data(sealParametersId)];
+                              error:(NSError **)error {
+    seal::parms_id_type sealParametersId = {};
+    std::copy(std::begin(parametersId.block),
+              std::end(parametersId.block),
+              sealParametersId.begin());
+    
+    
+    
+    return [[ASLSealContextData alloc] initWithSEALContextData:_sealContext->get_context_data(sealParametersId)];
 }
 
 #pragma mark - ASLSealContext_Internal
 
 - (instancetype)initWithEncryptionParameters:(seal::EncryptionParameters)encryptionParameters
-							  expandModChain:(BOOL)expandModChain
-							   securityLevel:(seal::sec_level_type)securityLevel {
-	self = [super init];
-	if (self == nil) {
-		return nil;
-	}
-	
-	_sealContext = seal::SEALContext::Create(encryptionParameters, expandModChain, securityLevel);
-	
-	return self;
+                              expandModChain:(BOOL)expandModChain
+                               securityLevel:(seal::sec_level_type)securityLevel {
+    self = [super init];
+    if (self == nil) {
+        return nil;
+    }
+    
+    _sealContext = seal::SEALContext::Create(encryptionParameters, expandModChain, securityLevel);
+    
+    return self;
 }
 
 - (instancetype)initWithEncryptionParameters:(seal::EncryptionParameters)encryptionParameters
-							  expandModChain:(BOOL)expandModChain {
-	self = [super init];
-	if (self == nil) {
-		return nil;
-	}
-	
-	_sealContext = seal::SEALContext::Create(encryptionParameters, expandModChain, seal::sec_level_type::tc128);
-	
-	return self;
+                              expandModChain:(BOOL)expandModChain {
+    self = [super init];
+    if (self == nil) {
+        return nil;
+    }
+    
+    _sealContext = seal::SEALContext::Create(encryptionParameters, expandModChain, seal::sec_level_type::tc128);
+    
+    return self;
 }
 
 - (instancetype)initWithEncryptionParameters:(seal::EncryptionParameters)encryptionParameters
-							   securityLevel:(seal::sec_level_type)securityLevel {
-	self = [super init];
-	if (self == nil) {
-		return nil;
-	}
-	
-	_sealContext = seal::SEALContext::Create(encryptionParameters, true, securityLevel);
-	
-	return self;
+                               securityLevel:(seal::sec_level_type)securityLevel {
+    self = [super init];
+    if (self == nil) {
+        return nil;
+    }
+    
+    _sealContext = seal::SEALContext::Create(encryptionParameters, true, securityLevel);
+    
+    return self;
 }
 
 - (instancetype)initWithEncryptionParameters:(seal::EncryptionParameters)encryptionParameters {
-	self = [super init];
-	if (self == nil) {
-		return nil;
-	}
-	
-	_sealContext = seal::SEALContext::Create(encryptionParameters);
-	
-	return self;
+    self = [super init];
+    if (self == nil) {
+        return nil;
+    }
+    
+    _sealContext = seal::SEALContext::Create(encryptionParameters);
+    
+    return self;
 }
 
 - (std::shared_ptr<seal::SEALContext>)sealContext {
-	return _sealContext;
+    return _sealContext;
 }
 
 @end

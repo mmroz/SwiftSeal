@@ -18,6 +18,7 @@ typedef NS_CLOSED_ENUM(NSInteger, ASLSealErrorErrorCode) {
 	ASLSealErrorCodeUnknown = 0,
 	ASLSealErrorCodeInvalidParameter,
 	ASLSealErrorCodeLogicError,
+    ASLSealErrorCodeRuntimeError,
 };
 
 @interface NSError (NSError_CXXAdditions)
@@ -25,6 +26,8 @@ typedef NS_CLOSED_ENUM(NSInteger, ASLSealErrorErrorCode) {
 + (instancetype)ASL_SealInvalidParameter:(std::exception const &)exception;
 
 + (instancetype)ASL_SealLogicError:(std::exception const &)exception;
+
++ (instancetype)ASL_SealRuntimeError:(const std::exception &)exception;
 
 @end
 

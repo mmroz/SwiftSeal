@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign, readonly) seal::RelinKeys sealRelinKeys;
 
+- (instancetype)initWithRelinearizationKeys:(seal::RelinKeys)RelinearizationKeys;
+
 @end
 
 NS_ASSUME_NONNULL_END

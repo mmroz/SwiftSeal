@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign, readonly) seal::GaloisKeys sealGaloisKeys;
 
+- (instancetype)initWithGaloisKeys:(seal::GaloisKeys)sealGaloisKeys;
+
 @end
 
 NS_ASSUME_NONNULL_END

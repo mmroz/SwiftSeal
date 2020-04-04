@@ -14,7 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ASLMemoryPoolHandle ()
 
-/// Returns a copy of the memory pool handle backing the receiver.
 @property (nonatomic, assign, readonly) seal::MemoryPoolHandle memoryPoolHandle;
 
 - (instancetype)initWithMemoryPoolHandle:(seal::MemoryPoolHandle)memoryPoolHandle;

@@ -29,17 +29,6 @@ NSString * const ASLSecretKeyErrorDomain = @"ASLSecretKeyErrorDomain";
 
 #pragma mark - Initialization
 
-- (instancetype)initWithSecretKey:(seal::SecretKey)secretKey {
-	self = [super init];
-	if (self == nil) {
-		return nil;
-	}
-	
-	_secretKey = std::move(secretKey);
-	
-	return self;
-}
-
 - (instancetype)init {
 	self = [super init];
 	if (!self) {
@@ -51,6 +40,17 @@ NSString * const ASLSecretKeyErrorDomain = @"ASLSecretKeyErrorDomain";
 }
 
 # pragma mark - ASLSecretKey_Internal
+
+- (instancetype)initWithSecretKey:(seal::SecretKey)secretKey {
+    self = [super init];
+    if (self == nil) {
+        return nil;
+    }
+    
+    _secretKey = std::move(secretKey);
+    
+    return self;
+}
 
 - (seal::SecretKey)sealSecretKey {
 	return _secretKey;

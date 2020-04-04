@@ -27,7 +27,7 @@ class ASLKSwitchKeysTests: XCTestCase {
 		XCTAssertEqual(dataMatrix, matrix)
 	}
 	
-	func testParameterIdool() {
+	func testParameters() {
 		let kSwitchKeys = ASLKSwitchKeys()
 		XCTAssertEqual(kSwitchKeys.parametersId, ASLParametersIdType(block: (0,0,0,0)))
 	}

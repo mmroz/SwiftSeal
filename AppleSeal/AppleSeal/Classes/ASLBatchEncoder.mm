@@ -17,7 +17,6 @@
 #import "ASLEncryptionParameters_Internal.h"
 #import "ASLPlainText_Internal.h"
 #import "ASLMemoryPoolHandle_Internal.h"
-#import "NSString+CXXAdditions.h"
 #import "NSError+CXXAdditions.h"
 
 @implementation ASLBatchEncoder {

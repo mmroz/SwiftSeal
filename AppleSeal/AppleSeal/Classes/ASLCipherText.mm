@@ -70,11 +70,12 @@
                                           error:(NSError **)error {
     NSParameterAssert(context != nil);
     NSParameterAssert(parametersId != nil);
+    
+    seal::parms_id_type sealParametersId = {};
+           std::copy(std::begin(parametersId->block),
+                     std::end(parametersId->block),
+                     sealParametersId.begin());
     try {
-        seal::parms_id_type sealParametersId = {};
-        std::copy(std::begin(parametersId->block),
-                  std::end(parametersId->block),
-                  sealParametersId.begin());
         seal::Ciphertext const cipherText = seal::Ciphertext(context.sealContext, sealParametersId, sizeCapacity);
         return [[ASLCipherText alloc] initWithCipherText:cipherText];
     } catch (std::invalid_argument const &e) {

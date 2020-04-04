@@ -11,43 +11,184 @@
 #include "seal/intencoder.h"
 
 #import  "ASLSealContext_Internal.h"
-
-// TODO - implement this when I figure out the pointer stuff
+#import  "ASLPlainText_Internal.h"
+#import "ASLBigUInt_Internal.h"
+#import "ASLSmallModulus_Internal.h"
+#import "NSString+CXXAdditions.h"
+#import "NSError+CXXAdditions.h"
 
 @implementation ASLIntegerEncoder {
-	std::shared_ptr<seal::IntegerEncoder> _integerEncoder;
+    seal::IntegerEncoder* _integerEncoder;
 }
 
 #pragma mark - Initialization
 
-//+ (instancetype)integerEncoderWithContext:(ASLSealContext *)context
-//									error:(NSError **)error {
-//	NSParameterAssert(context != nil);
-//	try {
-//		auto encoder = std::make_shared<seal::IntegerEncoder>(std::move(seal::IntegerEncoder(context.sealContext)));
-//		return [[ASLIntegerEncoder alloc] initWithIntegerEncoder:encoder];
-//	} catch (std::invalid_argument const &e) {
-//		if (error != nil) {
-//			NSString * const whichParameter = [NSString stringWithUTF8String:e.what()];
-//			*error = [[NSError alloc] initWithDomain:ASLBatchEncoderErrorDomain
-//												code:ASLBatchEncoderErrorCodeInvalidParameter
-//											userInfo:@{NSDebugDescriptionErrorKey : whichParameter}];
-//		}
-//		return nil;
-//	}
-//}
-//
-//- (instancetype)initWithIntegerEncoder:(std::shared_ptr<seal::IntegerEncoder>)integerEncoder {
-//	self = [super init];
-//	if (self == nil) {
-//		return nil;
-//	}
-//
-//	_integerEncoder = integerEncoder;
-//
-//	return self;
-//}
++ (instancetype _Nullable)integerEncoderWithContext:(ASLSealContext *)context
+                                              error:(NSError **)error {
+    NSParameterAssert(context != nil);
+    
+    try {
+        seal::IntegerEncoder* encryptor = new seal::IntegerEncoder(context.sealContext);
+        return [[ASLIntegerEncoder alloc] initWithIntegerEncoder:encryptor];
+    } catch (std::invalid_argument const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealInvalidParameter:e];
+        }
+        return nil;
+    }
+}
 
+- (instancetype)initWithIntegerEncoder:(seal::IntegerEncoder *)integerEncoder {
+    self = [super init];
+    if (self == nil) {
+        return nil;
+    }
+    _integerEncoder = integerEncoder;
+    
+    return self;
+}
+
+- (void)dealloc {
+    delete _integerEncoder;
+    _integerEncoder = nullptr;
+}
+
+#pragma mark - Public Methods
+
+- (ASLPlainText*)encodeUInt64Value:(uint64_t)uInt64Value {
+    seal::Plaintext value = _integerEncoder->encode(uInt64Value);
+    return [[ASLPlainText alloc] initWithPlainText:value];
+}
+
+- (void)encodeUInt64Value:(uint64_t)uInt64Value
+              destination:(ASLPlainText *)destination {
+    
+    seal::Plaintext sealDestination = destination.sealPlainText;
+    _integerEncoder->encode(uInt64Value,sealDestination);
+}
+
+- (NSNumber*)decodeUInt32WithPlain:(ASLPlainText *)plain
+                            error:(NSError **)error {
+    NSParameterAssert(plain != nil);
+    seal::Plaintext sealPlainText = plain.sealPlainText;
+    try {
+        return  [[NSNumber alloc] initWithFloat:_integerEncoder->decode_int32(sealPlainText)];
+    }  catch (std::invalid_argument const &e) {
+           if (error != nil) {
+               *error = [NSError ASL_SealInvalidParameter:e];
+           }
+           return nil;
+    }
+}
+
+- (NSNumber*)decodeUInt64WithPlain:(ASLPlainText *)plain
+                             error:(NSError **)error {
+    NSParameterAssert(plain != nil);
+    seal::Plaintext sealPlainText = plain.sealPlainText;
+       try {
+           return  [[NSNumber alloc] initWithFloat:_integerEncoder->decode_uint64(sealPlainText)];
+       }  catch (std::invalid_argument const &e) {
+              if (error != nil) {
+                  *error = [NSError ASL_SealInvalidParameter:e];
+              }
+              return nil;
+       }
+}
+
+- (ASLPlainText*)encodeInt64Value:(int64_t)int64Value {
+    return [[ASLPlainText alloc] initWithPlainText:_integerEncoder->encode(int64Value)];
+}
+
+- (void)encodeInt64Value:(int64_t)int64Value
+             destination:(ASLPlainText *)destination {
+    NSParameterAssert(destination != nil);
+    seal::Plaintext sealDestination = destination.sealPlainText;
+    _integerEncoder->encode(int64Value, sealDestination);
+}
+
+
+- (ASLPlainText*)encodeBigUInt:(ASLBigUInt *)bigUInt {
+    NSParameterAssert(bigUInt != nil);
+    seal::BigUInt sealBigUInt = bigUInt.sealBigUInt;
+    return [[ASLPlainText alloc]initWithPlainText:_integerEncoder->encode(sealBigUInt)];
+}
+
+- (void)encodeBigUInt:(ASLBigUInt *)bigUInt
+          destination:(ASLPlainText *)destination {
+    NSParameterAssert(bigUInt != nil);
+    NSParameterAssert(destination != nil);
+    seal::BigUInt sealBigUInt = bigUInt.sealBigUInt;
+    seal::Plaintext sealPlainText = destination.sealPlainText;
+    _integerEncoder->encode(sealBigUInt, sealPlainText);
+}
+
+- (NSNumber*)decodeInt32WithPlain:(ASLPlainText *)plain
+                            error:(NSError **)error {
+    NSParameterAssert(plain != nil);
+    seal::Plaintext sealPlainText = plain.sealPlainText;
+    try {
+        return  [[NSNumber alloc] initWithFloat:_integerEncoder->decode_int32(sealPlainText)];
+    }  catch (std::invalid_argument const &e) {
+           if (error != nil) {
+               *error = [NSError ASL_SealInvalidParameter:e];
+           }
+           return nil;
+    }
+}
+
+- (NSNumber*)decodeInt64WithPlain:(ASLPlainText *)plain
+                            error:(NSError **)error {
+    NSParameterAssert(plain != nil);
+       seal::Plaintext sealPlainText = plain.sealPlainText;
+       try {
+           return  [[NSNumber alloc] initWithFloat:_integerEncoder->decode_int64(sealPlainText)];
+       }  catch (std::invalid_argument const &e) {
+              if (error != nil) {
+                  *error = [NSError ASL_SealInvalidParameter:e];
+              }
+              return nil;
+       }
+}
+
+- (ASLBigUInt *)decodeBigUInWithPlain:(ASLPlainText *)plain
+                                error:(NSError **)error {
+    NSParameterAssert(plain != nil);
+    seal::Plaintext sealPlainText = plain.sealPlainText;
+    try {
+        return  [[ASLBigUInt alloc] initWithBigUInt:_integerEncoder->decode_biguint(sealPlainText)];
+    }  catch (std::invalid_argument const &e) {
+           if (error != nil) {
+               *error = [NSError ASL_SealInvalidParameter:e];
+           }
+           return nil;
+    }
+}
+
+- (void)encodeUInt32Value:(uint32_t)uInt32Value
+              destination:(ASLPlainText *)destination {
+    NSParameterAssert(destination != nil);
+    seal::Plaintext sealDestination = destination.sealPlainText;
+    _integerEncoder->encode(uInt32Value, sealDestination);
+}
+
+- (ASLPlainText*)encodeInt32Value:(int32_t)int32Value {
+    return [[ASLPlainText alloc] initWithPlainText:_integerEncoder->encode(int32Value)];
+}
+
+- (void)encodeInt32Value:(int32_t)int32Value
+             destination:(ASLPlainText *)destination {
+    NSParameterAssert(destination != nil);
+       seal::Plaintext sealDestination = destination.sealPlainText;
+       _integerEncoder->encode(int32Value, sealDestination);
+}
+
+- (ASLPlainText*)encodeUInt32Value:(uint32_t)uInt32Value {
+    return [[ASLPlainText alloc] initWithPlainText:_integerEncoder->encode(uInt32Value)];
+}
+
+- (ASLSmallModulus *)plainModulus {
+    return [[ASLSmallModulus alloc]initWithSmallModulus:_integerEncoder->plain_modulus()];
+}
 
 @end
 
