@@ -151,6 +151,6 @@ class ASLEncryptorTests: XCTestCase {
     private func createValidContext() throws -> ASLSealContext {
         let params = ASLEncryptionParameters(schemeType: .BFV)
         try params.setPolynomialModulusDegree(8192)
-        return try ASLSealContext(encrytionParameters: params)
+        return try ASLSealContext(encrytionParameters: params, expandModChain: true, securityLevel: .TC128, memoryPoolHandle: ASLMemoryPoolHandle.createNew(true))
     }
 }

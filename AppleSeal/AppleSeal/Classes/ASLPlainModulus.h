@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param polynomialModulusDegree The value of the poly_modulus_degree
  encryption parameter
  @param bitSize The bit-length of the prime to be generated
- @throws std::invalid_argument if poly_modulus_degree is not a power-of-two
+ @throws ASLSealErrorCodeInvalidParameter if poly_modulus_degree is not a power-of-two
  or is too large
  @throws ASLSealErrorCodeInvalidParameter if bitSize is out of bounds
  @throws ASLSealErrorCodeLogicError if a suitable prime could not be found

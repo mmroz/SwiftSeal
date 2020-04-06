@@ -17,9 +17,6 @@
 #import "ASLGaloisKeys_Internal.h"
 #import "NSError+CXXAdditions.h"
 
-
-// TODO - implement this when I figure out the pointer stuff
-
 @implementation ASLKeyGenerator {
     seal::KeyGenerator* _keyGenerator;
 }

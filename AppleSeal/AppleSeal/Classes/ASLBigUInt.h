@@ -436,7 +436,7 @@ NS_ASSUME_NONNULL_BEGIN
  result. The input operands are not modified. The bit count of the result
  is set to the maximum of the two input operand bit counts.
  
- @param[in] bigUInt The second operand to AND
+ @param bigUInt The second operand to AND
  @return  The resuling ASLBigUInt.
  */
 - (ASLBigUInt *)bigUIntByBitwiseAndBigUInt:(ASLBigUInt *)bigUInt;
@@ -554,7 +554,7 @@ NS_ASSUME_NONNULL_BEGIN
  scalarValues:(uint64_t *)value
         error:(NSError **)error;
 
-/**
+/*!
  Resets an aliased BigUInt into an empty non-alias BigUInt with bit count
  of zero.
  

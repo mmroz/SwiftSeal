@@ -15,9 +15,8 @@
 #include <vector>
 #include "seal/smallmodulus.h"
 
-#import "NSString+CXXAdditions.h"
+#import "NSError+CXXAdditions.h"
 
-NSString * const ASLSmallModulusErrorDomain = @"ASLSmallModulusErrorDomain";
 
 @implementation ASLSmallModulus {
 	seal::SmallModulus _smallModulus;
@@ -32,11 +31,9 @@ NSString * const ASLSmallModulusErrorDomain = @"ASLSmallModulusErrorDomain";
 		return [[ASLSmallModulus alloc] initWithSmallModulus:smallModulus];
 	} catch (std::invalid_argument const &e) {
 		if (error != nil) {
-			NSString * const whichParameter = [NSString stringWithUTF8String:e.what()];
-			*error = [[NSError alloc] initWithDomain:ASLSmallModulusErrorDomain
-												code:ASLSmallModulusErrorCodeInvalidParameter
-											userInfo:@{NSDebugDescriptionErrorKey : whichParameter}];
-		}
+            *error = [NSError ASL_SealInvalidParameter:e];
+        }
+        return nil;
 	}
 	return nil;
 }
@@ -146,6 +143,12 @@ NSString * const ASLSmallModulusErrorDomain = @"ASLSmallModulusErrorDomain";
 
 - (BOOL)isPrime {
 	return _smallModulus.is_prime();
+}
+
+#pragma mark - Public Methods
+
+- (void)setUInt64Value:(uint64_t)value {
+    _smallModulus = value;
 }
 
 #pragma mark - Properties - Internal

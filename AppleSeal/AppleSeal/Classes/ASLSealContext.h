@@ -91,7 +91,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface ASLSealContext : NSObject
 
-/**
+/*!
  Creates an instance of SEALContext, and performs several pre-computations
  on the given EncryptionParameters.
  
@@ -160,6 +160,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, readonly, assign, getter=isAllowedKeySwitching) BOOL allowedKeySwitching;
 
+/*!
+ Returns the ContextData corresponding to encryption parameters with a given
+ parms_id. If parameters with the given parms_id are not found then the
+ function returns nullptr.
+ 
+ @param parametersId The ASLParametersIdType of the encryption parameters
+ */
 - (ASLSealContextData *)contextData:(ASLParametersIdType)parametersId
                               error:(NSError **)error;
 

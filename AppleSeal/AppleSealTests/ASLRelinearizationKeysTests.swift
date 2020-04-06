@@ -17,12 +17,12 @@ class ASLRelinearizationKeysTests: XCTestCase {
 	
 	func testHasKey() {
 		let relinearizationKeys = ASLRelinearizationKeys()
-		XCTAssertFalse(relinearizationKeys.hasKey(5))
+        XCTAssertFalse(try relinearizationKeys.hasKey(5) as! Bool)
 	}
 	
 	func testGetIndex() {
 		let relinearizationKeys = ASLRelinearizationKeys()
-		XCTAssertEqual(relinearizationKeys.getIndex(5), 3)
+		XCTAssertEqual(try relinearizationKeys.getIndex(5), 3)
 	}
 	
 	func testKey() {

@@ -159,7 +159,7 @@ typedef NS_CLOSED_ENUM(NSInteger, ASLSchemeType) {
 - (BOOL)setPlainModulus:(ASLSmallModulus *)plainModulus
                   error:(NSError **)error;
 
-/**
+/*!
  Sets the plaintext modulus parameter. The plaintext modulus is an integer
  modulus represented by the SmallModulus class. This constructor instead
  takes a std::uint64_t and automatically creates the SmallModulus object.

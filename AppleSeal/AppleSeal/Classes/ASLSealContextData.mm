@@ -77,6 +77,10 @@
 	return _contextData->upper_half_increment();
 }
 
+- (const uint64_t)coefficientModPlainModulus {
+    return _contextData->coeff_mod_plain_modulus();
+}
+
 - (ASLSealContextData *)previousContextData {
 	return [[ASLSealContextData alloc] initWithSEALContextData:_contextData->prev_context_data()];
 }

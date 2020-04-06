@@ -15,22 +15,26 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern NSString * const ASLSecretKeyErrorDomain;
-
-typedef NS_CLOSED_ENUM(NSInteger, ASLSecretKeyErrorCode) {
-	ASLSecretKeyErrorCodeUnknown = 0,
-	ASLSecretKeyErrorCodeInvalidParameter,
-	ASLSecretKeyErrorCodeLogicError,
-	ASLSecretKeyErrorCodeRuntimeError,
-};
-
 @interface ASLSecretKey : NSObject <NSCopying, NSCoding>
 
+/*!
+ Returns a reference to the underlying polynomial.
+ */
 @property (nonatomic, readonly, assign) ASLPlainText*  plainTextData;
 
+/*!
+ Returns a const reference to parametersId.
+ 
+ @see EncryptionParameters for more information about parametersId.
+ */
 @property (nonatomic, readonly, assign) ASLParametersIdType parametersId;
 
+/*!
+ Returns the currently used MemoryPoolHandle.
+ */
 @property (nonatomic, readonly, assign) ASLMemoryPoolHandle * pool;
+
+// TODO - add save and load
 
 @end
 

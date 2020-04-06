@@ -302,7 +302,7 @@ destination:(ASLCipherText *)destination
 -(BOOL)squareInplace:(ASLCipherText *)encrypted
                error:(NSError **)error;
 
-/**
+/*!
  Squares a ciphertext. This functions computes the square of encrypted. Dynamic
  memory allocations in the process are allocated from the memory pool pointed
  to by the given MemoryPoolHandle.
@@ -343,7 +343,7 @@ destination:(ASLCipherText *)destination
          pool:(ASLMemoryPoolHandle *)pool
         error:(NSError **)error;
 
-/**
+/*!
  Squares a ciphertext. This functions computes the square of encrypted and
  stores the result in the destination parameter. Dynamic memory allocations
  in the process are allocated from the memory pool pointed to by the given
@@ -383,7 +383,7 @@ destination:(ASLCipherText *)destination
 -(BOOL)relinearizeInplace:(ASLCipherText *)encrypted
       relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
                     error:(NSError **)error;
-/**
+/*!
  Relinearizes a ciphertext. This functions relinearizes encrypted, reducing
  its size down to 2. If the size of encrypted is K+1, the given relinearization
  keys need to have size at least K-1. Dynamic memory allocations in the
@@ -495,7 +495,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
                   pool:(ASLMemoryPoolHandle *)pool
                  error:(NSError **)error;
 
-/**
+/*!
  Given a ciphertext encrypted modulo q_1...q_k, this function switches the
  modulus down to q_1...q_{k-1}. Dynamic memory allocations in the process
  are allocated from the memory pool pointed to by the given MemoryPoolHandle.
@@ -514,7 +514,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
                          pool:(ASLMemoryPoolHandle *)pool
                         error:(NSError **)error;
 
-/**
+/*!
  Given a ciphertext encrypted modulo q_1...q_k, this function switches the
  modulus down to q_1...q_{k-1}. Dynamic memory allocations in the process
  are allocated from the memory pool pointed to by the given MemoryPoolHandle.
@@ -1152,7 +1152,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
                 pool:(ASLMemoryPoolHandle *)pool
                error:(NSError **)error;
 
-/**
+/*!
  Multiplies a ciphertext with a plaintext. This function multiplies
  a ciphertext with a plaintext and stores the result in the destination
  parameter. The plaintext must be a valid for the current encryption parameters,
@@ -1445,7 +1445,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
               pool:(ASLMemoryPoolHandle *)pool
              error:(NSError **)error;
 
-/**
+/*!
  Applies a Galois automorphism to a ciphertext and writes the result to the
  destination parameter. To evaluate the Galois automorphism, an appropriate
  set of Galois keys must also be provided. Dynamic memory allocations in

@@ -257,7 +257,7 @@ NS_ASSUME_NONNULL_BEGIN
                          pool:(ASLMemoryPoolHandle *)pool
                         error:(NSError **)error;
 
-/**
+/*!
  Encodes a double-precision floating-point real number into a plaintext
  polynomial. The number repeats for N/2 times to fill all slots. The
  encryption parameters used are the top level parameters for the given
@@ -277,7 +277,7 @@ NS_ASSUME_NONNULL_BEGIN
                   destination:(ASLPlainText *)destination
                         error:(NSError **)error;
 
-/**
+/*!
  Encodes a double-precision floating-point real number into a plaintext
  polynomial. The number repeats for N/2 times to fill all slots. The
  encryption parameters used are the top level parameters for the given
@@ -300,7 +300,7 @@ NS_ASSUME_NONNULL_BEGIN
                          pool:(ASLMemoryPoolHandle *)pool
                         error:(NSError **)error;
 
-/**
+/*!
  Encodes a double-precision complex number into a plaintext polynomial.
  Append zeros to fill all slots. Dynamic memory allocations in the process
  are allocated from the memory pool pointed to by the given MemoryPoolHandle.
@@ -323,7 +323,7 @@ NS_ASSUME_NONNULL_BEGIN
                    destination:(ASLPlainText *)destination
                          error:(NSError **)error;
 
-/**
+/*!
  Encodes a double-precision complex number into a plaintext polynomial.
  Append zeros to fill all slots. Dynamic memory allocations in the process
  are allocated from the memory pool pointed to by the given MemoryPoolHandle.
@@ -447,7 +447,7 @@ NS_ASSUME_NONNULL_BEGIN
                           pool:(ASLMemoryPoolHandle *)pool
                          error:(NSError **)error;
 
-/**
+/*!
  Encodes an integer number into a plaintext polynomial without any scaling.
  The number repeats for N/2 times to fill all slots.
  @param longValue The integer number to encode
@@ -463,7 +463,7 @@ NS_ASSUME_NONNULL_BEGIN
                 destination:(ASLPlainText *)destination
                       error:(NSError **)error;
 
-/**
+/*!
  Encodes an integer number into a plaintext polynomial without any scaling.
  The number repeats for N/2 times to fill all slots. The encryption
  parameters used are the top level parameters for the given context.

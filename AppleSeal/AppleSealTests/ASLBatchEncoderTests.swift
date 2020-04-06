@@ -52,7 +52,7 @@ class ASLBatchEncoderTests: XCTestCase {
     
     private func createValidEncoder() throws -> ASLBatchEncoder  {
         let encryptionParameters = ASLEncryptionParameters(schemeType: .BFV)
-        let context = try! ASLSealContext(encrytionParameters: encryptionParameters, securityLevel: .TC128)
+        let context = try ASLSealContext(encrytionParameters: encryptionParameters, expandModChain: true, securityLevel: .None, memoryPoolHandle: ASLMemoryPoolHandle.createNew(true))
         return try ASLBatchEncoder(context: context)
     }
 }

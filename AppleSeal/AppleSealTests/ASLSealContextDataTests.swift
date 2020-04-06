@@ -70,9 +70,10 @@ class ASLSealContextDataTests: XCTestCase {
 	
 	private func contextData(_ schemeType: ASLSchemeType = .CKKS) -> ASLSealContextData {
 		let encryptionParameters = ASLEncryptionParameters(schemeType: schemeType)
-		let context  = try! ASLSealContext(encrytionParameters: encryptionParameters, expandModChain: true)
-		
-		return context.keyContextData
+        
+        let context = try? ASLSealContext(encrytionParameters: encryptionParameters, expandModChain: true, securityLevel: .TC128, memoryPoolHandle: ASLMemoryPoolHandle.createNew(true))
+    
+		return context!.keyContextData
 	}
 	
 	private func uint64Pointer(_ bytes: [UInt64] = [39, 77, 111, 111, 102, 33, 39, 0]) -> UnsafeMutablePointer<UInt64> {

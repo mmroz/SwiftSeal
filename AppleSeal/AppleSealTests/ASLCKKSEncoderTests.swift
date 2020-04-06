@@ -21,14 +21,17 @@ class ASLCKKSEncoderTests: XCTestCase {
         let params = ASLEncryptionParameters(schemeType: .CKKS)
         try params.setPolynomialModulusDegree(8192)
         try params.setCoefficientModulus(ASLCoefficientModulus.create(8192, bitSizes: [40, 40, 40, 40, 40]))
-        let context = try ASLSealContext(encrytionParameters: params)
+        let context  = try ASLSealContext(encrytionParameters: params, expandModChain: true, securityLevel: .TC128, memoryPoolHandle: ASLMemoryPoolHandle.createNew(true))
         
         XCTAssertNoThrow(_ = try ASLCKKSEncoder(context: context))
     }
     
     func testCreateWithBFVContextThrows() throws {
         let params = ASLEncryptionParameters(schemeType: .BFV)
-        XCTAssertThrowsError(try ASLCKKSEncoder(context: ASLSealContext(encrytionParameters: params)))
+        
+        let context  = try ASLSealContext(encrytionParameters: params, expandModChain: true, securityLevel: .TC128, memoryPoolHandle: ASLMemoryPoolHandle.createNew(true))
+        
+        XCTAssertThrowsError(try ASLCKKSEncoder(context: context))
     }
     
     func testSlotCount() throws {
@@ -207,7 +210,7 @@ class ASLCKKSEncoderTests: XCTestCase {
         let params = ASLEncryptionParameters(schemeType: .CKKS)
         try params.setPolynomialModulusDegree(8192)
         try params.setCoefficientModulus(ASLCoefficientModulus.create(8192, bitSizes: [40, 40, 40, 40, 40]))
-        let context = try ASLSealContext(encrytionParameters: params)
+        let context = try ASLSealContext(encrytionParameters: params, expandModChain: true, securityLevel: .None, memoryPoolHandle: ASLMemoryPoolHandle.createNew(true))
         return try ASLCKKSEncoder(context: context)
     }
 }

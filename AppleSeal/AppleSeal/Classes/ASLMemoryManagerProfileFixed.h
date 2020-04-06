@@ -29,7 +29,7 @@ specific memory pool.
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 
-/**
+/*!
 Creates a new MMProfFixed. The MemoryPoolHandle given as argument is returned
 by every call to get_pool(mm_prof_opt_t).
 

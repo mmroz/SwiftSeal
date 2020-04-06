@@ -21,8 +21,6 @@
 #import "ASLSealContext_Internal.h"
 #import "ASLSecretKey_Internal.h"
 
-NSString * const ASLSecretKeyErrorDomain = @"ASLSecretKeyErrorDomain";
-
 @implementation ASLSecretKey  {
 	seal::SecretKey _secretKey;
 }

@@ -167,7 +167,7 @@ NS_ASSUME_NONNULL_BEGIN
                                    parametersId:(ASLParametersIdType *)parametersId
                                           error:(NSError **)error;
 
-/**
+/*!
  Constructs a new ciphertext by copying a given one.
  
  @param cipherText The ciphertext to copy from
@@ -254,7 +254,7 @@ NS_ASSUME_NONNULL_BEGIN
   sizeCapacity:(size_t)size
          error:(NSError **)error;
 
-/**
+/*!
  Resizes the ciphertext to given size, reallocating if the capacity
  of the ciphertext is too small. The ciphertext parameters are
  determined by the highest-level parameters associated to the given
@@ -297,7 +297,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 -(void)returnMemoryToPool;
 
-/**
+/*!
  Returns a pointer to a particular polynomial in the ciphertext
  data. Note that Microsoft SEAL stores each polynomial in the ciphertext
  modulo all of the K primes in the coefficient modulus. The pointer

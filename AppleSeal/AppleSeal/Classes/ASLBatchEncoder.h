@@ -182,7 +182,7 @@ NS_ASSUME_NONNULL_BEGIN
                       error:(NSError **)error;
 
 
-/**
+/*!
  Inverse of encode. This function "unbatches" a given plaintext in-place into
  a matrix of integers modulo the plaintext modulus. The input plaintext must have
  degress less than the polynomial modulus, and coefficients less than the plaintext
@@ -198,7 +198,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)decodeWithPlainText:(ASLPlainText*)plainText
                       error:(NSError **)error;
 
-/**
+/*!
  Inverse of encode. This function "unbatches" a given plaintext in-place into
  a matrix of integers modulo the plaintext modulus. The input plaintext must have
  degress less than the polynomial modulus, and coefficients less than the plaintext

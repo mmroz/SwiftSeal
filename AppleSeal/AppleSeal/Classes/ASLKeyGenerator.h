@@ -88,7 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, readonly, assign) ASLSecretKey* secretKey;
 
-/**
+/*!
  Generates and returns relinearization keys.
  
  @throws ASL_SealLogicError if the encryption parameters do not support

@@ -173,7 +173,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype _Nullable)plainTextWithCoefficientCount:(size_t)coefficientCount
                                                   error:(NSError **)error;
 
-/**
+/*!
  Constructs an empty plaintext allocating no memory.
  
  @param pool The MemoryPoolHandle pointing to a valid memory pool

@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (int)maxBitCount:(size_t)polynomialModulusDegree;
 
-/**
+/*!
  Returns a default coefficient modulus for the BFV scheme that guarantees
  a given security level when using a given poly_modulus_degree, according
  to the HomomorphicEncryption.org security standard. Note that all security
