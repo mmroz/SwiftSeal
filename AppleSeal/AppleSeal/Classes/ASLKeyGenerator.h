@@ -154,7 +154,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (ASLGaloisKeys * _Nullable) galoisKeysWithSteps:(NSArray<NSNumber *>*)steps
                                             error:(NSError **)error;
 
-// TODO - handle saving
+// TODO - add save and load functions
 
 @end
 

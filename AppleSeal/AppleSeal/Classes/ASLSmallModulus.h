@@ -72,9 +72,6 @@ typedef struct {
 
 - (void)setUInt64Value:(uint64_t)value;
 
-// TODO - Save and load
-
-
 @end
 
 NS_ASSUME_NONNULL_END

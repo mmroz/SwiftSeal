@@ -84,7 +84,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 -(NSArray<ASLPublicKey*>* _Nullable)keyWithKeyPower:(size_t)keyPower
                                     error:(NSError **)error;
-
 @end
 
 NS_ASSUME_NONNULL_END

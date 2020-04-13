@@ -58,8 +58,6 @@ Returns the currently used MemoryPoolHandle.
 - (long long)saveSize:(ASLCompressionModeType)compressionModeType
 			   error:(NSError **)error;
 
-// TODO - add the save and load methods
-
 @end
 
 NS_ASSUME_NONNULL_END

@@ -77,10 +77,7 @@
 
 #pragma mark - NSCoding
 
-// TODO - decide on what methods to use to encode and decode and implement them
-
 - (void)encodeWithCoder:(NSCoder *)coder {
-
 	std::size_t const lengthUpperBound = _secretKey.save_size(seal::Serialization::compr_mode_default);
 	NSMutableData * const data = [NSMutableData dataWithLength:lengthUpperBound];
 	std::size_t const actualLength = _secretKey.save(static_cast<std::byte *>(data.mutableBytes), lengthUpperBound);
@@ -88,47 +85,17 @@
 	[coder encodeDataObject:data];
 }
 
--(bool)encodeWithCoder:(NSCoder *)coder
-			   context:(ASLSealContext*)context
-				 error:(NSError **)error
-{
-	
-	NSData * const encodedValueData = [coder decodeDataObject];
-	if (encodedValueData.length == 0) {
-		return NO;
-	}
-
-	seal::SecretKey encodedSecretKey;
-	std::byte const * bytes = static_cast<std::byte const *>(encodedValueData.bytes);
-	std::size_t const length = static_cast<std::size_t const>(encodedValueData.length);
-
-	try {
-		//encodedSecretKey.load(std::make_shared<seal::SEALContext>(context.sealContext), bytes, length);
-		return [self initWithSecretKey:encodedSecretKey];
-	} catch (std::exception const &e) {
-		return nil;
-	}
-}
-
 - (instancetype)initWithCoder:(NSCoder *)coder {
-	// TODO - figure out if this is possible
-//	NSData * const encodedValueData = [coder decodeDataObject];
-//	if (encodedValueData.length == 0) {
-//		return nil;
-//	}
-//
-//	seal::SecretKey encodedSecretKey;
-//	std::byte const * bytes = static_cast<std::byte const *>(encodedValueData.bytes);
-//	std::size_t const length = static_cast<std::size_t const>(encodedValueData.length);
-//
-//	try {
-//		encodedSecretKey.load
-//		return [self initWithSecretKey:secretKey];
-//	} catch (std::exception const &e) {
-//		return nil;
-//	}
-	return nil;
-}
+    NSData * const encodedValueData = [coder decodeDataObject];
+    if (encodedValueData.length == 0) {
+        return nil;
+    }
 
+    seal::SecretKey encodedSecretKey;
+    std::byte const * bytes = static_cast<std::byte const *>(encodedValueData.bytes);
+    std::size_t const length = static_cast<std::size_t const>(encodedValueData.length);
+   //    encodedSecretKey.load(bytes, length);
+    return [self initWithSecretKey:encodedSecretKey];
+}
 
 @end

@@ -471,6 +471,20 @@ class ASLBigUIntTests: XCTestCase {
     //
     //    }
     
+    func testEncoding() {
+        let bigUInt = ASLBigUInt.createNew(withValue: 4)
+        
+        let archiver = NSKeyedArchiver(requiringSecureCoding: false)
+        archiver.encode(bigUInt, forKey: "testObject")
+        let data = archiver.encodedData
+
+        let unarchiver = try! NSKeyedUnarchiver(forReadingFrom: data)
+        unarchiver.requiresSecureCoding = false
+        let decodedBigUInt = unarchiver.decodeObject(of: ASLBigUInt.self, forKey: "testObject")!
+
+        XCTAssertEqual(bigUInt, decodedBigUInt)
+    }
+    
     // MARK: - Test Helper
     
     private func uint64Pointer() -> UnsafeMutablePointer<UInt64> {
@@ -478,5 +492,13 @@ class ASLBigUIntTests: XCTestCase {
         let uint64Pointer = UnsafeMutablePointer<UInt64>.allocate(capacity: 8)
         uint64Pointer.initialize(from: &bytes, count: 8)
         return uint64Pointer
+    }
+}
+
+enum CodingKey: Decodable {
+    case withContext(ASLSealContext)
+    
+    init(from decoder: Decoder) throws {
+        <#code#>
     }
 }

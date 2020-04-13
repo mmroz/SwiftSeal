@@ -24,4 +24,18 @@ class ASLSecretKeyTests: XCTestCase {
 		let secretKey = ASLSecretKey()
 		XCTAssertEqual(secretKey.plainTextData, ASLPlainText())
 	}
+    
+    func testEncoding() {
+        let bigUInt = ASLSecretKey()
+        
+        let archiver = NSKeyedArchiver(requiringSecureCoding: false)
+        archiver.encode(bigUInt, forKey: "testObject")
+        let data = archiver.encodedData
+
+        let unarchiver = try! NSKeyedUnarchiver(forReadingFrom: data)
+        unarchiver.requiresSecureCoding = false
+        let decodedBigUInt = unarchiver.decodeObject(of: ASLSecretKey.self, forKey: "testObject")!
+
+        XCTAssertEqual(bigUInt, decodedBigUInt)
+    }
 }

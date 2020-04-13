@@ -103,14 +103,25 @@ static seal::compr_mode_type sealComprModeTypeFromASLCompressionModeType(ASLComp
 
 #pragma mark - NSCoding
 
-// TODO - add the save and load methods
+- (void)encodeWithCoder:(NSCoder *)coder {
+    std::size_t const lengthUpperBound = _publicKey.save_size(seal::Serialization::compr_mode_default);
+    NSMutableData * const data = [NSMutableData dataWithLength:lengthUpperBound];
+    std::size_t const actualLength = _publicKey.save(static_cast<std::byte *>(data.mutableBytes), lengthUpperBound);
+    [data setLength:actualLength];
+    [coder encodeDataObject:data];
+}
 
-//- (void)encodeWithCoder:(nonnull NSCoder *)coder {
-//	return nil;
-//}
-//
-//- (nullable instancetype)initWithCoder:(nonnull NSCoder *)coder {
-//	return nil;
-//}
+- (instancetype)initWithCoder:(NSCoder *)coder {
+    NSData * const encodedValueData = [coder decodeDataObject];
+    if (encodedValueData.length == 0) {
+        return nil;
+    }
+
+    seal::PublicKey encodedPublicKey;
+    std::byte const * bytes = static_cast<std::byte const *>(encodedValueData.bytes);
+    std::size_t const length = static_cast<std::size_t const>(encodedValueData.length);
+    //encodedPublicKey.load(<#std::shared_ptr<SEALContext> context#>, <#const SEAL_BYTE *in#>, <#std::size_t size#>)
+    return [self initWithPublicKey:encodedPublicKey];
+}
 
 @end

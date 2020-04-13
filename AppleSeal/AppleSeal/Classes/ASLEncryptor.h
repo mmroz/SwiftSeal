@@ -47,7 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
  the default NTT form, and will throw an exception if this is not the case.
  */
 
-@interface ASLEncryptor : NSObject <NSCoding>
+@interface ASLEncryptor : NSObject
 
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
@@ -343,11 +343,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)setSecretKey:(ASLSecretKey *)secretKey
                error:(NSError **)error;
 
-// TODO - fix this
--(BOOL)save;
-
-// TODO - fix this
--(BOOL)load;
+// TODO - add save and load functions
 
 @end
 

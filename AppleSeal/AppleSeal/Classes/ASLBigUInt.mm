@@ -21,6 +21,7 @@
 }
 
 #pragma mark - Initialization
+
 + (instancetype)bigUIntWithBitCount:(NSInteger)bitCount error:(NSError **)error {
     try {
         seal::BigUInt const bigUInt = seal::BigUInt(static_cast<int>(bitCount));
@@ -113,6 +114,30 @@
     }
     
     return [self isEqualToBigUInt:(ASLBigUInt *)object];
+}
+
+#pragma mark - NSCoding
+
+- (instancetype)initWithCoder:(NSCoder *)coder {
+    NSData * const encodedValueData = [coder decodeDataObject];
+    if (encodedValueData.length == 0) {
+        return nil;
+    }
+    
+    seal::BigUInt encodedBigUInt;
+    std::byte const * bytes = static_cast<std::byte const *>(encodedValueData.bytes);
+    std::size_t const length = static_cast<std::size_t const>(encodedValueData.length);
+    encodedBigUInt.load(bytes, length);
+    return [self initWithBigUInt:encodedBigUInt];
+}
+
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+    std::size_t const lengthUpperBound = _bigUInt.save_size(seal::Serialization::compr_mode_default);
+    NSMutableData * const data = [NSMutableData dataWithLength:lengthUpperBound];
+    std::size_t const actualLength = _bigUInt.save(static_cast<std::byte *>(data.mutableBytes), lengthUpperBound);
+    [data setLength:actualLength];
+    [coder encodeDataObject:data];
 }
 
 #pragma mark - Public Methods

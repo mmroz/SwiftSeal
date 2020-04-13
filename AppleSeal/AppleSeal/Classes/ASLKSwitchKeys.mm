@@ -84,16 +84,27 @@
 	return [[ASLMemoryPoolHandle alloc] initWithMemoryPoolHandle:_kSiwtchKeys.pool()];
 }
 
-#pragma mark: - NSCoding
+#pragma mark - NSCoding
 
-// TODO - add this and the other required save and load methods
+- (void)encodeWithCoder:(NSCoder *)coder {
+    std::size_t const lengthUpperBound = _kSiwtchKeys.save_size(seal::Serialization::compr_mode_default);
+    NSMutableData * const data = [NSMutableData dataWithLength:lengthUpperBound];
+    std::size_t const actualLength = _kSiwtchKeys.save(static_cast<std::byte *>(data.mutableBytes), lengthUpperBound);
+    [data setLength:actualLength];
+    [coder encodeDataObject:data];
+}
 
-//- (void)encodeWithCoder:(nonnull NSCoder *)coder {
-//	<#code#>
-//}
-//
-//- (nullable instancetype)initWithCoder:(nonnull NSCoder *)coder {
-//	<#code#>
-//}
+- (instancetype)initWithCoder:(NSCoder *)coder {
+    NSData * const encodedValueData = [coder decodeDataObject];
+    if (encodedValueData.length == 0) {
+        return nil;
+    }
+
+    seal::KSwitchKeys encodedKSwitchKeys;
+    std::byte const * bytes = static_cast<std::byte const *>(encodedValueData.bytes);
+    std::size_t const length = static_cast<std::size_t const>(encodedValueData.length);
+    //encodedKSwitchKeys.load(<#std::shared_ptr<SEALContext> context#>, <#std::istream &stream#>)
+    return [self initWithKSwitchKeys:encodedKSwitchKeys];
+}
 
 @end

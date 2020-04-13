@@ -179,12 +179,6 @@ typedef NS_CLOSED_ENUM(NSInteger, ASLSchemeType) {
 // TODO - fix this
 -(BOOL)setRandomGenerator;
 
-// TODO - fix this
--(BOOL)save;
-
-// TODO - fix this
--(BOOL)load;
-
 @end
 
 NS_ASSUME_NONNULL_END

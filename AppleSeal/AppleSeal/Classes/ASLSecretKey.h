@@ -34,8 +34,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, readonly, assign) ASLMemoryPoolHandle * pool;
 
-// TODO - add save and load
-
 @end
 
 NS_ASSUME_NONNULL_END

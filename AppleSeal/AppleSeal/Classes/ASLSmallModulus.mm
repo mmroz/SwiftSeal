@@ -38,19 +38,6 @@
 	return nil;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)coder {
-	NSData * const encodedValueData = [coder decodeDataObject];
-	if (encodedValueData.length == 0) {
-		return nil;
-	}
-
-	seal::SmallModulus encodedSmallModulus;
-	std::byte const * bytes = static_cast<std::byte const *>(encodedValueData.bytes);
-	std::size_t const length = static_cast<std::size_t const>(encodedValueData.length);
-	encodedSmallModulus.load(bytes, length);
-	return [self initWithSmallModulus:encodedSmallModulus];
-}
-
 #pragma mark - NSCoding
 
 - (void)encodeWithCoder:(NSCoder *)coder {
@@ -60,6 +47,20 @@
 	[data setLength:actualLength];
 	[coder encodeDataObject:data];
 }
+
+- (instancetype)initWithCoder:(NSCoder *)coder {
+    NSData * const encodedValueData = [coder decodeDataObject];
+    if (encodedValueData.length == 0) {
+        return nil;
+    }
+
+    seal::SmallModulus encodedSmallModulus;
+    std::byte const * bytes = static_cast<std::byte const *>(encodedValueData.bytes);
+    std::size_t const length = static_cast<std::size_t const>(encodedValueData.length);
+    encodedSmallModulus.load(bytes, length);
+    return [self initWithSmallModulus:encodedSmallModulus];
+}
+
 
 #pragma mark - NSCopying
 

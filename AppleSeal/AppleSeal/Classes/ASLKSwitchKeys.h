@@ -62,8 +62,6 @@ Returns the currently used MemoryPoolHandle.
 */
 @property (nonatomic, readonly, assign) ASLMemoryPoolHandle * pool;
 
-// TODO - handle saving
-
 @end
 
 NS_ASSUME_NONNULL_END

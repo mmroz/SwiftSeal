@@ -87,7 +87,7 @@ NS_ASSUME_NONNULL_BEGIN
  @superclass SuperClass: NSObject\n
  */
 
-@interface ASLBigUInt : NSObject <NSCopying>
+@interface ASLBigUInt : NSObject <NSCopying, NSCoding>
 
 /*!
  Creates a zero-initialized BigUInt of the specified bit width. Represents an unsigned integer with
