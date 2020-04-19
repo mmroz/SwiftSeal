@@ -53,8 +53,8 @@
     return nil;
 }
 + (instancetype)bigUIntWithBitCount:(NSInteger)bitCount
-                                  scalarValue:(uint64_t)value
-                                        error:(NSError **)error {
+                        scalarValue:(uint64_t)value
+                              error:(NSError **)error {
     try {
         seal::BigUInt const bigUInt = seal::BigUInt(static_cast<int>(bitCount), value);
         return [[ASLBigUInt alloc] initWithBigUInt:bigUInt];
@@ -247,7 +247,7 @@
             *error = [NSError ASL_SealLogicError:e];
         }
         return nil;
-    } 
+    }
 }
 
 - (ASLBigUInt *)dividingRemainderWithScalarModulus:(uint64_t)scalarModulus
@@ -318,17 +318,18 @@
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return nil;
+        return NO;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return nil;
+        return NO;
     }
+    return NO;
 }
 
 - (BOOL)tryModuloInvertWithScalarModulus:(uint64_t)scalarModulus
-inverse:(ASLBigUInt *)inverse
+                                 inverse:(ASLBigUInt *)inverse
                                    error:(NSError **)error {
     try {
         seal::BigUInt inverseModulus = inverse.sealBigUInt;
@@ -337,13 +338,14 @@ inverse:(ASLBigUInt *)inverse
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return nil;
+        return NO;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return nil;
+        return NO;
     }
+    return NO;
 }
 
 + (ASLBigUInt *) createNewWithValue:(uint64_t)value {
@@ -356,12 +358,12 @@ inverse:(ASLBigUInt *)inverse
         seal::BigUInt sealDestination = destination.sealBigUInt;
         _bigUInt.duplicate_to(sealDestination);
         return YES;
-       } catch (std::logic_error const &e) {
-           if (error != nil) {
-               *error = [NSError ASL_SealLogicError:e];
-           }
-           return NO;
-       }
+    } catch (std::logic_error const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealLogicError:e];
+        }
+        return NO;
+    }
 }
 
 - (BOOL)duplicateFrom:(ASLBigUInt *)value
@@ -370,12 +372,12 @@ inverse:(ASLBigUInt *)inverse
         const seal::BigUInt sealDestination = value.sealBigUInt;
         _bigUInt.duplicate_from(sealDestination);
         return YES;
-       } catch (std::logic_error const &e) {
-           if (error != nil) {
-               *error = [NSError ASL_SealLogicError:e];
-           }
-           return NO;
-       }
+    } catch (std::logic_error const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealLogicError:e];
+        }
+        return NO;
+    }
 }
 
 - (BOOL)resize:(int)bitCount
@@ -407,26 +409,26 @@ inverse:(ASLBigUInt *)inverse
 
 - (ASLBigUInt *)incremenet:(NSError **)error {
     try {
-           return [[ASLBigUInt alloc] initWithBigUInt:_bigUInt.operator~()];
-       } catch (std::logic_error const &e) {
-           if (error != nil) {
-               *error = [NSError ASL_SealLogicError:e];
-           }
-           return nil;
-       }
-       return nil;
+        return [[ASLBigUInt alloc] initWithBigUInt:_bigUInt.operator~()];
+    } catch (std::logic_error const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealLogicError:e];
+        }
+        return nil;
+    }
+    return nil;
 }
 
 - (ASLBigUInt *)decrement:(NSError **)error {
     try {
-           return [[ASLBigUInt alloc] initWithBigUInt:_bigUInt.operator~()];
-       } catch (std::logic_error const &e) {
-           if (error != nil) {
-               *error = [NSError ASL_SealLogicError:e];
-           }
-           return nil;
-       }
-       return nil;
+        return [[ASLBigUInt alloc] initWithBigUInt:_bigUInt.operator~()];
+    } catch (std::logic_error const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealLogicError:e];
+        }
+        return nil;
+    }
+    return nil;
 }
 
 - (ASLBigUInt *)bigUIntByAddingBigUInt:(ASLBigUInt *)bigUInt {
@@ -440,8 +442,8 @@ inverse:(ASLBigUInt *)inverse
 
 - (ASLBigUInt *)bigUIntByDividingBigUInt:(ASLBigUInt *)bigUInt error:(NSError **)error {
     try {
-    const seal::BigUInt operand = bigUInt.sealBigUInt;
-       return [[ASLBigUInt alloc] initWithBigUInt: _bigUInt.operator/=(operand)];;
+        const seal::BigUInt operand = bigUInt.sealBigUInt;
+        return [[ASLBigUInt alloc] initWithBigUInt: _bigUInt.operator/=(operand)];;
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
@@ -454,14 +456,14 @@ inverse:(ASLBigUInt *)inverse
 - (ASLBigUInt *)bigUIntByDividingScalar:(uint64_t)scalar
                                   error:(NSError **)error {
     try {
-          return [[ASLBigUInt alloc] initWithBigUInt: _bigUInt.operator/=(scalar)];;
-       } catch (std::invalid_argument const &e) {
-           if (error != nil) {
-               *error = [NSError ASL_SealInvalidParameter:e];
-           }
-           return nil;
-       }
-       return nil;
+        return [[ASLBigUInt alloc] initWithBigUInt: _bigUInt.operator/=(scalar)];;
+    } catch (std::invalid_argument const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealInvalidParameter:e];
+        }
+        return nil;
+    }
+    return nil;
 }
 
 - (ASLBigUInt *)bigUIntByBitwiseAndBigUInt:(ASLBigUInt *)bigUInt {
@@ -470,7 +472,7 @@ inverse:(ASLBigUInt *)inverse
 }
 
 - (ASLBigUInt *)bigUIntByBitwiseAndScalar:(uint64_t)scalar {
-     return [[ASLBigUInt alloc] initWithBigUInt: _bigUInt.operator&=(scalar)];
+    return [[ASLBigUInt alloc] initWithBigUInt: _bigUInt.operator&=(scalar)];
 }
 
 - (ASLBigUInt *)bigUIntBySubtractingBigUInt:(ASLBigUInt *)bigUInt {
@@ -484,7 +486,7 @@ inverse:(ASLBigUInt *)inverse
 
 - (ASLBigUInt *)bigUIntByBitwiseXOrBigUInt:(ASLBigUInt *)bigUInt {
     const seal::BigUInt operand = bigUInt.sealBigUInt;
-       return [[ASLBigUInt alloc] initWithBigUInt: _bigUInt.operator^(operand)];
+    return [[ASLBigUInt alloc] initWithBigUInt: _bigUInt.operator^(operand)];
 }
 
 - (ASLBigUInt *)bigUIntByBitwiseXOrScalar:(uint64_t)scalar {
@@ -497,15 +499,15 @@ inverse:(ASLBigUInt *)inverse
 }
 
 - (ASLBigUInt *)bigUIntByBitwiseOrScalar:(uint64_t)scalar {
-     return [[ASLBigUInt alloc] initWithBigUInt: _bigUInt.operator^(scalar)];
+    return [[ASLBigUInt alloc] initWithBigUInt: _bigUInt.operator^(scalar)];
 }
 
 - (ASLBigUInt *)bigUIntByLeftShift:(int)shift {
-     return [[ASLBigUInt alloc] initWithBigUInt: _bigUInt.operator<<(shift)];
+    return [[ASLBigUInt alloc] initWithBigUInt: _bigUInt.operator<<(shift)];
 }
 
 - (ASLBigUInt *)bigUIntByRightShift:(int)shift {
-     return [[ASLBigUInt alloc] initWithBigUInt: _bigUInt.operator>>(shift)];
+    return [[ASLBigUInt alloc] initWithBigUInt: _bigUInt.operator>>(shift)];
 }
 
 - (BOOL)alias:(NSInteger)bitCount

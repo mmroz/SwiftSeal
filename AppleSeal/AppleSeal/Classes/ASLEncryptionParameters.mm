@@ -179,7 +179,7 @@ static std::uint8_t sealSchemeFromASLSchemeType(ASLSchemeType schemeType) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return nil;
+        return NO;
     }
     return NO;
 }
@@ -210,8 +210,9 @@ static std::uint8_t sealSchemeFromASLSchemeType(ASLSchemeType schemeType) {
            if (error != nil) {
                *error = [NSError ASL_SealInvalidParameter:e];
            }
-           return nil;
+           return NO;
        }
+     return NO;
 }
 
 #pragma mark - ASLEncrytionParameters_Internal
