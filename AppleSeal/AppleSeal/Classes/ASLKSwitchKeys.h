@@ -62,6 +62,23 @@ Returns the currently used MemoryPoolHandle.
 */
 @property (nonatomic, readonly, assign) ASLMemoryPoolHandle * pool;
 
+/*!
+ Loads a ASLKSwitchKeys from data overwriting the current ASLKSwitchKeys.
+ The loaded ASLKSwitchKeys is verified to be valid for the given SEALContext.
+ 
+ @param data The stream to load the ASLKSwitchKeys from
+ @param context The SEALContext
+ @throws ASL_InvalidArgument if the context is not set or encryption
+ parameters are not valid
+ @throws ASLogicError if the loaded data is invalid or if decompression
+ failed
+ @throws ASL_RuntimeError if I/O operations failed
+ */
+
+- (instancetype _Nullable)initWithData:(NSData *)data
+                               context:(ASLSealContext *)context
+                                 error:(NSError **)error;
+
 @end
 
 NS_ASSUME_NONNULL_END

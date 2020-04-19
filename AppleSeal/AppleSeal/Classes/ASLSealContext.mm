@@ -66,8 +66,6 @@ memoryPoolHandle:(ASLMemoryPoolHandle*)pool
 
 #pragma mark - Properties
 
-// TODO - impletment
-
 - (ASLSealContextData *)keyContextData {
     return [[ASLSealContextData alloc] initWithSEALContextData:_sealContext->key_context_data()];
 }

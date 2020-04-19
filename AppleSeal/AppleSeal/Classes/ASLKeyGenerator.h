@@ -154,8 +154,96 @@ NS_ASSUME_NONNULL_BEGIN
 - (ASLGaloisKeys * _Nullable) galoisKeysWithSteps:(NSArray<NSNumber *>*)steps
                                             error:(NSError **)error;
 
-// TODO - add save and load functions
+/*!
+ Generates and saves relinearization keys to a given memory location.
+ 
+ Half of the polynomials in relinearization keys are randomly generated
+ and are replaced with the seed used to compress output size. The output
+ is in binary format and not human-readable.
+ 
+ @throws ASL_LogicError if the encryption parameters do not support
+ keyswitching
+ @throws ASL_InvalidParameter if out is null or if size is too small to
+ contain a SEALHeader
+ @throws ASL_LogicError if compression mode is not supported, or if
+ compression failed
+ @throws ASL_RuntimeError if I/O operations failed
+ */
+- (NSData * _Nullable) relinearizationKeysSaveWithError:(NSError **)error;
 
+/*!
+ Generates and writes Galois keys to a given memory location. This function
+ creates logarithmically many (in degree of the polynomial modulus) Galois
+ keys that is sufficient to apply any Galois automorphism (e.g. rotations) on
+ encrypted data. Most users will want to use this overload of the function.
+ 
+ Half of the polynomials in Galois keys are randomly generated and are
+ replaced with the seed used to compress output size. The output is in
+ binary format and not human-readable.
+ 
+ @throws ASL_LogicError if the encryption parameters do not support
+ batching and scheme is scheme_type::BFV
+ @throws ASL_LogicError if the encryption parameters do not support
+ keyswitching
+ @throws ASL_LogicError if compression mode is not supported, or if
+ compression failed
+ @throws ASL_RuntimeError if I/O operations failed
+ */
+- (NSData * _Nullable) galoisKeysSaveWithError:(NSError **)error;
+
+/*!
+ Generates and writes Galois keys to a given memory location. This function
+ creates specific Galois keys that can be used to apply specific Galois
+ automorphisms on encrypted data. The user needs to give as input a vector
+ of desired Galois rotation step counts, where negative step counts correspond
+ to rotations to the right and positive step counts correspond to rotations to
+ the left. A step count of zero can be used to indicate a column rotation
+ in the BFV scheme complex conjugation in the CKKS scheme.
+ 
+ Half of the polynomials in Galois keys are randomly generated and are
+ replaced with the seed used to compress output size. The output is in
+ binary format and not human-readable.
+ 
+ @param steps The rotation step counts for which to generate keys
+ @throws ASL_LogicError if the encryption parameters do not support
+ batching and scheme is scheme_type::BFV
+ @throws ASL_LogicError if the encryption parameters do not support
+ keyswitching
+ @throws ASL_InvalidParameter if out is null or if size is too small to
+ contain a SEALHeader
+ @throws ASL_LogicError if compression mode is not supported, or if
+ compression failed
+ @throws ASL_RuntimeError if I/O operations failed
+ @throws ASL_InvalidParameter if the Galois elements are not valid
+ */
+- (NSData * _Nullable) galoisKeysSaveWithSteps:(NSArray<NSNumber *>*)steps
+                                         error:(NSError **)error;
+
+
+/*!
+ Generates and writes Galois keys to a given memory location. This function
+ creates specific Galois keys that can be used to apply specific Galois
+ automorphisms on encrypted data. The user needs to give as input a vector
+ of Galois elements corresponding to the keys that are to be created.
+ 
+ Half of the polynomials in Galois keys are randomly generated and are
+ replaced with the seed used to compress output size. The output is in
+ binary format and not human-readable.
+ 
+ @param elements The Galois elements for which to generate keys
+ @throws ASL_LogicError if the encryption parameters do not support
+ batching and scheme is scheme_type::BFV
+ @throws ASL_LogicError if the encryption parameters do not support
+ keyswitching
+ @throws ASL_InvalidParameter if out is null or if size is too small to
+ contain a SEALHeader
+ @throws ASL_LogicError if compression mode is not supported, or if
+ compression failed
+ @throws ASL_RuntimeError if I/O operations failed
+ @throws ASL_InvalidParameter if the Galois elements are not valid
+ */
+- (NSData * _Nullable) galoisKeysSaveWithElements:(NSArray<NSNumber *>*)elements
+                                            error:(NSError **)error;
 @end
 
 NS_ASSUME_NONNULL_END

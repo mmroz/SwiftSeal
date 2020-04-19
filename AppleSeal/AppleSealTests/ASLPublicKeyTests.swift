@@ -24,4 +24,16 @@ class ASLPublicKeyTests: XCTestCase {
 		let publicKey = ASLPublicKey()
 		XCTAssertNoThrow(publicKey.cipherTextData)
 	}
+    
+    func testCoding() throws {
+        let publicKey = ASLPublicKey()
+        
+        let archiver = NSKeyedArchiver(requiringSecureCoding: false)
+        archiver.encode(publicKey, forKey: "testObject")
+        let data = archiver.encodedData
+        
+        let decodedSecretKey = try ASLPublicKey(data: data, context: ASLSealContext())
+
+        XCTAssertEqual(publicKey, decodedSecretKey)
+    }
 }

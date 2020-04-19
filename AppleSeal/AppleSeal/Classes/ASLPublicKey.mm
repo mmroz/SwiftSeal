@@ -15,6 +15,7 @@
 #import "ASLMemoryPoolHandle.h"
 #import "ASLMemoryPoolHandle_Internal.h"
 #import "ASLCipherText_Internal.h"
+#import "ASLSealContext_Internal.h"
 #import "ASLPublicKey_Internal.h"
 #import "NSError+CXXAdditions.h"
 
@@ -112,16 +113,38 @@ static seal::compr_mode_type sealComprModeTypeFromASLCompressionModeType(ASLComp
 }
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
-    NSData * const encodedValueData = [coder decodeDataObject];
-    if (encodedValueData.length == 0) {
-        return nil;
-    }
+   // TODO - remove this method
+    NSParameterAssert(false);
+    return nil;
+}
 
-    seal::PublicKey encodedPublicKey;
-    std::byte const * bytes = static_cast<std::byte const *>(encodedValueData.bytes);
-    std::size_t const length = static_cast<std::size_t const>(encodedValueData.length);
-    //encodedPublicKey.load(<#std::shared_ptr<SEALContext> context#>, <#const SEAL_BYTE *in#>, <#std::size_t size#>)
-    return [self initWithPublicKey:encodedPublicKey];
+- (instancetype)initWithData:(NSData *)data
+                     context:(ASLSealContext *)context
+                       error:(NSError **)error{
+     seal::PublicKey encodedPublicKey;
+     std::byte const * bytes = static_cast<std::byte const *>(data.bytes);
+     std::size_t const length = static_cast<std::size_t const>(data.length);
+
+    try {
+        encodedPublicKey.load(context.sealContext, bytes, length);
+         return [self initWithPublicKey:encodedPublicKey];
+    } catch (std::logic_error const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealLogicError:e];
+        }
+        return nil;
+    } catch (std::invalid_argument const &e) {
+           if (error != nil) {
+               *error = [NSError ASL_SealInvalidParameter:e];
+           }
+           return nil;
+       }  catch (std::runtime_error const &e) {
+           if (error != nil) {
+               *error = [NSError ASL_SealRuntimeError:e];
+           }
+           return nil;
+       }
+    return nil;
 }
 
 @end

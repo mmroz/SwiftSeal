@@ -63,6 +63,30 @@ class ASLKeyGeneratorTests: XCTestCase {
         let keyGenerator = try ASLKeyGenerator(context: bfvDefaultContext())
         XCTAssertNoThrow(try keyGenerator.galoisKeys(withSteps: [1]))
     }
+    
+    func testRelinearizationKeysSave() throws {
+        let keyGenerator = try ASLKeyGenerator(context: bfvDefaultContext())
+        let data = try keyGenerator.relinearizationKeysSave()
+        let _ = try ASLRelinearizationKeys(data: data, context: ASLSealContext())
+    }
+    
+    func testGaloisKeysSave() throws {
+        let keyGenerator = try ASLKeyGenerator(context: bfvDefaultContext())
+        let data = try keyGenerator.galoisKeysSave()
+        let _ = try ASLGaloisKeys(data: data, context: ASLSealContext())
+    }
+    
+    func testGaloisKeysSaveWithSteps() throws {
+        let keyGenerator = try ASLKeyGenerator(context: bfvDefaultContext())
+        let data = try keyGenerator.galoisKeysSave(withSteps: [1])
+        let _ = try ASLGaloisKeys(data: data, context: ASLSealContext())
+    }
+    
+    func testGaloisKeysSaveWithElements() throws {
+        let keyGenerator = try ASLKeyGenerator(context: bfvDefaultContext())
+        let data = try keyGenerator.galoisKeysSave(withElements: [1])
+        let _ = try ASLGaloisKeys(data: data, context: ASLSealContext())
+    }
 }
 
 public func bfvDefaultContext() throws -> ASLSealContext {

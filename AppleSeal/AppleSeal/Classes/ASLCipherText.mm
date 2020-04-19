@@ -193,18 +193,39 @@
 #pragma mark - NSCoding
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
-    NSData * const encodedValueData = [coder decodeDataObject];
-    if (encodedValueData.length == 0) {
-        return nil;
-    }
-    
-    seal::Ciphertext encodedCipherText;
-    std::byte const * bytes = static_cast<std::byte const *>(encodedValueData.bytes);
-    std::size_t const length = static_cast<std::size_t const>(encodedValueData.length);
-    //	encodedCipherText.load(bytes, length); TODO - uh oh
-    return [self initWithCipherText:encodedCipherText];
+   // TODO - remove this method
+    NSParameterAssert(false);
+    return nil;
 }
 
+- (instancetype)initWithData:(NSData *)data
+                     context:(ASLSealContext *)context
+                       error:(NSError **)error{
+     seal::Ciphertext encodedCipherText;
+     std::byte const * bytes = static_cast<std::byte const *>(data.bytes);
+     std::size_t const length = static_cast<std::size_t const>(data.length);
+
+    try {
+        encodedCipherText.load(context.sealContext, bytes, length);
+         return [self initWithCipherText:encodedCipherText];
+    } catch (std::logic_error const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealLogicError:e];
+        }
+        return nil;
+    } catch (std::invalid_argument const &e) {
+           if (error != nil) {
+               *error = [NSError ASL_SealInvalidParameter:e];
+           }
+           return nil;
+       }  catch (std::runtime_error const &e) {
+           if (error != nil) {
+               *error = [NSError ASL_SealRuntimeError:e];
+           }
+           return nil;
+       }
+    return nil;
+}
 
 - (void)encodeWithCoder:(NSCoder *)coder {
     std::size_t const lengthUpperBound = _cipherText.save_size(seal::Serialization::compr_mode_default);
@@ -213,6 +234,8 @@
     [data setLength:actualLength];
     [coder encodeDataObject:data];
 }
+
+
 
 #pragma mark - NSCopying
 

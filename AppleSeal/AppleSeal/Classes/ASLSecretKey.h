@@ -34,6 +34,23 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, readonly, assign) ASLMemoryPoolHandle * pool;
 
+/*!
+ Loads a SecretKey from dat overwriting the current SecretKey.
+ The loaded SecretKey is verified to be valid for the given SEALContext.
+ 
+ @param data The stream to load the SecretKey from
+ @param context The SEALContext
+ @throws ASL_InvalidArgument if the context is not set or encryption
+ parameters are not valid
+ @throws ASLogicError if the loaded data is invalid or if decompression
+ failed
+ @throws ASL_RuntimeError if I/O operations failed
+ */
+
+- (instancetype _Nullable)initWithData:(NSData *)data
+                               context:(ASLSealContext *)context
+                                 error:(NSError **)error;
+
 @end
 
 NS_ASSUME_NONNULL_END

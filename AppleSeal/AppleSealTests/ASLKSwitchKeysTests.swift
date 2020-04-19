@@ -37,5 +37,15 @@ class ASLKSwitchKeysTests: XCTestCase {
 		XCTAssertNoThrow(kSwitchKeys.pool)
 	}
 	
-	// TODO - add coding tests
+	func testCoding() throws {
+        let kSwitchKeys = ASLKSwitchKeys()
+        
+        let archiver = NSKeyedArchiver(requiringSecureCoding: false)
+        archiver.encode(kSwitchKeys, forKey: "testObject")
+        let data = archiver.encodedData
+        
+        let decodedkSwitchKeys = try ASLKSwitchKeys(data: data, context: ASLSealContext())
+
+        XCTAssertEqual(kSwitchKeys, decodedkSwitchKeys)
+    }
 }

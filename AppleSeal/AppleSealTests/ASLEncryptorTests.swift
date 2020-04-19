@@ -148,6 +148,36 @@ class ASLEncryptorTests: XCTestCase {
         XCTAssertNoThrow(try encryptor.setSecretKey(secretKey))
     }
     
+    func testSymmetricSave() throws {
+        let encryptor = try ASLEncryptor(context: createValidContext(), publicKey: ASLPublicKey(), secretKey: ASLSecretKey())
+        let plainText = ASLPlainText()
+        let data = try encryptor.encryptSymmetricSave(with: plainText)
+        let decodedPlainText = try ASLPlainText(data: data, context: createValidContext())
+        XCTAssertEqual(decodedPlainText, plainText)
+    }
+    
+    func testEncryptSymmetricSave() throws {
+        let encryptor = try ASLEncryptor(context: createValidContext(), publicKey: ASLPublicKey(), secretKey: ASLSecretKey())
+        
+        let plainText = ASLPlainText()
+        let data = try encryptor.encryptSymmetricSave(with: plainText)
+        
+        let decodedPlainText = try ASLPlainText(data: data, context: createValidContext())
+        
+        XCTAssertEqual(plainText, decodedPlainText)
+    }
+    
+    func testEncryptZeroSymmetricSave() throws {
+        let encryptor = try ASLEncryptor(context: createValidContext(), publicKey: ASLPublicKey(), secretKey: ASLSecretKey())
+        
+        let plainText = ASLPlainText()
+        let data = try encryptor.encryptZeroSymmetricSave(withParamsId: ASLParametersIdType(block: (2,2,2,2)))
+        
+        let decodedPlainText = try ASLPlainText(data: data, context: createValidContext())
+        
+        XCTAssertEqual(plainText, decodedPlainText)
+    }
+    
     private func createValidContext() throws -> ASLSealContext {
         let params = ASLEncryptionParameters(schemeType: .BFV)
         try params.setPolynomialModulusDegree(8192)

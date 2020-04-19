@@ -10,6 +10,8 @@
 
 #import <AppleSeal/ASLMemoryPoolHandle.h>
 #import <AppleSeal/ASLParametersIdType.h>
+#import <AppleSeal/ASLSealContext.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -313,6 +315,23 @@ NS_ASSUME_NONNULL_BEGIN
  Sets the plaintext polynomial to zero.
  */
 - (void)setZero;
+
+/*!
+ Loads a ASLPlainText from dat overwriting the current PublicKey.
+ The loaded ASLPlainText is verified to be valid for the given SEALContext.
+ 
+ @param data The stream to load the ASLPlainText from
+ @param context The SEALContext
+ @throws ASL_InvalidArgument if the context is not set or encryption
+ parameters are not valid
+ @throws ASLogicError if the loaded data is invalid or if decompression
+ failed
+ @throws ASL_RuntimeError if I/O operations failed
+ */
+
+- (instancetype _Nullable)initWithData:(NSData *)data
+                               context:(ASLSealContext *)context
+                                 error:(NSError **)error;
 
 @end
 

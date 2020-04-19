@@ -373,6 +373,24 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, readonly, assign) ASLMemoryPoolHandle* pool;
 
+/*!
+ Loads a ciphertext from a given memory location overwriting the current
+ ciphertext. The loaded ciphertext is verified to be valid for the given
+ SEALContext.
+ 
+ @param data the data containing the ASLCipherTest
+ @param context context The SEALContext
+ @throws ASLSealErrorCodeInvalidParameter if the context is not set or encryption
+ parameters are not valid
+ @throws ASL_SealErrorCodeInvalidParameter if in is null or if size is too small to
+ contain a SEALHeader
+ @throws ASL_LogicErrorif the loaded data is invalid or if decompression
+ failed
+ @throws ASL_RuntimeError if I/O operations failed
+ */
+- (instancetype _Nullable)initWithData:(NSData *)data
+                               context:(ASLSealContext *)context
+                                 error:(NSError **)error;
 @end
 
 NS_ASSUME_NONNULL_END

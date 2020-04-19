@@ -116,6 +116,17 @@ class ASLCipherTextTests: XCTestCase {
 	
 	// TODO - finish testing the rest of the properties when I figure out how to create one
 	
+    func testCoding() throws {
+        let cipherText = ASLCipherText()
+        
+        let archiver = NSKeyedArchiver(requiringSecureCoding: false)
+        archiver.encode(cipherText, forKey: "testObject")
+        let data = archiver.encodedData
+        
+        let decodedCipherText = try ASLCipherText(data: data, context: ASLSealContext())
+
+        XCTAssertEqual(cipherText, decodedCipherText)
+    }
 	
 	// MARK: - Test Helper
 	

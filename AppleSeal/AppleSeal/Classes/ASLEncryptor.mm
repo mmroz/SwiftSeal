@@ -240,8 +240,8 @@
 }
 
 -(BOOL)encryptSymmetricWithPlainText:(ASLPlainText *)plainText
-                              cipherText:(ASLCipherText *)cipherText
-                                   error:(NSError **)error {
+                          cipherText:(ASLCipherText *)cipherText
+                               error:(NSError **)error {
     NSParameterAssert(plainText != nil);
     NSParameterAssert(cipherText != nil);
     
@@ -265,9 +265,9 @@
 }
 
 -(BOOL)encryptSymmetricWithPlainText:(ASLPlainText *)plainText
-                              cipherText:(ASLCipherText *)cipherText
-                                    pool:(ASLMemoryPoolHandle *)pool
-                                   error:(NSError **)error {
+                          cipherText:(ASLCipherText *)cipherText
+                                pool:(ASLMemoryPoolHandle *)pool
+                               error:(NSError **)error {
     NSParameterAssert(plainText != nil);
     NSParameterAssert(cipherText != nil);
     
@@ -291,7 +291,7 @@
 }
 
 -(BOOL)encryptZeroSymmetricWithCipherText:(ASLCipherText *)cipherText
-                                     error:(NSError **)error {
+                                    error:(NSError **)error {
     NSParameterAssert(cipherText != nil);
     
     seal::Ciphertext sealCipherText = cipherText.sealCipherText;
@@ -309,8 +309,8 @@
 }
 
 -(BOOL)encryptZeroSymmetricWithCipherText:(ASLCipherText *)cipherText
-                                      pool:(ASLMemoryPoolHandle *)pool
-                                     error:(NSError **)error {
+                                     pool:(ASLMemoryPoolHandle *)pool
+                                    error:(NSError **)error {
     NSParameterAssert(cipherText != nil);
     NSParameterAssert(pool != nil);
     
@@ -418,6 +418,67 @@
             *error = [NSError ASL_SealInvalidParameter:e];
         }
         return NO;
+    }
+}
+
+- (NSData *)encryptSymmetricSaveWithPlainText:(ASLPlainText *)plainText error:(NSError **)error {
+    NSParameterAssert(plainText != nil);
+    
+    std::size_t const lengthUpperBound = plainText.sealPlainText.save_size(seal::Serialization::compr_mode_default);
+    NSMutableData * const data = [NSMutableData dataWithLength:lengthUpperBound];
+    
+    try {
+        std::size_t const actualLength = _encryptor->encrypt_symmetric_save(plainText.sealPlainText, static_cast<std::byte *>(data.mutableBytes), lengthUpperBound);
+        [data setLength:actualLength];
+        return data;
+    }  catch (std::logic_error const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealLogicError:e];
+        }
+        return nil;
+    } catch (std::invalid_argument const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealInvalidParameter:e];
+        }
+        return nil;
+    }  catch (std::runtime_error const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealRuntimeError:e];
+        }
+        return nil;
+    }
+}
+
+- (NSData *)encryptZeroSymmetricSaveWithParamsId:(ASLParametersIdType)paramsId error:(NSError **)error {
+    
+    seal::parms_id_type sealParametersId = {};
+    std::copy(std::begin(paramsId.block),
+              std::end(paramsId.block),
+              sealParametersId.begin());
+    
+    // TODO - this is not the right size
+    std::size_t const lengthUpperBound = seal::Ciphertext().save_size(seal::compr_mode_type::none);
+    NSMutableData * const data = [NSMutableData dataWithLength:lengthUpperBound];
+    
+    try {
+        std::size_t const actualLength = _encryptor->encrypt_zero_symmetric_save(sealParametersId, static_cast<std::byte *>(data.mutableBytes), lengthUpperBound);
+        [data setLength:actualLength];
+        return data;
+    }  catch (std::logic_error const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealLogicError:e];
+        }
+        return nil;
+    } catch (std::invalid_argument const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealInvalidParameter:e];
+        }
+        return nil;
+    }  catch (std::runtime_error const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealRuntimeError:e];
+        }
+        return nil;
     }
 }
 

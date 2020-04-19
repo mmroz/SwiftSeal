@@ -15,6 +15,9 @@
 #import "ASLMemoryPoolHandle.h"
 #import "ASLMemoryPoolHandle_Internal.h"
 #import "ASLKSwitchKeys_Internal.h"
+#import "ASLSecretKey_Internal.h"
+#import "ASLSealContext_Internal.h"
+#import "NSError+CXXAdditions.h"
 
 @implementation ASLKSwitchKeys {
 	seal::KSwitchKeys _kSiwtchKeys;
@@ -95,16 +98,38 @@
 }
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
-    NSData * const encodedValueData = [coder decodeDataObject];
-    if (encodedValueData.length == 0) {
-        return nil;
-    }
+   // TODO - remove this method
+    NSParameterAssert(false);
+    return nil;
+}
 
-    seal::KSwitchKeys encodedKSwitchKeys;
-    std::byte const * bytes = static_cast<std::byte const *>(encodedValueData.bytes);
-    std::size_t const length = static_cast<std::size_t const>(encodedValueData.length);
-    //encodedKSwitchKeys.load(<#std::shared_ptr<SEALContext> context#>, <#std::istream &stream#>)
-    return [self initWithKSwitchKeys:encodedKSwitchKeys];
+- (instancetype)initWithData:(NSData *)data
+                     context:(ASLSealContext *)context
+                       error:(NSError **)error{
+     seal::KSwitchKeys encodedkSwitchKeys;
+     std::byte const * bytes = static_cast<std::byte const *>(data.bytes);
+     std::size_t const length = static_cast<std::size_t const>(data.length);
+
+    try {
+        encodedkSwitchKeys.load(context.sealContext, bytes, length);
+         return [self initWithKSwitchKeys:encodedkSwitchKeys];
+    } catch (std::logic_error const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealLogicError:e];
+        }
+        return nil;
+    } catch (std::invalid_argument const &e) {
+           if (error != nil) {
+               *error = [NSError ASL_SealInvalidParameter:e];
+           }
+           return nil;
+       }  catch (std::runtime_error const &e) {
+           if (error != nil) {
+               *error = [NSError ASL_SealRuntimeError:e];
+           }
+           return nil;
+       }
+    return nil;
 }
 
 @end

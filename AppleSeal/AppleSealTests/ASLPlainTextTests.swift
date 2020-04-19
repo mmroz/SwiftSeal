@@ -117,7 +117,15 @@ class ASLPlainTextTests: XCTestCase {
 		XCTAssertThrowsError(try plainText.resize(-1))
 	}
 	
-	func testEncoding() {
-		// TODO
-	}
+	    func testCoding() throws {
+        let plainText = ASLPlainText()
+        
+        let archiver = NSKeyedArchiver(requiringSecureCoding: false)
+        archiver.encode(plainText, forKey: "testObject")
+        let data = archiver.encodedData
+        
+        let decodedPlainText = try ASLPlainText(data: data, context: ASLSealContext())
+
+        XCTAssertEqual(plainText, decodedPlainText)
+    }
 }

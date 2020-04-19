@@ -174,4 +174,119 @@
     return nil;
 }
 
+- (NSData *)relinearizationKeysSaveWithError:(NSError **)error {
+    std::size_t const lengthUpperBound = _keyGenerator->relin_keys().save_size(seal::Serialization::compr_mode_default);
+    NSMutableData * const data = [NSMutableData dataWithLength:lengthUpperBound];
+    
+    try {
+        std::size_t const actualLength = _keyGenerator->relin_keys_save(static_cast<std::byte *>(data.mutableBytes), lengthUpperBound);
+        [data setLength:actualLength];
+        return data;
+    }  catch (std::logic_error const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealLogicError:e];
+        }
+        return nil;
+    } catch (std::invalid_argument const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealInvalidParameter:e];
+        }
+        return nil;
+    }  catch (std::runtime_error const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealRuntimeError:e];
+        }
+        return nil;
+    }
+}
+
+- (NSData *)galoisKeysSaveWithError:(NSError **)error {
+    std::size_t const lengthUpperBound = _keyGenerator->galois_keys().save_size(seal::Serialization::compr_mode_default);
+    NSMutableData * const data = [NSMutableData dataWithLength:lengthUpperBound];
+    
+    try {
+        std::size_t const actualLength = _keyGenerator->galois_keys_save(static_cast<std::byte *>(data.mutableBytes), lengthUpperBound);
+        [data setLength:actualLength];
+        return data;
+    }  catch (std::logic_error const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealLogicError:e];
+        }
+        return nil;
+    } catch (std::invalid_argument const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealInvalidParameter:e];
+        }
+        return nil;
+    }  catch (std::runtime_error const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealRuntimeError:e];
+        }
+        return nil;
+    }
+}
+
+- (NSData *)galoisKeysSaveWithSteps:(NSArray<NSNumber *> *)steps error:(NSError **)error {
+    std::size_t const lengthUpperBound = _keyGenerator->galois_keys().save_size(seal::Serialization::compr_mode_default);
+    NSMutableData * const data = [NSMutableData dataWithLength:lengthUpperBound];
+    
+    std::vector<int> valuesList(static_cast<size_t>(steps.count));
+    for (NSNumber * const step in steps) {
+        valuesList.push_back(step.intValue);
+    }
+    
+    try {
+        std::size_t const actualLength = _keyGenerator->galois_keys_save(valuesList, static_cast<std::byte *>(data.mutableBytes), lengthUpperBound);
+        [data setLength:actualLength];
+        return data;
+    }  catch (std::logic_error const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealLogicError:e];
+        }
+        return nil;
+    } catch (std::invalid_argument const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealInvalidParameter:e];
+        }
+        return nil;
+    }  catch (std::runtime_error const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealRuntimeError:e];
+        }
+        return nil;
+    }
+}
+
+- (NSData *) galoisKeysSaveWithElements:(NSArray<NSNumber *>*)elements
+                                  error:(NSError **)error {
+    std::size_t const lengthUpperBound = _keyGenerator->galois_keys().save_size(seal::Serialization::compr_mode_default);
+    NSMutableData * const data = [NSMutableData dataWithLength:lengthUpperBound];
+    
+    std::vector<std::uint64_t> valuesList(static_cast<size_t>(elements.count));
+    for (NSNumber * const element in elements) {
+        valuesList.push_back(element.unsignedIntValue);
+    }
+    
+    try {
+        std::size_t const actualLength = _keyGenerator->galois_keys_save(valuesList, static_cast<std::byte *>(data.mutableBytes), lengthUpperBound);
+        [data setLength:actualLength];
+        return data;
+    }  catch (std::logic_error const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealLogicError:e];
+        }
+        return nil;
+    } catch (std::invalid_argument const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealInvalidParameter:e];
+        }
+        return nil;
+    }  catch (std::runtime_error const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealRuntimeError:e];
+        }
+        return nil;
+    }
+}
+
 @end

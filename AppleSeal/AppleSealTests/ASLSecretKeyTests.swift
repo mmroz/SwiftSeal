@@ -25,17 +25,15 @@ class ASLSecretKeyTests: XCTestCase {
 		XCTAssertEqual(secretKey.plainTextData, ASLPlainText())
 	}
     
-    func testEncoding() {
-        let bigUInt = ASLSecretKey()
+    func testCoding() throws {
+        let secretKey = ASLSecretKey()
         
         let archiver = NSKeyedArchiver(requiringSecureCoding: false)
-        archiver.encode(bigUInt, forKey: "testObject")
+        archiver.encode(secretKey, forKey: "testObject")
         let data = archiver.encodedData
+        
+        let decodedSecretKey = try ASLSecretKey(data: data, context: ASLSealContext())
 
-        let unarchiver = try! NSKeyedUnarchiver(forReadingFrom: data)
-        unarchiver.requiresSecureCoding = false
-        let decodedBigUInt = unarchiver.decodeObject(of: ASLSecretKey.self, forKey: "testObject")!
-
-        XCTAssertEqual(bigUInt, decodedBigUInt)
+        XCTAssertEqual(secretKey, decodedSecretKey)
     }
 }

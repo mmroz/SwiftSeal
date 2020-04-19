@@ -495,10 +495,3 @@ class ASLBigUIntTests: XCTestCase {
     }
 }
 
-enum CodingKey: Decodable {
-    case withContext(ASLSealContext)
-    
-    init(from decoder: Decoder) throws {
-        <#code#>
-    }
-}
