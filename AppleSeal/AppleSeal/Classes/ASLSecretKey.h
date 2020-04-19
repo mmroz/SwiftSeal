@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ASLSecretKey : NSObject <NSCopying, NSCoding>
 
+- (instancetype)initWithCoder:(NSCoder *)coder NS_UNAVAILABLE;
+
 /*!
  Returns a reference to the underlying polynomial.
  */

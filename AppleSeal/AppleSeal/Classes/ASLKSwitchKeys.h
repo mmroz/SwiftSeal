@@ -41,6 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface ASLKSwitchKeys : NSObject <NSCopying, NSCoding>
 
+- (instancetype)initWithCoder:(NSCoder *)coder NS_UNAVAILABLE;
+
 /*!
  Returns the current number of keyswitching keys. Only keys that are
  non-empty are counted.

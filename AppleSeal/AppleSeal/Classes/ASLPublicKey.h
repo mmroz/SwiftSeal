@@ -40,6 +40,8 @@ typedef NS_CLOSED_ENUM(NSInteger, ASLCompressionModeType) {
  */
 @interface ASLPublicKey : NSObject <NSCopying, NSCoding>
 
+- (instancetype)initWithCoder:(NSCoder *)coder NS_UNAVAILABLE;
+
 /*!
 Returns a const reference to the underlying data.
 */

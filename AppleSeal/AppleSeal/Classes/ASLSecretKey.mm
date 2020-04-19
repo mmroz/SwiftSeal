@@ -87,8 +87,7 @@
 }
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
-   // TODO - remove this method
-    NSParameterAssert(false);
+   // Intentinally left blank
     return nil;
 }
 

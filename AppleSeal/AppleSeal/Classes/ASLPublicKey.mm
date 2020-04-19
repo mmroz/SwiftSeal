@@ -113,8 +113,7 @@ static seal::compr_mode_type sealComprModeTypeFromASLCompressionModeType(ASLComp
 }
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
-   // TODO - remove this method
-    NSParameterAssert(false);
+   // Intentially left blank
     return nil;
 }
 

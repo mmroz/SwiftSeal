@@ -55,6 +55,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ASLPlainText : NSObject <NSCopying, NSCoding>
 
+- (instancetype)initWithCoder:(NSCoder *)coder NS_UNAVAILABLE;
+
 /*!
  Constructs a plaintext from a given hexadecimal string describing the
  plaintext polynomial.

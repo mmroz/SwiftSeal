@@ -52,6 +52,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ASLCipherText : NSObject <NSCopying, NSCoding>
 
+- (instancetype)initWithCoder:(NSCoder *)coder NS_UNAVAILABLE;
+
 /*!
  Constructs an empty ciphertext allocating no memory.
  

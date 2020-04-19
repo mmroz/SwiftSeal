@@ -193,8 +193,7 @@
 #pragma mark - NSCoding
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
-   // TODO - remove this method
-    NSParameterAssert(false);
+   // Intentially left blank
     return nil;
 }
 
