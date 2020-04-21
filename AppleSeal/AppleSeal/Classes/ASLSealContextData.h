@@ -10,6 +10,8 @@
 
 #import "ASLEncryptionParameters.h"
 #import "ASLParametersIdType.h"
+#import "ASLEncryptionParameterQualifiers.h"
+#import "ASLSmallNttTables.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,8 +31,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, readonly, assign) ASLParametersIdType parametersId;
 
-//TODO - add this once ASLEncryptionParameterQualifiers exists
-//@property (nonatomic, assign, readonly) ASLEncryptionParameterQualifiers* qualifiers;
+/*!
+ Returns a copy of EncryptionParameterQualifiers corresponding to the
+ current encryption parameters. Note that to change the qualifiers it is
+ necessary to create a new instance of SEALContext once appropriate changes
+ to the encryption parameters have been made.
+ */
+@property (nonatomic, readonly, assign) ASLEncryptionParameterQualifiers qualifiers;
 
 /*!
  Returns a pointer to a pre-computed product of all primes in the coefficient
@@ -41,8 +48,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 // TODO - add these as well as the classes they need
 //SEAL_NODISCARD inline auto &base_converter() const noexcept
-//SEAL_NODISCARD inline auto &small_ntt_tables() const noexcept
 //SEAL_NODISCARD inline auto &plain_ntt_tables() const noexcept
+
+@property (nonatomic, readonly, assign) ASLSmallNttTables* smallNttTables;
 
 /*!
  Returns the significant bit count of the total coefficient modulus.

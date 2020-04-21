@@ -12,6 +12,7 @@
 #include "seal/context.h"
 
 #import "ASLEncryptionParameters_Internal.h"
+#import "ASLSmallNttTables_Internal.h"
 
 @implementation ASLSealContextData {
 	std::shared_ptr<const seal::SEALContext::ContextData> _contextData;
@@ -91,6 +92,16 @@
 
 - (NSInteger)chainIndex {
 	return _contextData->chain_index();
+}
+
+- (ASLEncryptionParameterQualifiers)qualifiers {
+    seal::EncryptionParameterQualifiers qualifiers = _contextData->qualifiers();
+    return ASLEncryptionParameterQualifiersMake(qualifiers.parameters_set, qualifiers.using_fft, qualifiers.using_ntt, qualifiers.using_batching, qualifiers.using_fast_plain_lift, qualifiers.using_descending_modulus_chain, static_cast<int>(qualifiers.sec_level));
+}
+
+- (ASLSmallNttTables *)smallNttTables {
+    auto table = _contextData->small_ntt_tables().get();
+    return [[ASLSmallNttTables alloc] initWithSmallNttTables:table];
 }
 
 @end

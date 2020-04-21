@@ -40,3 +40,4 @@ static inline BOOL ASLParametersIdTypeIsEqual(ASLParametersIdType lhs, ASLParame
 #endif
 
 NS_ASSUME_NONNULL_END
+

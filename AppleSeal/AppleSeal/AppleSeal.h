@@ -42,4 +42,5 @@ FOUNDATION_EXPORT const unsigned char AppleSealVersionString[];
 #import <AppleSeal/ASLEncryptor.h>
 #import <AppleSeal/ASLEvaluator.h>
 #import <AppleSeal/ASLKeyGenerator.h>
-
+#import <AppleSeal/ASLEncryptionParameterQualifiers.h>
+#import <AppleSeal/ASLSmallNttTables.h>
