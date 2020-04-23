@@ -12,6 +12,7 @@
 #import "ASLParametersIdType.h"
 #import "ASLEncryptionParameterQualifiers.h"
 #import "ASLSmallNttTables.h"
+#import "ASLBaseConverter.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -46,11 +47,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, assign, readonly) const uint64_t* totalCoefficientModulus;
 
-// TODO - add these as well as the classes they need
-//SEAL_NODISCARD inline auto &base_converter() const noexcept
-//SEAL_NODISCARD inline auto &plain_ntt_tables() const noexcept
+@property (nonatomic, readonly, assign) ASLBaseConverter* baseConverter;
 
 @property (nonatomic, readonly, assign) ASLSmallNttTables* smallNttTables;
+
+@property (nonatomic, readonly, assign) ASLSmallNttTables* plainNttTables;
 
 /*!
  Returns the significant bit count of the total coefficient modulus.

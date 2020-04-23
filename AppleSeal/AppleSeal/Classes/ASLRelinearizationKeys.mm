@@ -111,18 +111,19 @@
     [coder encodeDataObject:data];
 }
 
-- (instancetype)initWithCoder:(NSCoder *)coder {
-    NSData * const encodedValueData = [coder decodeDataObject];
-    if (encodedValueData.length == 0) {
-        return nil;
-    }
-
-    seal::RelinKeys encodedRelinearizationKeysy;
-    std::byte const * bytes = static_cast<std::byte const *>(encodedValueData.bytes);
-    std::size_t const length = static_cast<std::size_t const>(encodedValueData.length);
-    //encodedRelinearizationKeysy.load(<#std::shared_ptr<SEALContext> context#>, <#std::istream &stream#>)
-    return [self initWithRelinearizationKeys:encodedRelinearizationKeysy];
-}
+// TODO - see if I need this
+//- (instancetype)initWithCoder:(NSCoder *)coder {
+//    NSData * const encodedValueData = [coder decodeDataObject];
+//    if (encodedValueData.length == 0) {
+//        return nil;
+//    }
+//
+//    seal::RelinKeys encodedRelinearizationKeysy;
+//    std::byte const * bytes = static_cast<std::byte const *>(encodedValueData.bytes);
+//    std::size_t const length = static_cast<std::size_t const>(encodedValueData.length);
+//    //encodedRelinearizationKeysy.load(<#std::shared_ptr<SEALContext> context#>, <#std::istream &stream#>)
+//    return [self initWithRelinearizationKeys:encodedRelinearizationKeysy];
+//}
 
 
 @end

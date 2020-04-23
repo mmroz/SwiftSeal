@@ -10,7 +10,6 @@ import AppleSeal
 import XCTest
 
 class ASLSmallNttTablesTests: XCTestCase {
-    
     func testCreateWithDefaultInitializers() {
         _ = ASLSmallNttTables()
     }

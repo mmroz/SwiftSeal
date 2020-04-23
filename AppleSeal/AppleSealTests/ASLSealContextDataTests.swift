@@ -96,6 +96,16 @@ class ASLSealContextDataTests: XCTestCase {
         let data = contextData()
         XCTAssertEqual(data.smallNttTables.coefficentCount, 4)
     }
+    
+    func testPlainNttTables() {
+        let data = contextData()
+        XCTAssertEqual(data.plainNttTables.coefficentCount, 4)
+    }
+    
+    func testBaseConverter() {
+        let data = contextData()
+        XCTAssertEqual(data.baseConverter, ASLBaseConverter(pool: ASLMemoryPoolHandle.createNew(true)))
+    }
 	
 	// MARK: - Test Helpers
 	

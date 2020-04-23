@@ -13,6 +13,7 @@
 
 #import "ASLEncryptionParameters_Internal.h"
 #import "ASLSmallNttTables_Internal.h"
+#import "ASLBaseConverter_Internal.h"
 
 @implementation ASLSealContextData {
 	std::shared_ptr<const seal::SEALContext::ContextData> _contextData;
@@ -102,6 +103,16 @@
 - (ASLSmallNttTables *)smallNttTables {
     auto table = _contextData->small_ntt_tables().get();
     return [[ASLSmallNttTables alloc] initWithSmallNttTables:table];
+}
+
+- (ASLSmallNttTables *)plainNttTables {
+    auto table = _contextData->plain_ntt_tables().get();
+    return [[ASLSmallNttTables alloc] initWithSmallNttTables:table];
+}
+
+- (ASLBaseConverter *)baseConverter {
+    auto converter = _contextData->base_converter().get();
+    return [[ASLBaseConverter alloc] initWithBaseConverter:converter];
 }
 
 @end
