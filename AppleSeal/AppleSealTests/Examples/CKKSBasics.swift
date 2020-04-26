@@ -10,7 +10,7 @@ import AppleSeal
 import XCTest
 
 class CKKSBasics: XCTestCase {
-    func textExampleCKKSBasics() throws {
+    func testExampleCKKSBasics() throws {
         print("Example: CKKS Basics")
         
         /*

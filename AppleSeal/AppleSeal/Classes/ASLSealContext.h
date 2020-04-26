@@ -91,6 +91,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface ASLSealContext : NSObject
 
++ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
+
 /*!
  Creates an instance of SEALContext, and performs several pre-computations
  on the given EncryptionParameters.

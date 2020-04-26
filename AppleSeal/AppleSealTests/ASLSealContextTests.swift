@@ -12,11 +12,6 @@ import XCTest
 class ASLSealContextTests: XCTestCase {
 
 	// MARK: - Tests
-
-	func testCreationWithDefaultInitializer() throws {
-		XCTAssertNoThrow(ASLSealContext())
-        try ASLSealContext(ASLEncryptionParameters(schemeType: .none))
-	}
 	
 	func testCreateWithEncryptionParams() throws {
 		let encryptionParameters = ASLEncryptionParameters(schemeType: .CKKS)

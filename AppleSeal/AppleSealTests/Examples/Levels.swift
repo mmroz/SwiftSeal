@@ -10,7 +10,7 @@ import AppleSeal
 import XCTest
 
 class Levels: XCTestCase {
-    func exampleLevels() throws {
+    func testLevels() throws {
         print("Example: Levels")
         
         /*

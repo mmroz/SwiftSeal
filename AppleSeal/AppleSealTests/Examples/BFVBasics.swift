@@ -10,7 +10,7 @@ import AppleSeal
 import XCTest
 
 class BFVBasics: XCTestCase {
-    func test() throws {
+    func testBasic() throws {
         print("Example: BFV Basics")
         
         /*
@@ -97,7 +97,7 @@ class BFVBasics: XCTestCase {
          
          CoeffModulus.BFVDefault(polyModulusDegree),
          
-         which returns IEnumerable<SmallModulus> consisting of a generally good choice
+         which returns NSArray<ASLSmallModulus *> consisting of a generally good choice
          for the given PolyModulusDegree.
          */
         try parms.setCoefficientModulus(ASLCoefficientModulus.bfvDefault(polyModulusDegree))
@@ -134,7 +134,7 @@ class BFVBasics: XCTestCase {
         print()
         print("Set encryption parameters and print")
         // TODO - add custom string convertable here
-        //        Utilities.PrintParameters(context)
+        print(context)
         
         print()
         print("~~~~~~ A naive way to calculate 4(x^2+1)(x+1)^2. ~~~~~~")

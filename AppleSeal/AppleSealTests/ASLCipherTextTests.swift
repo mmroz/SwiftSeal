@@ -18,35 +18,35 @@ class ASLCipherTextTests: XCTestCase {
 	}
 	
 	func testCreationWithInvliadContext() {
-		XCTAssertThrowsError(try ASLCipherText(context: context()))
+		XCTAssertThrowsError(try ASLCipherText(context: .bfvDefault))
 	}
 	
 	func testCreateWithContextAndPool() {
-		XCTAssertThrowsError(try ASLCipherText(context: context(), pool: memoryPoolHandle()))
+		XCTAssertThrowsError(try ASLCipherText(context: .bfvDefault, pool: memoryPoolHandle()))
 	}
 	
 	func testeCreateWithParameterType() {
-		XCTAssertThrowsError(try ASLCipherText(context: context(), parametersId: ASLParametersIdType(block: (2,2,2,2))))
+		XCTAssertThrowsError(try ASLCipherText(context: .bfvDefault, parametersId: ASLParametersIdType(block: (2,2,2,2))))
 	}
 	
 	func testCreateWithParametersAndPool() {
-		XCTAssertThrowsError(try ASLCipherText(context: context(), parametersId: ASLParametersIdType(block: (2,2,2,2)), pool: memoryPoolHandle()))
+		XCTAssertThrowsError(try ASLCipherText(context: .bfvDefault, parametersId: ASLParametersIdType(block: (2,2,2,2)), pool: memoryPoolHandle()))
 	}
 	
 	func testCreateWithParametersSizeAndPool() {
-		XCTAssertThrowsError(try ASLCipherText(context: context(), parametersId: ASLParametersIdType(block: (2,2,2,2)), sizeCapacity: -1, pool: memoryPoolHandle()))
-		XCTAssertThrowsError(try ASLCipherText(context: context(), parametersId: ASLParametersIdType(block: (2,2,2,2)), sizeCapacity: 0, pool: memoryPoolHandle()))
-		XCTAssertThrowsError(try ASLCipherText(context: context(), parametersId: ASLParametersIdType(block: (2,2,2,2)), sizeCapacity: 1, pool: memoryPoolHandle()))
-		XCTAssertThrowsError(try ASLCipherText(context: context(), parametersId: ASLParametersIdType(block: (2,2,2,2)), sizeCapacity: .max, pool: memoryPoolHandle()))
+		XCTAssertThrowsError(try ASLCipherText(context: .bfvDefault, parametersId: ASLParametersIdType(block: (2,2,2,2)), sizeCapacity: -1, pool: memoryPoolHandle()))
+		XCTAssertThrowsError(try ASLCipherText(context: .bfvDefault, parametersId: ASLParametersIdType(block: (2,2,2,2)), sizeCapacity: 0, pool: memoryPoolHandle()))
+		XCTAssertThrowsError(try ASLCipherText(context: .bfvDefault, parametersId: ASLParametersIdType(block: (2,2,2,2)), sizeCapacity: 1, pool: memoryPoolHandle()))
+		XCTAssertThrowsError(try ASLCipherText(context: .bfvDefault, parametersId: ASLParametersIdType(block: (2,2,2,2)), sizeCapacity: .max, pool: memoryPoolHandle()))
 	}
 	
 	func testCreateWithSizeCapazityParameters() {
-		XCTAssertThrowsError(try ASLCipherText(context: context(), sizeCapacity: -1, parametersId: ASLParametersIdType(block: (2,2,2,2))))
-		XCTAssertThrowsError(try ASLCipherText(context: context(), sizeCapacity: 0, parametersId: ASLParametersIdType(block: (2,2,2,2))))
-		XCTAssertThrowsError(try ASLCipherText(context: context(), sizeCapacity: 1, parametersId: ASLParametersIdType(block: (2,2,2,2))))
-		XCTAssertThrowsError(try ASLCipherText(context: context(), sizeCapacity: 2, parametersId: ASLParametersIdType(block: (2,2,2,2))))
-		XCTAssertThrowsError(try ASLCipherText(context: context(), sizeCapacity: 3, parametersId: ASLParametersIdType(block: (2,2,2,2))))
-		XCTAssertThrowsError(try ASLCipherText(context: context(), sizeCapacity: .max, parametersId: ASLParametersIdType(block: (2,2,2,2))))
+		XCTAssertThrowsError(try ASLCipherText(context: .bfvDefault, sizeCapacity: -1, parametersId: ASLParametersIdType(block: (2,2,2,2))))
+		XCTAssertThrowsError(try ASLCipherText(context: .bfvDefault, sizeCapacity: 0, parametersId: ASLParametersIdType(block: (2,2,2,2))))
+		XCTAssertThrowsError(try ASLCipherText(context: .bfvDefault, sizeCapacity: 1, parametersId: ASLParametersIdType(block: (2,2,2,2))))
+		XCTAssertThrowsError(try ASLCipherText(context: .bfvDefault, sizeCapacity: 2, parametersId: ASLParametersIdType(block: (2,2,2,2))))
+		XCTAssertThrowsError(try ASLCipherText(context: .bfvDefault, sizeCapacity: 3, parametersId: ASLParametersIdType(block: (2,2,2,2))))
+		XCTAssertThrowsError(try ASLCipherText(context: .bfvDefault, sizeCapacity: .max, parametersId: ASLParametersIdType(block: (2,2,2,2))))
 	}
     
     func testSize() throws {
@@ -110,7 +110,7 @@ class ASLCipherTextTests: XCTestCase {
     }
     
 	func testCreateWithCopy() {
-//		let otherCipherText = try! ASLCipherText(context: context(), sizeCapacity: -1, parametersId: parameterTypePointer())
+//		let otherCipherText = try! ASLCipherText(context: .bfvDefault, sizeCapacity: -1, parametersId: parameterTypePointer())
 //		XCTAssertThrowsError(try ASLCipherText(cipherText: otherCipherText, pool: memoryPoolHandle()))
 	}
 	
@@ -123,7 +123,7 @@ class ASLCipherTextTests: XCTestCase {
         archiver.encode(cipherText, forKey: "testObject")
         let data = archiver.encodedData
         
-        let decodedCipherText = try ASLCipherText(data: data, context: ASLSealContext())
+        let decodedCipherText = try ASLCipherText(data: data, context: .bfvDefault)
 
         XCTAssertEqual(cipherText, decodedCipherText)
     }
@@ -132,10 +132,6 @@ class ASLCipherTextTests: XCTestCase {
 	
 	private func memoryPoolHandle() -> ASLMemoryPoolHandle {
 		return ASLMemoryPoolHandle(clearOnDestruction: true)
-	}
-	
-	private func context() -> ASLSealContext {
-		return ASLSealContext()
 	}
 }
 

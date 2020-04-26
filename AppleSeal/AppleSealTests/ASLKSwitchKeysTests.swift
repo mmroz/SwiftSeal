@@ -44,7 +44,7 @@ class ASLKSwitchKeysTests: XCTestCase {
         archiver.encode(kSwitchKeys, forKey: "testObject")
         let data = archiver.encodedData
         
-        let decodedkSwitchKeys = try ASLKSwitchKeys(data: data, context: ASLSealContext())
+        let decodedkSwitchKeys = try ASLKSwitchKeys(data: data, context: .bfvDefault)
 
         XCTAssertEqual(kSwitchKeys, decodedkSwitchKeys)
     }

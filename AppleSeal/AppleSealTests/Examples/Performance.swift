@@ -286,7 +286,6 @@ class Performance: XCTestCase {
     }
     
     private func ckksTest(context: ASLSealContext) throws {
-        let context = ASLSealContext()
         print(context)
         print()
         

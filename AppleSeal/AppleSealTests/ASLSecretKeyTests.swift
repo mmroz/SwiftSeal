@@ -32,7 +32,7 @@ class ASLSecretKeyTests: XCTestCase {
         archiver.encode(secretKey, forKey: "testObject")
         let data = archiver.encodedData
         
-        let decodedSecretKey = try ASLSecretKey(data: data, context: ASLSealContext())
+        let decodedSecretKey = try ASLSecretKey(data: data, context: .bfvDefault)
 
         XCTAssertEqual(secretKey, decodedSecretKey)
     }
