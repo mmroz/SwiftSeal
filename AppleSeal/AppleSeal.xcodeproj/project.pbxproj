@@ -398,7 +398,6 @@
 				E47C294E23D3C33C00AC70C9 /* ASLCoefficientModulusTests.swift */,
 				E47C295423D470BF00AC70C9 /* ASLPlainModulusTests.swift */,
 				E47C296423D4B32E00AC70C9 /* ASLValidityCheckerTests.swift */,
-				E4271A1423B7F86500B08B37 /* Info.plist */,
 				E4FFD41824268A6D00D4BDA7 /* ASLDecryptorTests.swift */,
 				E4FFD41A24279AA000D4BDA7 /* ASLEncryptorTests.swift */,
 				E4FFD41C242AFD0E00D4BDA7 /* ASLEvaluatorTests.swift */,
@@ -406,6 +405,7 @@
 				E47D97B724304B600006FD07 /* ASLKeyGeneratorTests.swift */,
 				E4006ECF244FB57200283B6C /* ASLSmallNttTablesTests.swift */,
 				E4006ED7245106F300283B6C /* ASLBaseConverterTests.swift */,
+				E4271A1423B7F86500B08B37 /* Info.plist */,
 			);
 			path = AppleSealTests;
 			sourceTree = "<group>";

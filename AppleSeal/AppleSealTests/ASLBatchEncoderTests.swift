@@ -14,45 +14,39 @@ class ASLBatchEncoderTests: XCTestCase {
     // MARK: - Tests
     
     func testCreateBatchEncoder() throws {
-        XCTAssertNoThrow(_ = try createValidEncoder())
+        XCTAssertNoThrow(_ = try ASLBatchEncoder(context: .bfvDefault))
     }
     
     func testSlotCount() throws {
-        let batchEncoder = try createValidEncoder()
+        let batchEncoder = try ASLBatchEncoder(context: .bfvDefault)
         XCTAssertEqual(batchEncoder.slotCount, 1)
     }
     
     func testEncoderWithPlainText() throws {
-        let batchEncoder = try createValidEncoder()
+        let batchEncoder = try ASLBatchEncoder(context: .bfvDefault)
         
         let plainText = try ASLPlainText(coefficientCount: 2)
         try batchEncoder.encode(with: plainText)
     }
     
     func testEncoderWithPlainTextWithMemoryPoolHandle() throws {
-        let batchEncoder = try createValidEncoder()
+        let batchEncoder = try ASLBatchEncoder(context: .bfvDefault)
         
         let plainText = try ASLPlainText(coefficientCount: 2)
         try batchEncoder.encode(with: plainText, pool: ASLMemoryPoolHandle(clearOnDestruction: true))
     }
     
     func testEncoderWithPlainTextWithSignedValues() throws {
-        let batchEncoder = try createValidEncoder()
+        let batchEncoder = try ASLBatchEncoder(context: .bfvDefault)
         
         let plainText = try ASLPlainText(coefficientCount: 2)
         try batchEncoder.encode(withSignedValues: [1], destination: plainText)
     }
     
     func testEncoderWithPlainTextWithUnsignedValues() throws {
-        let batchEncoder = try createValidEncoder()
+        let batchEncoder = try ASLBatchEncoder(context: .bfvDefault)
         
         let plainText = try ASLPlainText(coefficientCount: 2)
         try batchEncoder.encode(withUnsignedValues: [1], destination: plainText)
-    }
-    
-    private func createValidEncoder() throws -> ASLBatchEncoder  {
-        let encryptionParameters = ASLEncryptionParameters(schemeType: .BFV)
-        let context = try ASLSealContext(encrytionParameters: encryptionParameters, expandModChain: true, securityLevel: .TC128, memoryPoolHandle: ASLMemoryPoolHandle(clearOnDestruction: true))
-        return try ASLBatchEncoder(context: context)
     }
 }

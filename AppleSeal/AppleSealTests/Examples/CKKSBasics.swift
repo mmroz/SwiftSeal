@@ -120,9 +120,9 @@ class CKKSBasics: XCTestCase {
          We create plaintexts for PI, 0.4, and 1 using an overload of CKKSEncoder.Encode
          that encodes the given floating-point value to every slot in the vector.
          */
-        var plainCoeff3 = ASLPlainText()
-        var plainCoeff1 = ASLPlainText()
-        var plainCoeff0 = ASLPlainText()
+        let plainCoeff3 = ASLPlainText()
+        let plainCoeff1 = ASLPlainText()
+        let plainCoeff0 = ASLPlainText()
         try encoder.encode(withDoubleValue: 3.14159265, scale: scale, destination: plainCoeff3)
         try encoder.encode(withDoubleValue: 0.4, scale: scale, destination: plainCoeff1)
         try encoder.encode(withDoubleValue: 1.0, scale: scale, destination: plainCoeff0)
