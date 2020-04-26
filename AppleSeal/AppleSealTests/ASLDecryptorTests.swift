@@ -20,7 +20,7 @@ class ASLDecryptorTests: XCTestCase {
     func testCreateWithContextAndSecreyKey() throws {
         let params = ASLEncryptionParameters(schemeType: .BFV)
         try params.setPolynomialModulusDegree(8192)
-        let context = try ASLSealContext(encrytionParameters: params, expandModChain: true, securityLevel: .None, memoryPoolHandle: ASLMemoryPoolHandle.createNew(true))
+        let context = try ASLSealContext(encrytionParameters: params, expandModChain: true, securityLevel: .None, memoryPoolHandle: ASLMemoryPoolHandle(clearOnDestruction: true))
         
         XCTAssertNoThrow(_ = try ASLDecryptor(context: context, secretKey: ASLSecretKey()))
     }
@@ -28,7 +28,7 @@ class ASLDecryptorTests: XCTestCase {
     func testCreateWithInvalidContext() throws {
         let params = ASLEncryptionParameters(schemeType: .CKKS)
         try params.setPolynomialModulusDegree(8192)
-        let context = try ASLSealContext(encrytionParameters: params, expandModChain: true, securityLevel: .None, memoryPoolHandle: ASLMemoryPoolHandle.createNew(true))
+        let context = try ASLSealContext(encrytionParameters: params, expandModChain: true, securityLevel: .None, memoryPoolHandle: ASLMemoryPoolHandle(clearOnDestruction: true))
         
         XCTAssertThrowsError(_ = try ASLDecryptor(context: context, secretKey: ASLSecretKey()))
     }
@@ -36,7 +36,7 @@ class ASLDecryptorTests: XCTestCase {
     func testInvariantNoiseBudget() throws {
         let params = ASLEncryptionParameters(schemeType: .BFV)
         try params.setPolynomialModulusDegree(8192)
-        let context = try ASLSealContext(encrytionParameters: params, expandModChain: true, securityLevel: .None, memoryPoolHandle: ASLMemoryPoolHandle.createNew(true))
+        let context = try ASLSealContext(encrytionParameters: params, expandModChain: true, securityLevel: .None, memoryPoolHandle: ASLMemoryPoolHandle(clearOnDestruction: true))
     
         let decryptor = try ASLDecryptor(context: context, secretKey: ASLSecretKey())
         let invariantNoiseBudget = try decryptor.invariantNoiseBudget(ASLCipherText(context: context))

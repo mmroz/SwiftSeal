@@ -21,7 +21,7 @@ class ASLCKKSEncoderTests: XCTestCase {
         let params = ASLEncryptionParameters(schemeType: .CKKS)
         try params.setPolynomialModulusDegree(8192)
         try params.setCoefficientModulus(ASLCoefficientModulus.create(8192, bitSizes: [40, 40, 40, 40, 40]))
-        let context  = try ASLSealContext(encrytionParameters: params, expandModChain: true, securityLevel: .TC128, memoryPoolHandle: ASLMemoryPoolHandle.createNew(true))
+        let context  = try ASLSealContext(encrytionParameters: params, expandModChain: true, securityLevel: .TC128, memoryPoolHandle: ASLMemoryPoolHandle(clearOnDestruction: true))
         
         XCTAssertNoThrow(_ = try ASLCKKSEncoder(context: context))
     }
@@ -29,14 +29,14 @@ class ASLCKKSEncoderTests: XCTestCase {
     func testCreateWithBFVContextThrows() throws {
         let params = ASLEncryptionParameters(schemeType: .BFV)
         
-        let context  = try ASLSealContext(encrytionParameters: params, expandModChain: true, securityLevel: .TC128, memoryPoolHandle: ASLMemoryPoolHandle.createNew(true))
+        let context  = try ASLSealContext(encrytionParameters: params, expandModChain: true, securityLevel: .TC128, memoryPoolHandle: ASLMemoryPoolHandle(clearOnDestruction: true))
         
         XCTAssertThrowsError(try ASLCKKSEncoder(context: context))
     }
     
     func testSlotCount() throws {
         let encoder = try createEncoder()
-        XCTAssertEqual(encoder.slot_count, 4)
+        XCTAssertEqual(encoder.slotCount, 4)
     }
     
     func testEncodeWithComplexValues() throws {
@@ -45,7 +45,7 @@ class ASLCKKSEncoderTests: XCTestCase {
         let values = [ASLComplexType(real: 2, imaginary: 2)]
         let params = ASLParametersIdType(block: (40, 40, 40, 40))
         let destimation = try ASLPlainText(capacity: 2, coefficientCount: 2)
-        let pool = ASLMemoryPoolHandle.createNew(true)
+        let pool = ASLMemoryPoolHandle(clearOnDestruction: true)
         
         XCTAssertNoThrow(try encoder.encode(withComplexValues: values, parametersId: params, scale: 2.0, destination: destimation, pool: pool))
         
@@ -71,7 +71,7 @@ class ASLCKKSEncoderTests: XCTestCase {
         
         let value = ASLComplexType(real: 2, imaginary: 1)
         let destination = try ASLPlainText(capacity: 2, coefficientCount: 2)
-        let pool = ASLMemoryPoolHandle.createNew(true)
+        let pool = ASLMemoryPoolHandle(clearOnDestruction: true)
         
         XCTAssertNoThrow(try encoder.encode(withComplexValue: value, scale: 2.0, destination: destination, pool: pool))
     }
@@ -90,7 +90,7 @@ class ASLCKKSEncoderTests: XCTestCase {
         
         let value = 2.0
         let destination = try ASLPlainText(capacity: 2, coefficientCount: 2)
-        let pool = ASLMemoryPoolHandle.createNew(true)
+        let pool = ASLMemoryPoolHandle(clearOnDestruction: true)
         
         XCTAssertNoThrow(try encoder.encode(withDoubleValue: value, scale: 2.0, destination: destination, pool: pool))
     }
@@ -113,7 +113,7 @@ class ASLCKKSEncoderTests: XCTestCase {
         let params = ASLParametersIdType(block: (16, 16, 16, 16))
         let scale = 2.0
         let destination = try ASLPlainText(capacity: 2, coefficientCount: 2)
-        let pool = ASLMemoryPoolHandle.createNew(true)
+        let pool = ASLMemoryPoolHandle(clearOnDestruction: true)
         
         XCTAssertNoThrow(try encoder.encode(withComplexValue: complexValue, parametersId: params, scale: scale, destination: destination, pool: pool))
     }
@@ -136,7 +136,7 @@ class ASLCKKSEncoderTests: XCTestCase {
         let params = ASLParametersIdType(block: (4, 4, 4, 4))
         let scale = 2.0
         let destination = try ASLPlainText(capacity: 2, coefficientCount: 2)
-        let pool = ASLMemoryPoolHandle.createNew(true)
+        let pool = ASLMemoryPoolHandle(clearOnDestruction: true)
         
         XCTAssertThrowsError(try encoder.encode(withDoubleValues: doubleValues, parametersId: params, scale: scale, destination: destination, pool: pool))
     }
@@ -157,7 +157,7 @@ class ASLCKKSEncoderTests: XCTestCase {
         let doubleValues: [NSNumber] = [4.0, 8.0]
         let scale = 2.0
         let destination = try ASLPlainText(capacity: 2, coefficientCount: 2)
-        let pool = ASLMemoryPoolHandle.createNew(true)
+        let pool = ASLMemoryPoolHandle(clearOnDestruction: true)
         
         XCTAssertThrowsError(try encoder.encode(withDoubleValues: doubleValues, scale: scale, destination: destination, pool: pool))
     }
@@ -196,7 +196,7 @@ class ASLCKKSEncoderTests: XCTestCase {
         let encoder = try createEncoder()
         
         let plainText = try ASLPlainText(capacity: 2, coefficientCount: 2)
-        let pool = ASLMemoryPoolHandle.createNew(true)
+        let pool = ASLMemoryPoolHandle(clearOnDestruction: true)
         
         try encoder.encode(withLongValue: 2.0, destination: plainText)
         
@@ -210,7 +210,7 @@ class ASLCKKSEncoderTests: XCTestCase {
         let params = ASLEncryptionParameters(schemeType: .CKKS)
         try params.setPolynomialModulusDegree(8192)
         try params.setCoefficientModulus(ASLCoefficientModulus.create(8192, bitSizes: [40, 40, 40, 40, 40]))
-        let context = try ASLSealContext(encrytionParameters: params, expandModChain: true, securityLevel: .None, memoryPoolHandle: ASLMemoryPoolHandle.createNew(true))
+        let context = try ASLSealContext(encrytionParameters: params, expandModChain: true, securityLevel: .None, memoryPoolHandle: ASLMemoryPoolHandle(clearOnDestruction: true))
         return try ASLCKKSEncoder(context: context)
     }
 }

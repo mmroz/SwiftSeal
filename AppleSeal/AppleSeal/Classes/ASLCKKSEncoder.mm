@@ -53,7 +53,7 @@
 
 #pragma mark - Properties
 
-- (size_t)slot_count {
+- (size_t)slotCount {
     return _ckksEncoder->slot_count();
 }
 

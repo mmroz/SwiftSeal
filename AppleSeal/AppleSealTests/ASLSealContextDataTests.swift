@@ -8,27 +8,6 @@
 import AppleSeal
 import XCTest
 
-
-extension ASLEncryptionParameterQualifiers: Equatable {
-    public static func == (lhs: Self, rhs: Self) -> Bool {
-        return ASLEncryptionParameterQualifiersIsEqual(lhs, rhs)
-    }
-    
-    var aslSecurityLevel: ASLSecurityLevel {
-        return ASLSecurityLevel(rawValue: Int(securityLevel))!
-    }
-    
-    init(isParametersSet: Bool, isUsingFFT: Bool, isUsingNNT: Bool, isUsingBatching: Bool, isUsingFastPlainLift: Bool, isUsingDescendingModulusChain: Bool, securityLevel: ASLSecurityLevel) {
-        self.init()
-        self.isParametersSet = isParametersSet
-        self.isUsingFFT = isUsingFFT
-        self.isUsingNNT = isUsingNNT
-        self.isUsingBatching = isUsingBatching
-        self.isUsingDescendingModulusChain = isUsingDescendingModulusChain
-        self.securityLevel = Int32(securityLevel.rawValue)
-    }
-}
-
 class ASLSealContextDataTests: XCTestCase {
 	
 	func testChainIndex() {
@@ -104,7 +83,7 @@ class ASLSealContextDataTests: XCTestCase {
     
     func testBaseConverter() {
         let data = contextData()
-        XCTAssertEqual(data.baseConverter, ASLBaseConverter(pool: ASLMemoryPoolHandle.createNew(true)))
+        XCTAssertEqual(data.baseConverter, ASLBaseConverter(pool: ASLMemoryPoolHandle(clearOnDestruction: true)))
     }
 	
 	// MARK: - Test Helpers
@@ -112,7 +91,7 @@ class ASLSealContextDataTests: XCTestCase {
 	private func contextData(_ schemeType: ASLSchemeType = .CKKS) -> ASLSealContextData {
 		let encryptionParameters = ASLEncryptionParameters(schemeType: schemeType)
         
-        let context = try? ASLSealContext(encrytionParameters: encryptionParameters, expandModChain: true, securityLevel: .TC128, memoryPoolHandle: ASLMemoryPoolHandle.createNew(true))
+        let context = try? ASLSealContext(encrytionParameters: encryptionParameters, expandModChain: true, securityLevel: .TC128, memoryPoolHandle: ASLMemoryPoolHandle(clearOnDestruction: true))
     
 		return context!.keyContextData
 	}

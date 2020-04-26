@@ -19,7 +19,7 @@ class ASLEvaluatorTests: XCTestCase {
         try params.setPolynomialModulusDegree(8192)
         try params.setCoefficientModulus(ASLCoefficientModulus.bfvDefault(8192))
         try params.setPlainModulusWithInteger(65537)
-        let context = try ASLSealContext(encrytionParameters: params, expandModChain: true, securityLevel: .None, memoryPoolHandle: ASLMemoryPoolHandle.createNew(true))
+        let context = try ASLSealContext(encrytionParameters: params, expandModChain: true, securityLevel: .None, memoryPoolHandle: ASLMemoryPoolHandle(clearOnDestruction: true))
         return context
     }
 }

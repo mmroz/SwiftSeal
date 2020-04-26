@@ -68,6 +68,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)init NS_UNAVAILABLE;
 
++ (instancetype)memoryPoolHandleWithClearOnDestruction:(BOOL)clearOnDestruction;
+
 /*!
  Returns a MemoryPoolHandle pointing to the global memory pool.
  */
@@ -85,7 +87,7 @@ NS_ASSUME_NONNULL_BEGIN
  should be cleared when destroyed. This can be important when memory pools
  are used to store private data.
  */
-+ (ASLMemoryPoolHandle *) createNew:(BOOL)clearOnDestruction;
+//+ (ASLMemoryPoolHandle *) createNew:(BOOL)clearOnDestruction;
 
 /*!
  Returns the number of different allocation sizes. This function returns

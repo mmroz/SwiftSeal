@@ -37,7 +37,7 @@ class ASLEncryptorTests: XCTestCase {
         
         let plainText = ASLPlainText()
         let cipherText = ASLCipherText()
-        let pool = ASLMemoryPoolHandle.createNew(true)
+        let pool = ASLMemoryPoolHandle(clearOnDestruction: true)
         
         XCTAssertNoThrow(try encryptor.encrypt(with: plainText, cipherText: cipherText, pool: pool))
     }
@@ -54,7 +54,7 @@ class ASLEncryptorTests: XCTestCase {
         let encryptor = try ASLEncryptor(context: createValidContext(), publicKey: ASLPublicKey(), secretKey: ASLSecretKey())
         
         let cipherText = ASLCipherText()
-        let pool = ASLMemoryPoolHandle.createNew(true)
+        let pool = ASLMemoryPoolHandle(clearOnDestruction: true)
         
         XCTAssertNoThrow(try encryptor.encryptZero(with: cipherText, pool: pool))
     }
@@ -71,7 +71,7 @@ class ASLEncryptorTests: XCTestCase {
         let encryptor = try ASLEncryptor(context: createValidContext(), publicKey: ASLPublicKey(), secretKey: ASLSecretKey())
         
         let cipherText = ASLCipherText()
-        let pool = ASLMemoryPoolHandle.createNew(true)
+        let pool = ASLMemoryPoolHandle(clearOnDestruction: true)
         
         XCTAssertNoThrow(try  encryptor.encryptZero(with: ASLParametersIdType(block: (4,4,4,4)), cipherText: cipherText, pool: pool))
     }
@@ -90,7 +90,7 @@ class ASLEncryptorTests: XCTestCase {
         
         let cipherText = ASLCipherText()
         let plainText = ASLPlainText()
-        let pool = ASLMemoryPoolHandle.createNew(true)
+        let pool = ASLMemoryPoolHandle(clearOnDestruction: true)
         
         XCTAssertNoThrow(try encryptor.encryptSymmetric(with: plainText, cipherText: cipherText, pool: pool))
     }
@@ -107,7 +107,7 @@ class ASLEncryptorTests: XCTestCase {
         let encryptor = try ASLEncryptor(context: createValidContext(), publicKey: ASLPublicKey(), secretKey: ASLSecretKey())
         
         let cipherText = ASLCipherText()
-        let pool = ASLMemoryPoolHandle.createNew(true)
+        let pool = ASLMemoryPoolHandle(clearOnDestruction: true)
         
         XCTAssertNoThrow(try encryptor.encryptZeroSymmetric(with: cipherText, pool: pool))
     }
@@ -127,7 +127,7 @@ class ASLEncryptorTests: XCTestCase {
         
         let cipherText = ASLCipherText()
         let params = ASLParametersIdType(block: (4,4,4,4))
-        let pool = ASLMemoryPoolHandle.createNew(true)
+        let pool = ASLMemoryPoolHandle(clearOnDestruction: true)
         
         XCTAssertNoThrow(try encryptor.encryptZeroSymmetric(with: params, destination: cipherText, pool: pool))
     }
@@ -181,6 +181,6 @@ class ASLEncryptorTests: XCTestCase {
     private func createValidContext() throws -> ASLSealContext {
         let params = ASLEncryptionParameters(schemeType: .BFV)
         try params.setPolynomialModulusDegree(8192)
-        return try ASLSealContext(encrytionParameters: params, expandModChain: true, securityLevel: .TC128, memoryPoolHandle: ASLMemoryPoolHandle.createNew(true))
+        return try ASLSealContext(encrytionParameters: params, expandModChain: true, securityLevel: .TC128, memoryPoolHandle: ASLMemoryPoolHandle(clearOnDestruction: true))
     }
 }

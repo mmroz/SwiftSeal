@@ -9,12 +9,6 @@
 import AppleSeal
 import XCTest
 
-extension ASLParametersIdType: Equatable {
-	public static func == (lhs: Self, rhs: Self) -> Bool {
-		return ASLParametersIdTypeIsEqual(lhs, rhs)
-	}
-}
-
 class ASLParmsIdTypeTests: XCTestCase {
 
 	// MARK: - Tests

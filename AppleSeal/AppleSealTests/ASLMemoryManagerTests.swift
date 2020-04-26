@@ -20,7 +20,7 @@ class ASLMemoryManagerTests: XCTestCase {
 	func testSwitchProfile() {
 		let manager = ASLMemoryManager()
 		manager.switch(ASLMemoryManagerProfileGlobal())
-		manager.switch(try! ASLMemoryManagerProfileFixed(pool: ASLMemoryPoolHandle.createNew(true)))
+		manager.switch(try! ASLMemoryManagerProfileFixed(pool: ASLMemoryPoolHandle(clearOnDestruction: true)))
 		manager.switch(ASLMemoryManagerProfileThreadLocal())
 	}
 	

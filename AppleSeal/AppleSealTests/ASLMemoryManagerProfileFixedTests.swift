@@ -14,11 +14,11 @@ class ASLMemoryManagerProfileFixedTests: XCTestCase {
 	// MARK: - Tests
 	
 	func testCreationWithPoolInitializer() {
-		XCTAssertNoThrow(try ASLMemoryManagerProfileFixed(pool: ASLMemoryPoolHandle.createNew(false)))
+        XCTAssertNoThrow(try ASLMemoryManagerProfileFixed(pool: ASLMemoryPoolHandle(clearOnDestruction: false)))
 	}
 	
 	func testMemoryPoolHandle() {
-		let profile = try! ASLMemoryManagerProfileFixed(pool: ASLMemoryPoolHandle.createNew(false))
+        let profile = try! ASLMemoryManagerProfileFixed(pool: ASLMemoryPoolHandle(clearOnDestruction: false))
 		XCTAssertNotNil(profile.memoryPoolHandle)
 	}
 }

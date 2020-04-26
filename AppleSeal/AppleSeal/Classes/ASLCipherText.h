@@ -105,7 +105,7 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASLSealErrorCodeInvalidParameter if pool is uninitialized
  */
 + (instancetype _Nullable)cipherTextWithContext:(ASLSealContext *)context
-                                   parametersId:(ASLParametersIdType *)parametersId
+                                   parametersId:(ASLParametersIdType)parametersId
                                            pool:(ASLMemoryPoolHandle *)pool
                                           error:(NSError **)error;
 
@@ -123,7 +123,7 @@ NS_ASSUME_NONNULL_BEGIN
  parameters
  */
 + (instancetype _Nullable)cipherTextWithContext:(ASLSealContext *)context
-                                   parametersId:(ASLParametersIdType *)parametersId
+                                   parametersId:(ASLParametersIdType)parametersId
                                           error:(NSError **)error;
 
 /*!
@@ -144,7 +144,7 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASLSealErrorCodeInvalidParameter if pool is uninitialized
  */
 + (instancetype _Nullable)cipherTextWithContext:(ASLSealContext *)context
-                                   parametersId:(ASLParametersIdType *)parametersId
+                                   parametersId:(ASLParametersIdType)parametersId
                                    sizeCapacity:(size_t)sizeCapacity
                                            pool:(ASLMemoryPoolHandle *)pool
                                           error:(NSError **)error;
@@ -166,7 +166,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (instancetype _Nullable)cipherTextWithContext:(ASLSealContext *)context
                                    sizeCapacity:(size_t)sizeCapacity
-                                   parametersId:(ASLParametersIdType *)parametersId
+                                   parametersId:(ASLParametersIdType)parametersId
                                           error:(NSError **)error;
 
 /*!
@@ -312,6 +312,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (NSNumber * _Nullable)polynomialCoefficientAtIndex:(size_t)index
                                                error:(NSError **)error;
+
+-(void)setScale:(NSNumber*)scale;
 
 /*!
  Returns a reference to the backing IntArray object.

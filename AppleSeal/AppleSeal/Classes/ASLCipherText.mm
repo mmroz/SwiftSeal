@@ -41,17 +41,16 @@
 }
 
 + (instancetype _Nullable)cipherTextWithContext:(ASLSealContext *)context
-                                   parametersId:(ASLParametersIdType *)parametersId
+                                   parametersId:(ASLParametersIdType)parametersId
                                    sizeCapacity:(size_t)sizeCapacity
                                            pool:(ASLMemoryPoolHandle *)pool
                                           error:(NSError **)error {
     NSParameterAssert(context != nil);
-    NSParameterAssert(parametersId != nil);
     NSParameterAssert(pool != nil);
     try {
         seal::parms_id_type sealParametersId = {};
-        std::copy(std::begin(parametersId->block),
-                  std::end(parametersId->block),
+        std::copy(std::begin(parametersId.block),
+                  std::end(parametersId.block),
                   sealParametersId.begin());
         seal::Ciphertext const cipherText = seal::Ciphertext(context.sealContext, sealParametersId, sizeCapacity, pool.memoryPoolHandle);
         return [[ASLCipherText alloc] initWithCipherText:cipherText];
@@ -66,14 +65,13 @@
 
 + (instancetype _Nullable)cipherTextWithContext:(ASLSealContext *)context
                                    sizeCapacity:(size_t)sizeCapacity
-                                   parametersId:(ASLParametersIdType *)parametersId
+                                   parametersId:(ASLParametersIdType)parametersId
                                           error:(NSError **)error {
     NSParameterAssert(context != nil);
-    NSParameterAssert(parametersId != nil);
     
     seal::parms_id_type sealParametersId = {};
-           std::copy(std::begin(parametersId->block),
-                     std::end(parametersId->block),
+           std::copy(std::begin(parametersId.block),
+                     std::end(parametersId.block),
                      sealParametersId.begin());
     try {
         seal::Ciphertext const cipherText = seal::Ciphertext(context.sealContext, sealParametersId, sizeCapacity);
@@ -88,16 +86,15 @@
 }
 
 + (instancetype _Nullable)cipherTextWithContext:(ASLSealContext *)context
-                                   parametersId:(ASLParametersIdType *)parametersId
+                                   parametersId:(ASLParametersIdType)parametersId
                                            pool:(ASLMemoryPoolHandle *)pool
                                           error:(NSError **)error {
     NSParameterAssert(context != nil);
-    NSParameterAssert(parametersId != nil);
     NSParameterAssert(pool != nil);
     try {
         seal::parms_id_type sealParametersId = {};
-        std::copy(std::begin(parametersId->block),
-                  std::end(parametersId->block),
+        std::copy(std::begin(parametersId.block),
+                  std::end(parametersId.block),
                   sealParametersId.begin());
         seal::Ciphertext const cipherText = seal::Ciphertext(context.sealContext, sealParametersId, pool.memoryPoolHandle);
         return [[ASLCipherText alloc] initWithCipherText:cipherText];
@@ -111,14 +108,13 @@
 }
 
 + (instancetype _Nullable)cipherTextWithContext:(ASLSealContext *)context
-                                   parametersId:(ASLParametersIdType *)parametersId
+                                   parametersId:(ASLParametersIdType)parametersId
                                           error:(NSError **)error {
     NSParameterAssert(context != nil);
-    NSParameterAssert(parametersId != nil);
     try {
         seal::parms_id_type sealParametersId = {};
-        std::copy(std::begin(parametersId->block),
-                  std::end(parametersId->block),
+        std::copy(std::begin(parametersId.block),
+                  std::end(parametersId.block),
                   sealParametersId.begin());
         seal::Ciphertext const cipherText = seal::Ciphertext(context.sealContext, sealParametersId);
         return [[ASLCipherText alloc] initWithCipherText:cipherText];
@@ -293,6 +289,10 @@
 
 - (double)scale {
     return _cipherText.scale();
+}
+
+-(void)setScale:(NSNumber*)scale{
+    _cipherText.scale() = scale.doubleValue;
 }
 
 - (ASLMemoryPoolHandle *)pool {

@@ -17,15 +17,13 @@
 
 #pragma mark - Initialization
 
-- (instancetype)initWithMemoryPoolHandle:(seal::MemoryPoolHandle)memoryPoolHandle {
-	self = [super init];
-	if (self == nil) {
-		return nil;
-	}
-	
-	_memoryPoolHandle = std::move(memoryPoolHandle);
-	
-	return self;
++ (instancetype)memoryPoolHandleWithClearOnDestruction:(BOOL)clearOnDestruction {
+    static ASLMemoryPoolHandle * handle;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        handle = [[ASLMemoryPoolHandle alloc] initWithMemoryPoolHandle:seal::MemoryPoolHandle::New(clearOnDestruction)];
+    });
+    return handle;
 }
 
 - (instancetype)init {
@@ -74,15 +72,6 @@
 	return threadLocal;
 }
 
-+ (ASLMemoryPoolHandle *)createNew:(BOOL)clearOnDestruction {
-	static ASLMemoryPoolHandle * handle;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		handle = [[ASLMemoryPoolHandle alloc] initWithMemoryPoolHandle:seal::MemoryPoolHandle::New(clearOnDestruction)];
-	});
-	return handle;
-}
-
 #pragma mark - Properties
 
 - (size_t)poolCount {
@@ -117,6 +106,18 @@
 }
 
 #pragma mark - Properties - Internal
+
+- (instancetype)initWithMemoryPoolHandle:(seal::MemoryPoolHandle)memoryPoolHandle {
+    self = [super init];
+    if (self == nil) {
+        return nil;
+    }
+    
+    _memoryPoolHandle = std::move(memoryPoolHandle);
+    
+    return self;
+}
+
 
 - (seal::MemoryPoolHandle)memoryPoolHandle {
 	return _memoryPoolHandle;

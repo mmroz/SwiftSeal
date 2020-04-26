@@ -18,16 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ASLSealContext ()
 
 - (instancetype)initWithEncryptionParameters:(seal::EncryptionParameters)encryptionParameters
-							  expandModChain:(BOOL)expandModChain
-							   securityLevel:(seal::sec_level_type)securityLevel;
-
-- (instancetype)initWithEncryptionParameters:(seal::EncryptionParameters)encryptionParameters
-							  expandModChain:(BOOL)expandModChain;
-
-- (instancetype)initWithEncryptionParameters:(seal::EncryptionParameters)encryptionParameters
-							   securityLevel:(seal::sec_level_type)securityLevel;
-
-- (instancetype)initWithEncryptionParameters:(seal::EncryptionParameters)encryptionParameters;
+                              expandModChain:(BOOL)expandModChain
+                               securityLevel:(seal::sec_level_type)securityLevel;
 
 /// Returns a copy of the small modulus backing the receiver.
 @property (nonatomic, assign, readonly) std::shared_ptr<seal::SEALContext> sealContext;

@@ -13,11 +13,11 @@ import XCTest
 
 class ASLBaseConverterTests: XCTestCase {
     func testCreateWithMemoryPoolHandle() {
-        let _ = ASLBaseConverter(pool: ASLMemoryPoolHandle.createNew(true))
+        let _ = ASLBaseConverter(pool: ASLMemoryPoolHandle(clearOnDestruction: true))
     }
     
     func testCreate() throws {
-        let memoryPool = ASLMemoryPoolHandle.createNew(true)
+        let memoryPool = ASLMemoryPoolHandle(clearOnDestruction: true)
         let smallModuluses = [try ASLSmallModulus(value: 2)]
         let plainModulus = try ASLSmallModulus(value: 4)
         
@@ -25,7 +25,7 @@ class ASLBaseConverterTests: XCTestCase {
     }
     
     func testGenerate() throws {
-        let memoryPool = ASLMemoryPoolHandle.createNew(true)
+        let memoryPool = ASLMemoryPoolHandle(clearOnDestruction: true)
         let smallModuluses = [try ASLSmallModulus(value: 2)]
         let plainModulus = try ASLSmallModulus(value: 4)
         
@@ -35,7 +35,7 @@ class ASLBaseConverterTests: XCTestCase {
     }
     
     func testFloorLastCoeffModulusInplace() throws {
-        let memoryPool = ASLMemoryPoolHandle.createNew(true)
+        let memoryPool = ASLMemoryPoolHandle(clearOnDestruction: true)
         let smallModuluses = [try ASLSmallModulus(value: 2)]
         let plainModulus = try ASLSmallModulus(value: 4)
         
@@ -45,7 +45,7 @@ class ASLBaseConverterTests: XCTestCase {
     }
     
     func testRoundLastCoefficientModulusInplacet() throws {
-        let memoryPool = ASLMemoryPoolHandle.createNew(true)
+        let memoryPool = ASLMemoryPoolHandle(clearOnDestruction: true)
         let smallModuluses = [try ASLSmallModulus(value: 2)]
         let plainModulus = try ASLSmallModulus(value: 4)
         
@@ -55,7 +55,7 @@ class ASLBaseConverterTests: XCTestCase {
     }
     
     func testFastBaseConverterQToBsk() throws {
-        let memoryPool = ASLMemoryPoolHandle.createNew(true)
+        let memoryPool = ASLMemoryPoolHandle(clearOnDestruction: true)
         let smallModuluses = [try ASLSmallModulus(value: 2)]
         let plainModulus = try ASLSmallModulus(value: 4)
         
@@ -65,7 +65,7 @@ class ASLBaseConverterTests: XCTestCase {
     }
     
     func testFastBaseConverterBskToQ() throws {
-        let memoryPool = ASLMemoryPoolHandle.createNew(true)
+        let memoryPool = ASLMemoryPoolHandle(clearOnDestruction: true)
         let smallModuluses = [try ASLSmallModulus(value: 2)]
         let plainModulus = try ASLSmallModulus(value: 4)
         
@@ -75,7 +75,7 @@ class ASLBaseConverterTests: XCTestCase {
     }
     
     func testReduceBskPrimeToBsk() throws {
-        let memoryPool = ASLMemoryPoolHandle.createNew(true)
+        let memoryPool = ASLMemoryPoolHandle(clearOnDestruction: true)
         let smallModuluses = [try ASLSmallModulus(value: 2)]
         let plainModulus = try ASLSmallModulus(value: 4)
         
@@ -85,7 +85,7 @@ class ASLBaseConverterTests: XCTestCase {
     }
     
     func testFastFloor() throws {
-        let memoryPool = ASLMemoryPoolHandle.createNew(true)
+        let memoryPool = ASLMemoryPoolHandle(clearOnDestruction: true)
         let smallModuluses = [try ASLSmallModulus(value: 2)]
         let plainModulus = try ASLSmallModulus(value: 4)
         
@@ -95,7 +95,7 @@ class ASLBaseConverterTests: XCTestCase {
     }
     
     func testFastFloorFastBaseConverterQToBskPrime() throws {
-        let memoryPool = ASLMemoryPoolHandle.createNew(true)
+        let memoryPool = ASLMemoryPoolHandle(clearOnDestruction: true)
         let smallModuluses = [try ASLSmallModulus(value: 2)]
         let plainModulus = try ASLSmallModulus(value: 4)
         
@@ -105,7 +105,7 @@ class ASLBaseConverterTests: XCTestCase {
     }
     
     func testFastBaseConverterPlainGamma() throws {
-        let memoryPool = ASLMemoryPoolHandle.createNew(true)
+        let memoryPool = ASLMemoryPoolHandle(clearOnDestruction: true)
         let smallModuluses = [try ASLSmallModulus(value: 2)]
         let plainModulus = try ASLSmallModulus(value: 4)
         
@@ -115,7 +115,7 @@ class ASLBaseConverterTests: XCTestCase {
     }
     
     func testReset() throws {
-        let memoryPool = ASLMemoryPoolHandle.createNew(true)
+        let memoryPool = ASLMemoryPoolHandle(clearOnDestruction: true)
         let smallModuluses = [try ASLSmallModulus(value: 2)]
         let plainModulus = try ASLSmallModulus(value: 4)
         
@@ -125,7 +125,7 @@ class ASLBaseConverterTests: XCTestCase {
     }
     
     func testIsGenerated() throws {
-        let memoryPool = ASLMemoryPoolHandle.createNew(true)
+        let memoryPool = ASLMemoryPoolHandle(clearOnDestruction: true)
         let smallModuluses = [try ASLSmallModulus(value: 2)]
         let plainModulus = try ASLSmallModulus(value: 4)
         
@@ -139,7 +139,7 @@ class ASLBaseConverterTests: XCTestCase {
     }
     
     func testCoefficientBaseMododulusCount() throws {
-        let memoryPool = ASLMemoryPoolHandle.createNew(true)
+        let memoryPool = ASLMemoryPoolHandle(clearOnDestruction: true)
         let smallModuluses = [try ASLSmallModulus(value: 2)]
         let plainModulus = try ASLSmallModulus(value: 4)
         
@@ -149,7 +149,7 @@ class ASLBaseConverterTests: XCTestCase {
     }
     
     func testAuxBaseModCount() throws {
-        let memoryPool = ASLMemoryPoolHandle.createNew(true)
+        let memoryPool = ASLMemoryPoolHandle(clearOnDestruction: true)
         let smallModuluses = [try ASLSmallModulus(value: 2)]
         let plainModulus = try ASLSmallModulus(value: 4)
         
@@ -159,7 +159,7 @@ class ASLBaseConverterTests: XCTestCase {
     }
     
     func testInvertedGamma() throws {
-        let memoryPool = ASLMemoryPoolHandle.createNew(true)
+        let memoryPool = ASLMemoryPoolHandle(clearOnDestruction: true)
         let smallModuluses = [try ASLSmallModulus(value: 2)]
         let plainModulus = try ASLSmallModulus(value: 4)
         
@@ -169,7 +169,7 @@ class ASLBaseConverterTests: XCTestCase {
     }
     
     func testMsk() throws {
-        let memoryPool = ASLMemoryPoolHandle.createNew(true)
+        let memoryPool = ASLMemoryPoolHandle(clearOnDestruction: true)
         let smallModuluses = [try ASLSmallModulus(value: 2)]
         let plainModulus = try ASLSmallModulus(value: 4)
         
@@ -179,7 +179,7 @@ class ASLBaseConverterTests: XCTestCase {
     }
     
     func testPrime() throws {
-        let memoryPool = ASLMemoryPoolHandle.createNew(true)
+        let memoryPool = ASLMemoryPoolHandle(clearOnDestruction: true)
         let smallModuluses = [try ASLSmallModulus(value: 2)]
         let plainModulus = try ASLSmallModulus(value: 4)
         
@@ -189,7 +189,7 @@ class ASLBaseConverterTests: XCTestCase {
     }
     
     func testMPrimeInverseCoefficientProductsModulusCoefficient() throws {
-        let memoryPool = ASLMemoryPoolHandle.createNew(true)
+        let memoryPool = ASLMemoryPoolHandle(clearOnDestruction: true)
         let smallModuluses = [try ASLSmallModulus(value: 2)]
         let plainModulus = try ASLSmallModulus(value: 4)
         
@@ -199,7 +199,7 @@ class ASLBaseConverterTests: XCTestCase {
     }
     
     func testInverseCoefficientModulusMPrime() throws {
-        let memoryPool = ASLMemoryPoolHandle.createNew(true)
+        let memoryPool = ASLMemoryPoolHandle(clearOnDestruction: true)
         let smallModuluses = [try ASLSmallModulus(value: 2)]
         let plainModulus = try ASLSmallModulus(value: 4)
         

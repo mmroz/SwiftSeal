@@ -18,20 +18,20 @@ class ASLPlainTextTests: XCTestCase {
 	}
 	
 	func testCreateWithMemoryPoolHandle() {
-		let _ = ASLPlainText(pool: ASLMemoryPoolHandle.createNew(true))
+		let _ = ASLPlainText(pool: ASLMemoryPoolHandle(clearOnDestruction: true))
 	}
 	
 	func testCreateWithCoefficentCount() {
 		XCTAssertNoThrow(try ASLPlainText(coefficientCount: 2))
-		XCTAssertNoThrow(try ASLPlainText(coefficientCount: 2, pool: ASLMemoryPoolHandle.createNew(true)))
+		XCTAssertNoThrow(try ASLPlainText(coefficientCount: 2, pool: ASLMemoryPoolHandle(clearOnDestruction: true)))
 		
 		XCTAssertThrowsError(try ASLPlainText(coefficientCount: -1))
-		XCTAssertThrowsError(try ASLPlainText(coefficientCount: -1, pool: ASLMemoryPoolHandle.createNew(true)))
+		XCTAssertThrowsError(try ASLPlainText(coefficientCount: -1, pool: ASLMemoryPoolHandle(clearOnDestruction: true)))
 	}
 	
 	func testCreateWithCapacity() {
 		XCTAssertNoThrow(try ASLPlainText(capacity: 1, coefficientCount: 1))
-		XCTAssertNoThrow(try ASLPlainText(capacity: 1, coefficientCount: 1, pool: ASLMemoryPoolHandle.createNew(true)))
+		XCTAssertNoThrow(try ASLPlainText(capacity: 1, coefficientCount: 1, pool: ASLMemoryPoolHandle(clearOnDestruction: true)))
 		
 		XCTAssertThrowsError(try ASLPlainText(capacity: -1, coefficientCount: 1))
 		XCTAssertThrowsError(try ASLPlainText(capacity: 1, coefficientCount: -1))
@@ -42,7 +42,7 @@ class ASLPlainTextTests: XCTestCase {
 		XCTAssertNoThrow(try ASLPlainText(polynomialString: ""))
 		XCTAssertNoThrow(try ASLPlainText(polynomialString: "1"))
 		XCTAssertNoThrow(try ASLPlainText(polynomialString: "a"))
-		XCTAssertNoThrow(try ASLPlainText(polynomialString: "a", pool: ASLMemoryPoolHandle.createNew(true)))
+		XCTAssertNoThrow(try ASLPlainText(polynomialString: "a", pool: ASLMemoryPoolHandle(clearOnDestruction: true)))
 	}
 	
 	func testZero() {

@@ -23,7 +23,7 @@ class ASLValidityCheckerTests: XCTestCase {
 	
 	func createContext() -> ASLSealContext {
 		let encryptionParameters = ASLEncryptionParameters(schemeType: .CKKS)
-		let context = try! ASLSealContext(encrytionParameters: encryptionParameters, expandModChain: true, securityLevel: .None, memoryPoolHandle: ASLMemoryPoolHandle.createNew(true))
+		let context = try! ASLSealContext(encrytionParameters: encryptionParameters, expandModChain: true, securityLevel: .None, memoryPoolHandle: ASLMemoryPoolHandle(clearOnDestruction: true))
 		return context
 	}
 	

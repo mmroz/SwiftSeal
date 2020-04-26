@@ -58,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  Returns the number of complex numbers encoded.
  */
-@property (nonatomic, readonly, assign) size_t slot_count;
+@property (nonatomic, readonly, assign) size_t slotCount;
 
 /*!
  Encodes a vector of double-precision floating-point real or complex numbers

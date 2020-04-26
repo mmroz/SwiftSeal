@@ -26,27 +26,27 @@ class ASLCipherTextTests: XCTestCase {
 	}
 	
 	func testeCreateWithParameterType() {
-		XCTAssertThrowsError(try ASLCipherText(context: context(), parametersId: parameterTypePointer()))
+		XCTAssertThrowsError(try ASLCipherText(context: context(), parametersId: ASLParametersIdType(block: (2,2,2,2))))
 	}
 	
 	func testCreateWithParametersAndPool() {
-		XCTAssertThrowsError(try ASLCipherText(context: context(), parametersId: parameterTypePointer(), pool: memoryPoolHandle()))
+		XCTAssertThrowsError(try ASLCipherText(context: context(), parametersId: ASLParametersIdType(block: (2,2,2,2)), pool: memoryPoolHandle()))
 	}
 	
 	func testCreateWithParametersSizeAndPool() {
-		XCTAssertThrowsError(try ASLCipherText(context: context(), parametersId: parameterTypePointer(), sizeCapacity: -1, pool: memoryPoolHandle()))
-		XCTAssertThrowsError(try ASLCipherText(context: context(), parametersId: parameterTypePointer(), sizeCapacity: 0, pool: memoryPoolHandle()))
-		XCTAssertThrowsError(try ASLCipherText(context: context(), parametersId: parameterTypePointer(), sizeCapacity: 1, pool: memoryPoolHandle()))
-		XCTAssertThrowsError(try ASLCipherText(context: context(), parametersId: parameterTypePointer(), sizeCapacity: .max, pool: memoryPoolHandle()))
+		XCTAssertThrowsError(try ASLCipherText(context: context(), parametersId: ASLParametersIdType(block: (2,2,2,2)), sizeCapacity: -1, pool: memoryPoolHandle()))
+		XCTAssertThrowsError(try ASLCipherText(context: context(), parametersId: ASLParametersIdType(block: (2,2,2,2)), sizeCapacity: 0, pool: memoryPoolHandle()))
+		XCTAssertThrowsError(try ASLCipherText(context: context(), parametersId: ASLParametersIdType(block: (2,2,2,2)), sizeCapacity: 1, pool: memoryPoolHandle()))
+		XCTAssertThrowsError(try ASLCipherText(context: context(), parametersId: ASLParametersIdType(block: (2,2,2,2)), sizeCapacity: .max, pool: memoryPoolHandle()))
 	}
 	
 	func testCreateWithSizeCapazityParameters() {
-		XCTAssertThrowsError(try ASLCipherText(context: context(), sizeCapacity: -1, parametersId: parameterTypePointer()))
-		XCTAssertThrowsError(try ASLCipherText(context: context(), sizeCapacity: 0, parametersId: parameterTypePointer()))
-		XCTAssertThrowsError(try ASLCipherText(context: context(), sizeCapacity: 1, parametersId: parameterTypePointer()))
-		XCTAssertThrowsError(try ASLCipherText(context: context(), sizeCapacity: 2, parametersId: parameterTypePointer()))
-		XCTAssertThrowsError(try ASLCipherText(context: context(), sizeCapacity: 3, parametersId: parameterTypePointer()))
-		XCTAssertThrowsError(try ASLCipherText(context: context(), sizeCapacity: .max, parametersId: parameterTypePointer()))
+		XCTAssertThrowsError(try ASLCipherText(context: context(), sizeCapacity: -1, parametersId: ASLParametersIdType(block: (2,2,2,2))))
+		XCTAssertThrowsError(try ASLCipherText(context: context(), sizeCapacity: 0, parametersId: ASLParametersIdType(block: (2,2,2,2))))
+		XCTAssertThrowsError(try ASLCipherText(context: context(), sizeCapacity: 1, parametersId: ASLParametersIdType(block: (2,2,2,2))))
+		XCTAssertThrowsError(try ASLCipherText(context: context(), sizeCapacity: 2, parametersId: ASLParametersIdType(block: (2,2,2,2))))
+		XCTAssertThrowsError(try ASLCipherText(context: context(), sizeCapacity: 3, parametersId: ASLParametersIdType(block: (2,2,2,2))))
+		XCTAssertThrowsError(try ASLCipherText(context: context(), sizeCapacity: .max, parametersId: ASLParametersIdType(block: (2,2,2,2))))
 	}
     
     func testSize() throws {
@@ -131,18 +131,11 @@ class ASLCipherTextTests: XCTestCase {
 	// MARK: - Test Helper
 	
 	private func memoryPoolHandle() -> ASLMemoryPoolHandle {
-		return ASLMemoryPoolHandle.createNew(true)
+		return ASLMemoryPoolHandle(clearOnDestruction: true)
 	}
 	
 	private func context() -> ASLSealContext {
 		return ASLSealContext()
-	}
-
-	private func parameterTypePointer() -> UnsafeMutablePointer<ASLParametersIdType> {
-		var parameterIds = ASLParametersIdType(block: (2,2,2,2))
-		let uint64Pointer = UnsafeMutablePointer<ASLParametersIdType>.allocate(capacity: 8)
-		uint64Pointer.initialize(from: &parameterIds, count: 8)
-		return uint64Pointer
 	}
 }
 

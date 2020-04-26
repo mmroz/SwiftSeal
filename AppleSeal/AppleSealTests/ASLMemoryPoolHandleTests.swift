@@ -22,13 +22,13 @@ class ASLMemoryPoolHandleTests: XCTestCase {
 	}
 	
 	func testCreateNew() {
-		XCTAssertNoThrow(ASLMemoryPoolHandle.createNew(true))
-		XCTAssertNoThrow(ASLMemoryPoolHandle.createNew(false))
+		XCTAssertNoThrow(ASLMemoryPoolHandle(clearOnDestruction: true))
+		XCTAssertNoThrow(ASLMemoryPoolHandle(clearOnDestruction: false))
 	}
 	
 	func testIsInitialized() {
-		XCTAssertTrue(ASLMemoryPoolHandle.createNew(true).isInitialized)
-		XCTAssertTrue(ASLMemoryPoolHandle.createNew(false).isInitialized)
+		XCTAssertTrue(ASLMemoryPoolHandle(clearOnDestruction: true).isInitialized)
+		XCTAssertTrue(ASLMemoryPoolHandle(clearOnDestruction: false).isInitialized)
 	}
 	
 }

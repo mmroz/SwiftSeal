@@ -167,8 +167,8 @@ NS_ASSUME_NONNULL_BEGIN
  
  @param parametersId The ASLParametersIdType of the encryption parameters
  */
-- (ASLSealContextData *)contextData:(ASLParametersIdType)parametersId
-                              error:(NSError **)error;
+- (ASLSealContextData * _Nullable)contextData:(ASLParametersIdType)parametersId
+                                        error:(NSError **)error;
 
 @end
 

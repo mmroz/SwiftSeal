@@ -94,5 +94,5 @@ public func bfvDefaultContext() throws -> ASLSealContext {
     try params.setPolynomialModulusDegree(8192)
     try params.setCoefficientModulus(ASLCoefficientModulus.bfvDefault(8192))
     try params.setPlainModulusWithInteger(65537)
-    return try ASLSealContext(encrytionParameters: params, expandModChain: true, securityLevel: .TC128, memoryPoolHandle: ASLMemoryPoolHandle.createNew(true))
+    return try ASLSealContext(encrytionParameters: params, expandModChain: true, securityLevel: .TC128, memoryPoolHandle: ASLMemoryPoolHandle(clearOnDestruction: true))
 }

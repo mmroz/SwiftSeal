@@ -39,18 +39,18 @@ static seal::sec_level_type sealSecurityLevelFromASLSecurityLevel(ASLSecurityLev
 #pragma mark - Initialization
 
 + (instancetype _Nullable)sealContextWithEncrytionParameters:(ASLEncryptionParameters *)encrytionParameters
-  expandModChain:(BOOL)expandModChain
-   securityLevel:(ASLSecurityLevel)securityLevel
-memoryPoolHandle:(ASLMemoryPoolHandle*)pool
+                                              expandModChain:(BOOL)expandModChain
+                                               securityLevel:(ASLSecurityLevel)securityLevel
+                                            memoryPoolHandle:(ASLMemoryPoolHandle*)pool
                                                        error:(NSError **)error {
     try {
         return [[ASLSealContext alloc] initWithEncryptionParameters:encrytionParameters.sealEncryptionParams expandModChain:expandModChain securityLevel:sealSecurityLevelFromASLSecurityLevel(securityLevel)];
     }  catch (std::invalid_argument const &e) {
-           if (error != nil) {
-               *error = [NSError ASL_SealInvalidParameter:e];
-           }
-           return nil;
-       }
+        if (error != nil) {
+            *error = [NSError ASL_SealInvalidParameter:e];
+        }
+        return nil;
+    }
 }
 
 - (instancetype)init {
@@ -115,6 +115,8 @@ memoryPoolHandle:(ASLMemoryPoolHandle*)pool
     return [[ASLSealContextData alloc] initWithSEALContextData:_sealContext->get_context_data(sealParametersId)];
 }
 
+
+
 #pragma mark - ASLSealContext_Internal
 
 - (instancetype)initWithEncryptionParameters:(seal::EncryptionParameters)encryptionParameters
@@ -124,44 +126,9 @@ memoryPoolHandle:(ASLMemoryPoolHandle*)pool
     if (self == nil) {
         return nil;
     }
-    
+
     _sealContext = seal::SEALContext::Create(encryptionParameters, expandModChain, securityLevel);
-    
-    return self;
-}
 
-- (instancetype)initWithEncryptionParameters:(seal::EncryptionParameters)encryptionParameters
-                              expandModChain:(BOOL)expandModChain {
-    self = [super init];
-    if (self == nil) {
-        return nil;
-    }
-    
-    _sealContext = seal::SEALContext::Create(encryptionParameters, expandModChain, seal::sec_level_type::tc128);
-    
-    return self;
-}
-
-- (instancetype)initWithEncryptionParameters:(seal::EncryptionParameters)encryptionParameters
-                               securityLevel:(seal::sec_level_type)securityLevel {
-    self = [super init];
-    if (self == nil) {
-        return nil;
-    }
-    
-    _sealContext = seal::SEALContext::Create(encryptionParameters, true, securityLevel);
-    
-    return self;
-}
-
-- (instancetype)initWithEncryptionParameters:(seal::EncryptionParameters)encryptionParameters {
-    self = [super init];
-    if (self == nil) {
-        return nil;
-    }
-    
-    _sealContext = seal::SEALContext::Create(encryptionParameters);
-    
     return self;
 }
 

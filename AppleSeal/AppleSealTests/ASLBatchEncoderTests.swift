@@ -33,7 +33,7 @@ class ASLBatchEncoderTests: XCTestCase {
         let batchEncoder = try createValidEncoder()
         
         let plainText = try ASLPlainText(coefficientCount: 2)
-        try batchEncoder.encode(with: plainText, pool: ASLMemoryPoolHandle.createNew(true))
+        try batchEncoder.encode(with: plainText, pool: ASLMemoryPoolHandle(clearOnDestruction: true))
     }
     
     func testEncoderWithPlainTextWithSignedValues() throws {
@@ -52,7 +52,7 @@ class ASLBatchEncoderTests: XCTestCase {
     
     private func createValidEncoder() throws -> ASLBatchEncoder  {
         let encryptionParameters = ASLEncryptionParameters(schemeType: .BFV)
-        let context = try ASLSealContext(encrytionParameters: encryptionParameters, expandModChain: true, securityLevel: .None, memoryPoolHandle: ASLMemoryPoolHandle.createNew(true))
+        let context = try ASLSealContext(encrytionParameters: encryptionParameters, expandModChain: true, securityLevel: .TC128, memoryPoolHandle: ASLMemoryPoolHandle(clearOnDestruction: true))
         return try ASLBatchEncoder(context: context)
     }
 }

@@ -101,6 +101,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype _Nullable)evaluatorWith:(ASLSealContext *)context
                                   error:(NSError **)error;
 
+
+-(BOOL)negate:(ASLCipherText *)encrypted
+   detination:(ASLCipherText *)destination
+        error:(NSError **)error;
+
 /*!
  Negates a ciphertext.
  
@@ -564,7 +569,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(BOOL)modSwitchToInplace:(ASLCipherText *)encrypted
-             parametersId:(ASLParametersIdType *)parametersId
+             parametersId:(ASLParametersIdType)parametersId
                      pool:(ASLMemoryPoolHandle *)pool
                     error:(NSError **)error;
 
@@ -586,7 +591,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(BOOL)modSwitchToInplace:(ASLCipherText *)encrypted
-             parametersId:(ASLParametersIdType *)parametersId
+             parametersId:(ASLParametersIdType)parametersId
                     error:(NSError **)error;
 /*!
  Given a ciphertext encrypted modulo q_1...q_k, this function switches the
@@ -609,7 +614,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(BOOL)modSwitchTo:(ASLCipherText *)encrypted
-      parametersId:(ASLParametersIdType *)parametersId
+      parametersId:(ASLParametersIdType)parametersId
        destination:(ASLCipherText *)destination
               pool:(ASLMemoryPoolHandle *)pool
              error:(NSError **)error;
@@ -633,7 +638,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(BOOL)modSwitchTo:(ASLCipherText *)encrypted
-      parametersId:(ASLParametersIdType *)parametersId
+      parametersId:(ASLParametersIdType)parametersId
        destination:(ASLCipherText *)destination
              error:(NSError **)error;
 
@@ -652,7 +657,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  large for the new encryption parameters
  */
 -(BOOL)modSwitchToInplaceWithPlain:(ASLPlainText *)plain
-                      parametersId:(ASLParametersIdType *)parametersId
+                      parametersId:(ASLParametersIdType)parametersId
                              error:(NSError **)error;
 
 /*!
@@ -672,7 +677,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  large for the new encryption parameters
  */
 -(BOOL)modSwitchToWithPlain:(ASLPlainText *)plain
-               parametersId:(ASLParametersIdType *)parametersId
+               parametersId:(ASLParametersIdType)parametersId
                 destination:(ASLPlainText *)destination
                       error:(NSError **)error;
 
@@ -769,7 +774,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(BOOL)rescaleToInplace:(ASLCipherText *)encrypted
-           parametersId:(ASLParametersIdType *)parametersId
+           parametersId:(ASLParametersIdType)parametersId
                    pool:(ASLMemoryPoolHandle *)pool
                   error:(NSError **)error;
 
@@ -790,7 +795,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(BOOL)rescaleToInplace:(ASLCipherText *)encrypted
-           parametersId:(ASLParametersIdType *)parametersId
+           parametersId:(ASLParametersIdType)parametersId
                   error:(NSError **)error;
 
 /*!
@@ -814,7 +819,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(BOOL)rescaleTo:(ASLCipherText *)encrypted
-    parametersId:(ASLParametersIdType *)parametersId
+    parametersId:(ASLParametersIdType)parametersId
      destination:(ASLCipherText *)destination
             pool:(ASLMemoryPoolHandle *)pool
            error:(NSError **)error;
@@ -838,7 +843,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(BOOL)rescaleTo:(ASLCipherText *)encrypted
-    parametersId:(ASLParametersIdType *)parametersId
+    parametersId:(ASLParametersIdType)parametersId
      destination:(ASLCipherText *)destination
            error:(NSError **)error;
 
@@ -1196,7 +1201,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealInvalidParameter if pool is uninitialized
  */
 -(BOOL)transformToNttInplace:(ASLPlainText *)plain
-                parametersId:(ASLParametersIdType *)parametersId
+                parametersId:(ASLParametersIdType)parametersId
                         pool:(ASLMemoryPoolHandle *)pool
                        error:(NSError **)error;
 
@@ -1219,7 +1224,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  encryption parameters
  */
 -(BOOL)transformToNttInplace:(ASLPlainText *)plain
-                parametersId:(ASLParametersIdType *)parametersId
+                parametersId:(ASLParametersIdType)parametersId
                        error:(NSError **)error;
 
 /*!
@@ -1245,7 +1250,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealInvalidParameter if pool is uninitialized
  */
 -(BOOL)transformToNtt:(ASLPlainText *)plain
-         parametersId:(ASLParametersIdType *)parametersId
+         parametersId:(ASLParametersIdType)parametersId
        destinationNtt:(ASLPlainText *)destinationNtt
                  pool:(ASLMemoryPoolHandle *)pool
                 error:(NSError **)error;
@@ -1271,7 +1276,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  encryption parameters
  */
 -(BOOL)transformToNtt:(ASLPlainText *)plain
-         parametersId:(ASLParametersIdType *)parametersId
+         parametersId:(ASLParametersIdType)parametersId
        destinationNtt:(ASLPlainText *)destinationNtt
                 error:(NSError **)error;
 

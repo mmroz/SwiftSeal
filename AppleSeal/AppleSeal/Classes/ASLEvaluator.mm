@@ -60,6 +60,24 @@
 
 #pragma Public Methods
 
+- (BOOL)negate:(ASLCipherText *)encrypted
+    detination:(ASLCipherText *)destination
+         error:(NSError **)error {
+    NSParameterAssert(encrypted != nil);
+    NSParameterAssert(destination != nil);
+    
+    try {
+        seal::Ciphertext destinationCipherText = destination.sealCipherText;
+        _evaluator->negate(encrypted.sealCipherText, destinationCipherText);
+        return YES;
+    } catch (std::logic_error const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealLogicError:e];
+        }
+        return NO;
+    }
+}
+
 -(BOOL)negateInplace:(ASLCipherText *)encrypted
                error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
@@ -607,16 +625,15 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
 }
 
 -(BOOL)modSwitchToInplace:(ASLCipherText *)encrypted
-             parametersId:(ASLParametersIdType *)parametersId
+             parametersId:(ASLParametersIdType)parametersId
                      pool:(ASLMemoryPoolHandle *)pool
                     error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
-    NSParameterAssert(parametersId != nil);
     NSParameterAssert(pool != nil);
     
     seal::parms_id_type sealParametersId = {};
-    std::copy(std::begin(parametersId->block),
-              std::end(parametersId->block),
+    std::copy(std::begin(parametersId.block),
+              std::end(parametersId.block),
               sealParametersId.begin());
     
     seal::Ciphertext sealEncrypted = encrypted.sealCipherText;
@@ -637,15 +654,15 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
 }
 
 -(BOOL)modSwitchToInplace:(ASLCipherText *)encrypted
-             parametersId:(ASLParametersIdType *)parametersId
+             parametersId:(ASLParametersIdType)parametersId
                     error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
-    NSParameterAssert(parametersId != nil);
+    
     
     
     seal::parms_id_type sealParametersId = {};
-    std::copy(std::begin(parametersId->block),
-              std::end(parametersId->block),
+    std::copy(std::begin(parametersId.block),
+              std::end(parametersId.block),
               sealParametersId.begin());
     seal::Ciphertext sealEncrypted = encrypted.sealCipherText;
     try {
@@ -665,18 +682,18 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
 }
 
 -(BOOL)modSwitchTo:(ASLCipherText *)encrypted
-      parametersId:(ASLParametersIdType *)parametersId
+      parametersId:(ASLParametersIdType)parametersId
        destination:(ASLCipherText *)destination
               pool:(ASLMemoryPoolHandle *)pool
              error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
-    NSParameterAssert(parametersId != nil);
+    
     NSParameterAssert(destination != nil);
     NSParameterAssert(pool != nil);
     
     seal::parms_id_type sealParametersId = {};
-    std::copy(std::begin(parametersId->block),
-              std::end(parametersId->block),
+    std::copy(std::begin(parametersId.block),
+              std::end(parametersId.block),
               sealParametersId.begin());
     seal::Ciphertext sealEncrypted = encrypted.sealCipherText;
     seal::Ciphertext sealDestination = destination.sealCipherText;
@@ -697,17 +714,17 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
 }
 
 -(BOOL)modSwitchTo:(ASLCipherText *)encrypted
-      parametersId:(ASLParametersIdType *)parametersId
+      parametersId:(ASLParametersIdType)parametersId
        destination:(ASLCipherText *)destination
              error:(NSError **)error {
     
     NSParameterAssert(encrypted != nil);
-    NSParameterAssert(parametersId != nil);
+    
     NSParameterAssert(destination != nil);
     
     seal::parms_id_type sealParametersId = {};
-    std::copy(std::begin(parametersId->block),
-              std::end(parametersId->block),
+    std::copy(std::begin(parametersId.block),
+              std::end(parametersId.block),
               sealParametersId.begin());
     seal::Ciphertext sealEncrypted = encrypted.sealCipherText;
     seal::Ciphertext sealDestination = destination.sealCipherText;
@@ -728,14 +745,14 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
 }
 
 -(BOOL)modSwitchToInplaceWithPlain:(ASLPlainText *)plain
-                      parametersId:(ASLParametersIdType *)parametersId
+                      parametersId:(ASLParametersIdType)parametersId
                              error:(NSError **)error {
     NSParameterAssert(plain != nil);
-    NSParameterAssert(parametersId != nil);
+    
     
     seal::parms_id_type sealParametersId = {};
-    std::copy(std::begin(parametersId->block),
-              std::end(parametersId->block),
+    std::copy(std::begin(parametersId.block),
+              std::end(parametersId.block),
               sealParametersId.begin());
     
     seal::Plaintext sealPlainText = plain.sealPlainText;
@@ -756,15 +773,15 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
 }
 
 -(BOOL)modSwitchToWithPlain:(ASLPlainText *)plain
-               parametersId:(ASLParametersIdType *)parametersId
+               parametersId:(ASLParametersIdType)parametersId
                 destination:(ASLPlainText *)destination
                       error:(NSError **)error {
     NSParameterAssert(plain != nil);
     NSParameterAssert(destination != nil);
     
     seal::parms_id_type sealParametersId = {};
-    std::copy(std::begin(parametersId->block),
-              std::end(parametersId->block),
+    std::copy(std::begin(parametersId.block),
+              std::end(parametersId.block),
               sealParametersId.begin());
     
     seal::Plaintext sealDestination = destination.sealPlainText;
@@ -881,15 +898,15 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
 }
 
 -(BOOL)rescaleToInplace:(ASLCipherText *)encrypted
-           parametersId:(ASLParametersIdType *)parametersId
+           parametersId:(ASLParametersIdType)parametersId
                    pool:(ASLMemoryPoolHandle *)pool
                   error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(pool != nil);
     
     seal::parms_id_type sealParametersId = {};
-    std::copy(std::begin(parametersId->block),
-              std::end(parametersId->block),
+    std::copy(std::begin(parametersId.block),
+              std::end(parametersId.block),
               sealParametersId.begin());
     
     seal::Ciphertext sealEncrypted = encrypted.sealCipherText;
@@ -910,13 +927,13 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
 }
 
 -(BOOL)rescaleToInplace:(ASLCipherText *)encrypted
-           parametersId:(ASLParametersIdType *)parametersId
+           parametersId:(ASLParametersIdType)parametersId
                   error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     
     seal::parms_id_type sealParametersId = {};
-    std::copy(std::begin(parametersId->block),
-              std::end(parametersId->block),
+    std::copy(std::begin(parametersId.block),
+              std::end(parametersId.block),
               sealParametersId.begin());
     
     seal::Ciphertext sealEncrypted = encrypted.sealCipherText;
@@ -937,7 +954,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
 }
 
 -(BOOL)rescaleTo:(ASLCipherText *)encrypted
-    parametersId:(ASLParametersIdType *)parametersId
+    parametersId:(ASLParametersIdType)parametersId
      destination:(ASLCipherText *)destination
             pool:(ASLMemoryPoolHandle *)pool
            error:(NSError **)error {
@@ -946,8 +963,8 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
     NSParameterAssert(pool != nil);
     
     seal::parms_id_type sealParametersId = {};
-    std::copy(std::begin(parametersId->block),
-              std::end(parametersId->block),
+    std::copy(std::begin(parametersId.block),
+              std::end(parametersId.block),
               sealParametersId.begin());
     
     seal::Ciphertext sealEncrypted = encrypted.sealCipherText;
@@ -969,15 +986,15 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
 }
 
 -(BOOL)rescaleTo:(ASLCipherText *)encrypted
-    parametersId:(ASLParametersIdType *)parametersId
+    parametersId:(ASLParametersIdType)parametersId
      destination:(ASLCipherText *)destination
            error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(destination != nil);
     
     seal::parms_id_type sealParametersId = {};
-    std::copy(std::begin(parametersId->block),
-              std::end(parametersId->block),
+    std::copy(std::begin(parametersId.block),
+              std::end(parametersId.block),
               sealParametersId.begin());
     
     seal::Ciphertext sealEncrypted = encrypted.sealCipherText;
@@ -1369,15 +1386,15 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(BOOL)transformToNttInplace:(ASLPlainText *)plain
-                parametersId:(ASLParametersIdType *)parametersId
+                parametersId:(ASLParametersIdType)parametersId
                         pool:(ASLMemoryPoolHandle *)pool
                        error:(NSError **)error {
     NSParameterAssert(plain != nil);
     NSParameterAssert(pool != nil);
     
     seal::parms_id_type sealParametersId = {};
-    std::copy(std::begin(parametersId->block),
-              std::end(parametersId->block),
+    std::copy(std::begin(parametersId.block),
+              std::end(parametersId.block),
               sealParametersId.begin());
     
     seal::Plaintext sealPlainText = plain.sealPlainText;
@@ -1398,13 +1415,13 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(BOOL)transformToNttInplace:(ASLPlainText *)plain
-                parametersId:(ASLParametersIdType *)parametersId
+                parametersId:(ASLParametersIdType)parametersId
                        error:(NSError **)error {
     NSParameterAssert(plain != nil);
     
     seal::parms_id_type sealParametersId = {};
-    std::copy(std::begin(parametersId->block),
-              std::end(parametersId->block),
+    std::copy(std::begin(parametersId.block),
+              std::end(parametersId.block),
               sealParametersId.begin());
     
     seal::Plaintext sealPlainText = plain.sealPlainText;
@@ -1425,7 +1442,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(BOOL)transformToNtt:(ASLPlainText *)plain
-         parametersId:(ASLParametersIdType *)parametersId
+         parametersId:(ASLParametersIdType)parametersId
        destinationNtt:(ASLPlainText *)destinationNtt
                  pool:(ASLMemoryPoolHandle *)pool
                 error:(NSError **)error {
@@ -1434,8 +1451,8 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
     NSParameterAssert(pool != nil);
     
     seal::parms_id_type sealParametersId = {};
-    std::copy(std::begin(parametersId->block),
-              std::end(parametersId->block),
+    std::copy(std::begin(parametersId.block),
+              std::end(parametersId.block),
               sealParametersId.begin());
     
     seal::Plaintext sealPlainText = plain.sealPlainText;
@@ -1457,15 +1474,15 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(BOOL)transformToNtt:(ASLPlainText *)plain
-         parametersId:(ASLParametersIdType *)parametersId
+         parametersId:(ASLParametersIdType)parametersId
        destinationNtt:(ASLPlainText *)destinationNtt
                 error:(NSError **)error {
     NSParameterAssert(plain != nil);
     NSParameterAssert(destinationNtt != nil);
     
     seal::parms_id_type sealParametersId = {};
-    std::copy(std::begin(parametersId->block),
-              std::end(parametersId->block),
+    std::copy(std::begin(parametersId.block),
+              std::end(parametersId.block),
               sealParametersId.begin());
     
     seal::Plaintext sealPlainText = plain.sealPlainText;
