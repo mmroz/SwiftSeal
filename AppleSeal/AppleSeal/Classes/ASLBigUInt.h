@@ -306,7 +306,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param scalarModulus The modulus to calculate the inverse with respect to
  @param inverse Stores the inverse if the inverse operation was
  successful.
- @throws std::ASL_SealInvalidParameter if modulus is zero
+ @throws ASL_SealInvalidParameter if modulus is zero
  @throws ASL_SealInvalidParameter if modulus is not greater than the BigUInt
  value.
  @throws ASL_SealLogicError if the inverse is an alias which the function

@@ -371,7 +371,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSData * _Nullable)encryptSymmetricSaveWithPlainText:(ASLPlainText *)plainText
                                                   error:(NSError **)error;
 
-/**
+/*!
  Encrypts a zero plaintext with the secret key and saves result to a given
  memory location. The encryption parameters for the resulting ciphertext
  correspond to the given parms_id. Dynamic memory allocations in the process
@@ -381,14 +381,14 @@ NS_ASSUME_NONNULL_BEGIN
  with the seed used to compress output size. The output is in binary format
  and not human-readable.
  
- @param[in] paramsId The parms_id for the resulting ciphertext
- @throws std::logic_error if a secret key is not set
- @throws std::invalid_argument if out is null or if size is too small to
+ @param paramsId The parms_id for the resulting ciphertext
+ @throws ASL_LogicError if a secret key is not set
+ @throws ASL_InvalidArgument if out is null or if size is too small to
  contain a SEALHeader
- @throws std::logic_error if the data to be saved is invalid, if compression
+ @throws ASL_LogicError if the data to be saved is invalid, if compression
  mode is not supported, or if compression failed
- @throws std::runtime_error if I/O operations failed
- @throws std::invalid_argument if parms_id is not valid for the encryption
+ @throws ASL_RuntimeError if I/O operations failed
+ @throws ASL_InvalidArgument if parms_id is not valid for the encryption
  parameters
  */
 - (NSData * _Nullable) encryptZeroSymmetricSaveWithParamsId:(ASLParametersIdType)paramsId

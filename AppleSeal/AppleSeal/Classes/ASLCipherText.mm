@@ -254,6 +254,7 @@
 
 #pragma mark - Properies
 
+// TODO
 //- (NSInteger)intArray {
 //    return _cipherText.int_array()
 //}

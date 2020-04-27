@@ -18,9 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ASLSealContextData : NSObject
 
-// TODO - uh oh this isnt good
-//+ (instancetype)new NS_UNAVAILABLE;
-//- (instancetype)new NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)new NS_UNAVAILABLE;
 
 /*!
  Returns a const reference to the underlying encryption parameters.
