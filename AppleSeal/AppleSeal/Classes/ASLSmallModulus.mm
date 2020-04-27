@@ -61,7 +61,6 @@
     return [self initWithSmallModulus:encodedSmallModulus];
 }
 
-
 #pragma mark - NSCopying
 
 - (id)copyWithZone:(NSZone *)zone {
@@ -70,9 +69,9 @@
 
 #pragma mark - NSObject
 
-- (NSString *)debugDescription
+- (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p> %f", [self class], self, static_cast<double>(self.uint64Value)];
+    return [NSString stringWithFormat:@"Value: %llu", self.uint64Value];
 }
 
 - (BOOL)isEqual:(id)object {

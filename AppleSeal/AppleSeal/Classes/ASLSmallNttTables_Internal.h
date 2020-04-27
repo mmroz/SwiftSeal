@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ASLSmallNttTables ()
 
-- (instancetype)initWithSmallNttTables:(const seal::util::SmallNTTTables *)smallNttTables;
+- (instancetype)initWithSmallNttTables:(const seal::util::SmallNTTTables *)smallNttTables
+                          freeWhenDone:(BOOL)freeWhenDone;
 
 @end
 

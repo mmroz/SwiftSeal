@@ -135,6 +135,31 @@ static std::uint8_t sealSchemeFromASLSchemeType(ASLSchemeType schemeType) {
     return [self isEqualToEncryptionParameters:(ASLEncryptionParameters *)object];
 }
 
+- (NSString *)description
+{
+    NSString * scheme;
+    switch (self.scheme) {
+        case ASLSchemeTypeNone:
+            scheme = @"None";
+            break;
+        case ASLSchemeTypeBFV:
+            scheme = @"BFV";
+            break;
+        case ASLSchemeTypeCKKS:
+            scheme = @"CKKS";
+            break;
+    }
+    
+    NSString * polyModulus = [NSString stringWithFormat:@"%zu",self.polynomialModulusDegree];
+    
+    NSString * coeffModulus = [self.coefficientModulus componentsJoinedByString:@", "];
+    
+    NSString * plainModulus = self.plainModulus.description;
+    
+    
+    return [NSString stringWithFormat:@"scheme: %@, polynmial modulus degree %@, Coefficient Modulus %@, Plain Modulus %@", scheme, polyModulus, coeffModulus, plainModulus];
+}
+
 #pragma mark - Public Methods
 
 - (BOOL)isEqualToEncryptionParameters:(ASLEncryptionParameters *)other {
@@ -162,7 +187,7 @@ static std::uint8_t sealSchemeFromASLSchemeType(ASLSchemeType schemeType) {
 
 - (BOOL)setCoefficientModulus:(NSArray<ASLSmallModulus *> *)coefficientModulus
                         error:(NSError **)error {
-    std::vector<seal::SmallModulus> smallModulusList(static_cast<size_t>(coefficientModulus.count));
+    std::vector<seal::SmallModulus> smallModulusList;
     for (ASLSmallModulus * const smallModulus in coefficientModulus) {
         smallModulusList.push_back(smallModulus.smallModulus);
     }

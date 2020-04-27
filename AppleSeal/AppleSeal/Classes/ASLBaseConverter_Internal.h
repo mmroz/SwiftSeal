@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ASLBaseConverter ()
 
-- (instancetype)initWithBaseConverter:(const seal::util::BaseConverter *)baseConverter;
+- (instancetype)initWithBaseConverter:(const seal::util::BaseConverter *)baseConverter freeWhenDone:(BOOL)freeWhenDone;
 
 @end
 

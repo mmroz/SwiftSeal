@@ -80,7 +80,7 @@
     if (self == nil) {
         return nil;
     }
-    _keyGenerator = keyGenerator;
+    _keyGenerator = std::move(keyGenerator);
     return self;
 }
 
@@ -126,7 +126,7 @@
 - (ASLGaloisKeys *)galoisKeysWithGaloisElements:(NSArray<NSNumber *>*)galoisElements
                                           error:(NSError **)error {
     NSParameterAssert(galoisElements != nil);
-    std::vector<std::uint64_t> galoisElementList(static_cast<size_t>(galoisElements.count));
+    std::vector<std::uint64_t> galoisElementList;
     for (NSNumber * const element in galoisElements) {
         galoisElementList.push_back(element.unsignedIntValue);
     }
@@ -149,7 +149,7 @@
 - (ASLGaloisKeys *) galoisKeysWithSteps:(NSArray<NSNumber *>*)steps
                                   error:(NSError **)error {
     NSParameterAssert(steps != nil);
-    std::vector<int> stepsList(static_cast<size_t>(steps.count));
+    std::vector<int> stepsList;
     for (NSNumber * const step in steps) {
         stepsList.push_back(step.intValue);
     }
@@ -230,7 +230,7 @@
     std::size_t const lengthUpperBound = _keyGenerator->galois_keys().save_size(seal::Serialization::compr_mode_default);
     NSMutableData * const data = [NSMutableData dataWithLength:lengthUpperBound];
     
-    std::vector<int> valuesList(static_cast<size_t>(steps.count));
+    std::vector<int> valuesList;
     for (NSNumber * const step in steps) {
         valuesList.push_back(step.intValue);
     }
@@ -262,7 +262,7 @@
     std::size_t const lengthUpperBound = _keyGenerator->galois_keys().save_size(seal::Serialization::compr_mode_default);
     NSMutableData * const data = [NSMutableData dataWithLength:lengthUpperBound];
     
-    std::vector<std::uint64_t> valuesList(static_cast<size_t>(elements.count));
+    std::vector<std::uint64_t> valuesList;
     for (NSNumber * const element in elements) {
         valuesList.push_back(element.unsignedIntValue);
     }

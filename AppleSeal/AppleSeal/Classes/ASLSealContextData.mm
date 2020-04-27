@@ -102,17 +102,17 @@
 
 - (ASLSmallNttTables *)smallNttTables {
     auto table = _contextData->small_ntt_tables().get();
-    return [[ASLSmallNttTables alloc] initWithSmallNttTables:table];
+    return [[ASLSmallNttTables alloc] initWithSmallNttTables:table freeWhenDone:NO];
 }
 
 - (ASLSmallNttTables *)plainNttTables {
     auto table = _contextData->plain_ntt_tables().get();
-    return [[ASLSmallNttTables alloc] initWithSmallNttTables:table];
+    return [[ASLSmallNttTables alloc] initWithSmallNttTables:table freeWhenDone:NO];
 }
 
 - (ASLBaseConverter *)baseConverter {
     auto converter = _contextData->base_converter().get();
-    return [[ASLBaseConverter alloc] initWithBaseConverter:converter];
+    return [[ASLBaseConverter alloc] initWithBaseConverter:converter freeWhenDone:NO];
 }
 
 @end

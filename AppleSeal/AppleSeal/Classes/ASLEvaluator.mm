@@ -147,7 +147,7 @@ destination:(ASLCipherText *)destination
     NSParameterAssert(encrypteds != nil);
     NSParameterAssert(destination != nil);
     
-    std::vector<seal::Ciphertext> vectorEncrypteds(static_cast<size_t>(encrypteds.count));
+    std::vector<seal::Ciphertext> vectorEncrypteds;
     for (ASLCipherText * const value in encrypteds) {
         vectorEncrypteds.push_back(value.sealCipherText);
     }
@@ -1025,7 +1025,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
     NSParameterAssert(destination != nil);
     NSParameterAssert(pool != nil);
     
-    std::vector<seal::Ciphertext> vectorEncrypteds(static_cast<size_t>(encrypteds.count));
+    std::vector<seal::Ciphertext> vectorEncrypteds;
     for (ASLCipherText * const value in encrypteds) {
         vectorEncrypteds.push_back(value.sealCipherText);
     }
@@ -1055,7 +1055,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
     NSParameterAssert(relinearizationKeys != nil);
     NSParameterAssert(destination != nil);
     
-    std::vector<seal::Ciphertext> vectorEncrypteds(static_cast<size_t>(encrypteds.count));
+    std::vector<seal::Ciphertext> vectorEncrypteds;
     for (ASLCipherText * const value in encrypteds) {
         vectorEncrypteds.push_back(value.sealCipherText);
     }

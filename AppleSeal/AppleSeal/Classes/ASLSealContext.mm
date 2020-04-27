@@ -64,6 +64,15 @@ static seal::sec_level_type sealSecurityLevelFromASLSecurityLevel(ASLSecurityLev
     return self;
 }
 
+#pragma mark - NSObject
+
+- (NSString *)description
+{
+    ASLEncryptionParameters * params = self.keyContextData.encryptionParameters;
+    
+    return [NSString stringWithFormat:@"Key Context Data Encryption Parameters %@", params.description];
+}
+
 #pragma mark - Properties
 
 - (ASLSealContextData *)keyContextData {

@@ -15,45 +15,50 @@
 
 @implementation ASLSmallNttTables {
     seal::util::SmallNTTTables * _smallNttTables;
+    BOOL _freeWhenDone;
 }
 
 # pragma mark - Initialization
 
 + (instancetype)smallNttTablesWithPool:(ASLMemoryPoolHandle *)pool {
     auto table = seal::util::SmallNTTTables(pool.memoryPoolHandle);
-    return [[ASLSmallNttTables alloc] initWithSmallNttTables:&table];
+    return [[ASLSmallNttTables alloc] initWithSmallNttTables:&table freeWhenDone:YES];
 }
 
 + (instancetype)smallNttTablesWithCoefficentCountPower:(int)coefficentCountPower smallModulus:(ASLSmallModulus *)smallModulus pool:(ASLMemoryPoolHandle *)pool {
     auto table = seal::util::SmallNTTTables(coefficentCountPower, smallModulus.smallModulus, pool.memoryPoolHandle);
-    return [[ASLSmallNttTables alloc] initWithSmallNttTables:&table];
+    return [[ASLSmallNttTables alloc] initWithSmallNttTables:&table freeWhenDone:YES];
 }
 
 + (instancetype)smallNttTablesWithCoefficentCountPower:(int)coefficentCountPower smallModulus:(ASLSmallModulus *)smallModulus {
     auto table = seal::util::SmallNTTTables(coefficentCountPower, smallModulus.smallModulus);
     
-    return [[ASLSmallNttTables alloc] initWithSmallNttTables:&table];
+    return [[ASLSmallNttTables alloc] initWithSmallNttTables:&table freeWhenDone:YES];
 }
 
 - (instancetype)init {
     auto table = seal::util::SmallNTTTables();
-    return [[ASLSmallNttTables alloc] initWithSmallNttTables:&table];
+    return [[ASLSmallNttTables alloc] initWithSmallNttTables:&table freeWhenDone:YES];
 }
 
+// TODO - 💩 this is never deleted
 - (void)dealloc {
-    delete _smallNttTables;
+//    if (_freeWhenDone) {
+//       delete _smallNttTables;
+//    }
     _smallNttTables = nullptr;
 }
 
 #pragma mark - Properties - Internal
 
-- (instancetype)initWithSmallNttTables:(seal::util::SmallNTTTables *)smallNttTables {
+- (instancetype)initWithSmallNttTables:(seal::util::SmallNTTTables *)smallNttTables freeWhenDone:(BOOL)freeWhenDone{
     self = [super init];
     if (self == nil) {
         return nil;
     }
     
     _smallNttTables = std::move(smallNttTables);
+    _freeWhenDone = freeWhenDone;
     
     return self;
 }

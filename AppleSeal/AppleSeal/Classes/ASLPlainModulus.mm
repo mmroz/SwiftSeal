@@ -42,7 +42,7 @@
 							  bitSizes:(NSArray<NSNumber*>*)bitSizes
 								 error:(NSError **)error {
 	
-	std::vector<int> intBitSizes(static_cast<size_t>(bitSizes.count));
+	std::vector<int> intBitSizes;
 	for (NSNumber * const bitSize in bitSizes) {
 		intBitSizes.push_back(bitSize.intValue);
 	}

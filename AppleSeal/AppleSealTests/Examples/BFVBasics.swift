@@ -208,7 +208,7 @@ class BFVBasics: XCTestCase {
          We then encrypt the plaintext, producing a ciphertext.
          */
         print()
-        let xEncrypted = ASLCipherText()
+        var xEncrypted = ASLCipherText()
         print("Encrypt xPlain to xEncrypted.")
         try encryptor.encrypt(with: xPlain, cipherText: xEncrypted)
         

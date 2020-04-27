@@ -15,6 +15,7 @@
 
 @implementation ASLBaseConverter {
     seal::util::BaseConverter * _baseConverter;
+    BOOL _freeWhenDone;
 }
 
 // TODO - rename these because the call sies imply the wrong thing
@@ -22,37 +23,42 @@
 # pragma mark - Initialization
 
 + (instancetype)baseConverterWithPool:(ASLMemoryPoolHandle *)pool {
-    auto converter = seal::util::BaseConverter(pool.memoryPoolHandle);
-    return [[ASLBaseConverter alloc] initWithBaseConverter:&converter];
+    auto converter = new seal::util::BaseConverter(pool.memoryPoolHandle);
+    return [[ASLBaseConverter alloc] initWithBaseConverter:converter freeWhenDone:YES];
 }
 
 + (instancetype)baseConverterWithModuluses:(NSArray<ASLSmallModulus *> *)moduluses coefficientCount:(NSNumber *)coefficientCount smallPlainModulus:(ASLSmallModulus *)smallPlainModulus pool:(ASLMemoryPoolHandle *)pool {
     
-    std::vector<seal::SmallModulus> smallModulusList(static_cast<size_t>(moduluses.count));
+    std::vector<seal::SmallModulus> smallModulusList;
     for (ASLSmallModulus * const smallModulus in moduluses) {
         smallModulusList.push_back(smallModulus.smallModulus);
     }
     
-    auto converter = seal::util::BaseConverter(smallModulusList, coefficientCount.unsignedIntValue, smallPlainModulus.smallModulus, pool.memoryPoolHandle);
+    auto converter = new seal::util::BaseConverter(smallModulusList, coefficientCount.unsignedIntValue, smallPlainModulus.smallModulus, pool.memoryPoolHandle);
     
-    return [[ASLBaseConverter alloc] initWithBaseConverter:&converter];
+    return [[ASLBaseConverter alloc] initWithBaseConverter:converter freeWhenDone:YES];
 }
 
+// TODO - 💩 this class has its memory handled by another class
 - (void)dealloc {
-    delete _baseConverter;
+    if (_freeWhenDone) {
+        delete _baseConverter;
+    }
+
     _baseConverter = nullptr;
 }
 
 #pragma mark - Properties - Internal
 
-- (instancetype)initWithBaseConverter:(seal::util::BaseConverter *)baseConverter {
+- (instancetype)initWithBaseConverter:(seal::util::BaseConverter *)baseConverter freeWhenDone:(BOOL)freeWhenDone {
     self = [super init];
     if (self == nil) {
         return nil;
     }
-    
+
     _baseConverter = std::move(baseConverter);
-    
+    _freeWhenDone = freeWhenDone;
+
     return self;
 }
 
@@ -60,7 +66,7 @@
 
 - (void)generate:(NSArray<ASLSmallModulus *> *)coefficientBase coefficientCount:(NSNumber *)coefficientCount smallPlainModulus:(ASLSmallModulus *)smallPlainModulus {
     
-    std::vector<seal::SmallModulus> smallModulusList(static_cast<size_t>(coefficientBase.count));
+    std::vector<seal::SmallModulus> smallModulusList;
     for (ASLSmallModulus * const smallModulus in coefficientBase) {
         smallModulusList.push_back(smallModulus.smallModulus);
     }

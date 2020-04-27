@@ -67,7 +67,7 @@
     NSParameterAssert(values != nil);
     NSParameterAssert(destination != nil);
     
-    std::vector<double> doubleValuesList(static_cast<size_t>(values.count));
+    std::vector<double> doubleValuesList;
     for (NSNumber * const value in values) {
         doubleValuesList.push_back(value.doubleValue);
     }
@@ -102,7 +102,7 @@
     NSParameterAssert(destination != nil);
     NSParameterAssert(pool != nil);
     
-    std::vector<double> doubleValuesList(static_cast<size_t>(values.count));
+    std::vector<double> doubleValuesList;
     for (NSNumber * const value in values) {
         doubleValuesList.push_back(value.doubleValue);
     }
@@ -135,7 +135,7 @@
     NSParameterAssert(values != nil);
     NSParameterAssert(destination != nil);
     
-    std::vector<std::complex<double>> doubleValuesList(static_cast<size_t>(values.count));
+    std::vector<std::complex<double>> doubleValuesList;
     for (ASLComplexType * const value in values) {
         doubleValuesList.push_back(value.complex);
     }
@@ -169,7 +169,7 @@
     NSParameterAssert(destination != nil);
     NSParameterAssert(pool != nil);
     
-    std::vector<std::complex<double>> doubleValuesList(static_cast<size_t>(values.count));
+    std::vector<std::complex<double>> doubleValuesList;
     for (ASLComplexType * const value in values) {
         doubleValuesList.push_back(value.complex);
     }
@@ -200,7 +200,7 @@
     NSParameterAssert(values != nil);
     NSParameterAssert(destination != nil);
     
-    std::vector<double> doubleValuesList(static_cast<size_t>(values.count));
+    std::vector<double> doubleValuesList;
     for (NSNumber * const value in values) {
         doubleValuesList.push_back(value.doubleValue);
     }
@@ -229,7 +229,7 @@
     NSParameterAssert(destination != nil);
     NSParameterAssert(pool != nil);
     
-    std::vector<double> doubleValuesList(static_cast<size_t>(values.count));
+    std::vector<double> doubleValuesList;
     for (NSNumber * const value in values) {
         doubleValuesList.push_back(value.doubleValue);
     }
@@ -256,7 +256,7 @@
     NSParameterAssert(values != nil);
     NSParameterAssert(destination != nil);
     
-    std::vector<std::complex<double>> doubleValuesList(static_cast<size_t>(values.count));
+    std::vector<std::complex<double>> doubleValuesList;
     for (ASLComplexType * const value in values) {
         doubleValuesList.push_back(value.complex);
     }
@@ -284,7 +284,7 @@
     NSParameterAssert(destination != nil);
     NSParameterAssert(pool != nil);
     
-    std::vector<std::complex<double>> doubleValuesList(static_cast<size_t>(values.count));
+    std::vector<std::complex<double>> doubleValuesList;
     for (ASLComplexType * const value in values) {
         doubleValuesList.push_back(value.complex);
     }
@@ -547,16 +547,12 @@
     NSParameterAssert(plainText != nil);
     NSParameterAssert(destination != nil);
     
-    std::vector<double> doubleValuesList(static_cast<size_t>(destination.count));
-    for (NSNumber * const value in destination) {
-        doubleValuesList.push_back(value.doubleValue);
+    std::vector<double> doubleList;
+    for (NSNumber * value in destination) {
+        doubleList.push_back(value.doubleValue);
     }
-    const std::vector<double> constDoubleValues = doubleValuesList;
-    
-    auto const sealPlainText = plainText.sealPlainText;
     try {
-        // TODO - fix this
-        //_ckksEncoder->decode(sealPlainText, constDoubleValues)
+        _ckksEncoder->decode(plainText.sealPlainText, doubleList);
         return YES;
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
@@ -574,7 +570,7 @@
     NSParameterAssert(plainText != nil);
     NSParameterAssert(destination != nil);
     
-    std::vector<std::uint64_t> destinationValues(static_cast<size_t>(destination.count));
+    std::vector<std::uint64_t> destinationValues;
     for (NSNumber * const value in destination) {
         destinationValues.push_back(value.intValue);
     }
@@ -599,7 +595,7 @@
     NSParameterAssert(plainText != nil);
     NSParameterAssert(destination != nil);
     
-    std::vector<std::uint64_t> destinationValues(static_cast<size_t>(destination.count));
+    std::vector<std::uint64_t> destinationValues;
     for (NSNumber * const value in destination) {
         destinationValues.push_back(value.intValue);
     }

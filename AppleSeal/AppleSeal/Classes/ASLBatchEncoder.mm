@@ -20,6 +20,7 @@
 #import "NSError+CXXAdditions.h"
 
 @implementation ASLBatchEncoder {
+    
     seal::BatchEncoder* _batchEncoder;
 }
 
@@ -64,7 +65,7 @@
 
 - (BOOL)encodeWithUnsignedValues:(NSArray<NSNumber *> *)unsignedValues destination:(ASLPlainText *)destination error:(NSError **)error {
     
-    std::vector<std::uint64_t> valuesList(static_cast<size_t>(unsignedValues.count));
+    std::vector<std::uint64_t> valuesList;
     for (NSNumber * const value in unsignedValues) {
         valuesList.push_back(value.intValue);
     }
@@ -86,7 +87,7 @@
 
 - (BOOL)encodeWithSignedValues:(NSArray<NSNumber *> *)signedValues destination:(ASLPlainText *)destination error:(NSError **)error {
     
-    std::vector<std::uint64_t> valuesList(static_cast<size_t>(signedValues.count));
+    std::vector<std::uint64_t> valuesList;
     for (NSNumber * const value in signedValues) {
         valuesList.push_back(value.intValue);
     }
@@ -148,7 +149,7 @@
     NSParameterAssert(plainText != nil);
     NSParameterAssert(unsignedDestination != nil);
     
-    std::vector<std::uint64_t> destinationValuesList(static_cast<size_t>(unsignedDestination.count));
+    std::vector<std::uint64_t> destinationValuesList;
     for (NSNumber * const value in unsignedDestination) {
         destinationValuesList.push_back(value.intValue);
     }
@@ -173,7 +174,7 @@
     NSParameterAssert(plainText != nil);
     NSParameterAssert(signedDestination != nil);
     
-    std::vector<std::uint64_t> destinationValuesList(static_cast<size_t>(signedDestination.count));
+    std::vector<std::uint64_t> destinationValuesList;
     for (NSNumber * const value in signedDestination) {
         destinationValuesList.push_back(value.intValue);
     }

@@ -64,9 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ASLMemoryPoolHandle : NSObject <NSCopying>
 
 + (instancetype)new NS_UNAVAILABLE;
-- (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
-+ (instancetype)init NS_UNAVAILABLE;
 
 + (instancetype)memoryPoolHandleWithClearOnDestruction:(BOOL)clearOnDestruction;
 
