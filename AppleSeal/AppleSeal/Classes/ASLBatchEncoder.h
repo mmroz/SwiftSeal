@@ -79,7 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param destination The plaintext polynomial to overwrite with the result
  @throws ASLSealErrorCodeInvalidParameter if values is too large
  */
-- (BOOL)encodeWithUnsignedValues:(NSArray<NSNumber *>*)unsignedValues
+- (ASLPlainText * _Nullable)encodeWithUnsignedValues:(NSArray<NSNumber *>*)unsignedValues
                      destination:(ASLPlainText *)destination
                            error:(NSError **)error;
 
@@ -99,7 +99,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param destination The plaintext polynomial to overwrite with the result
  @throws ASLSealErrorCodeInvalidParameter if values is too large
  */
-- (BOOL)encodeWithSignedValues:(NSArray<NSNumber *>*)signedValues
+- (ASLPlainText *)encodeWithSignedValues:(NSArray<NSNumber *>*)signedValues
                    destination:(ASLPlainText *)destination
                          error:(NSError **)error;
 
@@ -159,7 +159,7 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASLSealErrorCodeInvalidParameter if plain is in NTT form
  @throws ASLSealErrorCodeInvalidParameter if pool is uninitialized
  */
-- (BOOL)decodeWithPlainText:(ASLPlainText*)plainText
+- (NSArray<NSNumber *> * _Nullable)decodeWithPlainText:(ASLPlainText*)plainText
         unsignedDestination:(NSArray<NSNumber *>*)unsignedDestination
                       error:(NSError **)error;
 
@@ -177,7 +177,7 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASLSealErrorCodeInvalidParameter if plain is in NTT form
  @throws ASLSealErrorCodeInvalidParameter if pool is uninitialized
  */
-- (BOOL)decodeWithPlainText:(ASLPlainText*)plainText
+- (NSArray<NSNumber *> *)decodeWithPlainText:(ASLPlainText*)plainText
           signedDestination:(NSArray<NSNumber *>*)signedDestination
                       error:(NSError **)error;
 

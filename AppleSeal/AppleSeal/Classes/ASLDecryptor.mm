@@ -59,20 +59,20 @@
 
 #pragma mark - Public Methods
 
-- (BOOL)decrypt:(ASLCipherText *)encrypted
+- (ASLPlainText *)decrypt:(ASLCipherText *)encrypted
     destination:(ASLPlainText *)destination
           error:(NSError **)error {
     auto sealPlainText = destination.sealPlainText;
     try {
         _decryptor->decrypt(encrypted.sealCipherText, sealPlainText);
-        return YES;
+        return [[ASLPlainText alloc] initWithPlainText:sealPlainText];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     }
-    return NO;
+    return nil;
 }
 
 - (NSNumber *)invariantNoiseBudget:(ASLCipherText *)cipherText

@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
  parameters
  @throws ASL_SealInvalidParameter if encrypted is not in the default NTT form
  */
-- (BOOL)decrypt:(ASLCipherText *)encrypted
+- (ASLPlainText * _Nullable)decrypt:(ASLCipherText *)encrypted
     destination:(ASLPlainText *)destination
           error:(NSError **)error;
 

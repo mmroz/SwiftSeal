@@ -60,11 +60,12 @@
     return [[ASLPlainText alloc] initWithPlainText:value];
 }
 
-- (void)encodeUInt64Value:(uint64_t)uInt64Value
+- (ASLPlainText *)encodeUInt64Value:(uint64_t)uInt64Value
               destination:(ASLPlainText *)destination {
     
     seal::Plaintext sealDestination = destination.sealPlainText;
     _integerEncoder->encode(uInt64Value,sealDestination);
+    return [[ASLPlainText alloc] initWithPlainText:sealDestination];
 }
 
 - (NSNumber*)decodeUInt32WithPlain:(ASLPlainText *)plain
@@ -99,11 +100,12 @@
     return [[ASLPlainText alloc] initWithPlainText:_integerEncoder->encode(int64Value)];
 }
 
-- (void)encodeInt64Value:(int64_t)int64Value
+- (ASLPlainText *)encodeInt64Value:(int64_t)int64Value
              destination:(ASLPlainText *)destination {
     NSParameterAssert(destination != nil);
     seal::Plaintext sealDestination = destination.sealPlainText;
     _integerEncoder->encode(int64Value, sealDestination);
+    return [[ASLPlainText alloc] initWithPlainText:sealDestination];
 }
 
 
@@ -113,13 +115,14 @@
     return [[ASLPlainText alloc]initWithPlainText:_integerEncoder->encode(sealBigUInt)];
 }
 
-- (void)encodeBigUInt:(ASLBigUInt *)bigUInt
+- (ASLPlainText *)encodeBigUInt:(ASLBigUInt *)bigUInt
           destination:(ASLPlainText *)destination {
     NSParameterAssert(bigUInt != nil);
     NSParameterAssert(destination != nil);
     seal::BigUInt sealBigUInt = bigUInt.sealBigUInt;
     seal::Plaintext sealPlainText = destination.sealPlainText;
     _integerEncoder->encode(sealBigUInt, sealPlainText);
+    return [[ASLPlainText alloc] initWithPlainText:sealPlainText];
 }
 
 - (NSNumber*)decodeInt32WithPlain:(ASLPlainText *)plain
@@ -164,22 +167,24 @@
     }
 }
 
-- (void)encodeUInt32Value:(uint32_t)uInt32Value
+- (ASLPlainText *)encodeUInt32Value:(uint32_t)uInt32Value
               destination:(ASLPlainText *)destination {
     NSParameterAssert(destination != nil);
     seal::Plaintext sealDestination = destination.sealPlainText;
     _integerEncoder->encode(uInt32Value, sealDestination);
+    return [[ASLPlainText alloc] initWithPlainText:sealDestination];
 }
 
 - (ASLPlainText*)encodeInt32Value:(int32_t)int32Value {
     return [[ASLPlainText alloc] initWithPlainText:_integerEncoder->encode(int32Value)];
 }
 
-- (void)encodeInt32Value:(int32_t)int32Value
+- (ASLPlainText *)encodeInt32Value:(int32_t)int32Value
              destination:(ASLPlainText *)destination {
     NSParameterAssert(destination != nil);
        seal::Plaintext sealDestination = destination.sealPlainText;
        _integerEncoder->encode(int32Value, sealDestination);
+    return [[ASLPlainText alloc] initWithPlainText:sealDestination];
 }
 
 - (ASLPlainText*)encodeUInt32Value:(uint32_t)uInt32Value {

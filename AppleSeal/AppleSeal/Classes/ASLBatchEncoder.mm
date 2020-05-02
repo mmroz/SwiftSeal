@@ -63,7 +63,9 @@
 
 #pragma mark - Public Methods
 
-- (BOOL)encodeWithUnsignedValues:(NSArray<NSNumber *> *)unsignedValues destination:(ASLPlainText *)destination error:(NSError **)error {
+- (ASLPlainText *)encodeWithUnsignedValues:(NSArray<NSNumber *> *)unsignedValues
+                               destination:(ASLPlainText *)destination
+                                     error:(NSError **)error {
     
     std::vector<std::uint64_t> valuesList;
     for (NSNumber * const value in unsignedValues) {
@@ -75,17 +77,19 @@
     
     try {
         _batchEncoder->encode(constValuesValues, sealPlainText);
-        return YES;
+        return [[ASLPlainText alloc] initWithPlainText:sealPlainText];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     }
-    return NO;
+    return nil;
 }
 
-- (BOOL)encodeWithSignedValues:(NSArray<NSNumber *> *)signedValues destination:(ASLPlainText *)destination error:(NSError **)error {
+- (ASLPlainText *)encodeWithSignedValues:(NSArray<NSNumber *> *)signedValues
+                             destination:(ASLPlainText *)destination
+                                   error:(NSError **)error {
     
     std::vector<std::uint64_t> valuesList;
     for (NSNumber * const value in signedValues) {
@@ -97,14 +101,14 @@
     
     try {
         _batchEncoder->encode(constValuesValues, sealPlainText);
-        return YES;
+         return [[ASLPlainText alloc] initWithPlainText:sealPlainText];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     }
-    return NO;
+    return nil;
 }
 
 - (BOOL)encodeWithPlainText:(ASLPlainText*)plainText
@@ -143,9 +147,9 @@
     return NO;
 }
 
-- (BOOL)decodeWithPlainText:(ASLPlainText*)plainText
-        unsignedDestination:(NSArray<NSNumber *>*)unsignedDestination
-                      error:(NSError **)error {
+- (NSArray<NSNumber *> *)decodeWithPlainText:(ASLPlainText*)plainText
+                         unsignedDestination:(NSArray<NSNumber *>*)unsignedDestination
+                                       error:(NSError **)error {
     NSParameterAssert(plainText != nil);
     NSParameterAssert(unsignedDestination != nil);
     
@@ -158,19 +162,23 @@
     
     try {
         _batchEncoder->decode(sealPlainText, destinationValuesList);
-        return YES;
+        NSMutableArray<NSNumber *> * results = [[NSMutableArray alloc] initWithCapacity:destinationValuesList.size()];
+        for (std::uint64_t & value : destinationValuesList) {
+            [results addObject:[[NSNumber alloc]initWithFloat:value]];
+        }
+        return results;
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     }
-    return NO;
+    return nil;
 }
 
-- (BOOL)decodeWithPlainText:(ASLPlainText*)plainText
-          signedDestination:(NSArray<NSNumber *>*)signedDestination
-                      error:(NSError **)error {
+- (NSArray<NSNumber *> *)decodeWithPlainText:(ASLPlainText*)plainText
+                           signedDestination:(NSArray<NSNumber *>*)signedDestination
+                                       error:(NSError **)error {
     NSParameterAssert(plainText != nil);
     NSParameterAssert(signedDestination != nil);
     
@@ -183,14 +191,18 @@
     
     try {
         _batchEncoder->decode(sealPlainText, destinationValuesList);
-        return YES;
+         NSMutableArray<NSNumber *> * results = [[NSMutableArray alloc] initWithCapacity:destinationValuesList.size()];
+           for (std::uint64_t & value : destinationValuesList) {
+               [results addObject:[[NSNumber alloc]initWithFloat:value]];
+           }
+           return results;
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     }
-    return NO;
+    return nil;
 }
 
 

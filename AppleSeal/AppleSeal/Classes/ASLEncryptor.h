@@ -301,7 +301,7 @@ NS_ASSUME_NONNULL_BEGIN
  parameters
  @throws ASL_SealInvalidParameter if pool is uninitialized
  */
--(BOOL)encryptZeroSymmetricWithParametersId:(ASLParametersIdType)parametersId
+-(ASLCipherText * _Nullable)encryptZeroSymmetricWithParametersId:(ASLParametersIdType)parametersId
                                 destination:(ASLCipherText *)destination
                                       error:(NSError **)error;
 
@@ -320,7 +320,7 @@ NS_ASSUME_NONNULL_BEGIN
  parameters
  @throws ASL_SealInvalidParameter if pool is uninitialized
  */
--(BOOL)encryptZeroSymmetricWithParametersId:(ASLParametersIdType)parametersId
+-(ASLCipherText * _Nullable)encryptZeroSymmetricWithParametersId:(ASLParametersIdType)parametersId
                                 destination:(ASLCipherText *)destination
                                        pool:(ASLMemoryPoolHandle *)pool
                                       error:(NSError **)error;

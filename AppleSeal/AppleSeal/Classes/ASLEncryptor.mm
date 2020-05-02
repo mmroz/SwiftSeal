@@ -333,7 +333,7 @@
     return NO;
 }
 
--(BOOL)encryptZeroSymmetricWithParametersId:(ASLParametersIdType)parametersId
+-(ASLCipherText *)encryptZeroSymmetricWithParametersId:(ASLParametersIdType)parametersId
                                 destination:(ASLCipherText *)destination
                                       error:(NSError **)error {
     NSParameterAssert(destination != nil);
@@ -346,22 +346,22 @@
     
     try {
         _encryptor->encrypt_zero_symmetric(sealParametersId, sealCipherText);
-        return YES;
+        return [[ASLCipherText alloc]initWithCipherText:sealCipherText];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
-    return NO;
+    return nil;
 }
 
--(BOOL)encryptZeroSymmetricWithParametersId:(ASLParametersIdType)parametersId
+-(ASLCipherText *)encryptZeroSymmetricWithParametersId:(ASLParametersIdType)parametersId
                                 destination:(ASLCipherText *)destination
                                        pool:(ASLMemoryPoolHandle *)pool
                                       error:(NSError **)error {
@@ -376,19 +376,19 @@
     
     try {
         _encryptor->encrypt_zero_symmetric(sealParametersId, sealCipherText, pool.memoryPoolHandle);
-        return YES;
+        return [[ASLCipherText alloc]initWithCipherText:sealCipherText];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
-    return NO;
+    return nil;
 }
 
 - (BOOL)setPublicKey:(ASLPublicKey *)publicKey

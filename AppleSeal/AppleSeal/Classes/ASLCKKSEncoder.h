@@ -81,7 +81,7 @@ NS_ASSUME_NONNULL_BEGIN
  parameters
  @throws ASL_SealInvalidParameter if pool is uninitialized
  */
-- (BOOL)encodeWithComplexValues:(NSArray<ASLComplexType *>*)values
+- (ASLPlainText * _Nullable)encodeWithComplexValues:(NSArray<ASLComplexType *>*)values
                    parametersId:(ASLParametersIdType)parametersId
                           scale:(double)scale
                     destination:(ASLPlainText *)destination
@@ -107,7 +107,7 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealInvalidParameter if encoding is too large for the encryption
  parameters
  */
-- (BOOL)encodeWithComplexValues:(NSArray<ASLComplexType *>*)values
+- (ASLPlainText * _Nullable)encodeWithComplexValues:(NSArray<ASLComplexType *>*)values
                    parametersId:(ASLParametersIdType)parametersId
                           scale:(double)scale
                     destination:(ASLPlainText *)destination
@@ -132,7 +132,7 @@ NS_ASSUME_NONNULL_BEGIN
  parameters
  @throws ASL_SealInvalidParameter if pool is uninitialized
  */
-- (BOOL)encodeWithComplexValues:(NSArray<ASLComplexType *>*)values
+- (ASLPlainText * _Nullable)encodeWithComplexValues:(NSArray<ASLComplexType *>*)values
                           scale:(double)scale
                     destination:(ASLPlainText *)destination
                            pool:(ASLMemoryPoolHandle *)pool
@@ -156,7 +156,7 @@ NS_ASSUME_NONNULL_BEGIN
  parameters
  */
 
-- (BOOL)encodeWithComplexValues:(NSArray<ASLComplexType *>*)values
+- (ASLPlainText * _Nullable)encodeWithComplexValues:(NSArray<ASLComplexType *>*)values
                           scale:(double)scale
                     destination:(ASLPlainText *)destination
                           error:(NSError **)error;
@@ -179,7 +179,7 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealInvalidParameter if pool is uninitialized
  */
 
-- (BOOL)encodeWithComplexValue:(ASLComplexType *)complexValue
+- (ASLPlainText * _Nullable)encodeWithComplexValue:(ASLComplexType *)complexValue
                          scale:(double)scale
                    destination:(ASLPlainText *)destination
                           pool:(ASLMemoryPoolHandle *)pool
@@ -201,7 +201,7 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealInvalidParameter if encoding is too large for the encryption
  parameters
  */
-- (BOOL)encodeWithComplexValue:(ASLComplexType *)complexValue
+- (ASLPlainText * _Nullable)encodeWithComplexValue:(ASLComplexType *)complexValue
                          scale:(double)scale
                    destination:(ASLPlainText *)destination
                          error:(NSError **)error;
@@ -224,7 +224,7 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealInvalidParameter if encoding is too large for the encryption
  parameters
  */
-- (BOOL)encodeWithDoubleValue:(double)value
+- (ASLPlainText * _Nullable)encodeWithDoubleValue:(double)value
                  parametersId:(ASLParametersIdType)parametersId
                         scale:(double)scale
                   destination:(ASLPlainText *)destination
@@ -250,7 +250,7 @@ NS_ASSUME_NONNULL_BEGIN
  parameters
  @throws ASL_SealInvalidParameter if pool is uninitialized
  */
-- (BOOL)encodeWithDoubleValue:(double)value
+- (ASLPlainText * _Nullable)encodeWithDoubleValue:(double)value
                  parametersId:(ASLParametersIdType)parametersId
                         scale:(double)scale
                   destination:(ASLPlainText *)destination
@@ -272,7 +272,7 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealInvalidParameter if encoding is too large for the encryption
  parameters
  */
-- (BOOL)encodeWithDoubleValue:(double)value
+- (ASLPlainText * _Nullable)encodeWithDoubleValue:(double)value
                         scale:(double)scale
                   destination:(ASLPlainText *)destination
                         error:(NSError **)error;
@@ -294,7 +294,7 @@ NS_ASSUME_NONNULL_BEGIN
  parameters
  @throws ASL_SealInvalidParameter if pool is uninitialized
  */
-- (BOOL)encodeWithDoubleValue:(double)value
+- (ASLPlainText * _Nullable)encodeWithDoubleValue:(double)value
                         scale:(double)scale
                   destination:(ASLPlainText *)destination
                          pool:(ASLMemoryPoolHandle *)pool
@@ -317,7 +317,7 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealInvalidParameter if encoding is too large for the encryption
  parameters
  */
-- (BOOL)encodeWithComplexValue:(ASLComplexType *)complexValue
+- (ASLPlainText * _Nullable)encodeWithComplexValue:(ASLComplexType *)complexValue
                   parametersId:(ASLParametersIdType)parametersId
                          scale:(double)scale
                    destination:(ASLPlainText *)destination
@@ -342,7 +342,7 @@ NS_ASSUME_NONNULL_BEGIN
  parameters
  @throws ASL_SealInvalidParameter if pool is uninitialized
  */
-- (BOOL)encodeWithComplexValue:(ASLComplexType *)complexValue
+- (ASLPlainText * _Nullable)encodeWithComplexValue:(ASLComplexType *)complexValue
                   parametersId:(ASLParametersIdType)parametersId
                          scale:(double)scale
                    destination:(ASLPlainText *)destination
@@ -368,7 +368,7 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealInvalidParameter if encoding is too large for the encryption
  parameters
  */
-- (BOOL)encodeWithDoubleValues:(NSArray<NSNumber *> *)values
+- (ASLPlainText * _Nullable)encodeWithDoubleValues:(NSArray<NSNumber *> *)values
                   parametersId:(ASLParametersIdType)parametersId
                          scale:(double)scale
                    destination:(ASLPlainText *)destination
@@ -395,7 +395,7 @@ NS_ASSUME_NONNULL_BEGIN
  parameters
  @throws ASL_SealInvalidParameter if pool is uninitialized
  */
-- (BOOL)encodeWithDoubleValues:(NSArray<NSNumber *> *)values
+- (ASLPlainText * _Nullable)encodeWithDoubleValues:(NSArray<NSNumber *> *)values
                   parametersId:(ASLParametersIdType)parametersId
                          scale:(double)scale
                    destination:(ASLPlainText *)destination
@@ -418,7 +418,7 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealInvalidParameter if encoding is too large for the encryption
  parameters
  */
-- (BOOL)encodeWithDoubleValues:(NSArray<NSNumber *> *)values
+- (ASLPlainText * _Nullable)encodeWithDoubleValues:(NSArray<NSNumber *> *)values
                          scale:(double)scale
                    destination:(ASLPlainText *)destination
                          error:(NSError **)error;
@@ -441,7 +441,7 @@ NS_ASSUME_NONNULL_BEGIN
  parameters
  @throws ASL_SealInvalidParameter if pool is uninitialized
  */
-- (BOOL)encodeWithDoubleValues:(NSArray<NSNumber *> *)values
+- (ASLPlainText * _Nullable)encodeWithDoubleValues:(NSArray<NSNumber *> *)values
                          scale:(double)scale
                    destination:(ASLPlainText *)destination
                           pool:(ASLMemoryPoolHandle *)pool
@@ -458,7 +458,7 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealInvalidParameter if parms_id is not valid for the encryption
  parameters
  */
-- (BOOL)encodeWithLongValue:(NSDecimalNumber*)longValue
+- (ASLPlainText * _Nullable)encodeWithLongValue:(NSDecimalNumber*)longValue
                parametersId:(ASLParametersIdType)parametersId
                 destination:(ASLPlainText *)destination
                       error:(NSError **)error;
@@ -472,7 +472,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param destination The plaintext polynomial to overwrite with the
  result
  */
-- (BOOL)encodeWithLongValue:(NSDecimalNumber*)longValue
+- (ASLPlainText * _Nullable)encodeWithLongValue:(NSDecimalNumber*)longValue
                 destination:(ASLPlainText *)destination
                       error:(NSError **)error;
 
@@ -490,7 +490,7 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealInvalidParameter if plain is not valid for the encryption parameters
  @throws ASL_SealInvalidParameter if plain is in NTT form
  */
-- (BOOL)decode:(ASLPlainText *)plainText
+- (NSArray<NSNumber *> * _Nullable)decode:(ASLPlainText *)plainText
    destination:(NSArray<NSNumber *> *)destination
          error:(NSError **)error;
 
@@ -509,7 +509,7 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealInvalidParameter if plain is in NTT form
  @throws ASL_SealInvalidParameter if pool is uninitialized
  */
-- (BOOL)decode:(ASLPlainText *)plainText
+- (NSArray<NSNumber *> * _Nullable)decode:(ASLPlainText *)plainText
    destination:(NSArray<NSNumber *> *)destination
           pool:(ASLMemoryPoolHandle *)pool
          error:(NSError **)error;
@@ -527,7 +527,7 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealInvalidParameter if plain is not valid for the encryption parameters
  @throws ASL_SealInvalidParameter if plain is in NTT form
  */
-- (BOOL)decodeWithDoubleValues:(ASLPlainText *)plainText
+- (NSArray<NSDecimalNumber *> * _Nullable)decodeWithDoubleValues:(ASLPlainText *)plainText
                    destination:(NSArray<NSDecimalNumber *> *)destination
                          error:(NSError **)error;
 @end

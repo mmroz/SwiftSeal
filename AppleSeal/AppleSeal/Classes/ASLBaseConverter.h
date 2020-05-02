@@ -44,41 +44,41 @@ smallPlainModulus:(ASLSmallModulus *)smallPlainModulus;
 /*!
  Fast base converter from q to Bsk
  */
--(void)fastBaseConverterQToBsk:(NSNumber *)input
+-(NSNumber * _Nullable)fastBaseConverterQToBsk:(NSNumber *)input
                    destination:(NSNumber *)destination
                           pool:(ASLMemoryPoolHandle *)pool;
 
 /*!
  Fast base converter from Bsk to q
  */
--(void)fastBaseConverterBskToQ:(NSNumber *)input
+-(NSNumber * _Nullable)fastBaseConverterBskToQ:(NSNumber *)input
                    destination:(NSNumber *)destination
                           pool:(ASLMemoryPoolHandle *)pool;
 
 /*!
  Reduction from Bsk U {m_tilde} to Bsk
  */
--(void)reduceBskPrimeToBsk:(NSNumber *)input
+-(NSNumber * _Nullable)reduceBskPrimeToBsk:(NSNumber *)input
                destination:(NSNumber *)destination;
 
 /*!
  Fast base converter from q U Bsk to Bsk
  */
--(void)fastFloor:(NSNumber *)input
+-(NSNumber * _Nullable)fastFloor:(NSNumber *)input
      destination:(NSNumber *)destination
             pool:(ASLMemoryPoolHandle *)pool;
 
 /*!
  Fast base converter from q to Bsk U {m_tilde}
  */
--(void)fastFloorFastBaseConverterQToBskPrime:(NSNumber *)input
+-(NSNumber * _Nullable)fastFloorFastBaseConverterQToBskPrime:(NSNumber *)input
                                  destination:(NSNumber *)destination
                                         pool:(ASLMemoryPoolHandle *)pool;
 
 /*!
  Fast base converter from q to plain_modulus U {gamma}
  */
--(void)fastBaseConverterPlainGamma:(NSNumber *)input
+-(NSNumber * _Nullable)fastBaseConverterPlainGamma:(NSNumber *)input
                        destination:(NSNumber *)destination
                               pool:(ASLMemoryPoolHandle *)pool;
 

@@ -84,44 +84,54 @@
     _baseConverter->round_last_coeff_modulus_inplace(&value, pool.memoryPoolHandle);
 }
 
-- (void)fastBaseConverterQToBsk:(NSNumber *)input
-                    destination:(NSNumber *)destination pool:(ASLMemoryPoolHandle *)pool {
+- (NSNumber *)fastBaseConverterQToBsk:(NSNumber *)input
+                    destination:(NSNumber *)destination
+                           pool:(ASLMemoryPoolHandle *)pool {
     std::uint64_t inputValue = input.unsignedLongLongValue;
     std::uint64_t destinationValue = destination.unsignedLongLongValue;
     _baseConverter->fastbconv(&inputValue, &destinationValue, pool.memoryPoolHandle);
+    return [[NSNumber alloc] initWithLong:destinationValue];
 }
 
-- (void)fastBaseConverterBskToQ:(NSNumber *)input destination:(NSNumber *)destination pool:(ASLMemoryPoolHandle *)pool {
+- (NSNumber *)fastBaseConverterBskToQ:(NSNumber *)input
+                    destination:(NSNumber *)destination
+                           pool:(ASLMemoryPoolHandle *)pool {
     std::uint64_t inputValue = input.unsignedLongLongValue;
      std::uint64_t destinationValue = destination.unsignedLongLongValue;
     _baseConverter->fastbconv_sk(&inputValue, &destinationValue, pool.memoryPoolHandle);
+    return [[NSNumber alloc] initWithLong:destinationValue];
     
 }
 
-- (void)reduceBskPrimeToBsk:(NSNumber *)input destination:(NSNumber *)destination {
+- (NSNumber *)reduceBskPrimeToBsk:(NSNumber *)input
+                destination:(NSNumber *)destination {
     std::uint64_t inputValue = input.unsignedLongLongValue;
     std::uint64_t destinationValue = destination.unsignedLongLongValue;
     _baseConverter->mont_rq(&inputValue, &destinationValue);
-    
+    return [[NSNumber alloc] initWithLong:destinationValue];
 }
 
-- (void)fastFloor:(NSNumber *)input destination:(NSNumber *)destination pool:(ASLMemoryPoolHandle *)pool {
+- (NSNumber *)fastFloor:(NSNumber *)input
+      destination:(NSNumber *)destination
+             pool:(ASLMemoryPoolHandle *)pool {
     std::uint64_t inputValue = input.unsignedLongLongValue;
     std::uint64_t destinationValue = destination.unsignedLongLongValue;
     _baseConverter->fast_floor(&inputValue, &destinationValue, pool.memoryPoolHandle);
+    return [[NSNumber alloc] initWithLong:destinationValue];
 }
 
-- (void)fastFloorFastBaseConverterQToBskPrime:(NSNumber *)input destination:(NSNumber *)destination pool:(ASLMemoryPoolHandle *)pool {
+- (NSNumber *)fastFloorFastBaseConverterQToBskPrime:(NSNumber *)input destination:(NSNumber *)destination pool:(ASLMemoryPoolHandle *)pool {
     std::uint64_t inputValue = input.unsignedLongLongValue;
     std::uint64_t destinationValue = destination.unsignedLongLongValue;
     _baseConverter->fastbconv_mtilde(&inputValue, &destinationValue, pool.memoryPoolHandle);
-    
+    return [[NSNumber alloc] initWithLong:destinationValue];
 }
 
-- (void)fastBaseConverterPlainGamma:(NSNumber *)input destination:(NSNumber *)destination pool:(ASLMemoryPoolHandle *)pool {
+- (NSNumber *)fastBaseConverterPlainGamma:(NSNumber *)input destination:(NSNumber *)destination pool:(ASLMemoryPoolHandle *)pool {
     std::uint64_t inputValue = input.unsignedLongLongValue;
     std::uint64_t destinationValue = destination.unsignedLongLongValue;
     _baseConverter->fastbconv_plain_gamma(&inputValue, &destinationValue, pool.memoryPoolHandle);
+    return [[NSNumber alloc] initWithLong:destinationValue];
 }
 
 - (void)reset {

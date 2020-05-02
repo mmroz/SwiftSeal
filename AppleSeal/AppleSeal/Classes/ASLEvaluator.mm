@@ -117,7 +117,7 @@
     }
 }
 
--(BOOL)add:(ASLCipherText *)encrypted1
+-(ASLCipherText * _Nullable)add:(ASLCipherText *)encrypted1
 encrypted2:(ASLCipherText *)encrypted2
 destination:(ASLCipherText *)destination
      error:(NSError **)error {
@@ -127,21 +127,22 @@ destination:(ASLCipherText *)destination
     try {
         seal::Ciphertext constDestination = destination.sealCipherText;
         _evaluator->add(encrypted1.sealCipherText, encrypted2.sealCipherText, constDestination);
-        return YES;
+        return [[ASLCipherText alloc]initWithCipherText:constDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
+    return nil;
 }
 
--(BOOL)addMany:(NSArray<ASLCipherText *> *)encrypteds
+-(ASLCipherText * _Nullable)addMany:(NSArray<ASLCipherText *> *)encrypteds
    destination:(ASLCipherText *)destination
          error:(NSError **)error {
     NSParameterAssert(encrypteds != nil);
@@ -155,18 +156,19 @@ destination:(ASLCipherText *)destination
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->add_many(vectorEncrypteds, sealDestination);
-        return YES;
+       return [[ASLCipherText alloc]initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
+    return nil;
 }
 
 -(BOOL)subInplace:(ASLCipherText *)encrypted1
@@ -192,7 +194,7 @@ destination:(ASLCipherText *)destination
     }
 }
 
--(BOOL)sub:(ASLCipherText *)encrypted1
+-(ASLCipherText * _Nullable)sub:(ASLCipherText *)encrypted1
 encrypted2:(ASLCipherText *)encrypted2
 destination:(ASLCipherText *)destination
      error:(NSError **)error {
@@ -202,17 +204,17 @@ destination:(ASLCipherText *)destination
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->sub(encrypted1.sealCipherText, encrypted2.sealCipherText, sealDestination);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
@@ -264,7 +266,7 @@ destination:(ASLCipherText *)destination
     }
 }
 
--(BOOL)multiply:(ASLCipherText *)encrypted1
+-(ASLCipherText * _Nullable)multiply:(ASLCipherText *)encrypted1
      encrypted2:(ASLCipherText *)encrypted2
     destination:(ASLCipherText *)destination
            pool:(ASLMemoryPoolHandle *)pool
@@ -277,21 +279,21 @@ destination:(ASLCipherText *)destination
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->multiply(encrypted1.sealCipherText, encrypted2.sealCipherText, sealDestination, pool.memoryPoolHandle);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];;
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
--(BOOL)multiply:(ASLCipherText *)encrypted1
+-(ASLCipherText * _Nullable)multiply:(ASLCipherText *)encrypted1
      encrypted2:(ASLCipherText *)encrypted2
     destination:(ASLCipherText *)destination
           error:(NSError **)error {
@@ -302,17 +304,17 @@ destination:(ASLCipherText *)destination
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->multiply(encrypted1.sealCipherText, encrypted2.sealCipherText, sealDestination);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];;
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
@@ -360,7 +362,7 @@ destination:(ASLCipherText *)destination
     }
 }
 
--(BOOL)square:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)square:(ASLCipherText *)encrypted
   destination:(ASLCipherText *)destination
          pool:(ASLMemoryPoolHandle *)pool
         error:(NSError **)error {
@@ -371,21 +373,21 @@ destination:(ASLCipherText *)destination
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->square(encrypted.sealCipherText, sealDestination, pool.memoryPoolHandle);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
--(BOOL)square:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)square:(ASLCipherText *)encrypted
   destination:(ASLCipherText *)destination
         error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
@@ -394,17 +396,17 @@ destination:(ASLCipherText *)destination
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->square(encrypted.sealCipherText, sealDestination);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
@@ -457,7 +459,7 @@ destination:(ASLCipherText *)destination
     }
 }
 
--(BOOL)relinearize:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)relinearize:(ASLCipherText *)encrypted
 relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
        destination:(ASLCipherText *)destination
              error:(NSError **)error {
@@ -468,21 +470,21 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
     seal::Ciphertext sealDestination = encrypted.sealCipherText;
     try {
         _evaluator->relinearize(encrypted.sealCipherText, relinearizationKeys.sealRelinKeys, sealDestination);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
--(BOOL)relinearize:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)relinearize:(ASLCipherText *)encrypted
 relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
        destination:(ASLCipherText *)destination
               pool:(ASLMemoryPoolHandle *)pool
@@ -495,21 +497,21 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->relinearize(encrypted.sealCipherText, relinearizationKeys.sealRelinKeys, sealDestination, pool.memoryPoolHandle);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
--(BOOL)modSwitchToNext:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)modSwitchToNext:(ASLCipherText *)encrypted
            destination:(ASLCipherText *)destination
                  error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
@@ -519,21 +521,21 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->mod_switch_to_next(sealEncrypted, sealDestination);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
--(BOOL)modSwitchToNext:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)modSwitchToNext:(ASLCipherText *)encrypted
            destination:(ASLCipherText *)destination
                   pool:(ASLMemoryPoolHandle *)pool
                  error:(NSError **)error {
@@ -545,17 +547,17 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->mod_switch_to_next(sealEncrypted, sealDestination, pool.memoryPoolHandle);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
@@ -573,12 +575,12 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
@@ -681,7 +683,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
     }
 }
 
--(BOOL)modSwitchTo:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)modSwitchTo:(ASLCipherText *)encrypted
       parametersId:(ASLParametersIdType)parametersId
        destination:(ASLCipherText *)destination
               pool:(ASLMemoryPoolHandle *)pool
@@ -699,21 +701,21 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->mod_switch_to(sealEncrypted, sealParametersId, sealDestination, pool.memoryPoolHandle);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
--(BOOL)modSwitchTo:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)modSwitchTo:(ASLCipherText *)encrypted
       parametersId:(ASLParametersIdType)parametersId
        destination:(ASLCipherText *)destination
              error:(NSError **)error {
@@ -730,17 +732,17 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->mod_switch_to(sealEncrypted, sealParametersId, sealDestination);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
@@ -772,7 +774,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
     }
 }
 
--(BOOL)modSwitchToWithPlain:(ASLPlainText *)plain
+-(ASLPlainText * _Nullable)modSwitchToWithPlain:(ASLPlainText *)plain
                parametersId:(ASLParametersIdType)parametersId
                 destination:(ASLPlainText *)destination
                       error:(NSError **)error {
@@ -788,21 +790,21 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
     seal::Plaintext sealPlain = plain.sealPlainText;
     try {
         _evaluator->mod_switch_to(sealPlain, sealParametersId, sealDestination);
-        return YES;
+        return [[ASLPlainText alloc] initWithPlainText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
--(BOOL)rescaleToNext:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)rescaleToNext:(ASLCipherText *)encrypted
          destination:(ASLCipherText *)destination
                 pool:(ASLMemoryPoolHandle *)pool
                error:(NSError **)error {
@@ -815,21 +817,21 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->rescale_to_next(sealEncrypted, sealDestination, pool.memoryPoolHandle);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
--(BOOL)rescaleToNext:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)rescaleToNext:(ASLCipherText *)encrypted
          destination:(ASLCipherText *)destination
                error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
@@ -839,17 +841,17 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->rescale_to_next(sealEncrypted, sealDestination);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
@@ -953,7 +955,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
     }
 }
 
--(BOOL)rescaleTo:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)rescaleTo:(ASLCipherText *)encrypted
     parametersId:(ASLParametersIdType)parametersId
      destination:(ASLCipherText *)destination
             pool:(ASLMemoryPoolHandle *)pool
@@ -971,21 +973,21 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->rescale_to(sealEncrypted, sealParametersId, sealDestination, pool.memoryPoolHandle);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
--(BOOL)rescaleTo:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)rescaleTo:(ASLCipherText *)encrypted
     parametersId:(ASLParametersIdType)parametersId
      destination:(ASLCipherText *)destination
            error:(NSError **)error {
@@ -1001,21 +1003,21 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->rescale_to(sealEncrypted, sealParametersId, sealDestination);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
--(BOOL)multiplyMany:(NSArray<ASLCipherText*>*)encrypteds
+-(ASLCipherText * _Nullable)multiplyMany:(NSArray<ASLCipherText*>*)encrypteds
 relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
         destination:(ASLCipherText *)destination
                pool:(ASLMemoryPoolHandle *)pool
@@ -1033,21 +1035,21 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->multiply_many(vectorEncrypteds, relinearizationKeys.sealRelinKeys, sealDestination, pool.memoryPoolHandle);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
--(BOOL)multiplyMany:(NSArray<ASLCipherText*>*)encrypteds
+-(ASLCipherText * _Nullable)multiplyMany:(NSArray<ASLCipherText*>*)encrypteds
 relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
         destination:(ASLCipherText *)destination
               error:(NSError **)error {
@@ -1063,17 +1065,17 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->multiply_many(vectorEncrypteds, relinearizationKeys.sealRelinKeys, sealDestination);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
@@ -1127,7 +1129,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
     }
 }
 
--(BOOL)exponentiate:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)exponentiate:(ASLCipherText *)encrypted
            exponent:(uint64_t)exponent
 relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
         destination:(ASLCipherText *)destination
@@ -1142,21 +1144,21 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->exponentiate(sealEncrypted, exponent, relinearizationKeys.sealRelinKeys, sealDestination, pool.memoryPoolHandle);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
--(BOOL)exponentiate:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)exponentiate:(ASLCipherText *)encrypted
            exponent:(uint64_t)exponent
 relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
         destination:(ASLCipherText *)destination
@@ -1169,17 +1171,17 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->exponentiate(sealEncrypted, exponent, relinearizationKeys.sealRelinKeys, sealDestination);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
@@ -1207,7 +1209,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
     }
 }
 
--(BOOL)addPlain:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)addPlain:(ASLCipherText *)encrypted
           plain:(ASLPlainText *)plain
     destination:(ASLCipherText *)destination
           error:(NSError **)error {
@@ -1219,17 +1221,17 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->add_plain(sealEncrypted, plain.sealPlainText, sealDestination);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
@@ -1256,7 +1258,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
     }
 }
 
--(BOOL)subPlain:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)subPlain:(ASLCipherText *)encrypted
           plain:(ASLPlainText *)plain
     destination:(ASLCipherText *)destination
           error:(NSError **)error {
@@ -1268,17 +1270,17 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->sub_plain(sealEncrypted, plain.sealPlainText, sealDestination);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
@@ -1331,7 +1333,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 
--(BOOL)multiplyPlain:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)multiplyPlain:(ASLCipherText *)encrypted
                plain:(ASLPlainText *)plain
          destination:(ASLCipherText *)destination
                 pool:(ASLMemoryPoolHandle *)pool
@@ -1345,21 +1347,21 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->multiply_plain(sealEncrypted, plain.sealPlainText, sealDestination, pool.memoryPoolHandle);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
--(BOOL)multiplyPlain:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)multiplyPlain:(ASLCipherText *)encrypted
                plain:(ASLPlainText *)plain
          destination:(ASLCipherText *)destination
                error:(NSError **)error {
@@ -1371,17 +1373,17 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->multiply_plain(sealEncrypted, plain.sealPlainText, sealDestination);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
@@ -1569,7 +1571,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
     }
 }
 
--(BOOL)transformFromNtt:(ASLCipherText *)encryptedNtt
+-(ASLCipherText * _Nullable)transformFromNtt:(ASLCipherText *)encryptedNtt
             destination:(ASLCipherText *)destination
                   error:(NSError **)error {
     NSParameterAssert(encryptedNtt != nil);
@@ -1578,17 +1580,17 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->transform_from_ntt(encryptedNtt.sealCipherText, sealDestination);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
@@ -1642,7 +1644,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
     }
 }
 
--(BOOL)applyGalois:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)applyGalois:(ASLCipherText *)encrypted
      galoisElement:(uint64_t)galoisElement
          galoisKey:(ASLGaloisKeys *)galoisKey
        destination:(ASLCipherText *)destination
@@ -1657,21 +1659,21 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->apply_galois(sealEncrypted, galoisElement, galoisKey.sealGaloisKeys, sealDestination, pool.memoryPoolHandle);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
--(BOOL)applyGalois:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)applyGalois:(ASLCipherText *)encrypted
      galoisElement:(uint64_t)galoisElement
          galoisKey:(ASLGaloisKeys *)galoisKey
        destination:(ASLCipherText *)destination
@@ -1684,17 +1686,17 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->apply_galois(sealEncrypted, galoisElement, galoisKey.sealGaloisKeys, sealDestination);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
@@ -1748,7 +1750,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
     }
 }
 
--(BOOL)rotateRows:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)rotateRows:(ASLCipherText *)encrypted
             steps:(int)steps
         galoisKey:(ASLGaloisKeys *)galoisKey
       destination:(ASLCipherText *)destination
@@ -1763,21 +1765,21 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->rotate_rows(sealEncrypted, steps, galoisKey.sealGaloisKeys, sealDestination, pool.memoryPoolHandle);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
--(BOOL)rotateRows:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)rotateRows:(ASLCipherText *)encrypted
             steps:(int)steps
         galoisKey:(ASLGaloisKeys *)galoisKey
       destination:(ASLCipherText *)destination
@@ -1790,17 +1792,17 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->rotate_rows(sealEncrypted, steps, galoisKey.sealGaloisKeys, sealDestination);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
@@ -1851,7 +1853,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
     }
 }
 
--(BOOL)rotateColumns:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)rotateColumns:(ASLCipherText *)encrypted
            galoisKey:(ASLGaloisKeys *)galoisKey
          destination:(ASLCipherText *)destination
                 pool:(ASLMemoryPoolHandle *)pool
@@ -1865,21 +1867,21 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->rotate_columns(sealEncrypted, galoisKey.sealGaloisKeys, sealDestination, pool.memoryPoolHandle);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
--(BOOL)rotateColumns:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)rotateColumns:(ASLCipherText *)encrypted
            galoisKey:(ASLGaloisKeys *)galoisKey
          destination:(ASLCipherText *)destination
                error:(NSError **)error {
@@ -1891,17 +1893,17 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->rotate_columns(sealEncrypted, galoisKey.sealGaloisKeys, sealDestination);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
@@ -1955,7 +1957,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
     }
 }
 
--(BOOL)rotateVector:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)rotateVector:(ASLCipherText *)encrypted
               steps:(int)steps
           galoisKey:(ASLGaloisKeys *)galoisKey
         destination:(ASLCipherText *)destination
@@ -1970,21 +1972,21 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->rotate_vector(sealEncrypted, steps, galoisKey.sealGaloisKeys, sealDestination, pool.memoryPoolHandle);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
--(BOOL)rotateVector:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)rotateVector:(ASLCipherText *)encrypted
               steps:(int)steps
           galoisKey:(ASLGaloisKeys *)galoisKey
         destination:(ASLCipherText *)destination
@@ -1997,17 +1999,17 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->rotate_vector(sealEncrypted, steps, galoisKey.sealGaloisKeys, sealDestination);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
@@ -2059,7 +2061,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
     }
 }
 
--(BOOL)complexConjugate:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)complexConjugate:(ASLCipherText *)encrypted
               galoisKey:(ASLGaloisKeys *)galoisKey
             destination:(ASLCipherText *)destination
                    pool:(ASLMemoryPoolHandle *)pool
@@ -2073,21 +2075,21 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->complex_conjugate(sealEncrypted, galoisKey.sealGaloisKeys, sealDestination, pool.memoryPoolHandle);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
--(BOOL)complexConjugate:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)complexConjugate:(ASLCipherText *)encrypted
               galoisKey:(ASLGaloisKeys *)galoisKey
             destination:(ASLCipherText *)destination
                   error:(NSError **)error {
@@ -2099,17 +2101,17 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
     seal::Ciphertext sealDestination = destination.sealCipherText;
     try {
         _evaluator->complex_conjugate(sealEncrypted, galoisKey.sealGaloisKeys, sealDestination);
-        return YES;
+        return [[ASLCipherText alloc] initWithCipherText:sealDestination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 

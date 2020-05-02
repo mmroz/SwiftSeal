@@ -67,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param uInt64Value The unsigned integer to encode
  @param destination The plaintext to overwrite with the encoding
  */
-- (void)encodeUInt64Value:(uint64_t)uInt64Value
+- (ASLPlainText * _Nullable)encodeUInt64Value:(uint64_t)uInt64Value
               destination:(ASLPlainText *)destination;
 
 /*!
@@ -115,7 +115,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param int64Value The signed integer to encode
  @param destination The plaintext to overwrite with the encoding
  */
-- (void)encodeInt64Value:(int64_t)int64Value
+- (ASLPlainText * _Nullable)encodeInt64Value:(int64_t)int64Value
              destination:(ASLPlainText *)destination;
 
 /*!
@@ -131,7 +131,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param bigUInt The unsigned integer to encode
  @param destination The plaintext to overwrite with the encoding
  */
-- (void)encodeBigUInt:(ASLBigUInt *)bigUInt
+- (ASLPlainText * _Nullable)encodeBigUInt:(ASLBigUInt *)bigUInt
           destination:(ASLPlainText *)destination;
 
 /*!
@@ -188,7 +188,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param destination The plaintext to overwrite with the encoding
  */
 
-- (void)encodeUInt32Value:(uint32_t)uInt32Value
+- (ASLPlainText * _Nullable)encodeUInt32Value:(uint32_t)uInt32Value
               destination:(ASLPlainText *)destination;
 
 /*!
@@ -197,7 +197,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param int32Value The unsigned integer to encode
  @param destination The plaintext to overwrite with the encoding
  */
-- (void)encodeInt32Value:(int32_t)int32Value
+- (ASLPlainText * _Nullable)encodeInt32Value:(int32_t)int32Value
              destination:(ASLPlainText *)destination;
 
 /*!
