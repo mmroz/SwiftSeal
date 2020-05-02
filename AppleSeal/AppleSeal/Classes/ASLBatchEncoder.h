@@ -99,7 +99,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param destination The plaintext polynomial to overwrite with the result
  @throws ASLSealErrorCodeInvalidParameter if values is too large
  */
-- (ASLPlainText *)encodeWithSignedValues:(NSArray<NSNumber *>*)signedValues
+- (ASLPlainText * _Nullable)encodeWithSignedValues:(NSArray<NSNumber *>*)signedValues
                    destination:(ASLPlainText *)destination
                          error:(NSError **)error;
 

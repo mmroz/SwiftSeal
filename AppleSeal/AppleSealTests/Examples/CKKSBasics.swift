@@ -101,7 +101,7 @@ class CKKSBasics: XCTestCase {
         
         let encoder = try ASLCKKSEncoder(context: context)
         let slotCount: Double = Double(encoder.slotCount)
-        print("Number of slots: {slotCount}")
+        print("Number of slots: {\(slotCount)}")
         
         var input = Array(repeating: NSNumber(0), count: Int(slotCount))
         let currPoint: Double = 0
@@ -120,29 +120,24 @@ class CKKSBasics: XCTestCase {
          We create plaintexts for PI, 0.4, and 1 using an overload of CKKSEncoder.Encode
          that encodes the given floating-point value to every slot in the vector.
          */
-        let plainCoeff3 = ASLPlainText()
-        let plainCoeff1 = ASLPlainText()
-        let plainCoeff0 = ASLPlainText()
-        try encoder.encode(withDoubleValue: 3.14159265, scale: scale, destination: plainCoeff3)
-        try encoder.encode(withDoubleValue: 0.4, scale: scale, destination: plainCoeff1)
-        try encoder.encode(withDoubleValue: 1.0, scale: scale, destination: plainCoeff0)
+        let plainCoeff3 = try encoder.encode(withDoubleValue: 3.14159265, scale: scale, destination: ASLPlainText())
+        let plainCoeff1 = try encoder.encode(withDoubleValue: 0.4, scale: scale, destination: ASLPlainText())
+        let plainCoeff0 = try encoder.encode(withDoubleValue: 1.0, scale: scale, destination: ASLPlainText())
         
-        let xPlain = ASLPlainText()
         print()
         print("Encode input vectors.")
-        try encoder.encode(withDoubleValues: input, scale: scale, destination: xPlain)
-        let x1Encrypted = ASLCipherText()
-        try encryptor.encrypt(with: xPlain, cipherText: x1Encrypted)
+        let xPlain = try encoder.encode(withDoubleValues: input, scale: scale, destination: ASLPlainText())
+        let x1Encrypted = try encryptor.encrypt(with: xPlain, cipherText: ASLCipherText())
         
         /*
          To compute x^3 we first compute x^2 and relinearize. However, the scale has
          now grown to 2^80.
          */
-        let x3Encrypted = ASLCipherText()
+        
         print()
         print("Compute x^2 and relinearize:")
-        try evaluator.square(x1Encrypted, destination: x3Encrypted)
-        try evaluator.relinearizeInplace(x3Encrypted, relinearizationKeys: relinKeys)
+        var x3Encrypted = try evaluator.square(x1Encrypted, destination: ASLCipherText())
+        x3Encrypted = try evaluator.relinearizeInplace(x3Encrypted, relinearizationKeys: relinKeys)
         print("    + scale of x^2 before rescale: {\(log(x3Encrypted.scale))} bits")
         
         /*
@@ -153,7 +148,7 @@ class CKKSBasics: XCTestCase {
          */
         print()
         print("Rescale x^2.")
-        try evaluator.rescale(toNextInplace: x3Encrypted)
+        x3Encrypted = try evaluator.rescale(toNextInplace: x3Encrypted)
         print("    + scale of x^2 after rescale: {\(log(x3Encrypted.scale))} bits")
         
         /*

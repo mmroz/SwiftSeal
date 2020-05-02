@@ -115,6 +115,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, assign, readonly) ASLSealContextData* nextContextData;
 
+@property (nonatomic, readonly, assign, getter=isLastContextData) BOOL lastContextData;
+
 /*!
  Returns the index of the parameter set in a chain. The initial parameters
  have index 0 and the index increases sequentially in the parameter chain.

@@ -114,7 +114,7 @@ NS_ASSUME_NONNULL_BEGIN
  parameters
  @throws ASL_SealInvalidParameter if plain is not in default NTT form
  */
-- (BOOL)encryptWithPlainText:(ASLPlainText *)plainText
+- (ASLCipherText * _Nullable)encryptWithPlainText:(ASLPlainText *)plainText
                   cipherText:(ASLCipherText *)cipherText
                        error:(NSError **)error;
 
@@ -137,7 +137,7 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealInvalidParameter if plain is not in default NTT form
  @throws ASL_SealInvalidParameter if pool is uninitialized
  */
-- (BOOL)encryptWithPlainText:(ASLPlainText *)plainText
+- (ASLCipherText * _Nullable)encryptWithPlainText:(ASLPlainText *)plainText
                   cipherText:(ASLCipherText *)cipherText
                         pool:(ASLMemoryPoolHandle *)pool
                        error:(NSError **)error;

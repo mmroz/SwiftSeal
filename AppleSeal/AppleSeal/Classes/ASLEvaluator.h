@@ -102,7 +102,7 @@ NS_ASSUME_NONNULL_BEGIN
                                   error:(NSError **)error;
 
 
--(BOOL)negate:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)negate:(ASLCipherText *)encrypted
    detination:(ASLCipherText *)destination
         error:(NSError **)error;
 
@@ -113,7 +113,7 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealInvalidParameter if encrypted is not valid for the encryption
  parameters
  */
--(BOOL)negateInplace:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)negateInplace:(ASLCipherText *)encrypted
                error:(NSError **)error;
 
 /*!
@@ -129,7 +129,7 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealInvalidParameter if encrypted1 and encrypted2 have different scale
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)addInplace:(ASLCipherText *)encrypted1
+-(ASLCipherText * _Nullable)addInplace:(ASLCipherText *)encrypted1
        encrypted2:(ASLCipherText *)encrypted2
             error:(NSError **)error;
 
@@ -183,7 +183,7 @@ destination:(ASLCipherText *)destination
  @throws ASL_SealInvalidParameter if encrypted1 and encrypted2 have different scale
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)subInplace:(ASLCipherText *)encrypted1
+-(ASLCipherText * _Nullable)subInplace:(ASLCipherText *)encrypted1
        encrypted2:(ASLCipherText *)encrypted2
             error:(NSError **)error;
 
@@ -222,7 +222,7 @@ destination:(ASLCipherText *)destination
  is too large for the encryption parameters
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)multiplyInplace:(ASLCipherText *)encrypted1
+-(ASLCipherText * _Nullable)multiplyInplace:(ASLCipherText *)encrypted1
             encrypted2:(ASLCipherText *)encrypted2
                  error:(NSError **)error;
 
@@ -239,7 +239,7 @@ destination:(ASLCipherText *)destination
  @throws ASL_SealInvalidParameter if pool is uninitialized
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)multiplyInplace:(ASLCipherText *)encrypted1
+-(ASLCipherText * _Nullable)multiplyInplace:(ASLCipherText *)encrypted1
             encrypted2:(ASLCipherText *)encrypted2
                   pool:(ASLMemoryPoolHandle *)pool
                  error:(NSError **)error;
@@ -304,7 +304,7 @@ destination:(ASLCipherText *)destination
  is too large for the encryption parameters
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)squareInplace:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)squareInplace:(ASLCipherText *)encrypted
                error:(NSError **)error;
 
 /*!
@@ -322,7 +322,7 @@ destination:(ASLCipherText *)destination
  @throws ASL_SealInvalidParameter if pool is uninitialized
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)squareInplace:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)squareInplace:(ASLCipherText *)encrypted
                 pool:(ASLMemoryPoolHandle *)pool
                error:(NSError **)error;
 
@@ -385,7 +385,7 @@ destination:(ASLCipherText *)destination
  @throws ASL_SealLogicError if keyswitching is not supported by the context
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)relinearizeInplace:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)relinearizeInplace:(ASLCipherText *)encrypted
       relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
                     error:(NSError **)error;
 /*!
@@ -408,7 +408,7 @@ destination:(ASLCipherText *)destination
  @throws ASL_SealLogicError if keyswitching is not supported by the context
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)relinearizeInplace:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)relinearizeInplace:(ASLCipherText *)encrypted
       relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
                      pool:(ASLMemoryPoolHandle *)pool
                     error:(NSError **)error;
@@ -515,7 +515,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealInvalidParameter if pool is uninitialized
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)modSwitchToNextInplace:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)modSwitchToNextInplace:(ASLCipherText *)encrypted
                          pool:(ASLMemoryPoolHandle *)pool
                         error:(NSError **)error;
 
@@ -532,7 +532,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  large for the new encryption parameters
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)modSwitchToNextInplace:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)modSwitchToNextInplace:(ASLCipherText *)encrypted
                         error:(NSError **)error;
 
 /*!
@@ -546,7 +546,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealInvalidParameter if, when using scheme_type::CKKS, the scale is too
  large for the new encryption parameters
  */
--(BOOL)modSwitchToNext:(ASLPlainText *)plain
+-(ASLCipherText * _Nullable)modSwitchToNext:(ASLPlainText *)plain
                  error:(NSError **)error;
 
 /*!
@@ -568,7 +568,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealInvalidParameter if pool is uninitialized
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)modSwitchToInplace:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)modSwitchToInplace:(ASLCipherText *)encrypted
              parametersId:(ASLParametersIdType)parametersId
                      pool:(ASLMemoryPoolHandle *)pool
                     error:(NSError **)error;
@@ -590,7 +590,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  large for the new encryption parameters
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)modSwitchToInplace:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)modSwitchToInplace:(ASLCipherText *)encrypted
              parametersId:(ASLParametersIdType)parametersId
                     error:(NSError **)error;
 /*!
@@ -656,7 +656,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealInvalidParameter if, when using scheme_type::CKKS, the scale is too
  large for the new encryption parameters
  */
--(BOOL)modSwitchToInplaceWithPlain:(ASLPlainText *)plain
+-(ASLCipherText * _Nullable)modSwitchToInplaceWithPlain:(ASLPlainText *)plain
                       parametersId:(ASLParametersIdType)parametersId
                              error:(NSError **)error;
 
@@ -736,7 +736,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealInvalidParameter if pool is uninitialized
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)rescaleToNextInplace:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)rescaleToNextInplace:(ASLCipherText *)encrypted
                        pool:(ASLMemoryPoolHandle *)pool
                       error:(NSError **)error;
 /*!
@@ -752,7 +752,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealInvalidParameter if encrypted is already at lowest level
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)rescaleToNextInplace:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)rescaleToNextInplace:(ASLCipherText *)encrypted
                       error:(NSError **)error;
 
 /*!
@@ -773,7 +773,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealInvalidParameter if pool is uninitialized
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)rescaleToInplace:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)rescaleToInplace:(ASLCipherText *)encrypted
            parametersId:(ASLParametersIdType)parametersId
                    pool:(ASLMemoryPoolHandle *)pool
                   error:(NSError **)error;
@@ -794,7 +794,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  than the parameters corresponding to parms_id
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)rescaleToInplace:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)rescaleToInplace:(ASLCipherText *)encrypted
            parametersId:(ASLParametersIdType)parametersId
                   error:(NSError **)error;
 
@@ -930,7 +930,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if keyswitching is not supported by the context
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)exponentiateInplace:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)exponentiateInplace:(ASLCipherText *)encrypted
                   exponent:(uint64_t)exponent
        relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
                       pool:(ASLMemoryPoolHandle *)pool
@@ -958,7 +958,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if keyswitching is not supported by the context
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)exponentiateInplace:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)exponentiateInplace:(ASLCipherText *)encrypted
                   exponent:(uint64_t)exponent
        relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
                      error:(NSError **)error;
@@ -1035,7 +1035,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealInvalidParameter if encrypted or plain is in NTT form
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)addPlainInplace:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)addPlainInplace:(ASLCipherText *)encrypted
                  plain:(ASLPlainText *)plain
                  error:(NSError **)error;
 
@@ -1068,7 +1068,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealInvalidParameter if encrypted or plain is in NTT form
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)subPlainInplace:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)subPlainInplace:(ASLCipherText *)encrypted
                  plain:(ASLPlainText *)plain
                  error:(NSError **)error;
 
@@ -1107,7 +1107,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealInvalidParameter if pool is uninitialized
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)multiplyPlainInplace:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)multiplyPlainInplace:(ASLCipherText *)encrypted
                       plain:(ASLPlainText *)plain
                        pool:(ASLMemoryPoolHandle *)pool
                       error:(NSError **)error;
@@ -1127,7 +1127,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  scale is too large for the encryption parameters
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)multiplyPlainInplace:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)multiplyPlainInplace:(ASLCipherText *)encrypted
                       plain:(ASLPlainText *)plain
                       error:(NSError **)error;
 
@@ -1200,7 +1200,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  encryption parameters
  @throws ASL_SealInvalidParameter if pool is uninitialized
  */
--(BOOL)transformToNttInplace:(ASLPlainText *)plain
+-(ASLCipherText * _Nullable)transformToNttInplace:(ASLPlainText *)plain
                 parametersId:(ASLParametersIdType)parametersId
                         pool:(ASLMemoryPoolHandle *)pool
                        error:(NSError **)error;
@@ -1223,7 +1223,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealInvalidParameter if plain or parms_id is not valid for the
  encryption parameters
  */
--(BOOL)transformToNttInplace:(ASLPlainText *)plain
+-(ASLCipherText * _Nullable)transformToNttInplace:(ASLPlainText *)plain
                 parametersId:(ASLParametersIdType)parametersId
                        error:(NSError **)error;
 
@@ -1249,7 +1249,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  encryption parameters
  @throws ASL_SealInvalidParameter if pool is uninitialized
  */
--(BOOL)transformToNtt:(ASLPlainText *)plain
+-(ASLCipherText * _Nullable)transformToNtt:(ASLPlainText *)plain
          parametersId:(ASLParametersIdType)parametersId
        destinationNtt:(ASLPlainText *)destinationNtt
                  pool:(ASLMemoryPoolHandle *)pool
@@ -1275,7 +1275,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealInvalidParameter if plain or parms_id is not valid for the
  encryption parameters
  */
--(BOOL)transformToNtt:(ASLPlainText *)plain
+-(ASLCipherText * _Nullable)transformToNtt:(ASLPlainText *)plain
          parametersId:(ASLParametersIdType)parametersId
        destinationNtt:(ASLPlainText *)destinationNtt
                 error:(NSError **)error;
@@ -1290,7 +1290,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealInvalidParameter if encrypted is already in NTT form
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)transformToNttInplace:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)transformToNttInplace:(ASLCipherText *)encrypted
                        error:(NSError **)error;
 
 /*!
@@ -1305,7 +1305,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealInvalidParameter if encrypted is already in NTT form
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)transformToNtt:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)transformToNtt:(ASLCipherText *)encrypted
        destinationNtt:(ASLCipherText *)destinationNtt
                 error:(NSError **)error;
 
@@ -1320,7 +1320,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealInvalidParameter if encrypted_ntt is not in NTT form
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)transformFromNttInplace:(ASLCipherText *)encryptedNtt
+-(ASLCipherText * _Nullable)transformFromNttInplace:(ASLCipherText *)encryptedNtt
                          error:(NSError **)error;
 
 /*!
@@ -1370,7 +1370,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if keyswitching is not supported by the context
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)applyGaloisInplace:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)applyGaloisInplace:(ASLCipherText *)encrypted
             galoisElement:(uint64_t)galoisElement
                 galoisKey:(ASLGaloisKeys *)galoisKey
                      pool:(ASLMemoryPoolHandle *)pool
@@ -1405,7 +1405,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if keyswitching is not supported by the context
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)applyGaloisInplace:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)applyGaloisInplace:(ASLCipherText *)encrypted
             galoisElement:(uint64_t)galoisElement
                 galoisKey:(ASLGaloisKeys *)galoisKey
                     error:(NSError **)error;
@@ -1515,7 +1515,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if keyswitching is not supported by the context
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)rotateRowsInplace:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)rotateRowsInplace:(ASLCipherText *)encrypted
                    steps:(int)steps
                galoisKey:(ASLGaloisKeys *)galoisKey
                     pool:(ASLMemoryPoolHandle *)pool
@@ -1547,7 +1547,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if keyswitching is not supported by the context
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)rotateRowsInplace:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)rotateRowsInplace:(ASLCipherText *)encrypted
                    steps:(int)steps
                galoisKey:(ASLGaloisKeys *)galoisKey
                    error:(NSError **)error;
@@ -1646,7 +1646,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if keyswitching is not supported by the context
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)rotateColumnsInplace:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)rotateColumnsInplace:(ASLCipherText *)encrypted
                   galoisKey:(ASLGaloisKeys *)galoisKey
                        pool:(ASLMemoryPoolHandle *)pool
                       error:(NSError **)error;
@@ -1674,7 +1674,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if keyswitching is not supported by the context
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)rotateColumnsInplace:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)rotateColumnsInplace:(ASLCipherText *)encrypted
                   galoisKey:(ASLGaloisKeys *)galoisKey
                       error:(NSError **)error;
 
@@ -1765,7 +1765,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if keyswitching is not supported by the context
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)rotateVectorInplace:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)rotateVectorInplace:(ASLCipherText *)encrypted
                      steps:(int)steps
                  galoisKey:(ASLGaloisKeys *)galoisKey
                       pool:(ASLMemoryPoolHandle *)pool
@@ -1795,7 +1795,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if keyswitching is not supported by the context
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)rotateVectorInplace:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)rotateVectorInplace:(ASLCipherText *)encrypted
                      steps:(int)steps
                  galoisKey:(ASLGaloisKeys *)galoisKey
                      error:(NSError **)error;
@@ -1886,7 +1886,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if keyswitching is not supported by the context
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)complexConjugateInplace:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)complexConjugateInplace:(ASLCipherText *)encrypted
                      galoisKey:(ASLGaloisKeys *)galoisKey
                           pool:(ASLMemoryPoolHandle *)pool
                          error:(NSError **)error;
@@ -1910,7 +1910,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if keyswitching is not supported by the context
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
--(BOOL)complexConjugateInplace:(ASLCipherText *)encrypted
+-(ASLCipherText * _Nullable)complexConjugateInplace:(ASLCipherText *)encrypted
                      galoisKey:(ASLGaloisKeys *)galoisKey
                          error:(NSError **)error;
 

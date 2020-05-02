@@ -147,7 +147,11 @@ class Levels: XCTestCase {
             /*
              Step forward in the chain.
              */
-            contextData = contextData.next
+            if contextData.isLastContextData {
+                break
+            } else {
+                contextData = contextData.next
+            }
         }
         print("End of chain reached")
         print()
@@ -175,9 +179,9 @@ class Levels: XCTestCase {
          In the BFV scheme plaintexts do not carry a ParmsId, but ciphertexts do. Note
          how the freshly encrypted ciphertext is at the highest data level.
          */
-        let plain = try ASLPlainText(polynomialString: "1x^3 + 2x^2 + 3x^1 + 4")
-        let encrypted = ASLCipherText()
-        try encryptor.encrypt(with: plain, cipherText: encrypted)
+        var plain = try ASLPlainText(polynomialString: "1x^3 + 2x^2 + 3x^1 + 4")
+        
+        var encrypted = try encryptor.encrypt(with: plain, cipherText: ASLCipherText())
         print("    + plain:      {\(plain.parametersId)} (not set in BFV)")
         print("    + encrypted:  {\(encrypted.parametersId)}")
         print()
@@ -192,15 +196,16 @@ class Levels: XCTestCase {
         print()
         print("Perform modulus switching on encrypted and print.")
         contextData = context.firstContextData
-        print("----> ")
-        while (nil != contextData.next)
+        print("---->)")
+        
+        while !contextData.isLastContextData
         {
             print("Level (chain index): {\(contextData.chainIndex)}")
             print("      ParmsId of encrypted: {\(contextData.parametersId)}")
             print("      Noise budget at this level: {\(try decryptor.invariantNoiseBudget(encrypted))} bits")
             print("\\")
             print(" \\--> ")
-            try evaluator.modSwitch(toNextInplace: encrypted)
+            encrypted = try evaluator.modSwitch(toNextInplace: encrypted)
             contextData = contextData.next
         }
         print("Level (chain index): {\(contextData.chainIndex)}")
@@ -218,7 +223,7 @@ class Levels: XCTestCase {
          */
         print()
         print("Decrypt still works after modulus switching.")
-        try decryptor.decrypt(encrypted, destination: plain)
+        plain = try decryptor.decrypt(encrypted, destination: plain)
         print("    + Decryption of encrypted: {\(plain)} ...... Correct.")
         print()
         
@@ -238,19 +243,19 @@ class Levels: XCTestCase {
         print("Computation is more efficient with modulus switching.")
         print()
         print("Compute the eight power.")
-        try encryptor.encrypt(with: plain, cipherText: encrypted)
+        encrypted = try encryptor.encrypt(with: plain, cipherText: encrypted)
         print("    + Noise budget fresh:                  {\(try decryptor.invariantNoiseBudget(encrypted))} bits")
-        try evaluator.squareInplace(encrypted)
-        try evaluator.relinearizeInplace(encrypted, relinearizationKeys: relinKeys)
+        encrypted = try evaluator.squareInplace(encrypted)
+        encrypted = try evaluator.relinearizeInplace(encrypted, relinearizationKeys: relinKeys)
         print("    + Noise budget of the 2nd power:        {\(try decryptor.invariantNoiseBudget(encrypted))} bits")
-        try evaluator.squareInplace(encrypted)
-        try evaluator.relinearizeInplace(encrypted, relinearizationKeys: relinKeys)
+        encrypted = try evaluator.squareInplace(encrypted)
+        encrypted = try evaluator.relinearizeInplace(encrypted, relinearizationKeys: relinKeys)
         print("    + Noise budget of the 4th power:        {\(try decryptor.invariantNoiseBudget(encrypted))} bits")
         /*
          Surprisingly, in this case modulus switching has no effect at all on the
          noise budget.
          */
-        try evaluator.modSwitch(toNextInplace: encrypted)
+        encrypted = try evaluator.modSwitch(toNextInplace: encrypted)
         print("    + Noise budget after modulus switching: {\(try decryptor.invariantNoiseBudget(encrypted))} bits")
         
         
@@ -262,10 +267,10 @@ class Levels: XCTestCase {
          smaller parameters. We see from the print-out that the next modulus switch
          should be done ideally when the noise budget is down to around 25 bits.
          */
-        try evaluator.squareInplace(encrypted)
-        try evaluator.relinearizeInplace(encrypted, relinearizationKeys: relinKeys)
+        encrypted = try evaluator.squareInplace(encrypted)
+        encrypted = try evaluator.relinearizeInplace(encrypted, relinearizationKeys: relinKeys)
         print("    + Noise budget of the 8th power:        {\(try decryptor.invariantNoiseBudget(encrypted))} bits")
-        try evaluator.modSwitch(toNextInplace: encrypted)
+        encrypted = try evaluator.modSwitch(toNextInplace: encrypted)
         print("    + Noise budget after modulus switching: {\(try decryptor.invariantNoiseBudget(encrypted))} bits")
         
         /*
@@ -274,7 +279,7 @@ class Levels: XCTestCase {
          can be used to decrypt a ciphertext at any level in the modulus switching
          chain.
          */
-        try decryptor.decrypt(encrypted, destination: plain)
+        plain = try decryptor.decrypt(encrypted, destination: plain)
         print("    + Decryption of the 8th power (hexadecimal) ...... Correct.")
         print("    {\(plain)}")
         print()

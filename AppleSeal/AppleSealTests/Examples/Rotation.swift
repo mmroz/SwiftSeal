@@ -15,7 +15,7 @@ class Rotation: XCTestCase {
      vectorized computations on encrypted numbers. In addition to computing slot-wise,
      it is possible to rotate the encrypted vectors cyclically.
      */
-    func textExampleRotationBFV() throws {
+    func testExampleRotationBFV() throws {
         print("Example: Rotation / Rotation in BFV")
         
         let parms = ASLEncryptionParameters(schemeType: .BFV)
@@ -32,7 +32,6 @@ class Rotation: XCTestCase {
         let keygen = try ASLKeyGenerator(context: context)
         let publicKey = keygen.publicKey
         let secretKey = keygen.secretKey
-        let relinKeys = try keygen.relinearizationKeys()
         let encryptor = try ASLEncryptor(context: context, publicKey: publicKey)
         let evaluator = try ASLEvaluator(context)
         let decryptor = try ASLDecryptor(context: context, secretKey: secretKey)
@@ -43,17 +42,16 @@ class Rotation: XCTestCase {
         print("let matrix row size: {\(rowSize)}")
         
         var podMatrix = Array(repeating: NSNumber(0), count: slotCount)
-        podMatrix[0] = 0
-        podMatrix[1] = 1
-        podMatrix[2] = 2
-        podMatrix[3] = 3
-        podMatrix[rowSize] = 4
-        podMatrix[rowSize + 1] = 5
-        podMatrix[rowSize + 2] = 6
-        podMatrix[rowSize + 3] = 7
+        podMatrix.insert(0, at: 0)
+        podMatrix.insert(1, at: 1)
+        podMatrix.insert(2, at: 2)
+        podMatrix.insert(3, at: 3)
+        podMatrix.insert(4, at: rowSize)
+        podMatrix.insert(5, at: rowSize + 1)
+        podMatrix.insert(6, at: rowSize + 2)
+        podMatrix.insert(7, at: rowSize + 3)
         
-        print("Input plaintext matrix:")
-        print(podMatrix)
+        print("Input plaintext matrix: \(podMatrix)")
         print()
         
         /*
@@ -61,11 +59,10 @@ class Rotation: XCTestCase {
          the plaintext as usual.
          */
         print()
-        let plainMatrix = ASLPlainText()
+        
         print("Encode and encrypt.")
-        try batchEncoder.encode(withUnsignedValues: podMatrix, destination: plainMatrix)
-        let encryptedMatrix = ASLCipherText()
-        try encryptor.encrypt(with: plainMatrix, cipherText: encryptedMatrix)
+        let plainMatrix = try batchEncoder.encode(withUnsignedValues: podMatrix, destination: ASLPlainText())
+        var encryptedMatrix = try encryptor.encrypt(with: plainMatrix, cipherText: ASLCipherText())
         print("    + Noise budget in fresh encryption: {\(try decryptor.invariantNoiseBudget(encryptedMatrix)))} bits")
         print()
         
@@ -80,38 +77,34 @@ class Rotation: XCTestCase {
          */
         print()
         print("Rotate rows 3 steps left.")
-        try evaluator.rotateRowsInplace(encryptedMatrix, steps: 3, galoisKey: galKeys)
-        let plainResult = ASLPlainText()
+        encryptedMatrix = try evaluator.rotateRowsInplace(encryptedMatrix, steps: 3, galoisKey: galKeys)
         print("    + Noise budget after rotation: {\(try decryptor.invariantNoiseBudget(encryptedMatrix))} bits")
-        print("    + Decrypt and decode ...... Correct.")
-        try decryptor.decrypt(encryptedMatrix, destination: plainResult)
-        let podResult = [NSNumber]()
-        try batchEncoder.decode(with: plainResult, unsignedDestination: podResult)
-        print(podResult)
+        var plainResult = try decryptor.decrypt(encryptedMatrix, destination: ASLPlainText())
+        var podResult = try batchEncoder.decode(with: plainResult, unsignedDestination: [NSNumber]())
+        
+        print("    + Decrypt and decode \(podResult) ...... Correct.")
         
         /*
          We can also rotate the columns, i.e., swap the rows.
          */
         print()
         print("Rotate columns.")
-        try evaluator.rotateColumnsInplace(encryptedMatrix, galoisKey: galKeys)
+        encryptedMatrix = try evaluator.rotateColumnsInplace(encryptedMatrix, galoisKey: galKeys)
+        plainResult = try decryptor.decrypt(encryptedMatrix, destination: plainResult)
+        podResult = try batchEncoder.decode(with: plainResult, unsignedDestination: podResult)
         print("    + Noise budget after rotation: {\(try decryptor.invariantNoiseBudget(encryptedMatrix))} bits")
-        print("    + Decrypt and decode ...... Correct.")
-        try decryptor.decrypt(encryptedMatrix, destination: plainResult)
-        try batchEncoder.decode(with: plainResult, unsignedDestination: podResult)
-        print(podResult)
+        print("    + Decrypt and decode \(podResult) ...... Correct.")
         
         /*
          Finally, we rotate the rows 4 steps to the right, decrypt, decode, and print.
          */
         print()
         print("Rotate rows 4 steps right.")
-        try evaluator.rotateRowsInplace(encryptedMatrix, steps: -4, galoisKey: galKeys)
+        encryptedMatrix = try evaluator.rotateRowsInplace(encryptedMatrix, steps: -4, galoisKey: galKeys)
+        plainResult = try decryptor.decrypt(encryptedMatrix, destination: plainResult)
+        podResult = try batchEncoder.decode(with: plainResult, unsignedDestination: podResult)
         print("    + Noise budget after rotation: {\(try decryptor.invariantNoiseBudget(encryptedMatrix))} bits")
-        print("    + Decrypt and decode ...... Correct.")
-        try decryptor.decrypt(encryptedMatrix, destination: plainResult)
-        try batchEncoder.decode(with: plainResult, unsignedDestination: podResult)
-        print(podResult)
+        print("    + Decrypt and decode \(podResult) ...... Correct.")
         
         /*
          Note that rotations do not consume any noise budget. However, this is only
@@ -138,7 +131,6 @@ class Rotation: XCTestCase {
         let keygen = try ASLKeyGenerator(context: context)
         let publicKey = keygen.publicKey
         let secretKey = keygen.secretKey
-        let relinKeys = try keygen.relinearizationKeys()
         let galKeys = try keygen.galoisKeys()
         let encryptor = try ASLEncryptor(context: context, publicKey: publicKey)
         let evaluator = try ASLEvaluator(context)
@@ -153,9 +145,7 @@ class Rotation: XCTestCase {
         let currPoint: Double = 0
         let stepSize = Double(1.0) / Double(slotCount - 1)
         
-        for i in stride(from: Double(0), to: slotCount, by: stepSize) {
-            input.append(NSNumber(value: currPoint))
-        }
+        stride(from: Double(0), to: slotCount, by: stepSize).forEach({ input.append(NSNumber(value: $0))  })
         
         print("Input vector:")
         print(input[3...7])

@@ -208,9 +208,8 @@ class BFVBasics: XCTestCase {
          We then encrypt the plaintext, producing a ciphertext.
          */
         print()
-        var xEncrypted = ASLCipherText()
+        let xEncrypted = try encryptor.encrypt(with: xPlain, cipherText: ASLCipherText())
         print("Encrypt xPlain to xEncrypted.")
-        try encryptor.encrypt(with: xPlain, cipherText: xEncrypted)
         
         /*
          In Microsoft SEAL, a valid ciphertext consists of two or more polynomials
@@ -230,8 +229,8 @@ class BFVBasics: XCTestCase {
          We decrypt the ciphertext and print the resulting plaintext in order to
          demonstrate correctness of the encryption.
          */
-        let xDecrypted = ASLPlainText()
-        print("    + decryption of encrypted_x: \(try decryptor.decrypt(xEncrypted, destination: xDecrypted)) 0x{\(xDecrypted)} ...... Correct.")
+        let xDecrypted = try decryptor.decrypt(xEncrypted, destination: ASLPlainText())
+        print("    + decryption of encrypted_x: \(xDecrypted) 0x{\(xDecrypted)} ...... Correct.")
         
         /*
          When using Microsoft SEAL, it is typically advantageous to compute in a way
@@ -253,10 +252,9 @@ class BFVBasics: XCTestCase {
          */
         print()
         print("Compute xSqPlusOne (x^2+1).")
-        let xSqPlusOne = ASLCipherText()
-        try evaluator.square(xEncrypted, destination: xSqPlusOne)
+        var xSqPlusOne = try evaluator.square(xEncrypted, destination: ASLCipherText())
         let plainOne = try ASLPlainText(polynomialString: "1")
-        try evaluator.addPlainInplace(xSqPlusOne, plain: plainOne)
+        xSqPlusOne = try evaluator.addPlainInplace(xSqPlusOne, plain: plainOne)
         
         /*
          Encrypted multiplication results in the output ciphertext growing in size.
@@ -272,9 +270,8 @@ class BFVBasics: XCTestCase {
          Even though the size has grown, decryption works as usual as long as noise
          budget has not reached 0.
          */
-        let decryptedResult = ASLPlainText()
+        var decryptedResult = try decryptor.decrypt(xSqPlusOne, destination: ASLPlainText())
         print("    + decryption of xSqPlusOne: ")
-        try decryptor.decrypt(xSqPlusOne, destination: decryptedResult)
         print("0x{\(decryptedResult)} ...... Correct.")
         
         /*
@@ -282,14 +279,12 @@ class BFVBasics: XCTestCase {
          */
         print()
         print("Compute xPlusOneSq ((x+1)^2).")
-        let xPlusOneSq = ASLCipherText()
-        try evaluator.addPlain(xEncrypted, plain: plainOne, destination: xPlusOneSq)
-        try evaluator.squareInplace(xPlusOneSq)
-        print("    + size of xPlusOneSq: {xPlusOneSq.Size}")
-        print("    + noise budget in xPlusOneSq: {0} bits",
-              try decryptor.invariantNoiseBudget(xPlusOneSq))
+        var xPlusOneSq = try evaluator.addPlain(xEncrypted, plain: plainOne, destination: ASLCipherText())
+        xPlusOneSq = try evaluator.squareInplace(xPlusOneSq)
+        print("    + size of xPlusOneSq: {\(xSqPlusOne.size)}")
+        print("    + noise budget in xPlusOneSq: {\(try decryptor.invariantNoiseBudget(xPlusOneSq))} bits")
         print("    + decryption of xPlusOneSq: ")
-        try decryptor.decrypt(xPlusOneSq, destination: decryptedResult)
+        decryptedResult = try decryptor.decrypt(xPlusOneSq, destination: decryptedResult)
         print("0x{\(decryptedResult)} ...... Correct.")
         
         /*
@@ -297,10 +292,9 @@ class BFVBasics: XCTestCase {
          */
         print()
         print("Compute encryptedResult (4(x^2+1)(x+1)^2).")
-        let encryptedResult = ASLCipherText()
         let plainFour = try ASLPlainText(polynomialString: "4")
-        try evaluator.multiplyPlainInplace(xSqPlusOne, plain: plainFour)
-        try evaluator.multiply(xSqPlusOne, encrypted2: xPlusOneSq, destination: encryptedResult)
+        xPlusOneSq = try evaluator.multiplyPlainInplace(xSqPlusOne, plain: plainFour)
+        var encryptedResult = try evaluator.multiply(xSqPlusOne, encrypted2: xPlusOneSq, destination: ASLCipherText())
         print("    + size of encrypted_result: {\(encryptedResult.size)}")
         print("    + noise budget in encrypted_result: {\(try decryptor.invariantNoiseBudget(encryptedResult)))} bits")
         print("NOTE: Decryption can be incorrect if noise budget is zero.")
@@ -343,35 +337,34 @@ class BFVBasics: XCTestCase {
          */
         print()
         print("Compute and relinearize xSquared (x^2) then compute xSqPlusOne (x^2+1)")
-        let xSquared = ASLCipherText()
-        try evaluator.square(xEncrypted, destination: xSquared)
+        var xSquared = try evaluator.square(xEncrypted, destination: ASLCipherText())
         print("    + size of xSquared: {\(xSquared.size)}")
-        try evaluator.relinearizeInplace(xSquared, relinearizationKeys: relinKeys)
+        xSquared = try evaluator.relinearizeInplace(xSquared, relinearizationKeys: relinKeys)
         print("    + size of xSquared (after relinearization): {\(xSquared.size)}")
-        try evaluator.addPlain(xSquared, plain: plainOne, destination: xSqPlusOne)
+        xSqPlusOne = try evaluator.addPlain(xSquared, plain: plainOne, destination: xSqPlusOne)
         print("    + noise budget in xSqPlusOne: {\(try decryptor.invariantNoiseBudget(xSqPlusOne))} bits")
         print("    + decryption of xSqPlusOne: ")
-        try decryptor.decrypt(xSqPlusOne, destination: decryptedResult)
+        decryptedResult = try decryptor.decrypt(xSqPlusOne, destination: decryptedResult)
         print("0x{\(decryptedResult)} ...... Correct.")
         
         print()
-        let xPlusOne = ASLCipherText()
+        
         print("Compute xPlusOne (x+1), 12 then compute and relinearize xPlusOneSq ((x+1)^2).")
-        try evaluator.addPlain(xEncrypted, plain: plainOne, destination: xPlusOne)
-        try evaluator.square(xPlusOne, destination: xPlusOneSq)
+        var xPlusOne = try evaluator.addPlain(xEncrypted, plain: plainOne, destination: ASLCipherText())
+        xPlusOne = try evaluator.square(xPlusOne, destination: xPlusOneSq)
         print("    + size of xPlusOneSq: {\(xPlusOneSq.size)}")
-        try evaluator.relinearizeInplace(xPlusOneSq, relinearizationKeys: relinKeys)
+        xPlusOneSq = try evaluator.relinearizeInplace(xPlusOneSq, relinearizationKeys: relinKeys)
         print("    + noise budget in xPlusOneSq: {\(try decryptor.invariantNoiseBudget(xPlusOneSq))} bits")
         print("    + decryption of xPlusOneSq: ")
-        try decryptor.decrypt(xPlusOneSq, destination: decryptedResult)
+        decryptedResult = try decryptor.decrypt(xPlusOneSq, destination: decryptedResult)
         print("0x{\(decryptedResult)} ...... Correct.")
         
         print()
         print("Compute and relinearize encryptedResult (4(x^2+1)(x+1)^2).")
-        try evaluator.multiplyPlainInplace(xSqPlusOne, plain: plainFour)
-        try evaluator.multiply(xSqPlusOne, encrypted2: xPlusOneSq, destination: encryptedResult)
+        xSqPlusOne = try evaluator.multiplyPlainInplace(xSqPlusOne, plain: plainFour)
+        encryptedResult = try evaluator.multiply(xSqPlusOne, encrypted2: xPlusOneSq, destination: encryptedResult)
         print("    + size of encryptedResult: {\(encryptedResult.size)}")
-        try evaluator.relinearizeInplace(encryptedResult, relinearizationKeys: relinKeys)
+        encryptedResult = try evaluator.relinearizeInplace(encryptedResult, relinearizationKeys: relinKeys)
         print("    + size of encryptedResult (after relinearization): {\(encryptedResult.size)}")
         print("    + noise budget in encryptedResult: {\(try decryptor.invariantNoiseBudget(encryptedResult))} bits")
         
@@ -384,7 +377,7 @@ class BFVBasics: XCTestCase {
          */
         print()
         print("Decrypt encrypted_result (4(x^2+1)(x+1)^2).")
-        try decryptor.decrypt(encryptedResult, destination: decryptedResult)
+        decryptedResult = try decryptor.decrypt(encryptedResult, destination: decryptedResult)
         print("    + decryption of 4(x^2+1)(x+1)^2 = 0x{\(decryptedResult)} ...... Correct.")
         
         /*

@@ -40,6 +40,14 @@
 	return self;
 }
 
+#pragma mark - NSObject
+
+- (NSString *)description
+{
+    NSString * paramsIdString = ASLParametersIdTypeDescription(self.parametersId);
+    return [NSString stringWithFormat:@"Encryption Parameters: %@, params Id: %@, Coefficient Mod PlainModulus: %llu", self.encryptionParameters.description, paramsIdString, self.coefficientModPlainModulus];
+}
+
 #pragma mark - Properties
 
 - (ASLEncryptionParameters *)encryptionParameters {
@@ -89,6 +97,14 @@
 
 - (ASLSealContextData *)nextContextData {
 	return [[ASLSealContextData alloc] initWithSEALContextData:_contextData->prev_context_data()];
+}
+
+- (BOOL)isLastContextData {
+    if (_contextData->next_context_data()) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 - (NSInteger)chainIndex {

@@ -24,6 +24,10 @@ static inline ASLParametersIdType ASLParametersIdTypeMake(unsigned long long a, 
 	};
 }
 
+static inline NSString * ASLParametersIdTypeDescription(ASLParametersIdType value) {
+    return [NSString stringWithFormat:@"%llu, %llu, %llu, %llu", value.block[0], value.block[1], value.block[2], value.block[3]];
+}
+
 static inline uint64_t ASLParametersIdTypeHash(ASLParametersIdType value) {
 	return value.block[0] ^ value.block[1] ^ value.block[2] ^ value.block[3];
 }
