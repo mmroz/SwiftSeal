@@ -94,8 +94,6 @@ class ASLSealContextTests: XCTestCase {
 		let invalidContext  = try!  ASLSealContext(encrytionParameters: createEncryptionParameters(), expandModChain: true, securityLevel: .None, memoryPoolHandle: ASLMemoryPoolHandle(clearOnDestruction: true))
 		
 		XCTAssertFalse(invalidContext.isValidEncrytionParameters)
-		
-		// TODO - test a valid one here
 	}
 	
 	// MARK: - Test Helpers

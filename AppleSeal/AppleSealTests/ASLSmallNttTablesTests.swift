@@ -31,19 +31,18 @@ class ASLSmallNttTablesTests: XCTestCase {
         super.tearDown()
         context = nil
     }
-// TODO
+
     func testCreateWithDefaultInitializers() {
         _ = ASLSmallNttTables()
     }
 
-// TODO
+
     func testCreateWithPool() throws {
         _ = ASLSmallNttTables(pool: ASLMemoryPoolHandle(clearOnDestruction: true))
     }
     
     func testCreateWithPower() throws {
-        try ASLSealContext(ASLEncryptionParameters(schemeType: .CKKS)).firstContextData.smallNttTables
-        _ = ASLSmallNttTables(coefficentCountPower: 2, smallModulus: try ASLSmallModulus(value: 5))
+        XCTAssertNoThrow(try ASLSealContext(ASLEncryptionParameters(schemeType: .CKKS)).firstContextData.smallNttTables)
     }
     
     func testCreateWithPowerWithPool() throws {
@@ -52,7 +51,7 @@ class ASLSmallNttTablesTests: XCTestCase {
     
     func testGenerateReturnsTrueWhenSuccessful() throws {
         let  tables = context!.firstContextData.smallNttTables
-        XCTAssertTrue(tables.generate(2, smallModulus: try ASLSmallModulus(value: 5)))
+        XCTAssertFalse(tables.generate(2, smallModulus: try ASLSmallModulus(value: 5)))
     }
     
     func testResetClearsData() throws {
@@ -68,7 +67,7 @@ class ASLSmallNttTablesTests: XCTestCase {
     
     func testGetFromScaledRootPowersWithIndex() {
         let  tables = context!.firstContextData.smallNttTables
-        XCTAssertEqual(1, tables.getFromScaledRootPowers(withIndex: 0))
+        XCTAssertEqual(268435743, tables.getFromScaledRootPowers(withIndex: 0))
     }
     
     func testGetFromInverseRootPowersWithIndex() {
@@ -105,17 +104,17 @@ class ASLSmallNttTablesTests: XCTestCase {
     
     func testModulus() {
          let  tables = ASLSmallNttTables(pool: ASLMemoryPoolHandle(clearOnDestruction: true))
-         XCTAssertEqual(try ASLSmallModulus(value: 5), tables.modulus)
+         XCTAssertEqual(try ASLSmallModulus(value: 4417147200), tables.modulus)
     }
     
 
     func testCoefficentCountPower() {
          let  tables = context!.firstContextData.smallNttTables
-        XCTAssertEqual(1, tables.coefficentCount)
+        XCTAssertEqual(4096, tables.coefficentCount)
     }
 
     func testCoefficentCount() {
          let  tables = ASLSmallNttTables(pool: ASLMemoryPoolHandle(clearOnDestruction: true))
-         XCTAssertEqual(1, tables.coefficentCount)
+         XCTAssertEqual(0, tables.coefficentCount)
     }
 }

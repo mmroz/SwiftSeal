@@ -153,7 +153,7 @@
        }
 }
 
-- (ASLBigUInt *)decodeBigUInWithPlain:(ASLPlainText *)plain
+- (ASLBigUInt *)decodeBigUIntWithPlain:(ASLPlainText *)plain
                                 error:(NSError **)error {
     NSParameterAssert(plain != nil);
     seal::Plaintext sealPlainText = plain.sealPlainText;

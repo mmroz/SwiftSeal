@@ -62,7 +62,7 @@ class Rotation: XCTestCase {
         
         print("Encode and encrypt.")
         let plainMatrix = try batchEncoder.encode(withUnsignedValues: podMatrix, destination: ASLPlainText())
-        var encryptedMatrix = try encryptor.encrypt(with: plainMatrix, cipherText: ASLCipherText())
+        var encryptedMatrix = try encryptor.encrypt(with: plainMatrix, destination: ASLCipherText())
         print("    + Noise budget in fresh encryption: {\(try decryptor.invariantNoiseBudget(encryptedMatrix)))} bits")
         print()
         
@@ -157,7 +157,7 @@ class Rotation: XCTestCase {
         let plain = ASLPlainText()
         try ckksEncoder.encode(withDoubleValues: input, scale: scale, destination: plain)
         let encrypted = ASLCipherText()
-        try encryptor.encrypt(with: plain, cipherText: encrypted)
+        try encryptor.encrypt(with: plain, destination: encrypted)
         
         let rotated = ASLCipherText()
         print()

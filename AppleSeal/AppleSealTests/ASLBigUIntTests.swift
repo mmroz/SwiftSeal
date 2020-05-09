@@ -95,17 +95,9 @@ class ASLBigUIntTests: XCTestCase {
         XCTAssertEqual(bigInt.bitCount, 1)
     }
     
-    func testData() {
-        
-        // TODO
-        //		var bytes: [UInt64] = [39, 77, 111, 111, 102, 33, 39, 0]
-        //		let uint64Pointer = UnsafeMutablePointer<UInt64>.allocate(capacity: 8)
-        //		uint64Pointer.initialize(from: &bytes, count: 8)
-        //
-        //		let bigInt = try! ASLBigUInt(bitCount: 1, scalarValues: uint64Pointer)
-        //
-        //		memcmp(bigInt.data, uint64Pointer, 8*8)
-        //		XCTAssertEqual(bigInt.data, uint64Pointer)
+    func testData() throws {
+        let bigUInt = try ASLBigUInt(bitCount: 4, scalarValue: 4)
+        XCTAssertEqual(bigUInt.data, NSNumber(4))
     }
     
     func testByteCount() {

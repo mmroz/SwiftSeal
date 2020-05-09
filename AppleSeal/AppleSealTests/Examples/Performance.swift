@@ -176,7 +176,7 @@ class Performance: XCTestCase {
              */
             let encrypted = try ASLCipherText(context: context)
             try timedEvent {
-                try encryptor.encrypt(with: plain, cipherText: encrypted)
+                try encryptor.encrypt(with: plain, destination: encrypted)
             }
             
             /*
@@ -194,9 +194,9 @@ class Performance: XCTestCase {
              We create two ciphertexts and perform a few additions with them.
              */
             let encrypted1 = try ASLCipherText(context: context)
-            try encryptor.encrypt(with:  encoder.encodeInt32Value(Int32(i)), cipherText: encrypted1)
+            try encryptor.encrypt(with:  encoder.encodeInt32Value(Int32(i)), destination: encrypted1)
             let encrypted2 = try ASLCipherText(context: context)
-            try encryptor.encrypt(with: encoder.encodeInt32Value(Int32(i) + 1), cipherText: encrypted2)
+            try encryptor.encrypt(with: encoder.encodeInt32Value(Int32(i) + 1), destination: encrypted2)
             
             try timedEvent {
                 try evaluator.addInplace(encrypted1, encrypted2: encrypted1)
@@ -376,7 +376,7 @@ class Performance: XCTestCase {
              */
             let encrypted = try ASLCipherText(context: context)
             try timedEvent {
-                try encryptor.encrypt(with: plain, cipherText: encrypted)
+                try encryptor.encrypt(with: plain, destination: encrypted)
             }
             
             /*
@@ -392,10 +392,10 @@ class Performance: XCTestCase {
              */
             let encrypted1 = try ASLCipherText(context: context)
             try ckksEncoder.encode(withLongValue: NSDecimalNumber(integerLiteral: i + 1), destination: plain)
-            try encryptor.encrypt(with: plain, cipherText: encrypted1)
+            try encryptor.encrypt(with: plain, destination: encrypted1)
             let encrypted2 = try ASLCipherText(context: context)
             try ckksEncoder.encode(withLongValue: NSDecimalNumber(integerLiteral: i + 1), destination: plain2)
-            try encryptor.encrypt(with: plain2, cipherText: encrypted2)
+            try encryptor.encrypt(with: plain2, destination: encrypted2)
             try timedEvent {
                 try evaluator.addInplace(encrypted1, encrypted2: encrypted2)
                 try evaluator.addInplace(encrypted2, encrypted2: encrypted2)

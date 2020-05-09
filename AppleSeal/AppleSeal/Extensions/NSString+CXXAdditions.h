@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)ASL_stringWithStdString:(std::string const &)input;
 
++ (instancetype)ASL_stringWithBool:(BOOL const &)input;
+
 - (std::string)stdString;
 
 @end

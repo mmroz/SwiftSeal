@@ -181,7 +181,7 @@ class Levels: XCTestCase {
          */
         var plain = try ASLPlainText(polynomialString: "1x^3 + 2x^2 + 3x^1 + 4")
         
-        var encrypted = try encryptor.encrypt(with: plain, cipherText: ASLCipherText())
+        var encrypted = try encryptor.encrypt(with: plain, destination: ASLCipherText())
         print("    + plain:      {\(plain.parametersId)} (not set in BFV)")
         print("    + encrypted:  {\(encrypted.parametersId)}")
         print()
@@ -243,7 +243,7 @@ class Levels: XCTestCase {
         print("Computation is more efficient with modulus switching.")
         print()
         print("Compute the eight power.")
-        encrypted = try encryptor.encrypt(with: plain, cipherText: encrypted)
+        encrypted = try encryptor.encrypt(with: plain, destination: encrypted)
         print("    + Noise budget fresh:                  {\(try decryptor.invariantNoiseBudget(encrypted))} bits")
         encrypted = try evaluator.squareInplace(encrypted)
         encrypted = try evaluator.relinearizeInplace(encrypted, relinearizationKeys: relinKeys)

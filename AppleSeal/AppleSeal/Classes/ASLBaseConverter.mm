@@ -43,9 +43,10 @@
 - (void)dealloc {
     if (_freeWhenDone) {
         delete _baseConverter;
+        _baseConverter = nullptr;
     }
 
-    _baseConverter = nullptr;
+    
 }
 
 #pragma mark - Properties - Internal

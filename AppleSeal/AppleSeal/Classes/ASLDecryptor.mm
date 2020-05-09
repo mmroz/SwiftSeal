@@ -62,7 +62,7 @@
 - (ASLPlainText *)decrypt:(ASLCipherText *)encrypted
     destination:(ASLPlainText *)destination
           error:(NSError **)error {
-    auto sealPlainText = destination.sealPlainText;
+    seal::Plaintext sealPlainText = destination.sealPlainText;
     try {
         _decryptor->decrypt(encrypted.sealCipherText, sealPlainText);
         return [[ASLPlainText alloc] initWithPlainText:sealPlainText];

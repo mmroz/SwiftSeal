@@ -133,7 +133,6 @@ class BFVBasics: XCTestCase {
          */
         print()
         print("Set encryption parameters and print")
-        // TODO - add custom string convertable here
         print(context)
         
         print()
@@ -208,7 +207,7 @@ class BFVBasics: XCTestCase {
          We then encrypt the plaintext, producing a ciphertext.
          */
         print()
-        let xEncrypted = try encryptor.encrypt(with: xPlain, cipherText: ASLCipherText())
+        let xEncrypted = try encryptor.encrypt(with: xPlain, destination: ASLCipherText())
         print("Encrypt xPlain to xEncrypted.")
         
         /*

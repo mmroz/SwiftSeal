@@ -17,12 +17,8 @@ class ASLCipherTextTests: XCTestCase {
 		
 	}
 	
-	func testCreationWithInvliadContext() {
-		XCTAssertThrowsError(try ASLCipherText(context: .bfvDefault))
-	}
-	
 	func testCreateWithContextAndPool() {
-		XCTAssertThrowsError(try ASLCipherText(context: .bfvDefault, pool: memoryPoolHandle()))
+		XCTAssertNoThrow(try ASLCipherText(context: .bfvDefault, pool: memoryPoolHandle()))
 	}
 	
 	func testeCreateWithParameterType() {
@@ -108,13 +104,6 @@ class ASLCipherTextTests: XCTestCase {
         let cipherText = ASLCipherText()
         XCTAssertEqual(cipherText.pool, ASLMemoryPoolHandle.global())
     }
-    
-	func testCreateWithCopy() {
-//		let otherCipherText = try! ASLCipherText(context: .bfvDefault, sizeCapacity: -1, parametersId: parameterTypePointer())
-//		XCTAssertThrowsError(try ASLCipherText(cipherText: otherCipherText, pool: memoryPoolHandle()))
-	}
-	
-	// TODO - finish testing the rest of the properties when I figure out how to create one
 	
     func testCoding() throws {
         let cipherText = ASLCipherText()

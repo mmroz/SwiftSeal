@@ -120,7 +120,7 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASLSealErrorCodeInvalidParameter if pool is uninitialized
  */
 
-- (BOOL)encodeWithPlainText:(ASLPlainText*)plainText
+- (ASLPlainText * _Nullable)encodeWithPlainText:(ASLPlainText*)plainText
                       error:(NSError **)error;
 
 /*!
@@ -140,7 +140,7 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASLSealErrorCodeInvalidParameter if plain is in NTT form
  @throws ASLSealErrorCodeInvalidParameter if pool is uninitialized
  */
-- (BOOL)encodeWithPlainText:(ASLPlainText*)plainText
+- (ASLPlainText * _Nullable)encodeWithPlainText:(ASLPlainText*)plainText
                        pool:(ASLMemoryPoolHandle *)pool
                       error:(NSError **)error;
 
@@ -177,7 +177,7 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASLSealErrorCodeInvalidParameter if plain is in NTT form
  @throws ASLSealErrorCodeInvalidParameter if pool is uninitialized
  */
-- (NSArray<NSNumber *> *)decodeWithPlainText:(ASLPlainText*)plainText
+- (NSArray<NSNumber *> * _Nullable)decodeWithPlainText:(ASLPlainText*)plainText
           signedDestination:(NSArray<NSNumber *>*)signedDestination
                       error:(NSError **)error;
 
@@ -195,7 +195,7 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASLSealErrorCodeInvalidParameter if plain is in NTT form
  @throws ASLSealErrorCodeInvalidParameter if pool is uninitialized
  */
-- (BOOL)decodeWithPlainText:(ASLPlainText*)plainText
+- (ASLPlainText* _Nullable)decodeWithPlainText:(ASLPlainText*)plainText
                       error:(NSError **)error;
 
 /*!
@@ -212,7 +212,7 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASLSealErrorCodeInvalidParameter if plain is in NTT form
  @throws ASLSealErrorCodeInvalidParameter if pool is uninitialized
  */
-- (BOOL)decodeWithPlainText:(ASLPlainText*)plainText
+- (ASLPlainText* _Nullable)decodeWithPlainText:(ASLPlainText*)plainText
                        pool:(ASLMemoryPoolHandle *)pool
                       error:(NSError **)error;
 @end

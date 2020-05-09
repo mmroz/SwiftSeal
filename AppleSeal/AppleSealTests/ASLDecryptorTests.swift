@@ -11,19 +11,36 @@ import XCTest
 
 class ASLDecryptorTests: XCTestCase {
     
-    // MARK: - Tests
+    var decryptor: ASLDecryptor! = nil
+    var encryptor: ASLEncryptor! = nil
     
-    func testCreateWithDefaultParameters() {
-        let _ = ASLDecryptor()
-    }
-    
-    func testCreateWithContextAndSecreyKey() throws {
-        let params = ASLEncryptionParameters(schemeType: .BFV)
-        try params.setPolynomialModulusDegree(8192)
-        let context = try ASLSealContext(encrytionParameters: params, expandModChain: true, securityLevel: .None, memoryPoolHandle: ASLMemoryPoolHandle(clearOnDestruction: true))
+    override func setUp() {
+        super.setUp()
+        let parms = ASLEncryptionParameters(schemeType: .BFV)
+        let polyModulusDegree = 4096
+        try! parms.setPolynomialModulusDegree(polyModulusDegree)
         
-        XCTAssertNoThrow(_ = try ASLDecryptor(context: context, secretKey: ASLSecretKey()))
+        try! parms.setCoefficientModulus(ASLCoefficientModulus.bfvDefault(polyModulusDegree))
+        
+        try! parms.setPlainModulus(ASLSmallModulus(value: 1024))
+     
+        let context = try! ASLSealContext(parms)
+        
+        let keygen = try! ASLKeyGenerator(context: context)
+        let publicKey = keygen.publicKey
+        let secretKey = keygen.secretKey
+        
+        decryptor = try! ASLDecryptor(context: context, secretKey: secretKey)
+        encryptor = try! ASLEncryptor(context: context, publicKey: publicKey)
+        
     }
+    
+    override func tearDown() {
+        super.tearDown()
+        decryptor = nil
+    }
+    
+    // MARK: - Tests
     
     func testCreateWithInvalidContext() throws {
         let params = ASLEncryptionParameters(schemeType: .CKKS)
@@ -34,14 +51,12 @@ class ASLDecryptorTests: XCTestCase {
     }
     
     func testInvariantNoiseBudget() throws {
-        let params = ASLEncryptionParameters(schemeType: .BFV)
-        try params.setPolynomialModulusDegree(8192)
-        let context = try ASLSealContext(encrytionParameters: params, expandModChain: true, securityLevel: .None, memoryPoolHandle: ASLMemoryPoolHandle(clearOnDestruction: true))
-    
-        let decryptor = try ASLDecryptor(context: context, secretKey: ASLSecretKey())
-        let invariantNoiseBudget = try decryptor.invariantNoiseBudget(ASLCipherText(context: context))
+        let xPlain = try ASLPlainText(polynomialString: "\(1)")
+        let xEncrypted = try encryptor.encrypt(with: xPlain, destination: ASLCipherText())
+        
+        let invariantNoiseBudget = try decryptor.invariantNoiseBudget(xEncrypted)
         
         XCTAssertNotNil(invariantNoiseBudget)
-        XCTAssertEqual(invariantNoiseBudget, 1)
+        XCTAssertEqual(invariantNoiseBudget, 55)
     }
 }

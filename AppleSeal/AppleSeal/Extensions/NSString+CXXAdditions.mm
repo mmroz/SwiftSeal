@@ -14,6 +14,10 @@
 	return [NSString stringWithUTF8String:input.c_str()];
 }
 
++ (instancetype)ASL_stringWithBool:(const BOOL &)input {
+    return [NSString stringWithString: input ? @"YES" : @"NO"];
+}
+
 - (std::string)stdString {
 	return std::string(self.UTF8String);
 }

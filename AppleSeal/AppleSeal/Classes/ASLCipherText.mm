@@ -252,6 +252,13 @@
     return [self isEqualToCipherText:(ASLCipherText *)object];
 }
 
+- (NSString *)description
+{
+    auto const parameters = _cipherText.parms_id();
+    ASLParametersIdType params = ASLParametersIdTypeMake(parameters[0], parameters[1], parameters[2], parameters[3]);
+    return [NSString stringWithFormat:@"Scale: %f, Size: %lu, Capacity: %lu, Param Ids: %@, Is NTT: %@, Is Transparent: %@", _cipherText.scale(), _cipherText.size(), _cipherText.size_capacity(), ASLParametersIdTypeDescription(params), [NSString ASL_stringWithBool:_cipherText.is_ntt_form()], [NSString ASL_stringWithBool:_cipherText.is_ntt_form()]];
+}
+
 #pragma mark - Properies
 
 // TODO

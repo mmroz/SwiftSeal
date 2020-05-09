@@ -11,176 +11,83 @@ import XCTest
 
 class ASLEncryptorTests: XCTestCase {
     
-    func testCreateWithPublicKey() throws {
-        XCTAssertNoThrow(_ = try ASLEncryptor(context: createValidContext(), publicKey: ASLPublicKey()))
+    var encryptor: ASLEncryptor!
+    
+    override func setUp() {
+        super.setUp()
+        encryptor = createEncryptor()
     }
     
-    func testCreateWithSecretKey() throws {
-        XCTAssertNoThrow(_ = try ASLEncryptor(context: createValidContext(), secretKey: ASLSecretKey()))
+    override func tearDown() {
+        encryptor = nil
     }
     
-    func testCreateWithPublicAndSecretKey() throws {
-        XCTAssertNoThrow(_ = try ASLEncryptor(context: createValidContext(), publicKey: ASLPublicKey(), secretKey: ASLSecretKey()))
+    func testEncryptWithPlainText() throws {
+        let plainText = try ASLPlainText(coefficientCount: 2)
+        XCTAssertNoThrow(try encryptor.encrypt(with: plainText, destination: ASLCipherText()))
     }
     
-    func testEncryptWithPlainTextAndCipherText() throws {
-        let encryptor = try ASLEncryptor(context: createValidContext(), publicKey: ASLPublicKey(), secretKey: ASLSecretKey())
-        
-        let plainText = ASLPlainText()
-        let cipherText = ASLCipherText()
-        
-        XCTAssertNoThrow(try encryptor.encrypt(with: plainText, cipherText: cipherText))
+    func testEncryptWithPlainTextAndPool() throws {
+        let plainText = try ASLPlainText(coefficientCount: 2)
+        XCTAssertNoThrow(try encryptor.encrypt(with: plainText, destination: ASLCipherText(), pool: ASLMemoryPoolHandle.global()))
     }
     
-    func testEncryptWithPlainTextAndCipherTextAndPool() throws {
-        let encryptor = try ASLEncryptor(context: createValidContext(), publicKey: ASLPublicKey(), secretKey: ASLSecretKey())
-        
-        let plainText = ASLPlainText()
-        let cipherText = ASLCipherText()
-        let pool = ASLMemoryPoolHandle(clearOnDestruction: true)
-        
-        XCTAssertNoThrow(try encryptor.encrypt(with: plainText, cipherText: cipherText, pool: pool))
+    func testEncryptZeroWithCipherText() throws {
+        let encryptedText = try ASLCipherText(context: createValidContext())
+        XCTAssertNoThrow(try encryptor.encryptZero(with: encryptedText))
     }
     
-    func testEncryptZero() throws {
-        let encryptor = try ASLEncryptor(context: createValidContext(), publicKey: ASLPublicKey(), secretKey: ASLSecretKey())
-        
-        let cipherText = ASLCipherText()
-        
-        XCTAssertNoThrow(try encryptor.encryptZero(with: cipherText))
+    func testEncryptZeroWithCipherTextAndPool() throws {
+        let encryptedText = try ASLCipherText(context: createValidContext())
+        XCTAssertNoThrow(try encryptor.encryptZero(with: encryptedText, pool: ASLMemoryPoolHandle.global()))
     }
     
-    func testEncryptZeroWithPool() throws {
-        let encryptor = try ASLEncryptor(context: createValidContext(), publicKey: ASLPublicKey(), secretKey: ASLSecretKey())
-        
-        let cipherText = ASLCipherText()
-        let pool = ASLMemoryPoolHandle(clearOnDestruction: true)
-        
-        XCTAssertNoThrow(try encryptor.encryptZero(with: cipherText, pool: pool))
+    func testEncryptZeroWithParametersId() throws {
+        let encryptedText = try ASLCipherText(context: createValidContext())
+        XCTAssertNoThrow(try encryptor.encryptZero(with: ASLParametersIdType(block: (4, 4, 4, 4)), cipherText: encryptedText))
     }
     
-    func testEncryptZeroWithParams() throws {
-        let encryptor = try ASLEncryptor(context: createValidContext(), publicKey: ASLPublicKey(), secretKey: ASLSecretKey())
-        
-        let cipherText = ASLCipherText()
-        
-        XCTAssertNoThrow(try  encryptor.encryptZero(with: ASLParametersIdType(block: (4,4,4,4)), cipherText: cipherText))
+    func testEncryptZeroWithParametersIdWithPool() throws {
+        let encryptedText = try ASLCipherText(context: createValidContext())
+        XCTAssertNoThrow(try encryptor.encryptZeroSymmetric(with: encryptedText, pool: .global()))
     }
     
-    func testEncryptZeroWithParamsWithPool() throws {
-        let encryptor = try ASLEncryptor(context: createValidContext(), publicKey: ASLPublicKey(), secretKey: ASLSecretKey())
-        
-        let cipherText = ASLCipherText()
-        let pool = ASLMemoryPoolHandle(clearOnDestruction: true)
-        
-        XCTAssertNoThrow(try  encryptor.encryptZero(with: ASLParametersIdType(block: (4,4,4,4)), cipherText: cipherText, pool: pool))
+    func testEncryptZeroSymmetricWithParametersId() throws {
+        XCTAssertNoThrow(try encryptor.encryptZeroSymmetric(withPool: ASLParametersIdType(block: (4, 4, 4, 4)), destination: ASLCipherText(), pool: .global()))
     }
     
-    func testEncryptSymmetric() throws {
-        let encryptor = try ASLEncryptor(context: createValidContext(), publicKey: ASLPublicKey(), secretKey: ASLSecretKey())
-        
-        let cipherText = ASLCipherText()
-        let plainText = ASLPlainText()
-        
-        XCTAssertNoThrow(try encryptor.encryptSymmetric(with: plainText, cipherText: cipherText))
+    func testSetPublicKey() {
+        XCTAssertNoThrow(try encryptor.setPublicKey(ASLPublicKey()))
     }
     
-    func testEncryptSymmetricWithPool() throws {
-        let encryptor = try ASLEncryptor(context: createValidContext(), publicKey: ASLPublicKey(), secretKey: ASLSecretKey())
-        
-        let cipherText = ASLCipherText()
-        let plainText = ASLPlainText()
-        let pool = ASLMemoryPoolHandle(clearOnDestruction: true)
-        
-        XCTAssertNoThrow(try encryptor.encryptSymmetric(with: plainText, cipherText: cipherText, pool: pool))
+    func testSetSecretKey() {
+        XCTAssertNoThrow(try encryptor.setSecretKey(ASLSecretKey()))
     }
     
-    func testEncryptZeroSymmetric() throws {
-        let encryptor = try ASLEncryptor(context: createValidContext(), publicKey: ASLPublicKey(), secretKey: ASLSecretKey())
-        
-        let cipherText = ASLCipherText()
-        
-        XCTAssertNoThrow(try encryptor.encryptZeroSymmetric(with: cipherText))
+    func testEncryptSymmetricSaveWithPlainText() throws {
+       let data = try encryptor.encryptSymmetricSave(with: ASLPlainText())
+       XCTAssertNoThrow(try ASLPlainText(data: data, context: createValidContext()))
     }
     
-    func testEncryptZeroSymmetricWithPool() throws {
-        let encryptor = try ASLEncryptor(context: createValidContext(), publicKey: ASLPublicKey(), secretKey: ASLSecretKey())
-        
-        let cipherText = ASLCipherText()
-        let pool = ASLMemoryPoolHandle(clearOnDestruction: true)
-        
-        XCTAssertNoThrow(try encryptor.encryptZeroSymmetric(with: cipherText, pool: pool))
+    func testEncryptZeroSymmetricSaveWithParamsId() throws {
+        let data = try encryptor.encryptZeroSymmetricSave(withParamsId: ASLParametersIdType(block: (4, 4, 4, 4)))
+       try ASLPlainText(data: data, context: createValidContext())
     }
     
-    func testEncryptZeroSymmetricWithParams() throws {
-        let encryptor = try ASLEncryptor(context: createValidContext(), publicKey: ASLPublicKey(), secretKey: ASLSecretKey())
-        
-        let cipherText = ASLCipherText()
-        let params = ASLParametersIdType(block: (4,4,4,4))
-        
-        
-        XCTAssertNoThrow(try encryptor.encryptZeroSymmetric(with: params, destination: cipherText))
+    private func createValidContext() -> ASLSealContext {
+        let parms = ASLEncryptionParameters(schemeType: .BFV)
+        let polyModulusDegree = 4096
+        try! parms.setPolynomialModulusDegree(polyModulusDegree)
+        try! parms.setCoefficientModulus(ASLCoefficientModulus.bfvDefault(polyModulusDegree))
+        try! parms.setPlainModulus(ASLSmallModulus(value: 1024))
+        return try! ASLSealContext(parms)
     }
     
-    func testEncryptZeroSymmetricWithParamsWithPool() throws {
-        let encryptor = try ASLEncryptor(context: createValidContext(), publicKey: ASLPublicKey(), secretKey: ASLSecretKey())
-        
-        let cipherText = ASLCipherText()
-        let params = ASLParametersIdType(block: (4,4,4,4))
-        let pool = ASLMemoryPoolHandle(clearOnDestruction: true)
-        
-        XCTAssertNoThrow(try encryptor.encryptZeroSymmetric(with: params, destination: cipherText, pool: pool))
-    }
-    
-    func testSetPublicKey() throws {
-        let encryptor = try ASLEncryptor(context: createValidContext(), publicKey: ASLPublicKey(), secretKey: ASLSecretKey())
-        
-        let publicKey = ASLPublicKey()
-        
-        XCTAssertNoThrow(try encryptor.setPublicKey(publicKey))
-    }
-    
-    func testSetSecretKey() throws {
-        let encryptor = try ASLEncryptor(context: createValidContext(), publicKey: ASLPublicKey(), secretKey: ASLSecretKey())
-        
-        let secretKey = ASLSecretKey()
-        
-        XCTAssertNoThrow(try encryptor.setSecretKey(secretKey))
-    }
-    
-    func testSymmetricSave() throws {
-        let encryptor = try ASLEncryptor(context: createValidContext(), publicKey: ASLPublicKey(), secretKey: ASLSecretKey())
-        let plainText = ASLPlainText()
-        let data = try encryptor.encryptSymmetricSave(with: plainText)
-        let decodedPlainText = try ASLPlainText(data: data, context: createValidContext())
-        XCTAssertEqual(decodedPlainText, plainText)
-    }
-    
-    func testEncryptSymmetricSave() throws {
-        let encryptor = try ASLEncryptor(context: createValidContext(), publicKey: ASLPublicKey(), secretKey: ASLSecretKey())
-        
-        let plainText = ASLPlainText()
-        let data = try encryptor.encryptSymmetricSave(with: plainText)
-        
-        let decodedPlainText = try ASLPlainText(data: data, context: createValidContext())
-        
-        XCTAssertEqual(plainText, decodedPlainText)
-    }
-    
-    func testEncryptZeroSymmetricSave() throws {
-        let encryptor = try ASLEncryptor(context: createValidContext(), publicKey: ASLPublicKey(), secretKey: ASLSecretKey())
-        
-        let plainText = ASLPlainText()
-        let data = try encryptor.encryptZeroSymmetricSave(withParamsId: ASLParametersIdType(block: (2,2,2,2)))
-        
-        let decodedPlainText = try ASLPlainText(data: data, context: createValidContext())
-        
-        XCTAssertEqual(plainText, decodedPlainText)
-    }
-    
-    private func createValidContext() throws -> ASLSealContext {
-        let params = ASLEncryptionParameters(schemeType: .BFV)
-        try params.setPolynomialModulusDegree(8192)
-        return try ASLSealContext(encrytionParameters: params, expandModChain: true, securityLevel: .TC128, memoryPoolHandle: ASLMemoryPoolHandle(clearOnDestruction: true))
+    private func createEncryptor() -> ASLEncryptor {
+        let context = createValidContext()
+        let keygen = try! ASLKeyGenerator(context: context)
+        let publicKey = keygen.publicKey
+        let secretKey = keygen.secretKey
+        return try! ASLEncryptor(context: context, publicKey: publicKey)
     }
 }

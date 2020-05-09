@@ -180,8 +180,10 @@
     return _bigUInt.bit_count();
 }
 
-- (uint64_t *)data {
-    return _bigUInt.data();
+- (NSNumber *)data {
+    std::uint64_t data = *_bigUInt.data();
+    NSNumber * number = [[NSNumber alloc] initWithFloat:data];
+    return number;
 }
 
 - (size_t)byteCount {

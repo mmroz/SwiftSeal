@@ -111,40 +111,39 @@
     return nil;
 }
 
-- (BOOL)encodeWithPlainText:(ASLPlainText*)plainText
+- (ASLPlainText *)encodeWithPlainText:(ASLPlainText*)plainText
                       error:(NSError **)error {
     NSParameterAssert(plainText != nil);
-    
-    auto sealPlainText = plainText.sealPlainText;
+    seal::Plaintext sealPlainText = plainText.sealPlainText;
     try {
         _batchEncoder->encode(sealPlainText);
-        return YES;
+        return [[ASLPlainText alloc]initWithPlainText:sealPlainText];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     }
-    return NO;
+    return nil;
 }
 
-- (BOOL)encodeWithPlainText:(ASLPlainText*)plainText
+- (ASLPlainText *)encodeWithPlainText:(ASLPlainText*)plainText
                        pool:(ASLMemoryPoolHandle *)pool
                       error:(NSError **)error {
     NSParameterAssert(plainText != nil);
     NSParameterAssert(pool != nil);
     
-    auto sealPlainText = plainText.sealPlainText;
+    seal::Plaintext sealPlainText = plainText.sealPlainText;
     try {
         _batchEncoder->encode(sealPlainText, pool.memoryPoolHandle);
-        return YES;
+        return [[ASLPlainText alloc]initWithPlainText:sealPlainText];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     }
-    return NO;
+    return nil;
 }
 
 - (NSArray<NSNumber *> *)decodeWithPlainText:(ASLPlainText*)plainText
@@ -206,7 +205,7 @@
 }
 
 
-- (BOOL)decodeWithPlainText:(ASLPlainText*)plainText
+- (ASLPlainText*)decodeWithPlainText:(ASLPlainText*)plainText
                       error:(NSError **)error {
     NSParameterAssert(plainText != nil);
     
@@ -214,17 +213,17 @@
     
     try {
         _batchEncoder->decode(sealPlainText);
-        return YES;
+        return [[ASLPlainText alloc]initWithPlainText:sealPlainText];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     }
-    return NO;
+    return nil;
 }
 
-- (BOOL)decodeWithPlainText:(ASLPlainText*)plainText
+- (ASLPlainText*)decodeWithPlainText:(ASLPlainText*)plainText
                        pool:(ASLMemoryPoolHandle *)pool
                       error:(NSError **)error {
     NSParameterAssert(plainText != nil);
@@ -234,14 +233,14 @@
     
     try {
         _batchEncoder->decode(sealPlainText, pool.memoryPoolHandle);
-        return YES;
+        return [[ASLPlainText alloc]initWithPlainText:sealPlainText];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     }
-    return NO;
+    return nil;
 }
 
 @end

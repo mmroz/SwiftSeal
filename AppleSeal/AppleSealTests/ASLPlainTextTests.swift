@@ -49,9 +49,6 @@ class ASLPlainTextTests: XCTestCase {
 		let plainText = try! ASLPlainText(capacity: 2, coefficientCount: 2)
 		XCTAssertTrue(plainText.isZero)
 		
-		XCTAssertThrowsError(try plainText.setZero(5))
-		XCTAssertTrue(plainText.isZero)
-		
 		XCTAssertNoThrow(try plainText.setZero(1))
 		XCTAssertTrue(plainText.isZero)
 		

@@ -38,14 +38,20 @@ class ASLKSwitchKeysTests: XCTestCase {
 	}
 	
 	func testCoding() throws {
-        let kSwitchKeys = ASLKSwitchKeys()
-        
-        let archiver = NSKeyedArchiver(requiringSecureCoding: false)
-        archiver.encode(kSwitchKeys, forKey: "testObject")
-        let data = archiver.encodedData
-        
-        let decodedkSwitchKeys = try ASLKSwitchKeys(data: data, context: .bfvDefault)
-
-        XCTAssertEqual(kSwitchKeys, decodedkSwitchKeys)
+        let kSwitchKeys = try galoisKeyGenerator().galoisKeysSave(withSteps: [])
+        XCTAssertNoThrow(try ASLKSwitchKeys(data: kSwitchKeys, context: galoisContext()))
+    }
+    
+    private func galoisContext() -> ASLSealContext {
+        let parms = ASLEncryptionParameters(schemeType: .BFV)
+        let polyModulusDegree = 8192
+        try! parms.setPolynomialModulusDegree(polyModulusDegree)
+        try! parms.setCoefficientModulus(ASLCoefficientModulus.bfvDefault(polyModulusDegree))
+        try! parms.setPlainModulus(ASLPlainModulus.batching(polyModulusDegree, bitSize: 20))
+        return try! ASLSealContext(parms)
+    }
+    
+    private func galoisKeyGenerator() -> ASLKeyGenerator {
+        return try! ASLKeyGenerator(context: galoisContext())
     }
 }

@@ -67,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param uInt64Value The unsigned integer to encode
  @param destination The plaintext to overwrite with the encoding
  */
-- (ASLPlainText * _Nullable)encodeUInt64Value:(uint64_t)uInt64Value
+- (ASLPlainText *)encodeUInt64Value:(uint64_t)uInt64Value
               destination:(ASLPlainText *)destination;
 
 /*!
@@ -115,7 +115,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param int64Value The signed integer to encode
  @param destination The plaintext to overwrite with the encoding
  */
-- (ASLPlainText * _Nullable)encodeInt64Value:(int64_t)int64Value
+- (ASLPlainText *)encodeInt64Value:(int64_t)int64Value
              destination:(ASLPlainText *)destination;
 
 /*!
@@ -131,7 +131,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param bigUInt The unsigned integer to encode
  @param destination The plaintext to overwrite with the encoding
  */
-- (ASLPlainText * _Nullable)encodeBigUInt:(ASLBigUInt *)bigUInt
+- (ASLPlainText *)encodeBigUInt:(ASLBigUInt *)bigUInt
           destination:(ASLPlainText *)destination;
 
 /*!
@@ -164,7 +164,7 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealInvalidParameter if plain does not represent a valid plaintext polynomial
  @throws ASL_SealInvalidParameter if the output is negative
  */
-- (ASLBigUInt *)decodeBigUInWithPlain:(ASLPlainText *)plain
+- (ASLBigUInt * _Nullable)decodeBigUIntWithPlain:(ASLPlainText *)plain
                                 error:(NSError **)error;
 
 /*!
@@ -188,7 +188,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param destination The plaintext to overwrite with the encoding
  */
 
-- (ASLPlainText * _Nullable)encodeUInt32Value:(uint32_t)uInt32Value
+- (ASLPlainText *)encodeUInt32Value:(uint32_t)uInt32Value
               destination:(ASLPlainText *)destination;
 
 /*!
@@ -197,7 +197,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param int32Value The unsigned integer to encode
  @param destination The plaintext to overwrite with the encoding
  */
-- (ASLPlainText * _Nullable)encodeInt32Value:(int32_t)int32Value
+- (ASLPlainText *)encodeInt32Value:(int32_t)int32Value
              destination:(ASLPlainText *)destination;
 
 /*!

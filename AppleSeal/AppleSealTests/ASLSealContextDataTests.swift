@@ -17,7 +17,7 @@ class ASLSealContextDataTests: XCTestCase {
 	
 	func testParametersId() {
 		let data = contextData()
-		XCTAssertEqual(data.parametersId, ASLParametersIdType(block: (6098622831356892554, 15014073027091944544, 2882531263419799060, 6777358453269558412)))
+		XCTAssertEqual(data.parametersId, ASLParametersIdType(block: (18066650271355507441, 12390381042028728861, 2300535169702335606, 8907756561119861190)))
 	}
 	
 	func testTotalCoefficientModulus() {
@@ -28,7 +28,7 @@ class ASLSealContextDataTests: XCTestCase {
 	
 	func testTotalCoefficientModulusBitCount() {
 		let data = contextData()
-		XCTAssertEqual(data.totalCoefficientModulusBitCount, 0)
+		XCTAssertEqual(data.totalCoefficientModulusBitCount, 3)
 	}
 	
 	func testCoefficientDividedPlainModulus() {
@@ -85,7 +85,7 @@ class ASLSealContextDataTests: XCTestCase {
     
     func testBaseConverter() {
         let data = contextData()
-        XCTAssertEqual(data.baseConverter, ASLBaseConverter(pool: ASLMemoryPoolHandle(clearOnDestruction: true)))
+        XCTAssertNoThrow(data.baseConverter)
     }
 	
 	// MARK: - Test Helpers

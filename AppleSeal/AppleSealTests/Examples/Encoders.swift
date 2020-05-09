@@ -98,15 +98,15 @@ class Encoders: XCTestCase {
          */
         print()
         print("Encrypt plain1 to encrypted1 and plain2 to encrypted2.")
-        let encrypted1 = try encryptor.encrypt(with: plain1, cipherText: ASLCipherText())
-        var encrypted2 = try encryptor.encrypt(with: plain2, cipherText: ASLCipherText())
+        let encrypted1 = try encryptor.encrypt(with: plain1, destination: ASLCipherText())
+        var encrypted2 = try encryptor.encrypt(with: plain2, destination: ASLCipherText())
         print("Noise budget in encrypted1: {\(try decryptor.invariantNoiseBudget(encrypted1))} bits")
         print("Noise budget in encrypted2: {\(try decryptor.invariantNoiseBudget(encrypted2))} bits")
         
         /*
          As a simple example, we compute (-encrypted1 + encrypted2) * encrypted2.
          */
-        encrypted2 = try encryptor.encrypt(with: plain2, cipherText: encrypted2)
+        encrypted2 = try encryptor.encrypt(with: plain2, destination: encrypted2)
         print()
         print("Compute encrypted_result = (-encrypted1 + encrypted2) * encrypted2.")
         var encryptedResult = try evaluator.negate(encrypted1, detination: ASLCipherText())
@@ -234,7 +234,7 @@ class Encoders: XCTestCase {
        
         print()
         print("Encrypt plainMatrix to encryptedMatrix.")
-        var encryptedMatrix = try encryptor.encrypt(with: plainMatrix, cipherText: ASLCipherText())
+        var encryptedMatrix = try encryptor.encrypt(with: plainMatrix, destination: ASLCipherText())
         print("    + Noise budget in encryptedMatrix: {\(try decryptor.invariantNoiseBudget(encryptedMatrix))} bits")
         
         /*
@@ -396,7 +396,7 @@ class Encoders: XCTestCase {
          */
         print()
         print("Encrypt input vector, square, and relinearize.")
-        var encrypted = try encryptor.encrypt(with: plain, cipherText: ASLCipherText())
+        var encrypted = try encryptor.encrypt(with: plain, destination: ASLCipherText())
         
         /*
          Basic operations on the ciphertexts are still easy to do. Here we square

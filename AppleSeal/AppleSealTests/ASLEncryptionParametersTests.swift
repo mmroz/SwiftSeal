@@ -92,12 +92,12 @@ class ASLEncryptionParametersTests: XCTestCase {
 		let bfv = ASLEncryptionParameters(schemeType: .BFV)
 		XCTAssertEqual(bfv.coefficientModulus, NSArray())
 		XCTAssertNoThrow(try bfv.setCoefficientModulus([try! ASLSmallModulus(value: 0)]))
-		XCTAssertEqual(bfv.coefficientModulus, NSArray(objects: try! ASLSmallModulus(value: 0), try! ASLSmallModulus(value: 0)))
+		XCTAssertEqual(bfv.coefficientModulus, NSArray(objects: try! ASLSmallModulus(value: 0)))
 		
 		let ckks = ASLEncryptionParameters(schemeType: .CKKS)
 		XCTAssertEqual(ckks.coefficientModulus, NSArray())
 		XCTAssertNoThrow(try ckks.setCoefficientModulus([try! ASLSmallModulus(value: 0)]))
-		XCTAssertEqual(ckks.coefficientModulus, NSArray(objects: try! ASLSmallModulus(value: 0), try! ASLSmallModulus(value: 0)))
+		XCTAssertEqual(ckks.coefficientModulus, NSArray(objects: try! ASLSmallModulus(value: 0)))
 		
 		let none = ASLEncryptionParameters(schemeType: .none)
 		XCTAssertEqual(none.coefficientModulus, NSArray())

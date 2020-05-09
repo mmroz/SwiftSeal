@@ -96,7 +96,7 @@
 #pragma mark - Public Methods
 
 - (ASLCipherText *)encryptWithPlainText:(ASLPlainText *)plainText
-                             cipherText:(ASLCipherText *)cipherText
+                             destination:(ASLCipherText *)cipherText
                                   error:(NSError **)error {
     NSParameterAssert(plainText != nil);
     NSParameterAssert(cipherText != nil);
@@ -120,7 +120,7 @@
 }
 
 - (ASLCipherText *)encryptWithPlainText:(ASLPlainText *)plainText
-                             cipherText:(ASLCipherText *)cipherText
+                             destination:(ASLCipherText *)cipherText
                                    pool:(ASLMemoryPoolHandle *)pool
                                   error:(NSError **)error {
     NSParameterAssert(plainText != nil);
@@ -146,24 +146,24 @@
     return nil;
 }
 
--(BOOL)encryptZeroWithCipherText:(ASLCipherText *)cipherText
+-(ASLCipherText *)encryptZeroWithCipherText:(ASLCipherText *)cipherText
                            error:(NSError **)error {
     NSParameterAssert(cipherText != nil);
     
     seal::Ciphertext sealCipherText = cipherText.sealCipherText;
     try {
         _encryptor->encrypt_zero(sealCipherText);
-        return YES;
+        return [[ASLCipherText alloc]initWithCipherText:sealCipherText];
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
-    return NO;
+    return nil;
 }
 
--(BOOL)encryptZeroWithCipherText:(ASLCipherText *)cipherText
+-(ASLCipherText *)encryptZeroWithCipherText:(ASLCipherText *)cipherText
                             pool:(ASLMemoryPoolHandle *)pool
                            error:(NSError **)error {
     NSParameterAssert(cipherText != nil);
@@ -172,17 +172,17 @@
     seal::Ciphertext sealCipherText = cipherText.sealCipherText;
     try {
         _encryptor->encrypt_zero(sealCipherText, pool.memoryPoolHandle);
-        return YES;
+        return [[ASLCipherText alloc]initWithCipherText:sealCipherText];
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
-    return NO;
+    return nil;
 }
 
--(BOOL)encryptZeroWithParametersId:(ASLParametersIdType)parametersId
+-(ASLCipherText *)encryptZeroWithParametersId:(ASLParametersIdType)parametersId
                         cipherText:(ASLCipherText *)cipherText
                              error:(NSError **)error {
     NSParameterAssert(cipherText != nil);
@@ -195,22 +195,22 @@
     
     try {
         _encryptor->encrypt_zero(sealParametersId, sealCipherText);
-        return YES;
+        return [[ASLCipherText alloc]initWithCipherText:sealCipherText];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
-    return NO;
+    return nil;
 }
 
--(BOOL)encryptZeroWithParametersId:(ASLParametersIdType)parametersId
+-(ASLCipherText *)encryptZeroWithParametersId:(ASLParametersIdType)parametersId
                         cipherText:(ASLCipherText *)cipherText
                               pool:(ASLMemoryPoolHandle *)pool
                              error:(NSError **)error {
@@ -225,22 +225,22 @@
     
     try {
         _encryptor->encrypt_zero(sealParametersId, sealCipherText, pool.memoryPoolHandle);
-        return YES;
+        return [[ASLCipherText alloc]initWithCipherText:sealCipherText];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
-    return NO;
+    return nil;
 }
 
--(BOOL)encryptSymmetricWithPlainText:(ASLPlainText *)plainText
+-(ASLCipherText *)encryptSymmetricWithPlainText:(ASLPlainText *)plainText
                           cipherText:(ASLCipherText *)cipherText
                                error:(NSError **)error {
     NSParameterAssert(plainText != nil);
@@ -250,22 +250,22 @@
     
     try {
         _encryptor->encrypt_symmetric(plainText.sealPlainText, sealCipherText);
-        return YES;
+        return [[ASLCipherText alloc]initWithCipherText:sealCipherText];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
-    return NO;
+    return nil;
 }
 
--(BOOL)encryptSymmetricWithPlainText:(ASLPlainText *)plainText
+-(ASLCipherText *)encryptSymmetricWithPlainText:(ASLPlainText *)plainText
                           cipherText:(ASLCipherText *)cipherText
                                 pool:(ASLMemoryPoolHandle *)pool
                                error:(NSError **)error {
@@ -276,22 +276,22 @@
     
     try {
         _encryptor->encrypt_symmetric(plainText.sealPlainText, sealCipherText, pool.memoryPoolHandle);
-        return YES;
+        return [[ASLCipherText alloc]initWithCipherText:sealCipherText];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
-    return NO;
+    return nil;
 }
 
--(BOOL)encryptZeroSymmetricWithCipherText:(ASLCipherText *)cipherText
+-(ASLCipherText *)encryptZeroSymmetricWithCipherText:(ASLCipherText *)cipherText
                                     error:(NSError **)error {
     NSParameterAssert(cipherText != nil);
     
@@ -299,17 +299,17 @@
     
     try {
         _encryptor->encrypt_zero_symmetric(sealCipherText);
-        return YES;
+        return [[ASLCipherText alloc]initWithCipherText:sealCipherText];
     }  catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
-    return NO;
+    return nil;
 }
 
--(BOOL)encryptZeroSymmetricWithCipherText:(ASLCipherText *)cipherText
+-(ASLCipherText *)encryptZeroSymmetricWithCipherText:(ASLCipherText *)cipherText
                                      pool:(ASLMemoryPoolHandle *)pool
                                     error:(NSError **)error {
     NSParameterAssert(cipherText != nil);
@@ -319,19 +319,19 @@
     
     try {
         _encryptor->encrypt_zero_symmetric(sealCipherText, pool.memoryPoolHandle);
-        return YES;
+        return [[ASLCipherText alloc]initWithCipherText:sealCipherText];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
-        return NO;
+        return nil;
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
-    return NO;
+    return nil;
 }
 
 -(ASLCipherText *)encryptZeroSymmetricWithParametersId:(ASLParametersIdType)parametersId

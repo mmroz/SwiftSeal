@@ -36,7 +36,7 @@ class ASLCKKSEncoderTests: XCTestCase {
     
     func testSlotCount() throws {
         let encoder = try createEncoder()
-        XCTAssertEqual(encoder.slotCount, 4)
+        XCTAssertEqual(encoder.slotCount, 4096)
     }
     
     func testEncodeWithComplexValues() throws {

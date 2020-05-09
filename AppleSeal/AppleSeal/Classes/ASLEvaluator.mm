@@ -69,7 +69,7 @@
     try {
         seal::Ciphertext destinationCipherText = destination.sealCipherText;
         _evaluator->negate(encrypted.sealCipherText, destinationCipherText);
-        return [[ASLCipherText alloc] initWithCipherText:destination.sealCipherText];
+        return [[ASLCipherText alloc] initWithCipherText:destinationCipherText];
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
@@ -86,7 +86,7 @@
     try {
         seal::Ciphertext encryptedCipherText = encrypted.sealCipherText;
         _evaluator->negate_inplace(encryptedCipherText);
-        return [[ASLCipherText alloc] initWithCipherText:encrypted.sealCipherText];
+        return [[ASLCipherText alloc] initWithCipherText:encryptedCipherText];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];

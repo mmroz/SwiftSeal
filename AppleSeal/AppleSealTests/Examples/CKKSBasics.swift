@@ -127,7 +127,7 @@ class CKKSBasics: XCTestCase {
         print()
         print("Encode input vectors.")
         let xPlain = try encoder.encode(withDoubleValues: input, scale: scale, destination: ASLPlainText())
-        let x1Encrypted = try encryptor.encrypt(with: xPlain, cipherText: ASLCipherText())
+        let x1Encrypted = try encryptor.encrypt(with: xPlain, destination: ASLCipherText())
         
         /*
          To compute x^3 we first compute x^2 and relinearize. However, the scale has

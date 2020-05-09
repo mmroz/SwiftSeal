@@ -189,7 +189,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, readonly, assign) NSInteger significantBitCount;
 
-@property (nonatomic, readonly, assign) uint64_t *data;
+@property (nonatomic, readonly, assign) NSNumber *data;
 
 /*!
  Returns the BigUInt value as a double. Note that precision may be lost during
