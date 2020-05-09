@@ -8,6 +8,8 @@
 
 #import "ASLComplexType.h"
 
+#import "ASLComplexType_Internal.h"
+
 #include <complex>
 
 @implementation ASLComplexType {
@@ -40,6 +42,12 @@
 
 - (double)imaginary {
 	return std::imag(_complexDouble);
+}
+
+# pragma mark - ASLComplexType_Internal
+
+- (std::complex<double>)complex {
+    return _complexDouble;
 }
 
 @end

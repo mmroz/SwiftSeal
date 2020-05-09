@@ -47,9 +47,9 @@ class ASLCKKSEncoderTests: XCTestCase {
         let destimation = try ASLPlainText(capacity: 2, coefficientCount: 2)
         let pool = ASLMemoryPoolHandle(clearOnDestruction: true)
         
-        XCTAssertNoThrow(try encoder.encode(withComplexValues: values, parametersId: params, scale: 2.0, destination: destimation, pool: pool))
+        XCTAssertThrowsError(try encoder.encode(withComplexValues: values, parametersId: params, scale: 2.0, destination: destimation, pool: pool))
         
-        XCTAssertNoThrow(try encoder.encode(withComplexValues: values, parametersId: params, scale: 2.0, destination: destimation))
+        XCTAssertThrowsError(try encoder.encode(withComplexValues: values, parametersId: params, scale: 2.0, destination: destimation))
         
         XCTAssertNoThrow(try encoder.encode(withComplexValues: values, scale: 2.0, destination: destimation, pool: pool))
         
@@ -103,7 +103,7 @@ class ASLCKKSEncoderTests: XCTestCase {
         let scale = 2.0
         let destination = try ASLPlainText(capacity: 2, coefficientCount: 2)
         
-        XCTAssertNoThrow(try encoder.encode(withComplexValue: complexValue, parametersId: params, scale: scale, destination: destination))
+        XCTAssertThrowsError(try encoder.encode(withComplexValue: complexValue, parametersId: params, scale: scale, destination: destination))
     }
     
     func testEncodeComplexValueWithParamsAndPool() throws {
@@ -115,7 +115,7 @@ class ASLCKKSEncoderTests: XCTestCase {
         let destination = try ASLPlainText(capacity: 2, coefficientCount: 2)
         let pool = ASLMemoryPoolHandle(clearOnDestruction: true)
         
-        XCTAssertNoThrow(try encoder.encode(withComplexValue: complexValue, parametersId: params, scale: scale, destination: destination, pool: pool))
+        XCTAssertThrowsError(try encoder.encode(withComplexValue: complexValue, parametersId: params, scale: scale, destination: destination, pool: pool))
     }
     
     func testEncodeDoubleValuesWithParams() throws {
@@ -148,7 +148,7 @@ class ASLCKKSEncoderTests: XCTestCase {
         let scale = 2.0
         let destination = try ASLPlainText(capacity: 2, coefficientCount: 2)
         
-        XCTAssertThrowsError(try encoder.encode(withDoubleValues: doubleValues, scale: scale, destination: destination))
+        XCTAssertNoThrow(try encoder.encode(withDoubleValues: doubleValues, scale: scale, destination: destination))
     }
     
     func testEncodeDoubleValuesWithPool() throws {
@@ -159,7 +159,7 @@ class ASLCKKSEncoderTests: XCTestCase {
         let destination = try ASLPlainText(capacity: 2, coefficientCount: 2)
         let pool = ASLMemoryPoolHandle(clearOnDestruction: true)
         
-        XCTAssertThrowsError(try encoder.encode(withDoubleValues: doubleValues, scale: scale, destination: destination, pool: pool))
+        XCTAssertNoThrow(try encoder.encode(withDoubleValues: doubleValues, scale: scale, destination: destination, pool: pool))
     }
     
     func testEncodeLongValueWithParams() throws {
@@ -176,7 +176,7 @@ class ASLCKKSEncoderTests: XCTestCase {
         
         let destination = try ASLPlainText(capacity: 2, coefficientCount: 2)
         
-        XCTAssertThrowsError(try encoder.encode(withLongValue: 2.0, destination: destination))
+        XCTAssertNoThrow(try encoder.encode(withLongValue: 2.0, destination: destination))
     }
     
     func testDecode() throws {

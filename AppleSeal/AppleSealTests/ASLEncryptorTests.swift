@@ -43,8 +43,8 @@ class ASLEncryptorTests: XCTestCase {
     }
     
     func testEncryptZeroWithParametersId() throws {
-        let encryptedText = try ASLCipherText(context: createValidContext())
-        XCTAssertNoThrow(try encryptor.encryptZero(with: ASLParametersIdType(block: (4, 4, 4, 4)), cipherText: encryptedText))
+        let encryptedText = try ASLCipherText(context: .bfvDefault())
+        XCTAssertNoThrow(try encryptor.encryptZero(with: ASLParametersIdType(block: (40, 40, 40, 40)), cipherText: encryptedText))
     }
     
     func testEncryptZeroWithParametersIdWithPool() throws {
