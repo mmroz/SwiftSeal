@@ -30,15 +30,15 @@ class ASLKeyGeneratorTests: XCTestCase {
     }
     
     func testCreateKeyGenerator() throws {
-        XCTAssertNoThrow(try ASLKeyGenerator(context: .bfvDefault))
+        XCTAssertNoThrow(try ASLKeyGenerator(context: .bfvDefault()))
     }
     
     func testCreateKeyGeneratorWithSecretKeyAndPublicKey() throws {
-        XCTAssertNoThrow(try ASLKeyGenerator(context: .bfvDefault, secretKey: keyGenerator.secretKey, publicKey: keyGenerator.publicKey))
+        XCTAssertNoThrow(try ASLKeyGenerator(context: .bfvDefault(), secretKey: keyGenerator.secretKey, publicKey: keyGenerator.publicKey))
     }
     
     func testKeyGeneratorWithSecretKey() throws {
-        XCTAssertNoThrow(try ASLKeyGenerator(context: .bfvDefault, secretKey: keyGenerator.secretKey))
+        XCTAssertNoThrow(try ASLKeyGenerator(context: .bfvDefault(), secretKey: keyGenerator.secretKey))
     }
     
     func testPublicKey() throws {
@@ -72,9 +72,9 @@ class ASLKeyGeneratorTests: XCTestCase {
     }
     
     func testRelinearizationKeysSave() throws {
-        let keyGenerator = try ASLKeyGenerator(context: .bfvDefault)
+        let keyGenerator = try ASLKeyGenerator(context: .bfvDefault())
         let data = try keyGenerator.relinearizationKeysSave()
-        let _ = try ASLRelinearizationKeys(data: data, context: .bfvDefault)
+        let _ = try ASLRelinearizationKeys(data: data, context: .bfvDefault())
     }
     
     func testGaloisKeysSave() throws {

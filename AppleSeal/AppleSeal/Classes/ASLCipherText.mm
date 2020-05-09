@@ -261,10 +261,21 @@
 
 #pragma mark - Properies
 
-// TODO
-//- (NSInteger)intArray {
-//    return _cipherText.int_array()
-//}
+
+- (NSArray<NSNumber *> *)intArray {
+    std::size_t arraySize = _cipherText.int_array().size();
+    
+    NSMutableArray<NSNumber *> * results = [[NSMutableArray alloc] initWithCapacity:arraySize];
+    
+    int i=0;
+    for (i = 0; i < arraySize; i++)
+    {
+         NSNumber * value = [[NSNumber alloc] initWithLongLong:_cipherText.int_array()[i]];
+        [results insertObject:value atIndex:i];
+    }
+    
+    return results;
+}
 
 - (size_t)coefficientModulusCount {
     return _cipherText.coeff_mod_count();

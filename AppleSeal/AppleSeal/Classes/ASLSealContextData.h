@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
  modulus. The security of the encryption parameters largely depends on the
  bit-length of this product, and on the degree of the polynomial modulus.
  */
-@property (nonatomic, assign, readonly) const uint64_t* totalCoefficientModulus;
+@property (nonatomic, assign, readonly) const NSNumber * totalCoefficientModulus;
 
 @property (nonatomic, readonly, assign) ASLBaseConverter* baseConverter;
 
@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
  Return a pointer to BFV "Delta", i.e. coefficient modulus divided by
  plaintext modulus.
  */
-@property (nonatomic, assign, readonly) const uint64_t* coefficientDividedPlainModulus;
+@property (nonatomic, assign, readonly) const NSInteger coefficientDividedPlainModulus;
 
 /*!
  Return the threshold for the upper half of integers modulo plain_modulus.
@@ -75,7 +75,7 @@ NS_ASSUME_NONNULL_BEGIN
  for the full product coeff_modulus if using_fast_plain_lift is false and is
  otherwise represented modulo each of the coeff_modulus primes in order.
  */
-@property (nonatomic, assign, readonly) const uint64_t* plainUpperHalfIncrement;
+@property (nonatomic, assign, readonly) const NSInteger plainUpperHalfIncrement;
 
 /*!
  Return a pointer to the upper half threshold with respect to the total
@@ -94,12 +94,12 @@ NS_ASSUME_NONNULL_BEGIN
  this operation is only done for negative message coefficients, i.e. those
  that exceed plain_upper_half_threshold.
  */
-@property (nonatomic, assign, readonly) const uint64_t* upperHalfIncrement;
+@property (nonatomic, assign, readonly) const NSInteger upperHalfIncrement;
 
 /*!
  Return the non-RNS form of upppoer_half_increment which is q mod t.
  */
-@property (nonatomic, assign, readonly) const uint64_t coefficientModPlainModulus;
+@property (nonatomic, assign, readonly) const NSInteger coefficientModPlainModulus;
 
 /*!
  Returns a shared_ptr to the context data corresponding to the previous parameters

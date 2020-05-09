@@ -121,7 +121,7 @@ class ASLPlainTextTests: XCTestCase {
         archiver.encode(plainText, forKey: "testObject")
         let data = archiver.encodedData
         
-            let decodedPlainText = try ASLPlainText(data: data, context: .bfvDefault)
+            let decodedPlainText = try ASLPlainText(data: data, context: .bfvDefault())
 
         XCTAssertEqual(plainText, decodedPlainText)
     }

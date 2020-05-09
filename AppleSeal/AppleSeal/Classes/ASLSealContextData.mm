@@ -44,8 +44,11 @@
 
 - (NSString *)description
 {
-    NSString * paramsIdString = ASLParametersIdTypeDescription(self.parametersId);
-    return [NSString stringWithFormat:@"Encryption Parameters: %@, params Id: %@, Coefficient Mod PlainModulus: %llu", self.encryptionParameters.description, paramsIdString, self.coefficientModPlainModulus];
+    NSString * encryptionParametersString = (_contextData.get() == nil) ? @"{}" : self.encryptionParameters.description;
+    NSString * paramsIdString = (_contextData.get() == nil) ? @"{}" : ASLParametersIdTypeDescription(self.parametersId);
+    NSString * coeffPlainModulusString = (_contextData.get() == nil) ? @"{}" : [[NSString alloc]initWithFormat:@"%ld", (long)self.coefficientModPlainModulus];
+    
+    return [NSString stringWithFormat:@"Encryption Parameters: %@, params Id: %@, Coefficient Mod PlainModulus: %@", encryptionParametersString, paramsIdString, coeffPlainModulusString];
 }
 
 #pragma mark - Properties
@@ -59,36 +62,39 @@
 	return ASLParametersIdTypeMake(parameters[0], parameters[1], parameters[2], parameters[3]);
 }
 
-- (const std::uint64_t*)totalCoefficientModulus {
-	return _contextData->total_coeff_modulus();
+- (NSNumber *)totalCoefficientModulus {
+    const std::uint64_t result = *_contextData->total_coeff_modulus();
+    return [[NSNumber alloc] initWithUnsignedLongLong:result];
 }
 
 - (NSInteger)totalCoefficientModulusBitCount {
 	return _contextData->total_coeff_modulus_bit_count();
 }
 
-- (const std::uint64_t*)coefficientDividedPlainModulus {
-	return _contextData->coeff_div_plain_modulus();
+- (NSInteger)coefficientDividedPlainModulus {
+	return *_contextData->coeff_div_plain_modulus();
 }
 
 - (NSInteger)plainUpperHalfThreshold {
 	return _contextData->plain_upper_half_threshold();
 }
 
-- (const std::uint64_t*)plainUpperHalfIncrement {
-	return _contextData->plain_upper_half_increment();
+- (NSInteger)plainUpperHalfIncrement {
+    const std::uint64_t result = *_contextData->plain_upper_half_increment();
+    return result;
 }
 
 - (NSInteger)upperHalfThreshold {
 	return _contextData->plain_upper_half_threshold();
 }
 
-- (const std::uint64_t*)upperHalfIncrement {
-	return _contextData->upper_half_increment();
+- (NSInteger)upperHalfIncrement {
+    const std::uint64_t result = *_contextData->upper_half_increment();
+    return result;
 }
 
-- (const uint64_t)coefficientModPlainModulus {
-    return _contextData->coeff_mod_plain_modulus();
+- (NSInteger)coefficientModPlainModulus {
+    return  _contextData->coeff_mod_plain_modulus();
 }
 
 - (ASLSealContextData *)previousContextData {

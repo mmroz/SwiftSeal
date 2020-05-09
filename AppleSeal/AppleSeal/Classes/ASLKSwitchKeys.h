@@ -16,26 +16,26 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  @class ASLKSwitchKeys
  
- @brief The ASLKSwitchKeys class and wrapper for the  seal::KeyGenerator
+ @brief The ASLKSwitchKeys class and wrapper for the  seal::KSwitchKeys
  
- @discussion Class to store seal::KeyGenerator.
+ @discussion Class to store seal::KSwitchKeys.
  
  Class to store keyswitching keys. It should never be necessary for normal
  users to create an instance of KSwitchKeys. This class is used strictly as
  a base class for RelinKeys and GaloisKeys classes.
- 
- Keyswitching
+
+ @par Keyswitching
  Concretely, keyswitching is used to change a ciphertext encrypted with one
  key to be encrypted with another key. It is a general technique and is used
  in relinearization and Galois rotations. A keyswitching key contains a sequence
  (vector) of keys. In RelinKeys, each key is an encryption of a power of the
  secret key. In GaloisKeys, each key corresponds to a type of rotation.
- 
- Thread Safety
+
+ @par Thread Safety
  In general, reading from KSwitchKeys is thread-safe as long as no
  other thread is concurrently mutating it. This is due to the underlying
  data structure storing the keyswitching keys not being thread-safe.
- 
+
  @see RelinKeys for the class that stores the relinearization keys.
  @see GaloisKeys for the class that stores the Galois keys.
  */

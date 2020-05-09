@@ -345,7 +345,7 @@ class ASLEvaluatorTests: XCTestCase {
         let encryptedResult = try evaluator.exponentiate(encodeInt32(3), exponent: 2, relinearizationKeys: relinearizationKey, destination: ASLCipherText())
         let plainResult = try decryptor.decrypt(encryptedResult, destination: ASLPlainText())
         let decodedResult = try encoder.decodeInt32(withPlain: plainResult)
-        XCTAssertEqual(decodedResult, 16)
+        XCTAssertEqual(decodedResult, 9)
     }
     
     func testExponentiateWithPool() throws {
@@ -380,7 +380,7 @@ class ASLEvaluatorTests: XCTestCase {
         let encryptedResult = try evaluator.subPlainInplace(encodeInt32(4), plain: ASLPlainText(polynomialString: "\(6)"))
         let plainResult = try decryptor.decrypt(encryptedResult, destination: ASLPlainText())
         let decodedResult = try encoder.decodeInt32(withPlain: plainResult)
-        XCTAssertEqual(decodedResult, 10)
+        XCTAssertEqual(decodedResult, -2)
     }
     
     func testSubPlain() throws {
@@ -438,7 +438,6 @@ class ASLEvaluatorTests: XCTestCase {
     func testTransformToNttWithPool() throws {
         
     }
-    
     
     private func encodeInt32(_ value: Int32) -> ASLCipherText {
         let plain = encoder.encodeInt32Value(value)

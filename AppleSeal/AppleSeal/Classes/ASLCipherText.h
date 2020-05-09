@@ -318,7 +318,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  Returns a reference to the backing IntArray object.
  */
-@property (nonatomic, readonly, assign) NSInteger intArray;
+@property (nonatomic, readonly, assign) NSArray<NSNumber *> * intArray;
 
 /*!
  Returns the number of primes in the coefficient modulus of the
