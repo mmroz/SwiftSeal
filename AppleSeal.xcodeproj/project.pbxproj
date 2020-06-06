@@ -1,0 +1,1005 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		"AppleSeal::AppleSealPackageTests::ProductTarget" /* AppleSealPackageTests */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = OBJ_210 /* Build configuration list for PBXAggregateTarget "AppleSealPackageTests" */;
+			buildPhases = (
+			);
+			dependencies = (
+				OBJ_213 /* PBXTargetDependency */,
+			);
+			name = AppleSealPackageTests;
+			productName = AppleSealPackageTests;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		OBJ_168 /* ASLBaseConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* ASLBaseConverter.mm */; };
+		OBJ_169 /* ASLBatchEncoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* ASLBatchEncoder.mm */; };
+		OBJ_170 /* ASLBigUInt.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* ASLBigUInt.mm */; };
+		OBJ_171 /* ASLCKKSEncoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* ASLCKKSEncoder.mm */; };
+		OBJ_172 /* ASLCipherText.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* ASLCipherText.mm */; };
+		OBJ_173 /* ASLCoefficientModulus.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* ASLCoefficientModulus.mm */; };
+		OBJ_174 /* ASLComplexType.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* ASLComplexType.mm */; };
+		OBJ_175 /* ASLDecryptor.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* ASLDecryptor.mm */; };
+		OBJ_176 /* ASLEncryptionParameters.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* ASLEncryptionParameters.mm */; };
+		OBJ_177 /* ASLEncryptor.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* ASLEncryptor.mm */; };
+		OBJ_178 /* ASLEvaluator.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* ASLEvaluator.mm */; };
+		OBJ_179 /* ASLGaloisKeys.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_22 /* ASLGaloisKeys.mm */; };
+		OBJ_180 /* ASLIntegerEncoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* ASLIntegerEncoder.mm */; };
+		OBJ_181 /* ASLKSwitchKeys.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* ASLKSwitchKeys.mm */; };
+		OBJ_182 /* ASLKeyGenerator.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* ASLKeyGenerator.mm */; };
+		OBJ_183 /* ASLMemoryManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* ASLMemoryManager.mm */; };
+		OBJ_184 /* ASLMemoryManagerProfileFixed.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* ASLMemoryManagerProfileFixed.mm */; };
+		OBJ_185 /* ASLMemoryManagerProfileGlobal.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* ASLMemoryManagerProfileGlobal.mm */; };
+		OBJ_186 /* ASLMemoryManagerProfileThreadLocal.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* ASLMemoryManagerProfileThreadLocal.mm */; };
+		OBJ_187 /* ASLMemoryPoolHandle.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* ASLMemoryPoolHandle.mm */; };
+		OBJ_188 /* ASLModulus.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* ASLModulus.mm */; };
+		OBJ_189 /* ASLNttTables.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* ASLNttTables.mm */; };
+		OBJ_190 /* ASLPlainModulus.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* ASLPlainModulus.mm */; };
+		OBJ_191 /* ASLPlainText.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* ASLPlainText.mm */; };
+		OBJ_192 /* ASLPublicKey.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* ASLPublicKey.mm */; };
+		OBJ_193 /* ASLRelinearizationKeys.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* ASLRelinearizationKeys.mm */; };
+		OBJ_194 /* ASLRnsBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* ASLRnsBase.mm */; };
+		OBJ_195 /* ASLSealContext.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* ASLSealContext.mm */; };
+		OBJ_196 /* ASLSealContextData.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* ASLSealContextData.mm */; };
+		OBJ_197 /* ASLSecretKey.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* ASLSecretKey.mm */; };
+		OBJ_199 /* ASLValidityChecker.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* ASLValidityChecker.mm */; };
+		OBJ_200 /* NSError+CXXAdditions.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_43 /* NSError+CXXAdditions.mm */; };
+		OBJ_201 /* NSString+CXXAdditions.mm in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_44 /* NSString+CXXAdditions.mm */; };
+		OBJ_208 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
+		OBJ_219 /* ASLBaseConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_115 /* ASLBaseConverterTests.swift */; };
+		OBJ_220 /* ASLBatchEncoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_116 /* ASLBatchEncoderTests.swift */; };
+		OBJ_221 /* ASLBigUIntTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_117 /* ASLBigUIntTests.swift */; };
+		OBJ_222 /* ASLCKKSEncoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_118 /* ASLCKKSEncoderTests.swift */; };
+		OBJ_223 /* ASLCipherTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_119 /* ASLCipherTextTests.swift */; };
+		OBJ_224 /* ASLCoefficientModulusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_120 /* ASLCoefficientModulusTests.swift */; };
+		OBJ_225 /* ASLComplexTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_121 /* ASLComplexTypeTests.swift */; };
+		OBJ_226 /* ASLDecryptorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_122 /* ASLDecryptorTests.swift */; };
+		OBJ_227 /* ASLEncryptionParametersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_123 /* ASLEncryptionParametersTests.swift */; };
+		OBJ_228 /* ASLEncryptorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_124 /* ASLEncryptorTests.swift */; };
+		OBJ_229 /* ASLEvaluatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_125 /* ASLEvaluatorTests.swift */; };
+		OBJ_230 /* ASLGaloisKeysTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_126 /* ASLGaloisKeysTests.swift */; };
+		OBJ_231 /* ASLIntegerEncoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_127 /* ASLIntegerEncoderTests.swift */; };
+		OBJ_232 /* ASLKSwitchKeysTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_128 /* ASLKSwitchKeysTests.swift */; };
+		OBJ_233 /* ASLKeyGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_129 /* ASLKeyGeneratorTests.swift */; };
+		OBJ_234 /* ASLMemoryManagerProfileFixedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_130 /* ASLMemoryManagerProfileFixedTests.swift */; };
+		OBJ_235 /* ASLMemoryManagerProfileGlobalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_131 /* ASLMemoryManagerProfileGlobalTests.swift */; };
+		OBJ_236 /* ASLMemoryManagerProfileThreadLocalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_132 /* ASLMemoryManagerProfileThreadLocalTests.swift */; };
+		OBJ_237 /* ASLMemoryManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_133 /* ASLMemoryManagerTests.swift */; };
+		OBJ_238 /* ASLMemoryPoolHandleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_134 /* ASLMemoryPoolHandleTests.swift */; };
+		OBJ_239 /* ASLParmsIdTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_135 /* ASLParmsIdTypeTests.swift */; };
+		OBJ_240 /* ASLPlainModulusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_136 /* ASLPlainModulusTests.swift */; };
+		OBJ_241 /* ASLPlainTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_137 /* ASLPlainTextTests.swift */; };
+		OBJ_242 /* ASLPublicKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_138 /* ASLPublicKeyTests.swift */; };
+		OBJ_243 /* ASLRelinearizationKeysTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_139 /* ASLRelinearizationKeysTests.swift */; };
+		OBJ_244 /* ASLRnsBaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_140 /* ASLRnsBaseTests.swift */; };
+		OBJ_245 /* ASLSealContextDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_141 /* ASLSealContextDataTests.swift */; };
+		OBJ_246 /* ASLSealContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_142 /* ASLSealContextTests.swift */; };
+		OBJ_247 /* ASLSecretKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_143 /* ASLSecretKeyTests.swift */; };
+		OBJ_248 /* ASLSmallModulusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_144 /* ASLSmallModulusTests.swift */; };
+		OBJ_249 /* ASLSmallNttTablesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_145 /* ASLSmallNttTablesTests.swift */; };
+		OBJ_250 /* ASLValidityCheckerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_146 /* ASLValidityCheckerTests.swift */; };
+		OBJ_251 /* BFVBasics.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_148 /* BFVBasics.swift */; };
+		OBJ_252 /* CKKSBasics.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_149 /* CKKSBasics.swift */; };
+		OBJ_253 /* Encoders.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_150 /* Encoders.swift */; };
+		OBJ_254 /* Levels.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_151 /* Levels.swift */; };
+		OBJ_255 /* Performance.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_152 /* Performance.swift */; };
+		OBJ_256 /* Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_153 /* Rotation.swift */; };
+		OBJ_257 /* ASLEncryptionParameterQualifiers+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_155 /* ASLEncryptionParameterQualifiers+Extensions.swift */; };
+		OBJ_258 /* ASLGaloisKeys+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_156 /* ASLGaloisKeys+Extensions.swift */; };
+		OBJ_259 /* ASLParametersIdType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_157 /* ASLParametersIdType+Extensions.swift */; };
+		OBJ_260 /* ASLSealContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_158 /* ASLSealContext+Extensions.swift */; };
+		OBJ_262 /* AppleSeal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "AppleSeal::AppleSeal::Product" /* AppleSeal.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E493CF4B2484931800FC4FC2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "AppleSeal::AppleSeal";
+			remoteInfo = AppleSeal;
+		};
+		E493CF4C2484931800FC4FC2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "AppleSeal::AppleSealTests";
+			remoteInfo = AppleSealTests;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		"AppleSeal::AppleSeal::Product" /* AppleSeal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppleSeal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"AppleSeal::AppleSealTests::Product" /* AppleSealTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppleSealTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		OBJ_101 /* ASLMemoryManagerProfile_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLMemoryManagerProfile_Internal.h; sourceTree = "<group>"; };
+		OBJ_102 /* ASLMemoryManagerProfileThreadLocal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLMemoryManagerProfileThreadLocal.h; sourceTree = "<group>"; };
+		OBJ_103 /* ASLRnsBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLRnsBase.h; sourceTree = "<group>"; };
+		OBJ_104 /* ASLNttTables.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLNttTables.h; sourceTree = "<group>"; };
+		OBJ_105 /* ASLEncryptionParameterQualifiers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLEncryptionParameterQualifiers.h; sourceTree = "<group>"; };
+		OBJ_106 /* NSString+CXXAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+CXXAdditions.h"; sourceTree = "<group>"; };
+		OBJ_107 /* NSError+CXXAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSError+CXXAdditions.h"; sourceTree = "<group>"; };
+		OBJ_108 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = /Users/markmroz/Desktop/SEAL/apple/Sources/AppleSeal/include/module.modulemap; sourceTree = "<group>"; };
+		OBJ_11 /* ASLBaseConverter.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLBaseConverter.mm; sourceTree = "<group>"; };
+		OBJ_110 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		OBJ_111 /* shim.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shim.h; sourceTree = "<group>"; };
+		OBJ_114 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		OBJ_115 /* ASLBaseConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLBaseConverterTests.swift; sourceTree = "<group>"; };
+		OBJ_116 /* ASLBatchEncoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLBatchEncoderTests.swift; sourceTree = "<group>"; };
+		OBJ_117 /* ASLBigUIntTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLBigUIntTests.swift; sourceTree = "<group>"; };
+		OBJ_118 /* ASLCKKSEncoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLCKKSEncoderTests.swift; sourceTree = "<group>"; };
+		OBJ_119 /* ASLCipherTextTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLCipherTextTests.swift; sourceTree = "<group>"; };
+		OBJ_12 /* ASLBatchEncoder.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLBatchEncoder.mm; sourceTree = "<group>"; };
+		OBJ_120 /* ASLCoefficientModulusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLCoefficientModulusTests.swift; sourceTree = "<group>"; };
+		OBJ_121 /* ASLComplexTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLComplexTypeTests.swift; sourceTree = "<group>"; };
+		OBJ_122 /* ASLDecryptorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLDecryptorTests.swift; sourceTree = "<group>"; };
+		OBJ_123 /* ASLEncryptionParametersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLEncryptionParametersTests.swift; sourceTree = "<group>"; };
+		OBJ_124 /* ASLEncryptorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLEncryptorTests.swift; sourceTree = "<group>"; };
+		OBJ_125 /* ASLEvaluatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLEvaluatorTests.swift; sourceTree = "<group>"; };
+		OBJ_126 /* ASLGaloisKeysTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLGaloisKeysTests.swift; sourceTree = "<group>"; };
+		OBJ_127 /* ASLIntegerEncoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLIntegerEncoderTests.swift; sourceTree = "<group>"; };
+		OBJ_128 /* ASLKSwitchKeysTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLKSwitchKeysTests.swift; sourceTree = "<group>"; };
+		OBJ_129 /* ASLKeyGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLKeyGeneratorTests.swift; sourceTree = "<group>"; };
+		OBJ_13 /* ASLBigUInt.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLBigUInt.mm; sourceTree = "<group>"; };
+		OBJ_130 /* ASLMemoryManagerProfileFixedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLMemoryManagerProfileFixedTests.swift; sourceTree = "<group>"; };
+		OBJ_131 /* ASLMemoryManagerProfileGlobalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLMemoryManagerProfileGlobalTests.swift; sourceTree = "<group>"; };
+		OBJ_132 /* ASLMemoryManagerProfileThreadLocalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLMemoryManagerProfileThreadLocalTests.swift; sourceTree = "<group>"; };
+		OBJ_133 /* ASLMemoryManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLMemoryManagerTests.swift; sourceTree = "<group>"; };
+		OBJ_134 /* ASLMemoryPoolHandleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLMemoryPoolHandleTests.swift; sourceTree = "<group>"; };
+		OBJ_135 /* ASLParmsIdTypeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLParmsIdTypeTests.swift; sourceTree = "<group>"; };
+		OBJ_136 /* ASLPlainModulusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLPlainModulusTests.swift; sourceTree = "<group>"; };
+		OBJ_137 /* ASLPlainTextTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLPlainTextTests.swift; sourceTree = "<group>"; };
+		OBJ_138 /* ASLPublicKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLPublicKeyTests.swift; sourceTree = "<group>"; };
+		OBJ_139 /* ASLRelinearizationKeysTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLRelinearizationKeysTests.swift; sourceTree = "<group>"; };
+		OBJ_14 /* ASLCKKSEncoder.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLCKKSEncoder.mm; sourceTree = "<group>"; };
+		OBJ_140 /* ASLRnsBaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLRnsBaseTests.swift; sourceTree = "<group>"; };
+		OBJ_141 /* ASLSealContextDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLSealContextDataTests.swift; sourceTree = "<group>"; };
+		OBJ_142 /* ASLSealContextTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLSealContextTests.swift; sourceTree = "<group>"; };
+		OBJ_143 /* ASLSecretKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLSecretKeyTests.swift; sourceTree = "<group>"; };
+		OBJ_144 /* ASLSmallModulusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLSmallModulusTests.swift; sourceTree = "<group>"; };
+		OBJ_145 /* ASLSmallNttTablesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLSmallNttTablesTests.swift; sourceTree = "<group>"; };
+		OBJ_146 /* ASLValidityCheckerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ASLValidityCheckerTests.swift; sourceTree = "<group>"; };
+		OBJ_148 /* BFVBasics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BFVBasics.swift; sourceTree = "<group>"; };
+		OBJ_149 /* CKKSBasics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKKSBasics.swift; sourceTree = "<group>"; };
+		OBJ_15 /* ASLCipherText.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLCipherText.mm; sourceTree = "<group>"; };
+		OBJ_150 /* Encoders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encoders.swift; sourceTree = "<group>"; };
+		OBJ_151 /* Levels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Levels.swift; sourceTree = "<group>"; };
+		OBJ_152 /* Performance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Performance.swift; sourceTree = "<group>"; };
+		OBJ_153 /* Rotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rotation.swift; sourceTree = "<group>"; };
+		OBJ_155 /* ASLEncryptionParameterQualifiers+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ASLEncryptionParameterQualifiers+Extensions.swift"; sourceTree = "<group>"; };
+		OBJ_156 /* ASLGaloisKeys+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ASLGaloisKeys+Extensions.swift"; sourceTree = "<group>"; };
+		OBJ_157 /* ASLParametersIdType+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ASLParametersIdType+Extensions.swift"; sourceTree = "<group>"; };
+		OBJ_158 /* ASLSealContext+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ASLSealContext+Extensions.swift"; sourceTree = "<group>"; };
+		OBJ_16 /* ASLCoefficientModulus.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLCoefficientModulus.mm; sourceTree = "<group>"; };
+		OBJ_162 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		OBJ_17 /* ASLComplexType.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLComplexType.mm; sourceTree = "<group>"; };
+		OBJ_18 /* ASLDecryptor.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLDecryptor.mm; sourceTree = "<group>"; };
+		OBJ_19 /* ASLEncryptionParameters.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLEncryptionParameters.mm; sourceTree = "<group>"; };
+		OBJ_20 /* ASLEncryptor.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLEncryptor.mm; sourceTree = "<group>"; };
+		OBJ_21 /* ASLEvaluator.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLEvaluator.mm; sourceTree = "<group>"; };
+		OBJ_22 /* ASLGaloisKeys.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLGaloisKeys.mm; sourceTree = "<group>"; };
+		OBJ_23 /* ASLIntegerEncoder.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLIntegerEncoder.mm; sourceTree = "<group>"; };
+		OBJ_24 /* ASLKSwitchKeys.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLKSwitchKeys.mm; sourceTree = "<group>"; };
+		OBJ_25 /* ASLKeyGenerator.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLKeyGenerator.mm; sourceTree = "<group>"; };
+		OBJ_26 /* ASLMemoryManager.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLMemoryManager.mm; sourceTree = "<group>"; };
+		OBJ_27 /* ASLMemoryManagerProfileFixed.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLMemoryManagerProfileFixed.mm; sourceTree = "<group>"; };
+		OBJ_28 /* ASLMemoryManagerProfileGlobal.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLMemoryManagerProfileGlobal.mm; sourceTree = "<group>"; };
+		OBJ_29 /* ASLMemoryManagerProfileThreadLocal.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLMemoryManagerProfileThreadLocal.mm; sourceTree = "<group>"; };
+		OBJ_30 /* ASLMemoryPoolHandle.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLMemoryPoolHandle.mm; sourceTree = "<group>"; };
+		OBJ_31 /* ASLModulus.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLModulus.mm; sourceTree = "<group>"; };
+		OBJ_32 /* ASLNttTables.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLNttTables.mm; sourceTree = "<group>"; };
+		OBJ_33 /* ASLPlainModulus.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLPlainModulus.mm; sourceTree = "<group>"; };
+		OBJ_34 /* ASLPlainText.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLPlainText.mm; sourceTree = "<group>"; };
+		OBJ_35 /* ASLPublicKey.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLPublicKey.mm; sourceTree = "<group>"; };
+		OBJ_36 /* ASLRelinearizationKeys.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLRelinearizationKeys.mm; sourceTree = "<group>"; };
+		OBJ_37 /* ASLRnsBase.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLRnsBase.mm; sourceTree = "<group>"; };
+		OBJ_38 /* ASLSealContext.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLSealContext.mm; sourceTree = "<group>"; };
+		OBJ_39 /* ASLSealContextData.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLSealContextData.mm; sourceTree = "<group>"; };
+		OBJ_40 /* ASLSecretKey.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLSecretKey.mm; sourceTree = "<group>"; };
+		OBJ_42 /* ASLValidityChecker.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ASLValidityChecker.mm; sourceTree = "<group>"; };
+		OBJ_43 /* NSError+CXXAdditions.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSError+CXXAdditions.mm"; sourceTree = "<group>"; };
+		OBJ_44 /* NSString+CXXAdditions.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSString+CXXAdditions.mm"; sourceTree = "<group>"; };
+		OBJ_46 /* AppleSeal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppleSeal.h; sourceTree = "<group>"; };
+		OBJ_48 /* ASLValidityChecker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLValidityChecker.h; sourceTree = "<group>"; };
+		OBJ_49 /* ASLNttTables_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLNttTables_Internal.h; sourceTree = "<group>"; };
+		OBJ_50 /* ASLKSwitchKeys_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLKSwitchKeys_Internal.h; sourceTree = "<group>"; };
+		OBJ_51 /* ASLDecryptor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLDecryptor.h; sourceTree = "<group>"; };
+		OBJ_52 /* ASLRelinearizationKeys_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLRelinearizationKeys_Internal.h; sourceTree = "<group>"; };
+		OBJ_53 /* ASLModulus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLModulus.h; sourceTree = "<group>"; };
+		OBJ_54 /* ASLComplexType_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLComplexType_Internal.h; sourceTree = "<group>"; };
+		OBJ_55 /* ASLPlainModulus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLPlainModulus.h; sourceTree = "<group>"; };
+		OBJ_56 /* ASLKeyGenerator_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLKeyGenerator_Internal.h; sourceTree = "<group>"; };
+		OBJ_57 /* ASLSealContextData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLSealContextData.h; sourceTree = "<group>"; };
+		OBJ_58 /* ASLSecretKey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLSecretKey.h; sourceTree = "<group>"; };
+		OBJ_59 /* ASLBigUInt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLBigUInt.h; sourceTree = "<group>"; };
+		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		OBJ_60 /* ASLSealContextData_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLSealContextData_Internal.h; sourceTree = "<group>"; };
+		OBJ_61 /* ASLEncryptionParameters.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLEncryptionParameters.h; sourceTree = "<group>"; };
+		OBJ_62 /* ASLPublicKey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLPublicKey.h; sourceTree = "<group>"; };
+		OBJ_63 /* ASLPublicKey_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLPublicKey_Internal.h; sourceTree = "<group>"; };
+		OBJ_64 /* ASLMemoryManagerProfileFixed_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLMemoryManagerProfileFixed_Internal.h; sourceTree = "<group>"; };
+		OBJ_65 /* ASLComplexType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLComplexType.h; sourceTree = "<group>"; };
+		OBJ_66 /* ASLEncryptor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLEncryptor.h; sourceTree = "<group>"; };
+		OBJ_67 /* ASLRelinearizationKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLRelinearizationKeys.h; sourceTree = "<group>"; };
+		OBJ_68 /* ASLEvaluator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLEvaluator.h; sourceTree = "<group>"; };
+		OBJ_69 /* ASLEncryptionParameters_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLEncryptionParameters_Internal.h; sourceTree = "<group>"; };
+		OBJ_70 /* ASLCipherText_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLCipherText_Internal.h; sourceTree = "<group>"; };
+		OBJ_71 /* ASLMemoryManagerProfile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLMemoryManagerProfile.h; sourceTree = "<group>"; };
+		OBJ_72 /* ASLBaseConverter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLBaseConverter.h; sourceTree = "<group>"; };
+		OBJ_73 /* ASLCipherText.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLCipherText.h; sourceTree = "<group>"; };
+		OBJ_74 /* ASLKSwitchKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLKSwitchKeys.h; sourceTree = "<group>"; };
+		OBJ_75 /* ASLIntegerEncoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLIntegerEncoder.h; sourceTree = "<group>"; };
+		OBJ_76 /* ASLGaloisKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLGaloisKeys.h; sourceTree = "<group>"; };
+		OBJ_77 /* ASLGaloisKeys_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLGaloisKeys_Internal.h; sourceTree = "<group>"; };
+		OBJ_78 /* ASLSecretKey_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLSecretKey_Internal.h; sourceTree = "<group>"; };
+		OBJ_79 /* ASLPlainText_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLPlainText_Internal.h; sourceTree = "<group>"; };
+		OBJ_80 /* ASLModulus_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLModulus_Internal.h; sourceTree = "<group>"; };
+		OBJ_81 /* ASLParametersIdType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLParametersIdType.h; sourceTree = "<group>"; };
+		OBJ_82 /* ASLCoefficientModulus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLCoefficientModulus.h; sourceTree = "<group>"; };
+		OBJ_83 /* ASLMemoryManagerProfileFixed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLMemoryManagerProfileFixed.h; sourceTree = "<group>"; };
+		OBJ_84 /* ASLMemoryManagerProfileGlobal_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLMemoryManagerProfileGlobal_Internal.h; sourceTree = "<group>"; };
+		OBJ_86 /* ASLKeyGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLKeyGenerator.h; sourceTree = "<group>"; };
+		OBJ_87 /* ASLRnsBase_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLRnsBase_Internal.h; sourceTree = "<group>"; };
+		OBJ_88 /* ASLPlainText.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLPlainText.h; sourceTree = "<group>"; };
+		OBJ_89 /* ASLBigUInt_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLBigUInt_Internal.h; sourceTree = "<group>"; };
+		OBJ_9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		OBJ_90 /* ASLMemoryManagerProfileGlobal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLMemoryManagerProfileGlobal.h; sourceTree = "<group>"; };
+		OBJ_91 /* ASLBatchEncoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLBatchEncoder.h; sourceTree = "<group>"; };
+		OBJ_92 /* ASLCKKSEncoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLCKKSEncoder.h; sourceTree = "<group>"; };
+		OBJ_93 /* ASLMemoryManagerProfileThreadLocal_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLMemoryManagerProfileThreadLocal_Internal.h; sourceTree = "<group>"; };
+		OBJ_94 /* ASLSealContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLSealContext.h; sourceTree = "<group>"; };
+		OBJ_95 /* ASLBaseConverter_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLBaseConverter_Internal.h; sourceTree = "<group>"; };
+		OBJ_96 /* ASLMemoryManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLMemoryManager.h; sourceTree = "<group>"; };
+		OBJ_97 /* ASLMemoryPoolHandle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLMemoryPoolHandle.h; sourceTree = "<group>"; };
+		OBJ_98 /* ASLMemoryPoolHandle_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLMemoryPoolHandle_Internal.h; sourceTree = "<group>"; };
+		OBJ_99 /* ASLSealContext_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLSealContext_Internal.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		OBJ_202 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_261 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_262 /* AppleSeal.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		OBJ_10 /* AppleSeal */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_11 /* ASLBaseConverter.mm */,
+				OBJ_12 /* ASLBatchEncoder.mm */,
+				OBJ_13 /* ASLBigUInt.mm */,
+				OBJ_14 /* ASLCKKSEncoder.mm */,
+				OBJ_15 /* ASLCipherText.mm */,
+				OBJ_16 /* ASLCoefficientModulus.mm */,
+				OBJ_17 /* ASLComplexType.mm */,
+				OBJ_18 /* ASLDecryptor.mm */,
+				OBJ_19 /* ASLEncryptionParameters.mm */,
+				OBJ_20 /* ASLEncryptor.mm */,
+				OBJ_21 /* ASLEvaluator.mm */,
+				OBJ_22 /* ASLGaloisKeys.mm */,
+				OBJ_23 /* ASLIntegerEncoder.mm */,
+				OBJ_24 /* ASLKSwitchKeys.mm */,
+				OBJ_25 /* ASLKeyGenerator.mm */,
+				OBJ_26 /* ASLMemoryManager.mm */,
+				OBJ_27 /* ASLMemoryManagerProfileFixed.mm */,
+				OBJ_28 /* ASLMemoryManagerProfileGlobal.mm */,
+				OBJ_29 /* ASLMemoryManagerProfileThreadLocal.mm */,
+				OBJ_30 /* ASLMemoryPoolHandle.mm */,
+				OBJ_31 /* ASLModulus.mm */,
+				OBJ_32 /* ASLNttTables.mm */,
+				OBJ_33 /* ASLPlainModulus.mm */,
+				OBJ_34 /* ASLPlainText.mm */,
+				OBJ_35 /* ASLPublicKey.mm */,
+				OBJ_36 /* ASLRelinearizationKeys.mm */,
+				OBJ_37 /* ASLRnsBase.mm */,
+				OBJ_38 /* ASLSealContext.mm */,
+				OBJ_39 /* ASLSealContextData.mm */,
+				OBJ_40 /* ASLSecretKey.mm */,
+				OBJ_42 /* ASLValidityChecker.mm */,
+				OBJ_43 /* NSError+CXXAdditions.mm */,
+				OBJ_44 /* NSString+CXXAdditions.mm */,
+			);
+			path = AppleSeal;
+			sourceTree = "<group>";
+		};
+		OBJ_109 /* seal */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_110 /* module.modulemap */,
+				OBJ_111 /* shim.h */,
+			);
+			name = seal;
+			path = Sources/seal;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_112 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_113 /* AppleSealTests */,
+			);
+			name = Tests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_113 /* AppleSealTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_114 /* Info.plist */,
+				OBJ_115 /* ASLBaseConverterTests.swift */,
+				OBJ_116 /* ASLBatchEncoderTests.swift */,
+				OBJ_117 /* ASLBigUIntTests.swift */,
+				OBJ_118 /* ASLCKKSEncoderTests.swift */,
+				OBJ_119 /* ASLCipherTextTests.swift */,
+				OBJ_120 /* ASLCoefficientModulusTests.swift */,
+				OBJ_121 /* ASLComplexTypeTests.swift */,
+				OBJ_122 /* ASLDecryptorTests.swift */,
+				OBJ_123 /* ASLEncryptionParametersTests.swift */,
+				OBJ_124 /* ASLEncryptorTests.swift */,
+				OBJ_125 /* ASLEvaluatorTests.swift */,
+				OBJ_126 /* ASLGaloisKeysTests.swift */,
+				OBJ_127 /* ASLIntegerEncoderTests.swift */,
+				OBJ_128 /* ASLKSwitchKeysTests.swift */,
+				OBJ_129 /* ASLKeyGeneratorTests.swift */,
+				OBJ_130 /* ASLMemoryManagerProfileFixedTests.swift */,
+				OBJ_131 /* ASLMemoryManagerProfileGlobalTests.swift */,
+				OBJ_132 /* ASLMemoryManagerProfileThreadLocalTests.swift */,
+				OBJ_133 /* ASLMemoryManagerTests.swift */,
+				OBJ_134 /* ASLMemoryPoolHandleTests.swift */,
+				OBJ_135 /* ASLParmsIdTypeTests.swift */,
+				OBJ_136 /* ASLPlainModulusTests.swift */,
+				OBJ_137 /* ASLPlainTextTests.swift */,
+				OBJ_138 /* ASLPublicKeyTests.swift */,
+				OBJ_139 /* ASLRelinearizationKeysTests.swift */,
+				OBJ_140 /* ASLRnsBaseTests.swift */,
+				OBJ_141 /* ASLSealContextDataTests.swift */,
+				OBJ_142 /* ASLSealContextTests.swift */,
+				OBJ_143 /* ASLSecretKeyTests.swift */,
+				OBJ_144 /* ASLSmallModulusTests.swift */,
+				OBJ_145 /* ASLSmallNttTablesTests.swift */,
+				OBJ_146 /* ASLValidityCheckerTests.swift */,
+				OBJ_147 /* Examples */,
+				OBJ_154 /* Extensions */,
+			);
+			name = AppleSealTests;
+			path = Tests/AppleSealTests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_147 /* Examples */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_148 /* BFVBasics.swift */,
+				OBJ_149 /* CKKSBasics.swift */,
+				OBJ_150 /* Encoders.swift */,
+				OBJ_151 /* Levels.swift */,
+				OBJ_152 /* Performance.swift */,
+				OBJ_153 /* Rotation.swift */,
+			);
+			path = Examples;
+			sourceTree = "<group>";
+		};
+		OBJ_154 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_155 /* ASLEncryptionParameterQualifiers+Extensions.swift */,
+				OBJ_156 /* ASLGaloisKeys+Extensions.swift */,
+				OBJ_157 /* ASLParametersIdType+Extensions.swift */,
+				OBJ_158 /* ASLSealContext+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		OBJ_159 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				"AppleSeal::AppleSealTests::Product" /* AppleSealTests.xctest */,
+				"AppleSeal::AppleSeal::Product" /* AppleSeal.framework */,
+			);
+			name = Products;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		OBJ_45 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_46 /* AppleSeal.h */,
+				OBJ_47 /* AppleSeal */,
+				OBJ_108 /* module.modulemap */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		OBJ_47 /* AppleSeal */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_48 /* ASLValidityChecker.h */,
+				OBJ_49 /* ASLNttTables_Internal.h */,
+				OBJ_50 /* ASLKSwitchKeys_Internal.h */,
+				OBJ_51 /* ASLDecryptor.h */,
+				OBJ_52 /* ASLRelinearizationKeys_Internal.h */,
+				OBJ_53 /* ASLModulus.h */,
+				OBJ_54 /* ASLComplexType_Internal.h */,
+				OBJ_55 /* ASLPlainModulus.h */,
+				OBJ_56 /* ASLKeyGenerator_Internal.h */,
+				OBJ_57 /* ASLSealContextData.h */,
+				OBJ_58 /* ASLSecretKey.h */,
+				OBJ_59 /* ASLBigUInt.h */,
+				OBJ_60 /* ASLSealContextData_Internal.h */,
+				OBJ_61 /* ASLEncryptionParameters.h */,
+				OBJ_62 /* ASLPublicKey.h */,
+				OBJ_63 /* ASLPublicKey_Internal.h */,
+				OBJ_64 /* ASLMemoryManagerProfileFixed_Internal.h */,
+				OBJ_65 /* ASLComplexType.h */,
+				OBJ_66 /* ASLEncryptor.h */,
+				OBJ_67 /* ASLRelinearizationKeys.h */,
+				OBJ_68 /* ASLEvaluator.h */,
+				OBJ_69 /* ASLEncryptionParameters_Internal.h */,
+				OBJ_70 /* ASLCipherText_Internal.h */,
+				OBJ_71 /* ASLMemoryManagerProfile.h */,
+				OBJ_72 /* ASLBaseConverter.h */,
+				OBJ_73 /* ASLCipherText.h */,
+				OBJ_74 /* ASLKSwitchKeys.h */,
+				OBJ_75 /* ASLIntegerEncoder.h */,
+				OBJ_76 /* ASLGaloisKeys.h */,
+				OBJ_77 /* ASLGaloisKeys_Internal.h */,
+				OBJ_78 /* ASLSecretKey_Internal.h */,
+				OBJ_79 /* ASLPlainText_Internal.h */,
+				OBJ_80 /* ASLModulus_Internal.h */,
+				OBJ_81 /* ASLParametersIdType.h */,
+				OBJ_82 /* ASLCoefficientModulus.h */,
+				OBJ_83 /* ASLMemoryManagerProfileFixed.h */,
+				OBJ_84 /* ASLMemoryManagerProfileGlobal_Internal.h */,
+				OBJ_86 /* ASLKeyGenerator.h */,
+				OBJ_87 /* ASLRnsBase_Internal.h */,
+				OBJ_88 /* ASLPlainText.h */,
+				OBJ_89 /* ASLBigUInt_Internal.h */,
+				OBJ_90 /* ASLMemoryManagerProfileGlobal.h */,
+				OBJ_91 /* ASLBatchEncoder.h */,
+				OBJ_92 /* ASLCKKSEncoder.h */,
+				OBJ_93 /* ASLMemoryManagerProfileThreadLocal_Internal.h */,
+				OBJ_94 /* ASLSealContext.h */,
+				OBJ_95 /* ASLBaseConverter_Internal.h */,
+				OBJ_96 /* ASLMemoryManager.h */,
+				OBJ_97 /* ASLMemoryPoolHandle.h */,
+				OBJ_98 /* ASLMemoryPoolHandle_Internal.h */,
+				OBJ_99 /* ASLSealContext_Internal.h */,
+				OBJ_101 /* ASLMemoryManagerProfile_Internal.h */,
+				OBJ_102 /* ASLMemoryManagerProfileThreadLocal.h */,
+				OBJ_103 /* ASLRnsBase.h */,
+				OBJ_104 /* ASLNttTables.h */,
+				OBJ_105 /* ASLEncryptionParameterQualifiers.h */,
+				OBJ_106 /* NSString+CXXAdditions.h */,
+				OBJ_107 /* NSError+CXXAdditions.h */,
+			);
+			path = AppleSeal;
+			sourceTree = "<group>";
+		};
+		OBJ_5 /*  */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_6 /* Package.swift */,
+				OBJ_7 /* Sources */,
+				OBJ_112 /* Tests */,
+				OBJ_159 /* Products */,
+				OBJ_162 /* README.md */,
+			);
+			name = "";
+			sourceTree = "<group>";
+		};
+		OBJ_7 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_8 /* AppleSeal */,
+				OBJ_109 /* seal */,
+			);
+			name = Sources;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_8 /* AppleSeal */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_9 /* Info.plist */,
+				OBJ_10 /* AppleSeal */,
+				OBJ_45 /* include */,
+			);
+			name = AppleSeal;
+			path = Sources/AppleSeal;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		"AppleSeal::AppleSeal" /* AppleSeal */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_164 /* Build configuration list for PBXNativeTarget "AppleSeal" */;
+			buildPhases = (
+				OBJ_167 /* Sources */,
+				OBJ_202 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AppleSeal;
+			productName = AppleSeal;
+			productReference = "AppleSeal::AppleSeal::Product" /* AppleSeal.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		"AppleSeal::AppleSealTests" /* AppleSealTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_215 /* Build configuration list for PBXNativeTarget "AppleSealTests" */;
+			buildPhases = (
+				OBJ_218 /* Sources */,
+				OBJ_261 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_263 /* PBXTargetDependency */,
+			);
+			name = AppleSealTests;
+			productName = AppleSealTests;
+			productReference = "AppleSeal::AppleSealTests::Product" /* AppleSealTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		"AppleSeal::SwiftPMPackageDescription" /* AppleSealPackageDescription */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_204 /* Build configuration list for PBXNativeTarget "AppleSealPackageDescription" */;
+			buildPhases = (
+				OBJ_207 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AppleSealPackageDescription;
+			productName = AppleSealPackageDescription;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		OBJ_1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftMigration = 9999;
+				LastUpgradeCheck = 9999;
+			};
+			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "AppleSeal" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = OBJ_5 /*  */;
+			productRefGroup = OBJ_159 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				"AppleSeal::AppleSeal" /* AppleSeal */,
+				"AppleSeal::SwiftPMPackageDescription" /* AppleSealPackageDescription */,
+				"AppleSeal::AppleSealPackageTests::ProductTarget" /* AppleSealPackageTests */,
+				"AppleSeal::AppleSealTests" /* AppleSealTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		OBJ_167 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_168 /* ASLBaseConverter.mm in Sources */,
+				OBJ_169 /* ASLBatchEncoder.mm in Sources */,
+				OBJ_170 /* ASLBigUInt.mm in Sources */,
+				OBJ_171 /* ASLCKKSEncoder.mm in Sources */,
+				OBJ_172 /* ASLCipherText.mm in Sources */,
+				OBJ_173 /* ASLCoefficientModulus.mm in Sources */,
+				OBJ_174 /* ASLComplexType.mm in Sources */,
+				OBJ_175 /* ASLDecryptor.mm in Sources */,
+				OBJ_176 /* ASLEncryptionParameters.mm in Sources */,
+				OBJ_177 /* ASLEncryptor.mm in Sources */,
+				OBJ_178 /* ASLEvaluator.mm in Sources */,
+				OBJ_179 /* ASLGaloisKeys.mm in Sources */,
+				OBJ_180 /* ASLIntegerEncoder.mm in Sources */,
+				OBJ_181 /* ASLKSwitchKeys.mm in Sources */,
+				OBJ_182 /* ASLKeyGenerator.mm in Sources */,
+				OBJ_183 /* ASLMemoryManager.mm in Sources */,
+				OBJ_184 /* ASLMemoryManagerProfileFixed.mm in Sources */,
+				OBJ_185 /* ASLMemoryManagerProfileGlobal.mm in Sources */,
+				OBJ_186 /* ASLMemoryManagerProfileThreadLocal.mm in Sources */,
+				OBJ_187 /* ASLMemoryPoolHandle.mm in Sources */,
+				OBJ_188 /* ASLModulus.mm in Sources */,
+				OBJ_189 /* ASLNttTables.mm in Sources */,
+				OBJ_190 /* ASLPlainModulus.mm in Sources */,
+				OBJ_191 /* ASLPlainText.mm in Sources */,
+				OBJ_192 /* ASLPublicKey.mm in Sources */,
+				OBJ_193 /* ASLRelinearizationKeys.mm in Sources */,
+				OBJ_194 /* ASLRnsBase.mm in Sources */,
+				OBJ_195 /* ASLSealContext.mm in Sources */,
+				OBJ_196 /* ASLSealContextData.mm in Sources */,
+				OBJ_197 /* ASLSecretKey.mm in Sources */,
+				OBJ_199 /* ASLValidityChecker.mm in Sources */,
+				OBJ_200 /* NSError+CXXAdditions.mm in Sources */,
+				OBJ_201 /* NSString+CXXAdditions.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_207 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_208 /* Package.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_218 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_219 /* ASLBaseConverterTests.swift in Sources */,
+				OBJ_220 /* ASLBatchEncoderTests.swift in Sources */,
+				OBJ_221 /* ASLBigUIntTests.swift in Sources */,
+				OBJ_222 /* ASLCKKSEncoderTests.swift in Sources */,
+				OBJ_223 /* ASLCipherTextTests.swift in Sources */,
+				OBJ_224 /* ASLCoefficientModulusTests.swift in Sources */,
+				OBJ_225 /* ASLComplexTypeTests.swift in Sources */,
+				OBJ_226 /* ASLDecryptorTests.swift in Sources */,
+				OBJ_227 /* ASLEncryptionParametersTests.swift in Sources */,
+				OBJ_228 /* ASLEncryptorTests.swift in Sources */,
+				OBJ_229 /* ASLEvaluatorTests.swift in Sources */,
+				OBJ_230 /* ASLGaloisKeysTests.swift in Sources */,
+				OBJ_231 /* ASLIntegerEncoderTests.swift in Sources */,
+				OBJ_232 /* ASLKSwitchKeysTests.swift in Sources */,
+				OBJ_233 /* ASLKeyGeneratorTests.swift in Sources */,
+				OBJ_234 /* ASLMemoryManagerProfileFixedTests.swift in Sources */,
+				OBJ_235 /* ASLMemoryManagerProfileGlobalTests.swift in Sources */,
+				OBJ_236 /* ASLMemoryManagerProfileThreadLocalTests.swift in Sources */,
+				OBJ_237 /* ASLMemoryManagerTests.swift in Sources */,
+				OBJ_238 /* ASLMemoryPoolHandleTests.swift in Sources */,
+				OBJ_239 /* ASLParmsIdTypeTests.swift in Sources */,
+				OBJ_240 /* ASLPlainModulusTests.swift in Sources */,
+				OBJ_241 /* ASLPlainTextTests.swift in Sources */,
+				OBJ_242 /* ASLPublicKeyTests.swift in Sources */,
+				OBJ_243 /* ASLRelinearizationKeysTests.swift in Sources */,
+				OBJ_244 /* ASLRnsBaseTests.swift in Sources */,
+				OBJ_245 /* ASLSealContextDataTests.swift in Sources */,
+				OBJ_246 /* ASLSealContextTests.swift in Sources */,
+				OBJ_247 /* ASLSecretKeyTests.swift in Sources */,
+				OBJ_248 /* ASLSmallModulusTests.swift in Sources */,
+				OBJ_249 /* ASLSmallNttTablesTests.swift in Sources */,
+				OBJ_250 /* ASLValidityCheckerTests.swift in Sources */,
+				OBJ_251 /* BFVBasics.swift in Sources */,
+				OBJ_252 /* CKKSBasics.swift in Sources */,
+				OBJ_253 /* Encoders.swift in Sources */,
+				OBJ_254 /* Levels.swift in Sources */,
+				OBJ_255 /* Performance.swift in Sources */,
+				OBJ_256 /* Rotation.swift in Sources */,
+				OBJ_257 /* ASLEncryptionParameterQualifiers+Extensions.swift in Sources */,
+				OBJ_258 /* ASLGaloisKeys+Extensions.swift in Sources */,
+				OBJ_259 /* ASLParametersIdType+Extensions.swift in Sources */,
+				OBJ_260 /* ASLSealContext+Extensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		OBJ_213 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "AppleSeal::AppleSealTests" /* AppleSealTests */;
+			targetProxy = E493CF4C2484931800FC4FC2 /* PBXContainerItemProxy */;
+		};
+		OBJ_263 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "AppleSeal::AppleSeal" /* AppleSeal */;
+			targetProxy = E493CF4B2484931800FC4FC2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		OBJ_165 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++1z";
+				DEFINES_MODULE = NO;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/Sources/AppleSeal/include",
+					"$(SRCROOT)/Sources/seal",
+					Sources/AppleSeal/include/AppleSeal,
+				);
+				INFOPLIST_FILE = AppleSeal.xcodeproj/AppleSeal_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-I/usr/local/include/SEAL-3.5",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-L/usr/local/lib",
+					"-lseal-3.5",
+				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -I/usr/local/include/SEAL-3.5";
+				PRODUCT_BUNDLE_IDENTIFIER = AppleSeal;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				TARGET_NAME = AppleSeal;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		OBJ_166 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++1z";
+				DEFINES_MODULE = NO;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/Sources/AppleSeal/include",
+					"$(SRCROOT)/Sources/seal",
+					Sources/AppleSeal/include/AppleSeal,
+				);
+				INFOPLIST_FILE = AppleSeal.xcodeproj/AppleSeal_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-I/usr/local/include/SEAL-3.5",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-L/usr/local/lib",
+					"-lseal-3.5",
+				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -I/usr/local/include/SEAL-3.5";
+				PRODUCT_BUNDLE_IDENTIFIER = AppleSeal;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				TARGET_NAME = AppleSeal;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+		OBJ_205 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -package-description-version 5.1";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		OBJ_206 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LD = /usr/bin/true;
+				OTHER_SWIFT_FLAGS = "-swift-version 5 -I $(TOOLCHAIN_DIR)/usr/lib/swift/pm/4_2 -target x86_64-apple-macosx10.10 -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -package-description-version 5.1";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		OBJ_211 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		OBJ_212 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		OBJ_216 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/Sources/AppleSeal/include",
+					"$(SRCROOT)/Sources/seal",
+				);
+				INFOPLIST_FILE = AppleSeal.xcodeproj/AppleSealTests_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-I/usr/local/include/SEAL-3.5",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-L/usr/local/lib",
+					"-lseal-3.5",
+				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -I/usr/local/include/SEAL-3.5 -Xcc -fmodule-map-file=$(SRCROOT)/Sources/AppleSeal/include/module.modulemap";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = AppleSealTests;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		OBJ_217 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/Sources/AppleSeal/include",
+					"$(SRCROOT)/Sources/seal",
+				);
+				INFOPLIST_FILE = AppleSeal.xcodeproj/AppleSealTests_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-I/usr/local/include/SEAL-3.5",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-L/usr/local/lib",
+					"-lseal-3.5",
+				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -I/usr/local/include/SEAL-3.5 -Xcc -fmodule-map-file=$(SRCROOT)/Sources/AppleSeal/include/module.modulemap";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = AppleSealTests;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+		OBJ_3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SWIFT_PACKAGE=1",
+					"DEBUG=1",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE DEBUG";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				USE_HEADERMAP = NO;
+			};
+			name = Debug;
+		};
+		OBJ_4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SWIFT_PACKAGE=1",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				USE_HEADERMAP = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		OBJ_164 /* Build configuration list for PBXNativeTarget "AppleSeal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_165 /* Debug */,
+				OBJ_166 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_2 /* Build configuration list for PBXProject "AppleSeal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_3 /* Debug */,
+				OBJ_4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_204 /* Build configuration list for PBXNativeTarget "AppleSealPackageDescription" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_205 /* Debug */,
+				OBJ_206 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_210 /* Build configuration list for PBXAggregateTarget "AppleSealPackageTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_211 /* Debug */,
+				OBJ_212 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_215 /* Build configuration list for PBXNativeTarget "AppleSealTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_216 /* Debug */,
+				OBJ_217 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = OBJ_1 /* Project object */;
+}

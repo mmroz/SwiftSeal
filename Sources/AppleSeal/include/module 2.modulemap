@@ -1,0 +1,4 @@
+module AppleSeal {
+    umbrella header "AppleSeal.h"
+    export *
+}
