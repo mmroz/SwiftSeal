@@ -28,7 +28,7 @@
     for (ASLModulus * const modulusValue in moduluses) {
         modulusList.push_back(modulusValue.modulus);
     }
-    seal::util::RNSBase base = seal::util::RNSBase(modulusList, pool.memoryPoolHandle);
+    seal::util::RNSBase * base = new seal::util::RNSBase(modulusList, pool.memoryPoolHandle);
     return [[ASLRnsBase alloc] initWithRnsBase:base freeWhenDone:true];
 }
 
@@ -42,12 +42,13 @@
 
 # pragma mark - ASLRnsBase_Internal
 
-- (instancetype)initWithRnsBase:(seal::util::RNSBase)rnsBase freeWhenDone:(BOOL)freeWhenDone {
+- (instancetype)initWithRnsBase:(seal::util::RNSBase *)rnsBase
+                   freeWhenDone:(BOOL)freeWhenDone {
     self = [super init];
     if (self == nil) {
         return nil;
     }
-    _rnsBase = std::move(&rnsBase);
+    _rnsBase = rnsBase;
     _freeWhenDone = freeWhenDone;
     return self;
 }
@@ -59,7 +60,7 @@
 # pragma mark - Public Methods
 
 - (ASLRnsBase *)getAtIndex:(std::size_t)index {
-    seal::util::RNSBase result = _rnsBase[index];
+    seal::util::RNSBase * result = new seal::util::RNSBase(_rnsBase[index]);;
     return [[ASLRnsBase alloc] initWithRnsBase:result freeWhenDone:true];
 }
 
@@ -84,21 +85,24 @@
 }
 
 - (ASLRnsBase *)extendWithModulus:(ASLModulus *)modulus {
-    return[[ASLRnsBase alloc] initWithRnsBase:_rnsBase->extend(modulus.modulus) freeWhenDone:true];
+    seal::util::RNSBase * base = new seal::util::RNSBase(_rnsBase->extend(modulus.modulus));
+    return[[ASLRnsBase alloc] initWithRnsBase:base freeWhenDone:true];
 }
 
 - (ASLRnsBase *)extendWithRnsBase:(ASLRnsBase *)rnsBase {
     seal::util::RNSBase base = *rnsBase.rnsBase;
-    seal::util::RNSBase extendedBase = _rnsBase->extend(base);
+    seal::util::RNSBase * extendedBase = new seal::util::RNSBase(_rnsBase->extend(base));
     return [[ASLRnsBase alloc] initWithRnsBase:extendedBase freeWhenDone:false];
 }
 
 - (ASLRnsBase *)drop {
-    return [[ASLRnsBase alloc] initWithRnsBase:_rnsBase->drop() freeWhenDone:true];
+    seal::util::RNSBase * base = new seal::util::RNSBase(_rnsBase->drop());
+    return [[ASLRnsBase alloc] initWithRnsBase:base freeWhenDone:true];
 }
 
 - (ASLRnsBase *)dropWithModulus:(ASLModulus *)modulus {
-    return [[ASLRnsBase alloc] initWithRnsBase:_rnsBase->drop(modulus.modulus) freeWhenDone:true];
+    seal::util::RNSBase * base = new seal::util::RNSBase(_rnsBase->drop(modulus.modulus));
+    return [[ASLRnsBase alloc] initWithRnsBase:base freeWhenDone:true];
 }
 
 - (NSNumber *)decomposeValue:(NSNumber *)value

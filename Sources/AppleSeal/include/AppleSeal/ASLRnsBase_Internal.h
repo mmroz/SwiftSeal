@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign, readonly) seal::util::RNSBase * rnsBase;
 
-- (instancetype)initWithRnsBase:(const seal::util::RNSBase)rnsBase freeWhenDone:(BOOL)freeWhenDone;
+- (instancetype)initWithRnsBase:(seal::util::RNSBase *)rnsBase freeWhenDone:(BOOL)freeWhenDone;
 
 @end
 

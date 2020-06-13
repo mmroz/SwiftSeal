@@ -115,12 +115,12 @@
     seal::Serializable<seal::GaloisKeys> *_serializableKeys;
 }
 
-- (instancetype)initWithSerializableGaloisKey:(seal::Serializable<seal::GaloisKeys>)serializableKeys {
+- (instancetype)initWithSerializableGaloisKey:(seal::Serializable<seal::GaloisKeys> *)serializableKeys {
     self = [super init];
     if (!self) {
         return nil;
     }
-    _serializableKeys = std::move(&serializableKeys);
+    _serializableKeys = serializableKeys;
     return self;
 }
 
@@ -139,6 +139,7 @@
 
 - (nullable instancetype)initWithCoder:(nonnull NSCoder *)coder {
     // Intentially left blank
+    return nil;
 }
 
 

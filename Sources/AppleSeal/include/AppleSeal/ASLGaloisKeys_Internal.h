@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ASLSerializableGaloisKeys ()
 
-- (instancetype)initWithSerializableGaloisKey:(seal::Serializable<seal::GaloisKeys>)serializableKeys;
+- (instancetype)initWithSerializableGaloisKey:(seal::Serializable<seal::GaloisKeys> *)serializableKeys;
 
 @end
 

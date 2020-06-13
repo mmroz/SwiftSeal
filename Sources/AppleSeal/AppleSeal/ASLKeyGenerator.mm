@@ -145,7 +145,7 @@
         galoisElementList.push_back(element.unsignedIntValue);
     }
     try {
-        seal::Serializable<seal::GaloisKeys> keys = _keyGenerator->galois_keys(galoisElementList);
+        seal::Serializable<seal::GaloisKeys> * keys = new seal::Serializable<seal::GaloisKeys>(_keyGenerator->galois_keys(galoisElementList));
         return [[ASLSerializableGaloisKeys alloc] initWithSerializableGaloisKey:keys];
     }  catch (std::logic_error const &e) {
         if (error != nil) {
@@ -198,7 +198,7 @@
         stepsList.push_back(step.intValue);
     }
     try {
-        seal::Serializable<seal::GaloisKeys> keys = _keyGenerator->galois_keys(stepsList);
+        seal::Serializable<seal::GaloisKeys> * keys = new seal::Serializable<seal::GaloisKeys>(_keyGenerator->galois_keys(stepsList));
         return [[ASLSerializableGaloisKeys alloc] initWithSerializableGaloisKey:keys];
 
     }  catch (std::logic_error const &e) {
@@ -235,7 +235,8 @@
 
 - (ASLSerializableGaloisKeys *)galoisKeys:(NSError **)error {
     try {
-        return [[ASLSerializableGaloisKeys alloc] initWithSerializableGaloisKey:_keyGenerator->galois_keys()];
+         seal::Serializable<seal::GaloisKeys> * keys = new seal::Serializable<seal::GaloisKeys>(_keyGenerator->galois_keys());
+        return [[ASLSerializableGaloisKeys alloc] initWithSerializableGaloisKey:keys];
     }  catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];

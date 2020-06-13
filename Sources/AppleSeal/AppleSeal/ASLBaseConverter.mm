@@ -75,11 +75,13 @@
 # pragma mark - Properties
 
 - (ASLRnsBase *)iBase {
-    return [[ASLRnsBase alloc] initWithRnsBase:_baseConverter->ibase() freeWhenDone:true];
+    seal::util::RNSBase * base = new seal::util::RNSBase(_baseConverter->ibase());
+    return [[ASLRnsBase alloc] initWithRnsBase:base freeWhenDone:true];
 }
 
 - (ASLRnsBase *)oBase {
-    return [[ASLRnsBase alloc] initWithRnsBase:_baseConverter->obase() freeWhenDone:true];
+    seal::util::RNSBase * base = new seal::util::RNSBase(_baseConverter->obase());
+    return [[ASLRnsBase alloc] initWithRnsBase:base freeWhenDone:true];
 }
 
 - (size_t)iBaseSize {
