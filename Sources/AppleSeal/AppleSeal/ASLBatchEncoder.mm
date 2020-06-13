@@ -64,8 +64,8 @@
 #pragma mark - Public Methods
 
 - (ASLPlainText *)encodeWithUnsignedValues:(NSArray<NSNumber *> *)unsignedValues
-                               destination:(ASLPlainText *)destination
                                      error:(NSError **)error {
+    NSParameterAssert(unsignedValues != nil);
     
     std::vector<std::uint64_t> valuesList;
     for (NSNumber * const value in unsignedValues) {
@@ -73,7 +73,7 @@
     }
     const std::vector<uint64_t> constValuesValues = valuesList;
     
-    auto sealPlainText = destination.sealPlainText;
+    seal::Plaintext sealPlainText = seal::Plaintext();
     
     try {
         _batchEncoder->encode(constValuesValues, sealPlainText);
@@ -88,8 +88,9 @@
 }
 
 - (ASLPlainText *)encodeWithSignedValues:(NSArray<NSNumber *> *)signedValues
-                             destination:(ASLPlainText *)destination
                                    error:(NSError **)error {
+    
+    NSParameterAssert(signedValues != nil);
     
     std::vector<std::uint64_t> valuesList;
     for (NSNumber * const value in signedValues) {
@@ -97,7 +98,7 @@
     }
     const std::vector<uint64_t> constValuesValues = valuesList;
     
-    auto sealPlainText = destination.sealPlainText;
+    seal::Plaintext sealPlainText = seal::Plaintext();
     
     try {
         _batchEncoder->encode(constValuesValues, sealPlainText);
@@ -146,21 +147,14 @@
     return nil;
 }
 
-- (NSArray<NSNumber *> *)decodeWithPlainText:(ASLPlainText*)plainText
-                         unsignedDestination:(NSArray<NSNumber *>*)unsignedDestination
+- (NSArray<NSNumber *> *)decodeUnsignedValuesWithPlainText:(ASLPlainText*)plainText
                                        error:(NSError **)error {
     NSParameterAssert(plainText != nil);
-    NSParameterAssert(unsignedDestination != nil);
     
-    std::vector<std::uint64_t> destinationValuesList;
-    for (NSNumber * const value in unsignedDestination) {
-        destinationValuesList.push_back(value.intValue);
-    }
-    
-    auto sealPlainText = plainText.sealPlainText;
+    std::vector<std::uint64_t> destinationValuesList = {};
     
     try {
-        _batchEncoder->decode(sealPlainText, destinationValuesList);
+        _batchEncoder->decode(plainText.sealPlainText, destinationValuesList);
         NSMutableArray<NSNumber *> * results = [[NSMutableArray alloc] initWithCapacity:destinationValuesList.size()];
         for (std::uint64_t & value : destinationValuesList) {
             [results addObject:[[NSNumber alloc]initWithFloat:value]];
@@ -175,21 +169,14 @@
     return nil;
 }
 
-- (NSArray<NSNumber *> *)decodeWithPlainText:(ASLPlainText*)plainText
-                           signedDestination:(NSArray<NSNumber *>*)signedDestination
+- (NSArray<NSNumber *> *)decodeSignedValuesWithPlainText:(ASLPlainText*)plainText
                                        error:(NSError **)error {
     NSParameterAssert(plainText != nil);
-    NSParameterAssert(signedDestination != nil);
     
     std::vector<std::uint64_t> destinationValuesList;
-    for (NSNumber * const value in signedDestination) {
-        destinationValuesList.push_back(value.intValue);
-    }
-    
-    auto sealPlainText = plainText.sealPlainText;
-    
+
     try {
-        _batchEncoder->decode(sealPlainText, destinationValuesList);
+        _batchEncoder->decode(plainText.sealPlainText, destinationValuesList);
          NSMutableArray<NSNumber *> * results = [[NSMutableArray alloc] initWithCapacity:destinationValuesList.size()];
            for (std::uint64_t & value : destinationValuesList) {
                [results addObject:[[NSNumber alloc]initWithFloat:value]];
@@ -209,7 +196,7 @@
                       error:(NSError **)error {
     NSParameterAssert(plainText != nil);
     
-    auto sealPlainText = plainText.sealPlainText;
+    seal::Plaintext sealPlainText = plainText.sealPlainText;
     
     try {
         _batchEncoder->decode(sealPlainText);
@@ -229,7 +216,7 @@
     NSParameterAssert(plainText != nil);
     NSParameterAssert(pool != nil);
     
-    auto sealPlainText = plainText.sealPlainText;
+    seal::Plaintext sealPlainText = plainText.sealPlainText;
     
     try {
         _batchEncoder->decode(sealPlainText, pool.memoryPoolHandle);

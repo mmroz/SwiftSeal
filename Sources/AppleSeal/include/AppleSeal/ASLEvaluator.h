@@ -103,8 +103,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 -(ASLCipherText * _Nullable)negate:(ASLCipherText *)encrypted
-   detination:(ASLCipherText *)destination
-        error:(NSError **)error;
+                             error:(NSError **)error;
 
 /*!
  Negates a ciphertext.
@@ -114,7 +113,7 @@ NS_ASSUME_NONNULL_BEGIN
  parameters
  */
 -(ASLCipherText * _Nullable)negateInplace:(ASLCipherText *)encrypted
-               error:(NSError **)error;
+                                    error:(NSError **)error;
 
 /*!
  Adds two ciphertexts. This function adds together encrypted1 and encrypted2
@@ -130,8 +129,8 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)addInplace:(ASLCipherText *)encrypted1
-       encrypted2:(ASLCipherText *)encrypted2
-            error:(NSError **)error;
+                            encrypted2:(ASLCipherText *)encrypted2
+                                 error:(NSError **)error;
 
 /*!
  Adds two ciphertexts. This function adds together encrypted1 and encrypted2
@@ -139,7 +138,6 @@ NS_ASSUME_NONNULL_BEGIN
  
  @param encrypted1 The first ciphertext to add
  @param encrypted2 The second ciphertext to add
- @param destination The ciphertext to overwrite with the negated result
  @throws ASL_SealInvalidParameter if encrypted1 or encrypted2 is not valid for
  the encryption parameters
  @throws ASL_SealInvalidParameter if encrypted1 and encrypted2 are in different
@@ -148,16 +146,14 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)add:(ASLCipherText *)encrypted1
-encrypted2:(ASLCipherText *)encrypted2
-destination:(ASLCipherText *)destination
-     error:(NSError **)error;
+                     encrypted2:(ASLCipherText *)encrypted2
+                          error:(NSError **)error;
 
 /*!
  Adds together a vector of ciphertexts and stores the result in the destination
  parameter.
  
  @param encrypteds The ciphertexts to add
- @param destination The ciphertext to overwrite with the addition result
  @throws ASL_SealInvalidParameter if encrypteds is empty
  @throws ASL_SealInvalidParameter if the encrypteds are not valid for the encryption
  parameters
@@ -167,8 +163,7 @@ destination:(ASLCipherText *)destination
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)addMany:(NSArray<ASLCipherText *> *)encrypteds
-   destination:(ASLCipherText *)destination
-         error:(NSError **)error;
+                              error:(NSError **)error;
 
 /*!
  Subtracts two ciphertexts. This function computes the difference of encrypted1
@@ -184,8 +179,8 @@ destination:(ASLCipherText *)destination
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)subInplace:(ASLCipherText *)encrypted1
-       encrypted2:(ASLCipherText *)encrypted2
-            error:(NSError **)error;
+                            encrypted2:(ASLCipherText *)encrypted2
+                                 error:(NSError **)error;
 
 /*!
  Subtracts two ciphertexts. This function computes the difference of encrypted1
@@ -193,7 +188,6 @@ destination:(ASLCipherText *)destination
  
  @param encrypted1 The ciphertext to subtract from
  @param encrypted2 The ciphertext to subtract
- @param destination The ciphertext to overwrite with the negated result
  @throws ASL_SealInvalidParameter if encrypted1 or encrypted2 is not valid for the
  encryption parameters
  @throws ASL_SealInvalidParameter if encrypted1 and encrypted2 are in different
@@ -202,9 +196,9 @@ destination:(ASLCipherText *)destination
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)sub:(ASLCipherText *)encrypted1
-encrypted2:(ASLCipherText *)encrypted2
-destination:(ASLCipherText *)destination
-     error:(NSError **)error;
+                     encrypted2:(ASLCipherText *)encrypted2
+
+                          error:(NSError **)error;
 
 /*!
  Multiplies two ciphertexts. This functions computes the product of encrypted1
@@ -223,8 +217,8 @@ destination:(ASLCipherText *)destination
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)multiplyInplace:(ASLCipherText *)encrypted1
-            encrypted2:(ASLCipherText *)encrypted2
-                 error:(NSError **)error;
+                                 encrypted2:(ASLCipherText *)encrypted2
+                                      error:(NSError **)error;
 
 /*!
  @param encrypted1 The first ciphertext to multiply
@@ -240,9 +234,9 @@ destination:(ASLCipherText *)destination
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)multiplyInplace:(ASLCipherText *)encrypted1
-            encrypted2:(ASLCipherText *)encrypted2
-                  pool:(ASLMemoryPoolHandle *)pool
-                 error:(NSError **)error;
+                                 encrypted2:(ASLCipherText *)encrypted2
+                                       pool:(ASLMemoryPoolHandle *)pool
+                                      error:(NSError **)error;
 
 /*!
  Multiplies two ciphertexts. This functions computes the product of encrypted1
@@ -252,7 +246,6 @@ destination:(ASLCipherText *)destination
  
  @param encrypted1 The first ciphertext to multiply
  @param encrypted2 The second ciphertext to multiply
- @param destination The ciphertext to overwrite with the multiplication result
  @param pool The MemoryPoolHandle pointing to a valid memory pool
  @throws ASL_SealInvalidParameter if encrypted1 or encrypted2 is not valid for the
  encryption parameters
@@ -264,10 +257,9 @@ destination:(ASLCipherText *)destination
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)multiply:(ASLCipherText *)encrypted1
-     encrypted2:(ASLCipherText *)encrypted2
-    destination:(ASLCipherText *)destination
-           pool:(ASLMemoryPoolHandle *)pool
-          error:(NSError **)error;
+                          encrypted2:(ASLCipherText *)encrypted2
+                                pool:(ASLMemoryPoolHandle *)pool
+                               error:(NSError **)error;
 
 /*!
  Multiplies two ciphertexts. This functions computes the product of encrypted1
@@ -277,7 +269,6 @@ destination:(ASLCipherText *)destination
  
  @param encrypted1 The first ciphertext to multiply
  @param encrypted2 The second ciphertext to multiply
- @param destination The ciphertext to overwrite with the multiplication result
  @throws ASL_SealInvalidParameter if encrypted1 or encrypted2 is not valid for the
  encryption parameters
  @throws ASL_SealInvalidParameter if encrypted1 or encrypted2 is not in the default
@@ -287,9 +278,8 @@ destination:(ASLCipherText *)destination
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)multiply:(ASLCipherText *)encrypted1
-     encrypted2:(ASLCipherText *)encrypted2
-    destination:(ASLCipherText *)destination
-          error:(NSError **)error;
+                          encrypted2:(ASLCipherText *)encrypted2
+                               error:(NSError **)error;
 
 /*!
  Squares a ciphertext. This functions computes the square of encrypted. Dynamic
@@ -305,7 +295,7 @@ destination:(ASLCipherText *)destination
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)squareInplace:(ASLCipherText *)encrypted
-               error:(NSError **)error;
+                                    error:(NSError **)error;
 
 /*!
  Squares a ciphertext. This functions computes the square of encrypted. Dynamic
@@ -323,8 +313,8 @@ destination:(ASLCipherText *)destination
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)squareInplace:(ASLCipherText *)encrypted
-                pool:(ASLMemoryPoolHandle *)pool
-               error:(NSError **)error;
+                                     pool:(ASLMemoryPoolHandle *)pool
+                                    error:(NSError **)error;
 
 /*!
  Squares a ciphertext. This functions computes the square of encrypted and
@@ -333,7 +323,6 @@ destination:(ASLCipherText *)destination
  MemoryPoolHandle.
  
  @param encrypted The ciphertext to square
- @param destination The ciphertext to overwrite with the square
  @param pool The MemoryPoolHandle pointing to a valid memory pool
  @throws ASL_SealInvalidParameter if encrypted is not valid for the encryption
  parameters
@@ -344,9 +333,9 @@ destination:(ASLCipherText *)destination
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)square:(ASLCipherText *)encrypted
-  destination:(ASLCipherText *)destination
-         pool:(ASLMemoryPoolHandle *)pool
-        error:(NSError **)error;
+
+                              pool:(ASLMemoryPoolHandle *)pool
+                             error:(NSError **)error;
 
 /*!
  Squares a ciphertext. This functions computes the square of encrypted and
@@ -355,7 +344,6 @@ destination:(ASLCipherText *)destination
  MemoryPoolHandle.
  
  @param encrypted The ciphertext to square
- @param destination The ciphertext to overwrite with the square
  @throws ASL_SealInvalidParameter if encrypted is not valid for the encryption
  parameters
  @throws ASL_SealInvalidParameter if encrypted is not in the default NTT form
@@ -364,8 +352,8 @@ destination:(ASLCipherText *)destination
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)square:(ASLCipherText *)encrypted
-  destination:(ASLCipherText *)destination
-        error:(NSError **)error;
+
+                             error:(NSError **)error;
 
 /*!
  Relinearizes a ciphertext. This functions relinearizes encrypted, reducing
@@ -386,8 +374,8 @@ destination:(ASLCipherText *)destination
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)relinearizeInplace:(ASLCipherText *)encrypted
-      relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
-                    error:(NSError **)error;
+                           relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
+                                         error:(NSError **)error;
 /*!
  Relinearizes a ciphertext. This functions relinearizes encrypted, reducing
  its size down to 2. If the size of encrypted is K+1, the given relinearization
@@ -409,9 +397,9 @@ destination:(ASLCipherText *)destination
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)relinearizeInplace:(ASLCipherText *)encrypted
-      relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
-                     pool:(ASLMemoryPoolHandle *)pool
-                    error:(NSError **)error;
+                           relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
+                                          pool:(ASLMemoryPoolHandle *)pool
+                                         error:(NSError **)error;
 
 /*!
  Relinearizes a ciphertext. This functions relinearizes encrypted, reducing
@@ -422,7 +410,6 @@ destination:(ASLCipherText *)destination
  
  @param encrypted The ciphertext to relinearize
  @param relinearizationKeys The relinearization keys
- @param destination The ciphertext to overwrite with the relinearized result
  @throws ASL_SealInvalidParameter if encrypted or relin_keys is not valid for the
  encryption parameters
  @throws ASL_SealInvalidParameter if encrypted is not in the default NTT form
@@ -433,9 +420,9 @@ destination:(ASLCipherText *)destination
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)relinearize:(ASLCipherText *)encrypted
-relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
-       destination:(ASLCipherText *)destination
-             error:(NSError **)error;
+                    relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
+
+                                  error:(NSError **)error;
 
 /*!
  Relinearizes a ciphertext. This functions relinearizes encrypted, reducing
@@ -446,7 +433,6 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  
  @param encrypted The ciphertext to relinearize
  @param relinearizationKeys The relinearization keys
- @param destination The ciphertext to overwrite with the relinearized result
  @param pool The MemoryPoolHandle pointing to a valid memory pool
  @throws ASL_SealInvalidParameter if encrypted or relin_keys is not valid for the
  encryption parameters
@@ -459,10 +445,10 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)relinearize:(ASLCipherText *)encrypted
-relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
-       destination:(ASLCipherText *)destination
-              pool:(ASLMemoryPoolHandle *)pool
-             error:(NSError **)error;
+                    relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
+
+                                   pool:(ASLMemoryPoolHandle *)pool
+                                  error:(NSError **)error;
 
 /*!
  Given a ciphertext encrypted modulo q_1...q_k, this function switches the
@@ -471,7 +457,6 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  the memory pool pointed to by the given MemoryPoolHandle.
  
  @param encrypted The ciphertext to be switched to a smaller modulus
- @param destination The ciphertext to overwrite with the modulus switched result
  @throws ASL_SealInvalidParameter if encrypted is not valid for the encryption parameters
  @throws ASL_SealInvalidParameter if encrypted is not in the default NTT form
  @throws ASL_SealInvalidParameter if encrypted is already at lowest level
@@ -480,12 +465,10 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)modSwitchToNext:(ASLCipherText *)encrypted
-           destination:(ASLCipherText *)destination
-                 error:(NSError **)error;
+                                      error:(NSError **)error;
 
-/*
+/*!
  @param encrypted The ciphertext to be switched to a smaller modulus
- @param destination The ciphertext to overwrite with the modulus switched result
  @param pool The MemoryPoolHandle pointing to a valid memory pool
  @throws ASL_SealInvalidParameter if encrypted is not valid for the encryption parameters
  @throws ASL_SealInvalidParameter if encrypted is not in the default NTT form
@@ -496,9 +479,9 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)modSwitchToNext:(ASLCipherText *)encrypted
-           destination:(ASLCipherText *)destination
-                  pool:(ASLMemoryPoolHandle *)pool
-                 error:(NSError **)error;
+
+                                       pool:(ASLMemoryPoolHandle *)pool
+                                      error:(NSError **)error;
 
 /*!
  Given a ciphertext encrypted modulo q_1...q_k, this function switches the
@@ -516,8 +499,8 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)modSwitchToNextInplace:(ASLCipherText *)encrypted
-                         pool:(ASLMemoryPoolHandle *)pool
-                        error:(NSError **)error;
+                                              pool:(ASLMemoryPoolHandle *)pool
+                                             error:(NSError **)error;
 
 /*!
  Given a ciphertext encrypted modulo q_1...q_k, this function switches the
@@ -533,7 +516,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)modSwitchToNextInplace:(ASLCipherText *)encrypted
-                        error:(NSError **)error;
+                                             error:(NSError **)error;
 
 /*!
  Modulus switches an NTT transformed plaintext from modulo q_1...q_k down
@@ -546,8 +529,8 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealInvalidParameter if, when using scheme_type::CKKS, the scale is too
  large for the new encryption parameters
  */
--(ASLCipherText * _Nullable)modSwitchToNext:(ASLPlainText *)plain
-                 error:(NSError **)error;
+-(ASLCipherText * _Nullable)modSwitchToNextWithPlain:(ASLPlainText *)plain
+                                               error:(NSError **)error;
 
 /*!
  Given a ciphertext encrypted modulo q_1...q_k, this function switches the
@@ -569,9 +552,9 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)modSwitchToInplace:(ASLCipherText *)encrypted
-             parametersId:(ASLParametersIdType)parametersId
-                     pool:(ASLMemoryPoolHandle *)pool
-                    error:(NSError **)error;
+                                  parametersId:(ASLParametersIdType)parametersId
+                                          pool:(ASLMemoryPoolHandle *)pool
+                                         error:(NSError **)error;
 
 /*!
  Given a ciphertext encrypted modulo q_1...q_k, this function switches the
@@ -591,8 +574,8 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)modSwitchToInplace:(ASLCipherText *)encrypted
-             parametersId:(ASLParametersIdType)parametersId
-                    error:(NSError **)error;
+                                  parametersId:(ASLParametersIdType)parametersId
+                                         error:(NSError **)error;
 /*!
  Given a ciphertext encrypted modulo q_1...q_k, this function switches the
  modulus down until the parameters reach the given parms_id and stores the
@@ -601,7 +584,6 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  
  @param encrypted The ciphertext to be switched to a smaller modulus
  @param parametersId The target parms_id
- @param destination The ciphertext to overwrite with the modulus switched result
  @param pool The MemoryPoolHandle pointing to a valid memory pool
  @throws ASL_SealInvalidParameter if encrypted is not valid for the encryption parameters
  @throws ASL_SealInvalidParameter if encrypted is not in the default NTT form
@@ -614,10 +596,10 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)modSwitchTo:(ASLCipherText *)encrypted
-      parametersId:(ASLParametersIdType)parametersId
-       destination:(ASLCipherText *)destination
-              pool:(ASLMemoryPoolHandle *)pool
-             error:(NSError **)error;
+                           parametersId:(ASLParametersIdType)parametersId
+
+                                   pool:(ASLMemoryPoolHandle *)pool
+                                  error:(NSError **)error;
 
 /*!
  Given a ciphertext encrypted modulo q_1...q_k, this function switches the
@@ -627,7 +609,6 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  
  @param encrypted The ciphertext to be switched to a smaller modulus
  @param parametersId The target parms_id
- @param destination The ciphertext to overwrite with the modulus switched result
  @throws ASL_SealInvalidParameter if encrypted is not valid for the encryption parameters
  @throws ASL_SealInvalidParameter if encrypted is not in the default NTT form
  @throws ASL_SealInvalidParameter if parms_id is not valid for the encryption parameters
@@ -638,9 +619,9 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)modSwitchTo:(ASLCipherText *)encrypted
-      parametersId:(ASLParametersIdType)parametersId
-       destination:(ASLCipherText *)destination
-             error:(NSError **)error;
+                           parametersId:(ASLParametersIdType)parametersId
+
+                                  error:(NSError **)error;
 
 /*!
  Given an NTT transformed plaintext modulo q_1...q_k, this function switches
@@ -657,8 +638,8 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  large for the new encryption parameters
  */
 -(ASLCipherText * _Nullable)modSwitchToInplaceWithPlain:(ASLPlainText *)plain
-                      parametersId:(ASLParametersIdType)parametersId
-                             error:(NSError **)error;
+                                           parametersId:(ASLParametersIdType)parametersId
+                                                  error:(NSError **)error;
 
 /*!
  Given an NTT transformed plaintext modulo q_1...q_k, this function switches
@@ -667,7 +648,6 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  
  @param plain The plaintext to be switched to a smaller modulus
  @param parametersId The target parms_id
- @param destination The plaintext to overwrite with the modulus switched result
  @throws ASL_SealInvalidParameter if plain is not in NTT form
  @throws ASL_SealInvalidParameter if plain is not valid for the encryption parameters
  @throws ASL_SealInvalidParameter if parms_id is not valid for the encryption parameters
@@ -677,9 +657,8 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  large for the new encryption parameters
  */
 -(ASLPlainText * _Nullable)modSwitchToWithPlain:(ASLPlainText *)plain
-               parametersId:(ASLParametersIdType)parametersId
-                destination:(ASLPlainText *)destination
-                      error:(NSError **)error;
+                                   parametersId:(ASLParametersIdType)parametersId
+                                          error:(NSError **)error;
 
 /*!
  Given a ciphertext encrypted modulo q_1...q_k, this function switches the
@@ -690,7 +669,6 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  
  @param encrypted The ciphertext to be switched to a smaller modulus
  @param pool The MemoryPoolHandle pointing to a valid memory pool
- @param destination The ciphertext to overwrite with the modulus switched result
  @throws ASL_SealInvalidParameter if the scheme is invalid for rescaling
  @throws ASL_SealInvalidParameter if encrypted is not valid for the encryption parameters
  @throws ASL_SealInvalidParameter if encrypted is not in the default NTT form
@@ -699,9 +677,8 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)rescaleToNext:(ASLCipherText *)encrypted
-         destination:(ASLCipherText *)destination
-                pool:(ASLMemoryPoolHandle *)pool
-               error:(NSError **)error;
+                                     pool:(ASLMemoryPoolHandle *)pool
+                                    error:(NSError **)error;
 
 /*!
  Given a ciphertext encrypted modulo q_1...q_k, this function switches the
@@ -711,7 +688,6 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  MemoryPoolHandle.
  
  @param encrypted The ciphertext to be switched to a smaller modulus
- @param destination The ciphertext to overwrite with the modulus switched result
  @throws ASL_SealInvalidParameter if the scheme is invalid for rescaling
  @throws ASL_SealInvalidParameter if encrypted is not valid for the encryption parameters
  @throws ASL_SealInvalidParameter if encrypted is not in the default NTT form
@@ -719,8 +695,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)rescaleToNext:(ASLCipherText *)encrypted
-         destination:(ASLCipherText *)destination
-               error:(NSError **)error;
+                                    error:(NSError **)error;
 /*!
  Given a ciphertext encrypted modulo q_1...q_k, this function switches the
  modulus down to q_1...q_{k-1} and scales the message down accordingly. Dynamic
@@ -737,8 +712,8 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)rescaleToNextInplace:(ASLCipherText *)encrypted
-                       pool:(ASLMemoryPoolHandle *)pool
-                      error:(NSError **)error;
+                                            pool:(ASLMemoryPoolHandle *)pool
+                                           error:(NSError **)error;
 /*!
  Given a ciphertext encrypted modulo q_1...q_k, this function switches the
  modulus down to q_1...q_{k-1} and scales the message down accordingly. Dynamic
@@ -753,7 +728,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)rescaleToNextInplace:(ASLCipherText *)encrypted
-                      error:(NSError **)error;
+                                           error:(NSError **)error;
 
 /*!
  Given a ciphertext encrypted modulo q_1...q_k, this function switches the
@@ -774,9 +749,9 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)rescaleToInplace:(ASLCipherText *)encrypted
-           parametersId:(ASLParametersIdType)parametersId
-                   pool:(ASLMemoryPoolHandle *)pool
-                  error:(NSError **)error;
+                                parametersId:(ASLParametersIdType)parametersId
+                                        pool:(ASLMemoryPoolHandle *)pool
+                                       error:(NSError **)error;
 
 /*!
  Given a ciphertext encrypted modulo q_1...q_k, this function switches the
@@ -795,8 +770,8 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)rescaleToInplace:(ASLCipherText *)encrypted
-           parametersId:(ASLParametersIdType)parametersId
-                  error:(NSError **)error;
+                                parametersId:(ASLParametersIdType)parametersId
+                                       error:(NSError **)error;
 
 /*!
  Given a ciphertext encrypted modulo q_1...q_k, this function switches the
@@ -807,7 +782,6 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  
  @param encrypted The ciphertext to be switched to a smaller modulus
  @param parametersId The target parms_id
- @param destination The ciphertext to overwrite with the modulus switched result
  @param pool The MemoryPoolHandle pointing to a valid memory pool
  @throws ASL_SealInvalidParameter if the scheme is invalid for rescaling
  @throws ASL_SealInvalidParameter if encrypted is not valid for the encryption parameters
@@ -819,10 +793,9 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)rescaleTo:(ASLCipherText *)encrypted
-    parametersId:(ASLParametersIdType)parametersId
-     destination:(ASLCipherText *)destination
-            pool:(ASLMemoryPoolHandle *)pool
-           error:(NSError **)error;
+                         parametersId:(ASLParametersIdType)parametersId
+                                 pool:(ASLMemoryPoolHandle *)pool
+                                error:(NSError **)error;
 
 /*!
  Given a ciphertext encrypted modulo q_1...q_k, this function switches the
@@ -833,7 +806,6 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  
  @param encrypted The ciphertext to be switched to a smaller modulus
  @param parametersId The target parms_id
- @param destination The ciphertext to overwrite with the modulus switched result
  @throws ASL_SealInvalidParameter if the scheme is invalid for rescaling
  @throws ASL_SealInvalidParameter if encrypted is not valid for the encryption parameters
  @throws ASL_SealInvalidParameter if encrypted is not in the default NTT form
@@ -843,9 +815,8 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)rescaleTo:(ASLCipherText *)encrypted
-    parametersId:(ASLParametersIdType)parametersId
-     destination:(ASLCipherText *)destination
-           error:(NSError **)error;
+                         parametersId:(ASLParametersIdType)parametersId
+                                error:(NSError **)error;
 
 /*!
  Multiplies several ciphertexts together. This function computes the product
@@ -858,7 +829,6 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  
  @param encrypteds The ciphertexts to multiply
  @param relinearizationKeys The relinearization keys
- @param destination The ciphertext to overwrite with the multiplication result
  @param pool The MemoryPoolHandle pointing to a valid memory pool
  @throws ASL_SealLogicError if scheme is not scheme_type::BFV
  @throws ASL_SealInvalidParameter if encrypteds is empty
@@ -873,10 +843,9 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)multiplyMany:(NSArray<ASLCipherText*>*)encrypteds
-relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
-        destination:(ASLCipherText *)destination
-               pool:(ASLMemoryPoolHandle *)pool
-              error:(NSError **)error;
+                     relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
+                                    pool:(ASLMemoryPoolHandle *)pool
+                                   error:(NSError **)error;
 
 /*!
  Multiplies several ciphertexts together. This function computes the product
@@ -889,7 +858,6 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  
  @param encrypteds The ciphertexts to multiply
  @param relinearizationKeys The relinearization keys
- @param destination The ciphertext to overwrite with the multiplication result
  @throws ASL_SealLogicError if scheme is not scheme_type::BFV
  @throws ASL_SealInvalidParameter if encrypteds is empty
  @throws ASL_SealInvalidParameter if the ciphertexts or relin_keys are not valid for
@@ -902,9 +870,8 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)multiplyMany:(NSArray<ASLCipherText*>*)encrypteds
-relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
-        destination:(ASLCipherText *)destination
-              error:(NSError **)error;
+                     relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
+                                   error:(NSError **)error;
 
 /*!
  Exponentiates a ciphertext. This functions raises encrypted to a power.
@@ -931,10 +898,10 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)exponentiateInplace:(ASLCipherText *)encrypted
-                  exponent:(uint64_t)exponent
-       relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
-                      pool:(ASLMemoryPoolHandle *)pool
-                     error:(NSError **)error;
+                                       exponent:(uint64_t)exponent
+                            relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
+                                           pool:(ASLMemoryPoolHandle *)pool
+                                          error:(NSError **)error;
 
 /*!
  Exponentiates a ciphertext. This functions raises encrypted to a power.
@@ -959,9 +926,9 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)exponentiateInplace:(ASLCipherText *)encrypted
-                  exponent:(uint64_t)exponent
-       relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
-                     error:(NSError **)error;
+                                       exponent:(uint64_t)exponent
+                            relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
+                                          error:(NSError **)error;
 
 /*!
  Exponentiates a ciphertext. This functions raises encrypted to a power and
@@ -974,7 +941,6 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @param encrypted The ciphertext to exponentiate
  @param exponent The power to raise the ciphertext to
  @param relinearizationKeys The relinearization keys
- @param destination The ciphertext to overwrite with the power
  @param pool The MemoryPoolHandle pointing to a valid memory pool
  @throws ASL_SealLogicError if scheme is not scheme_type::BFV
  @throws ASL_SealInvalidParameter if encrypted or relin_keys is not valid for the
@@ -989,11 +955,10 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)exponentiate:(ASLCipherText *)encrypted
-           exponent:(uint64_t)exponent
-relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
-        destination:(ASLCipherText *)destination
-               pool:(ASLMemoryPoolHandle *)pool
-              error:(NSError **)error;
+                                exponent:(uint64_t)exponent
+                     relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
+                                    pool:(ASLMemoryPoolHandle *)pool
+                                   error:(NSError **)error;
 
 /*!
  Exponentiates a ciphertext. This functions raises encrypted to a power and
@@ -1006,7 +971,6 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @param encrypted The ciphertext to exponentiate
  @param exponent The power to raise the ciphertext to
  @param relinearizationKeys The relinearization keys
- @param destination The ciphertext to overwrite with the power
  @throws ASL_SealLogicError if scheme is not scheme_type::BFV
  @throws ASL_SealInvalidParameter if encrypted or relin_keys is not valid for the
  encryption parameters
@@ -1019,10 +983,9 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)exponentiate:(ASLCipherText *)encrypted
-           exponent:(uint64_t)exponent
-relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
-        destination:(ASLCipherText *)destination
-              error:(NSError **)error;
+                                exponent:(uint64_t)exponent
+                     relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
+                                   error:(NSError **)error;
 
 /*!
  Adds a ciphertext and a plaintext. The plaintext must be valid for the current
@@ -1036,8 +999,8 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)addPlainInplace:(ASLCipherText *)encrypted
-                 plain:(ASLPlainText *)plain
-                 error:(NSError **)error;
+                                      plain:(ASLPlainText *)plain
+                                      error:(NSError **)error;
 
 /*!
  Adds a ciphertext and a plaintext. This function adds a ciphertext and
@@ -1046,16 +1009,15 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  
  @param encrypted The ciphertext to add
  @param plain The plaintext to add
- @param destination The ciphertext to overwrite with the addition result
  @throws ASL_SealInvalidParameter if encrypted or plain is not valid for the
  encryption parameters
  @throws ASL_SealInvalidParameter if encrypted or plain is in NTT form
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)addPlain:(ASLCipherText *)encrypted
-          plain:(ASLPlainText *)plain
-    destination:(ASLCipherText *)destination
-          error:(NSError **)error;
+                               plain:(ASLPlainText *)plain
+
+                               error:(NSError **)error;
 
 /*!
  Subtracts a plaintext from a ciphertext. The plaintext must be valid for the
@@ -1069,8 +1031,8 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)subPlainInplace:(ASLCipherText *)encrypted
-                 plain:(ASLPlainText *)plain
-                 error:(NSError **)error;
+                                      plain:(ASLPlainText *)plain
+                                      error:(NSError **)error;
 
 /*!
  Subtracts a plaintext from a ciphertext. This function subtracts a plaintext
@@ -1079,16 +1041,15 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  
  @param encrypted The ciphertext to subtract from
  @param plain The plaintext to subtract
- @param destination The ciphertext to overwrite with the subtraction result
  @throws ASL_SealInvalidParameter if encrypted or plain is not valid for the
  encryption parameters
  @throws ASL_SealInvalidParameter if encrypted or plain is in NTT form
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)subPlain:(ASLCipherText *)encrypted
-          plain:(ASLPlainText *)plain
-    destination:(ASLCipherText *)destination
-          error:(NSError **)error;
+                               plain:(ASLPlainText *)plain
+
+                               error:(NSError **)error;
 
 /*!
  Multiplies a ciphertext with a plaintext. The plaintext must be valid for the
@@ -1108,9 +1069,9 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)multiplyPlainInplace:(ASLCipherText *)encrypted
-                      plain:(ASLPlainText *)plain
-                       pool:(ASLMemoryPoolHandle *)pool
-                      error:(NSError **)error;
+                                           plain:(ASLPlainText *)plain
+                                            pool:(ASLMemoryPoolHandle *)pool
+                                           error:(NSError **)error;
 
 /*!
  Multiplies a ciphertext with a plaintext. The plaintext must be valid for the
@@ -1128,8 +1089,8 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)multiplyPlainInplace:(ASLCipherText *)encrypted
-                      plain:(ASLPlainText *)plain
-                      error:(NSError **)error;
+                                           plain:(ASLPlainText *)plain
+                                           error:(NSError **)error;
 
 /*!
  Multiplies a ciphertext with a plaintext. This function multiplies
@@ -1140,7 +1101,6 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  
  @param encrypted The ciphertext to multiply
  @param plain The plaintext to multiply
- @param destination The ciphertext to overwrite with the multiplication result
  @param pool The MemoryPoolHandle pointing to a valid memory pool
  @throws ASL_SealInvalidParameter if the encrypted or plain is not valid for
  the encryption parameters
@@ -1152,10 +1112,9 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)multiplyPlain:(ASLCipherText *)encrypted
-               plain:(ASLPlainText *)plain
-         destination:(ASLCipherText *)destination
-                pool:(ASLMemoryPoolHandle *)pool
-               error:(NSError **)error;
+                                    plain:(ASLPlainText *)plain
+                                     pool:(ASLMemoryPoolHandle *)pool
+                                    error:(NSError **)error;
 
 /*!
  Multiplies a ciphertext with a plaintext. This function multiplies
@@ -1166,7 +1125,6 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  
  @param encrypted The ciphertext to multiply
  @param plain The plaintext to multiply
- @param destination The ciphertext to overwrite with the multiplication result
  @throws ASL_SealInvalidParameter if the encrypted or plain is not valid for
  the encryption parameters
  @throws ASL_SealInvalidParameter if encrypted and plain are in different NTT forms
@@ -1176,9 +1134,8 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)multiplyPlain:(ASLCipherText *)encrypted
-               plain:(ASLPlainText *)plain
-         destination:(ASLCipherText *)destination
-               error:(NSError **)error;
+                                    plain:(ASLPlainText *)plain
+                                    error:(NSError **)error;
 
 /*!
  Transforms a plaintext to NTT domain. This functions applies the Number
@@ -1201,9 +1158,9 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealInvalidParameter if pool is uninitialized
  */
 -(ASLCipherText * _Nullable)transformToNttInplace:(ASLPlainText *)plain
-                parametersId:(ASLParametersIdType)parametersId
-                        pool:(ASLMemoryPoolHandle *)pool
-                       error:(NSError **)error;
+                                     parametersId:(ASLParametersIdType)parametersId
+                                             pool:(ASLMemoryPoolHandle *)pool
+                                            error:(NSError **)error;
 
 /*!
  Transforms a plaintext to NTT domain. This functions applies the Number
@@ -1224,8 +1181,8 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  encryption parameters
  */
 -(ASLCipherText * _Nullable)transformToNttInplace:(ASLPlainText *)plain
-                parametersId:(ASLParametersIdType)parametersId
-                       error:(NSError **)error;
+                                     parametersId:(ASLParametersIdType)parametersId
+                                            error:(NSError **)error;
 
 /*!
  Transforms a plaintext to NTT domain. This functions applies the Number
@@ -1242,7 +1199,6 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  
  @param plain The plaintext to transform
  @param parametersId The parms_id with respect to which the NTT is done
- @param destinationNtt The plaintext to overwrite with the transformed result
  @param pool The MemoryPoolHandle pointing to a valid memory pool
  @throws ASL_SealInvalidParameter if plain is already in NTT form
  @throws ASL_SealInvalidParameter if plain or parms_id is not valid for the
@@ -1250,10 +1206,10 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealInvalidParameter if pool is uninitialized
  */
 -(ASLCipherText * _Nullable)transformToNtt:(ASLPlainText *)plain
-         parametersId:(ASLParametersIdType)parametersId
-       destinationNtt:(ASLPlainText *)destinationNtt
-                 pool:(ASLMemoryPoolHandle *)pool
-                error:(NSError **)error;
+                              parametersId:(ASLParametersIdType)parametersId
+                            destinationNtt:(ASLPlainText *)destinationNtt
+                                      pool:(ASLMemoryPoolHandle *)pool
+                                     error:(NSError **)error;
 
 /*!
  Transforms a plaintext to NTT domain. This functions applies the Number
@@ -1270,15 +1226,14 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  
  @param plain The plaintext to transform
  @param parametersId The parms_id with respect to which the NTT is done
- @param destinationNtt The plaintext to overwrite with the transformed result
  @throws ASL_SealInvalidParameter if plain is already in NTT form
  @throws ASL_SealInvalidParameter if plain or parms_id is not valid for the
  encryption parameters
  */
 -(ASLCipherText * _Nullable)transformToNtt:(ASLPlainText *)plain
-         parametersId:(ASLParametersIdType)parametersId
-       destinationNtt:(ASLPlainText *)destinationNtt
-                error:(NSError **)error;
+                              parametersId:(ASLParametersIdType)parametersId
+                            destinationNtt:(ASLPlainText *)destinationNtt
+                                     error:(NSError **)error;
 
 /*!
  Transforms a ciphertext to NTT domain. This functions applies David Harvey's
@@ -1291,7 +1246,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)transformToNttInplace:(ASLCipherText *)encrypted
-                       error:(NSError **)error;
+                                            error:(NSError **)error;
 
 /*!
  Transforms a ciphertext to NTT domain. This functions applies David Harvey's
@@ -1299,15 +1254,14 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  The result is stored in the destination_ntt parameter.
  
  @param encrypted The ciphertext to transform
- @param destinationNtt The ciphertext to overwrite with the transformed result
  @throws ASL_SealInvalidParameter if encrypted is not valid for the encryption
  parameters
  @throws ASL_SealInvalidParameter if encrypted is already in NTT form
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)transformToNtt:(ASLCipherText *)encrypted
-       destinationNtt:(ASLCipherText *)destinationNtt
-                error:(NSError **)error;
+                            destinationNtt:(ASLCipherText *)destinationNtt
+                                     error:(NSError **)error;
 
 /*!
  Transforms a ciphertext back from NTT domain. This functions applies the
@@ -1321,7 +1275,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)transformFromNttInplace:(ASLCipherText *)encryptedNtt
-                         error:(NSError **)error;
+                                              error:(NSError **)error;
 
 /*!
  Transforms a ciphertext back from NTT domain. This functions applies the
@@ -1329,15 +1283,13 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  polynomial of a ciphertext. The result is stored in the destination parameter.
  
  @param encryptedNtt The ciphertext to transform
- @param destination The ciphertext to overwrite with the transformed result
  @throws ASL_SealInvalidParameter if encrypted_ntt is not valid for the encryption
  parameters
  @throws ASL_SealInvalidParameter if encrypted_ntt is not in NTT form
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)transformFromNtt:(ASLCipherText *)encryptedNtt
-            destination:(ASLCipherText *)destination
-                  error:(NSError **)error;
+                                       error:(NSError **)error;
 
 /*!
  Applies a Galois automorphism to a ciphertext. To evaluate the Galois
@@ -1371,10 +1323,10 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)applyGaloisInplace:(ASLCipherText *)encrypted
-            galoisElement:(uint64_t)galoisElement
-                galoisKey:(ASLGaloisKeys *)galoisKey
-                     pool:(ASLMemoryPoolHandle *)pool
-                    error:(NSError **)error;
+                                 galoisElement:(uint64_t)galoisElement
+                                     galoisKey:(ASLGaloisKeys *)galoisKey
+                                          pool:(ASLMemoryPoolHandle *)pool
+                                         error:(NSError **)error;
 
 /*!
  Applies a Galois automorphism to a ciphertext. To evaluate the Galois
@@ -1406,9 +1358,9 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)applyGaloisInplace:(ASLCipherText *)encrypted
-            galoisElement:(uint64_t)galoisElement
-                galoisKey:(ASLGaloisKeys *)galoisKey
-                    error:(NSError **)error;
+                                 galoisElement:(uint64_t)galoisElement
+                                     galoisKey:(ASLGaloisKeys *)galoisKey
+                                         error:(NSError **)error;
 
 /*!
  Applies a Galois automorphism to a ciphertext and writes the result to the
@@ -1429,7 +1381,6 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @param encrypted The ciphertext to apply the Galois automorphism to
  @param galoisElement The Galois element
  @param galoisKey The Galois keys
- @param destination The ciphertext to overwrite with the result
  @param pool The MemoryPoolHandle pointing to a valid memory pool
  @throws ASL_SealInvalidParameter if encrypted or galois_keys is not valid for
  the encryption parameters
@@ -1444,11 +1395,10 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)applyGalois:(ASLCipherText *)encrypted
-     galoisElement:(uint64_t)galoisElement
-         galoisKey:(ASLGaloisKeys *)galoisKey
-       destination:(ASLCipherText *)destination
-              pool:(ASLMemoryPoolHandle *)pool
-             error:(NSError **)error;
+                          galoisElement:(uint64_t)galoisElement
+                              galoisKey:(ASLGaloisKeys *)galoisKey
+                                   pool:(ASLMemoryPoolHandle *)pool
+                                  error:(NSError **)error;
 
 /*!
  Applies a Galois automorphism to a ciphertext and writes the result to the
@@ -1469,7 +1419,6 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @param encrypted The ciphertext to apply the Galois automorphism to
  @param galoisElement The Galois element
  @param galoisKey The Galois keys
- @param destination The ciphertext to overwrite with the result
  @throws ASL_SealInvalidParameter if encrypted or galois_keys is not valid for
  the encryption parameters
  @throws ASL_SealInvalidParameter if galois_keys do not correspond to the top
@@ -1482,10 +1431,9 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)applyGalois:(ASLCipherText *)encrypted
-     galoisElement:(uint64_t)galoisElement
-         galoisKey:(ASLGaloisKeys *)galoisKey
-       destination:(ASLCipherText *)destination
-             error:(NSError **)error;
+                          galoisElement:(uint64_t)galoisElement
+                              galoisKey:(ASLGaloisKeys *)galoisKey
+                                  error:(NSError **)error;
 
 /*!
  Rotates plaintext matrix rows cyclically. When batching is used with the
@@ -1516,10 +1464,10 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)rotateRowsInplace:(ASLCipherText *)encrypted
-                   steps:(int)steps
-               galoisKey:(ASLGaloisKeys *)galoisKey
-                    pool:(ASLMemoryPoolHandle *)pool
-                   error:(NSError **)error;
+                                        steps:(int)steps
+                                    galoisKey:(ASLGaloisKeys *)galoisKey
+                                         pool:(ASLMemoryPoolHandle *)pool
+                                        error:(NSError **)error;
 
 /*!
  Rotates plaintext matrix rows cyclically. When batching is used with the
@@ -1548,9 +1496,9 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)rotateRowsInplace:(ASLCipherText *)encrypted
-                   steps:(int)steps
-               galoisKey:(ASLGaloisKeys *)galoisKey
-                   error:(NSError **)error;
+                                        steps:(int)steps
+                                    galoisKey:(ASLGaloisKeys *)galoisKey
+                                        error:(NSError **)error;
 
 /*!
  Rotates plaintext matrix rows cyclically. When batching is used with the
@@ -1565,7 +1513,6 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @param encrypted The ciphertext to rotate
  @param steps The number of steps to rotate (negative left, positive right)
  @param galoisKey The Galois keys
- @param destination The ciphertext to overwrite with the rotated result
  @param pool The MemoryPoolHandle pointing to a valid memory pool
  @throws ASL_SealLogicError if scheme is not scheme_type::BFV
  @throws ASL_SealLogicError if the encryption parameters do not support batching
@@ -1582,11 +1529,10 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)rotateRows:(ASLCipherText *)encrypted
-            steps:(int)steps
-        galoisKey:(ASLGaloisKeys *)galoisKey
-      destination:(ASLCipherText *)destination
-             pool:(ASLMemoryPoolHandle *)pool
-            error:(NSError **)error;
+                                 steps:(int)steps
+                             galoisKey:(ASLGaloisKeys *)galoisKey
+                                  pool:(ASLMemoryPoolHandle *)pool
+                                 error:(NSError **)error;
 
 /*!
  Rotates plaintext matrix rows cyclically. When batching is used with the
@@ -1601,7 +1547,6 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @param encrypted The ciphertext to rotate
  @param steps The number of steps to rotate (negative left, positive right)
  @param galoisKey The Galois keys
- @param destination The ciphertext to overwrite with the rotated result
  @throws ASL_SealLogicError if scheme is not scheme_type::BFV
  @throws ASL_SealLogicError if the encryption parameters do not support batching
  @throws ASL_SealInvalidParameter if encrypted or galois_keys is not valid for
@@ -1616,10 +1561,9 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)rotateRows:(ASLCipherText *)encrypted
-            steps:(int)steps
-        galoisKey:(ASLGaloisKeys *)galoisKey
-      destination:(ASLCipherText *)destination
-            error:(NSError **)error;
+                                 steps:(int)steps
+                             galoisKey:(ASLGaloisKeys *)galoisKey
+                                 error:(NSError **)error;
 
 /*!
  Rotates plaintext matrix columns cyclically. When batching is used with
@@ -1647,9 +1591,9 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)rotateColumnsInplace:(ASLCipherText *)encrypted
-                  galoisKey:(ASLGaloisKeys *)galoisKey
-                       pool:(ASLMemoryPoolHandle *)pool
-                      error:(NSError **)error;
+                                       galoisKey:(ASLGaloisKeys *)galoisKey
+                                            pool:(ASLMemoryPoolHandle *)pool
+                                           error:(NSError **)error;
 
 /*!
  Rotates plaintext matrix columns cyclically. When batching is used with
@@ -1675,8 +1619,8 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)rotateColumnsInplace:(ASLCipherText *)encrypted
-                  galoisKey:(ASLGaloisKeys *)galoisKey
-                      error:(NSError **)error;
+                                       galoisKey:(ASLGaloisKeys *)galoisKey
+                                           error:(NSError **)error;
 
 /*!
  Rotates plaintext matrix columns cyclically. When batching is used with
@@ -1689,7 +1633,6 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  
  @param encrypted The ciphertext to rotate
  @param galoisKey The Galois keys
- @param destination The ciphertext to overwrite with the rotated result
  @param pool The MemoryPoolHandle pointing to a valid memory pool
  @throws ASL_SealLogicError if scheme is not scheme_type::BFV
  @throws ASL_SealLogicError if the encryption parameters do not support batching
@@ -1705,10 +1648,9 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)rotateColumns:(ASLCipherText *)encrypted
-           galoisKey:(ASLGaloisKeys *)galoisKey
-         destination:(ASLCipherText *)destination
-                pool:(ASLMemoryPoolHandle *)pool
-               error:(NSError **)error;
+                                galoisKey:(ASLGaloisKeys *)galoisKey
+                                     pool:(ASLMemoryPoolHandle *)pool
+                                    error:(NSError **)error;
 
 /*!
  Rotates plaintext matrix columns cyclically. When batching is used with
@@ -1721,7 +1663,6 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  
  @param encrypted The ciphertext to rotate
  @param galoisKey The Galois keys
- @param destination The ciphertext to overwrite with the rotated result
  @throws ASL_SealLogicError if scheme is not scheme_type::BFV
  @throws ASL_SealLogicError if the encryption parameters do not support batching
  @throws ASL_SealInvalidParameter if encrypted or galois_keys is not valid for
@@ -1735,9 +1676,8 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)rotateColumns:(ASLCipherText *)encrypted
-           galoisKey:(ASLGaloisKeys *)galoisKey
-         destination:(ASLCipherText *)destination
-               error:(NSError **)error;
+                                galoisKey:(ASLGaloisKeys *)galoisKey
+                                    error:(NSError **)error;
 
 /*!
  Rotates plaintext vector cyclically. When using the CKKS scheme, this function
@@ -1766,10 +1706,10 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)rotateVectorInplace:(ASLCipherText *)encrypted
-                     steps:(int)steps
-                 galoisKey:(ASLGaloisKeys *)galoisKey
-                      pool:(ASLMemoryPoolHandle *)pool
-                     error:(NSError **)error;
+                                          steps:(int)steps
+                                      galoisKey:(ASLGaloisKeys *)galoisKey
+                                           pool:(ASLMemoryPoolHandle *)pool
+                                          error:(NSError **)error;
 
 /*!
  Rotates plaintext vector cyclically. When using the CKKS scheme, this function
@@ -1796,9 +1736,9 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)rotateVectorInplace:(ASLCipherText *)encrypted
-                     steps:(int)steps
-                 galoisKey:(ASLGaloisKeys *)galoisKey
-                     error:(NSError **)error;
+                                          steps:(int)steps
+                                      galoisKey:(ASLGaloisKeys *)galoisKey
+                                          error:(NSError **)error;
 
 /*!
  Rotates plaintext vector cyclically. When using the CKKS scheme, this function
@@ -1812,7 +1752,6 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @param encrypted The ciphertext to rotate
  @param steps The number of steps to rotate (negative left, positive right)
  @param galoisKey The Galois keys
- @param destination The ciphertext to overwrite with the rotated result
  @param pool The MemoryPoolHandle pointing to a valid memory pool
  @throws ASL_SealLogicError if scheme is not scheme_type::CKKS
  @throws ASL_SealInvalidParameter if encrypted or galois_keys is not valid for
@@ -1828,11 +1767,10 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)rotateVector:(ASLCipherText *)encrypted
-              steps:(int)steps
-          galoisKey:(ASLGaloisKeys *)galoisKey
-        destination:(ASLCipherText *)destination
-               pool:(ASLMemoryPoolHandle *)pool
-              error:(NSError **)error;
+                                   steps:(int)steps
+                               galoisKey:(ASLGaloisKeys *)galoisKey
+                                    pool:(ASLMemoryPoolHandle *)pool
+                                   error:(NSError **)error;
 
 /*!
  Rotates plaintext vector cyclically. When using the CKKS scheme, this function
@@ -1846,7 +1784,6 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @param encrypted The ciphertext to rotate
  @param steps The number of steps to rotate (negative left, positive right)
  @param galoisKey The Galois keys
- @param destination The ciphertext to overwrite with the rotated result
  @throws ASL_SealLogicError if scheme is not scheme_type::CKKS
  @throws ASL_SealInvalidParameter if encrypted or galois_keys is not valid for
  the encryption parameters
@@ -1860,10 +1797,9 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)rotateVector:(ASLCipherText *)encrypted
-              steps:(int)steps
-          galoisKey:(ASLGaloisKeys *)galoisKey
-        destination:(ASLCipherText *)destination
-              error:(NSError **)error;
+                                   steps:(int)steps
+                               galoisKey:(ASLGaloisKeys *)galoisKey
+                                   error:(NSError **)error;
 
 /*!
  Complex conjugates plaintext slot values. When using the CKKS scheme, this
@@ -1887,9 +1823,9 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)complexConjugateInplace:(ASLCipherText *)encrypted
-                     galoisKey:(ASLGaloisKeys *)galoisKey
-                          pool:(ASLMemoryPoolHandle *)pool
-                         error:(NSError **)error;
+                                          galoisKey:(ASLGaloisKeys *)galoisKey
+                                               pool:(ASLMemoryPoolHandle *)pool
+                                              error:(NSError **)error;
 
 /*!
  Complex conjugates plaintext slot values. When using the CKKS scheme, this
@@ -1911,8 +1847,8 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)complexConjugateInplace:(ASLCipherText *)encrypted
-                     galoisKey:(ASLGaloisKeys *)galoisKey
-                         error:(NSError **)error;
+                                          galoisKey:(ASLGaloisKeys *)galoisKey
+                                              error:(NSError **)error;
 
 /*!
  Complex conjugates plaintext slot values. When using the CKKS scheme, this
@@ -1923,7 +1859,6 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  
  @param encrypted The ciphertext to rotate
  @param galoisKey The Galois keys
- @param destination The ciphertext to overwrite with the rotated result
  @param pool The MemoryPoolHandle pointing to a valid memory pool
  @throws ASL_SealLogicError if scheme is not scheme_type::CKKS
  @throws ASL_SealInvalidParameter if encrypted or galois_keys is not valid for
@@ -1938,10 +1873,9 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)complexConjugate:(ASLCipherText *)encrypted
-              galoisKey:(ASLGaloisKeys *)galoisKey
-            destination:(ASLCipherText *)destination
-                   pool:(ASLMemoryPoolHandle *)pool
-                  error:(NSError **)error;
+                                   galoisKey:(ASLGaloisKeys *)galoisKey
+                                        pool:(ASLMemoryPoolHandle *)pool
+                                       error:(NSError **)error;
 
 /*!
  Complex conjugates plaintext slot values. When using the CKKS scheme, this
@@ -1952,7 +1886,6 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  
  @param encrypted The ciphertext to rotate
  @param galoisKey The Galois keys
- @param destination The ciphertext to overwrite with the rotated result
  @throws ASL_SealLogicError if scheme is not scheme_type::CKKS
  @throws ASL_SealInvalidParameter if encrypted or galois_keys is not valid for
  the encryption parameters
@@ -1965,9 +1898,8 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)complexConjugate:(ASLCipherText *)encrypted
-              galoisKey:(ASLGaloisKeys *)galoisKey
-            destination:(ASLCipherText *)destination
-                  error:(NSError **)error;
+                                   galoisKey:(ASLGaloisKeys *)galoisKey
+                                       error:(NSError **)error;
 @end
 
 NS_ASSUME_NONNULL_END

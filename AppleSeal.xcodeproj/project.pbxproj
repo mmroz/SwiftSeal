@@ -118,7 +118,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		"AppleSeal::AppleSeal::Product" /* AppleSeal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppleSeal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"AppleSeal::AppleSeal::Product" /* AppleSeal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AppleSeal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		"AppleSeal::AppleSealTests::Product" /* AppleSealTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppleSealTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_101 /* ASLMemoryManagerProfile_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLMemoryManagerProfile_Internal.h; sourceTree = "<group>"; };
 		OBJ_102 /* ASLMemoryManagerProfileThreadLocal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLMemoryManagerProfileThreadLocal.h; sourceTree = "<group>"; };
@@ -491,7 +491,7 @@
 			path = AppleSeal;
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -500,7 +500,6 @@
 				OBJ_159 /* Products */,
 				OBJ_162 /* README.md */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_7 /* Sources */ = {
@@ -589,7 +588,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_159 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -726,6 +725,8 @@
 					"$(inherited)",
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/Sources/AppleSeal/include",
@@ -767,6 +768,8 @@
 					"$(inherited)",
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/Sources/AppleSeal/include",

@@ -72,16 +72,11 @@ NS_ASSUME_NONNULL_BEGIN
  in the matrix can be at most equal to the plaintext modulus for it to represent
  a valid plaintext.
  
- If the destination plaintext overlaps the input values in memory, the behavior of
- this function is undefined.
- 
  @param unsignedValues The matrix of integers modulo plaintext modulus to batch
- @param destination The plaintext polynomial to overwrite with the result
  @throws ASLSealErrorCodeInvalidParameter if values is too large
  */
 - (ASLPlainText * _Nullable)encodeWithUnsignedValues:(NSArray<NSNumber *>*)unsignedValues
-                     destination:(ASLPlainText *)destination
-                           error:(NSError **)error;
+                                               error:(NSError **)error;
 
 /*!
  Creates a plaintext from a given matrix. This function "batches" a given matrix
@@ -92,16 +87,11 @@ NS_ASSUME_NONNULL_BEGIN
  in the matrix can be at most equal to the plaintext modulus for it to represent
  a valid plaintext.
  
- If the destination plaintext overlaps the input values in memory, the behavior of
- this function is undefined.
- 
  @param signedValues The matrix of integers modulo plaintext modulus to batch
- @param destination The plaintext polynomial to overwrite with the result
  @throws ASLSealErrorCodeInvalidParameter if values is too large
  */
 - (ASLPlainText * _Nullable)encodeWithSignedValues:(NSArray<NSNumber *>*)signedValues
-                   destination:(ASLPlainText *)destination
-                         error:(NSError **)error;
+                                             error:(NSError **)error;
 
 /*!
  Creates a plaintext from a given matrix. This function "batches" a given matrix
@@ -121,7 +111,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 
 - (ASLPlainText * _Nullable)encodeWithPlainText:(ASLPlainText*)plainText
-                      error:(NSError **)error;
+                                          error:(NSError **)error;
 
 /*!
  Creates a plaintext from a given matrix. This function "batches" a given matrix
@@ -141,8 +131,8 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASLSealErrorCodeInvalidParameter if pool is uninitialized
  */
 - (ASLPlainText * _Nullable)encodeWithPlainText:(ASLPlainText*)plainText
-                       pool:(ASLMemoryPoolHandle *)pool
-                      error:(NSError **)error;
+                                           pool:(ASLMemoryPoolHandle *)pool
+                                          error:(NSError **)error;
 
 /*!
  Inverse of encode. This function "unbatches" a given plaintext into a matrix
@@ -153,15 +143,13 @@ NS_ASSUME_NONNULL_BEGIN
  allocated from the memory pool pointed to by the given MemoryPoolHandle.
  
  @param plainText The plaintext polynomial to unbatch
- @param unsignedDestination The matrix to be overwritten with the values in the slots
  @parampool The MemoryPoolHandle pointing to a valid memory pool
  @throws ASLSealErrorCodeInvalidParameter if plain is not valid for the encryption parameters
  @throws ASLSealErrorCodeInvalidParameter if plain is in NTT form
  @throws ASLSealErrorCodeInvalidParameter if pool is uninitialized
  */
-- (NSArray<NSNumber *> * _Nullable)decodeWithPlainText:(ASLPlainText*)plainText
-        unsignedDestination:(NSArray<NSNumber *>*)unsignedDestination
-                      error:(NSError **)error;
+- (NSArray<NSNumber *> * _Nullable)decodeUnsignedValuesWithPlainText:(ASLPlainText*)plainText
+                                                               error:(NSError **)error;
 
 /*!
  Inverse of encode. This function "unbatches" a given plaintext into a matrix
@@ -172,14 +160,12 @@ NS_ASSUME_NONNULL_BEGIN
  allocated from the memory pool pointed to by the given MemoryPoolHandle.
  
  @param plainText The plaintext polynomial to unbatch
- @param signedDestination The matrix to be overwritten with the values in the slots
  @throws ASLSealErrorCodeInvalidParameter if plain is not valid for the encryption parameters
  @throws ASLSealErrorCodeInvalidParameter if plain is in NTT form
  @throws ASLSealErrorCodeInvalidParameter if pool is uninitialized
  */
-- (NSArray<NSNumber *> * _Nullable)decodeWithPlainText:(ASLPlainText*)plainText
-          signedDestination:(NSArray<NSNumber *>*)signedDestination
-                      error:(NSError **)error;
+- (NSArray<NSNumber *> * _Nullable)decodeSignedValuesWithPlainText:(ASLPlainText*)plainText
+                                                             error:(NSError **)error;
 
 
 /*!
@@ -196,7 +182,7 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASLSealErrorCodeInvalidParameter if pool is uninitialized
  */
 - (ASLPlainText* _Nullable)decodeWithPlainText:(ASLPlainText*)plainText
-                      error:(NSError **)error;
+                                         error:(NSError **)error;
 
 /*!
  Inverse of encode. This function "unbatches" a given plaintext in-place into
@@ -213,8 +199,8 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASLSealErrorCodeInvalidParameter if pool is uninitialized
  */
 - (ASLPlainText* _Nullable)decodeWithPlainText:(ASLPlainText*)plainText
-                       pool:(ASLMemoryPoolHandle *)pool
-                      error:(NSError **)error;
+                                          pool:(ASLMemoryPoolHandle *)pool
+                                         error:(NSError **)error;
 @end
 
 NS_ASSUME_NONNULL_END

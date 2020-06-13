@@ -331,12 +331,10 @@ NS_ASSUME_NONNULL_BEGIN
  Duplicates the current BigUInt. The bit count and the value of the
  given BigUInt are set to be exactly the same as in the current one.
  
- @param destination The BigUInt to overwrite with the duplicate
  @throws ASL_SealLogicError if the destination BigUInt is an alias
  @return  The resuling ASLBigUInt.
  */
-- (BOOL)duplicateTo:(ASLBigUInt *)destination
-              error:(NSError **)error;
+- (ASLBigUInt * _Nullable)duplicate:(NSError **)error;
 
 /*!
  Duplicates a given BigUInt. The bit count and the value of the current

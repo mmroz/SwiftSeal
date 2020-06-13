@@ -9,27 +9,36 @@
 import AppleSeal
 import XCTest
 
-class ASLBatchEncoderTests: XCTestCase {
+final class ASLBatchEncoderTests: XCTestCase {
     
-    var batchEncoder: ASLBatchEncoder!
+    private var batchEncoder: ASLBatchEncoder!
+    private var encryptor: ASLEncryptor!
+    private var decryptor: ASLDecryptor!
     
     override func setUp() {
         super.setUp()
         let parms = ASLEncryptionParameters(schemeType: .BFV)
+        
         let polyModulusDegree = 8192
         try! parms.setPolynomialModulusDegree(polyModulusDegree)
-        
         try! parms.setCoefficientModulus(ASLCoefficientModulus.bfvDefault(polyModulusDegree))
         try! parms.setPlainModulus(ASLPlainModulus.batching(polyModulusDegree, bitSize: 20))
         
         let context = try! ASLSealContext(parms)
-        self.batchEncoder = try! ASLBatchEncoder(context: context)
+        let keygen = try! ASLKeyGenerator(context: context)
+        let publicKey = keygen.publicKey
+        let secretKey = keygen.secretKey
         
+        encryptor = try! ASLEncryptor(context: context, publicKey: publicKey)
+        decryptor = try! ASLDecryptor(context: context, secretKey: secretKey)
+        batchEncoder = try! ASLBatchEncoder(context: context)
     }
     
     override func tearDown() {
         super.tearDown()
         batchEncoder = nil
+        encryptor = nil
+        decryptor = nil
     }
     
     // MARK: - Tests
@@ -39,38 +48,42 @@ class ASLBatchEncoderTests: XCTestCase {
     }
     
     func testEncodeWithUnsignedValues() throws {
-        let encodedPlainText = try batchEncoder.encode(withUnsignedValues: [NSNumber(4)], destination: ASLPlainText())
-        let decoded = try batchEncoder.decode(with: encodedPlainText, unsignedDestination: [])
-        let value = try XCTUnwrap(decoded.first)
-        XCTAssertEqual(NSNumber(4), value)
+        let podMatrix: [NSNumber] = [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+        let encodedPlainText = try batchEncoder.encode(withUnsignedValues: podMatrix)
+        let decoded = try batchEncoder.decodeUnsignedValues(with: encodedPlainText)
+        
+        podMatrix.forEach { entry in
+            if !decoded.contains(entry) {
+                XCTFail("Missing decoded value")
+            }
+        }
     }
     
     func testEncodeWithSignedValues() throws {
-        let encodedPlainText = try batchEncoder.encode(withSignedValues: [NSNumber(4)], destination: ASLPlainText())
-        let decoded = try batchEncoder.decode(with: encodedPlainText, unsignedDestination: [])
-        let value = try XCTUnwrap(decoded.first)
-        XCTAssertEqual(NSNumber(4), value)
+        let encodedPlainText = try batchEncoder.encode(withSignedValues: [NSNumber(4)])
+        let decoded = try batchEncoder.decodeSignedValues(with: encodedPlainText)
+        XCTAssertTrue(decoded.contains(NSNumber(4)))
     }
     
     func testEncoderWithPlainText() throws {
-        let plainText = try ASLPlainText(coefficientCount: 2)
-        let encoded = try batchEncoder.encode(with: plainText)
-        let decoded = try batchEncoder.decode(with: encoded, unsignedDestination: [])
-        let value = try XCTUnwrap(decoded.first)
-        XCTAssertEqual(NSNumber(0), value)
+        let encodedPlainText = try batchEncoder.encode(withSignedValues: [NSNumber(4)])
+        let encoded = try batchEncoder.encode(with: encodedPlainText)
+        let decodedPlainText = try batchEncoder.decode(with: encoded)
+        let decodedValues = try batchEncoder.decodeSignedValues(with: decodedPlainText)
+        XCTAssertTrue(decodedValues.contains(NSNumber(4)))
     }
     
     func testEncodeWithPlainTextAndPool() throws {
         let plainText = try ASLPlainText(coefficientCount: 2)
         let encoded = try batchEncoder.encode(with: plainText, pool: ASLMemoryPoolHandle.global())
-        let decoded = try batchEncoder.decode(with: encoded, unsignedDestination: [])
+        let decoded = try batchEncoder.decodeSignedValues(with: encoded)
         let value = try XCTUnwrap(decoded.first)
         XCTAssertEqual(NSNumber(0), value)
     }
     
     func testUnsignedIntArray() throws {
-        let encodedPlainText = try batchEncoder.encode(withUnsignedValues: [NSNumber(4)], destination: ASLPlainText())
-        let decoded = try batchEncoder.decode(with: encodedPlainText, unsignedDestination: [])
+        let encodedPlainText = try batchEncoder.encode(withUnsignedValues: [NSNumber(4)])
+        let decoded = try batchEncoder.decodeUnsignedValues(with: encodedPlainText)
         let value = try XCTUnwrap(decoded.first)
         XCTAssertEqual(NSNumber(4), value)
     }

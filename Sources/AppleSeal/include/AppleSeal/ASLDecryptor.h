@@ -65,15 +65,13 @@ NS_ASSUME_NONNULL_BEGIN
  Decrypts a Ciphertext and stores the result in the destination parameter.
  
  @param encrypted The ciphertext to decrypt
- @param destination The plaintext to overwrite with the decrypted
  ciphertext
  @throws ASL_SealInvalidParameter if encrypted is not valid for the encryption
  parameters
  @throws ASL_SealInvalidParameter if encrypted is not in the default NTT form
  */
 - (ASLPlainText * _Nullable)decrypt:(ASLCipherText *)encrypted
-    destination:(ASLPlainText *)destination
-          error:(NSError **)error;
+                              error:(NSError **)error;
 
 /*!
  Computes the invariant noise budget (in bits) of a ciphertext. The

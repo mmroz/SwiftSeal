@@ -98,25 +98,25 @@ class Encoders: XCTestCase {
          */
         print()
         print("Encrypt plain1 to encrypted1 and plain2 to encrypted2.")
-        let encrypted1 = try encryptor.encrypt(with: plain1, destination: ASLCipherText())
-        var encrypted2 = try encryptor.encrypt(with: plain2, destination: ASLCipherText())
+        let encrypted1 = try encryptor.encrypt(with: plain1)
+        var encrypted2 = try encryptor.encrypt(with: plain2)
         print("Noise budget in encrypted1: {\(try decryptor.invariantNoiseBudget(encrypted1))} bits")
         print("Noise budget in encrypted2: {\(try decryptor.invariantNoiseBudget(encrypted2))} bits")
         
         /*
          As a simple example, we compute (-encrypted1 + encrypted2) * encrypted2.
          */
-        encrypted2 = try encryptor.encrypt(with: plain2, destination: encrypted2)
+        encrypted2 = try encryptor.encrypt(with: plain2)
         print()
         print("Compute encrypted_result = (-encrypted1 + encrypted2) * encrypted2.")
-        var encryptedResult = try evaluator.negate(encrypted1, detination: ASLCipherText())
+        var encryptedResult = try evaluator.negate(encrypted1)
         encryptedResult = try evaluator.addInplace(encryptedResult, encrypted2: encrypted2)
         encryptedResult = try evaluator.multiplyInplace(encryptedResult, encrypted2: encrypted2)
         print("Noise budget in encryptedResult: {\(try decryptor.invariantNoiseBudget(encryptedResult))} bits")
         
         print()
         print("Decrypt encrypted_result to plain_result.")
-        let plainResult = try decryptor.decrypt(encryptedResult, destination: ASLPlainText())
+        let plainResult = try decryptor.decrypt(encryptedResult)
         
         /*
          Print the result plaintext polynomial. The coefficients are not even close
@@ -218,14 +218,13 @@ class Encoders: XCTestCase {
          */
         print()
         print("Encode plaintext matrix:")
-        let plainMatrix = try batchEncoder.encode(withUnsignedValues: podMatrix, destination: ASLPlainText())
+        let plainMatrix = try batchEncoder.encode(withUnsignedValues: podMatrix)
         
         /*
          We can instantly decode to verify correctness of the encoding. Note that no
          encryption or decryption has yet taken place.
          */
-        var podResult: [NSNumber]  = []
-        podResult = try batchEncoder.decode(with: plainMatrix, unsignedDestination: podResult)
+        let podResult = try batchEncoder.decodeUnsignedValues(with: plainMatrix)
         print("    + Decode plaintext matrix \(podResult) ...... Correct.")
         
         /*
@@ -234,7 +233,7 @@ class Encoders: XCTestCase {
        
         print()
         print("Encrypt plainMatrix to encryptedMatrix.")
-        var encryptedMatrix = try encryptor.encrypt(with: plainMatrix, destination: ASLCipherText())
+        var encryptedMatrix = try encryptor.encrypt(with: plainMatrix)
         print("    + Noise budget in encryptedMatrix: {\(try decryptor.invariantNoiseBudget(encryptedMatrix))} bits")
         
         /*
@@ -253,7 +252,7 @@ class Encoders: XCTestCase {
             podMatrix2[i] = NSNumber(value: (i % 2) + 1)
         }
 
-        let plainMatrix2 = try batchEncoder.encode(withSignedValues: podMatrix2, destination: ASLPlainText())
+        let plainMatrix2 = try batchEncoder.encode(withSignedValues: podMatrix2)
         print()
         print("Second input plaintext matrix: \(podMatrix2)")
         
@@ -278,9 +277,9 @@ class Encoders: XCTestCase {
        
         print()
         print("Decrypt and decode result.")
-        let plainResult = try decryptor.decrypt(encryptedMatrix, destination: ASLPlainText())
-        podResult = try batchEncoder.decode(with: plainResult, unsignedDestination: podResult)
-        print("    + Result plaintext matrix \(podResult) ...... Correct.")
+        let plainResult = try decryptor.decrypt(encryptedMatrix)
+        let decodedPodResult = try batchEncoder.decodeUnsignedValues(with: plainResult)
+        print("    + Result plaintext matrix \(decodedPodResult) ...... Correct.")
         
         /*
          Batching allows us to efficiently use the full plaintext polynomial when the
@@ -383,12 +382,12 @@ class Encoders: XCTestCase {
         let scale = Double(pow((2.0), 30))
         print()
         print("Encode input vector.")
-        var plain = try encoder.encode(withDoubleValues: input, scale: scale, destination: ASLPlainText())
+        var plain = try encoder.encode(withDoubleValues: input, scale: scale)
         
         /*
          We can instantly decode to check the correctness of encoding.
          */
-        var output = try encoder.decode(plain, destination: [NSNumber]())
+        var output = try encoder.decodeDoubleValues(plain)
         print("    + Decode input vector \(output) ...... Correct.")
         
         /*
@@ -396,7 +395,7 @@ class Encoders: XCTestCase {
          */
         print()
         print("Encrypt input vector, square, and relinearize.")
-        var encrypted = try encryptor.encrypt(with: plain, destination: ASLCipherText())
+        var encrypted = try encryptor.encrypt(with: plain)
         
         /*
          Basic operations on the ciphertexts are still easy to do. Here we square
@@ -414,8 +413,8 @@ class Encoders: XCTestCase {
         print("    + scale in squared input: {\(encrypted.scale)} ({\(log(encrypted.scale).rounded(.up))} bits)")
         print()
         print("Decrypt and decode.")
-        plain = try decryptor.decrypt(encrypted, destination: plain)
-        output = try encoder.decode(plain, destination: output)
+        plain = try decryptor.decrypt(encrypted)
+        output = try encoder.decodeDoubleValues(plain)
         print("    + Result vector \(output) ...... Correct.")
         
         /*

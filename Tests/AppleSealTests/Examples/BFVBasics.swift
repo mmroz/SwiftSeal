@@ -207,7 +207,7 @@ class BFVBasics: XCTestCase {
          We then encrypt the plaintext, producing a ciphertext.
          */
         print()
-        let xEncrypted = try encryptor.encrypt(with: xPlain, destination: ASLCipherText())
+        let xEncrypted = try encryptor.encrypt(with: xPlain)
         print("Encrypt xPlain to xEncrypted.")
         
         /*
@@ -228,7 +228,7 @@ class BFVBasics: XCTestCase {
          We decrypt the ciphertext and print the resulting plaintext in order to
          demonstrate correctness of the encryption.
          */
-        let xDecrypted = try decryptor.decrypt(xEncrypted, destination: ASLPlainText())
+        let xDecrypted = try decryptor.decrypt(xEncrypted)
         print("    + decryption of encrypted_x: \(xDecrypted) 0x{\(xDecrypted)} ...... Correct.")
         
         /*
@@ -251,7 +251,7 @@ class BFVBasics: XCTestCase {
          */
         print()
         print("Compute xSqPlusOne (x^2+1).")
-        var xSqPlusOne = try evaluator.square(xEncrypted, destination: ASLCipherText())
+        var xSqPlusOne = try evaluator.square(xEncrypted)
         let plainOne = try ASLPlainText(polynomialString: "1")
         xSqPlusOne = try evaluator.addPlainInplace(xSqPlusOne, plain: plainOne)
         
@@ -269,7 +269,7 @@ class BFVBasics: XCTestCase {
          Even though the size has grown, decryption works as usual as long as noise
          budget has not reached 0.
          */
-        var decryptedResult = try decryptor.decrypt(xSqPlusOne, destination: ASLPlainText())
+        var decryptedResult = try decryptor.decrypt(xSqPlusOne)
         print("    + decryption of xSqPlusOne: ")
         print("0x{\(decryptedResult)} ...... Correct.")
         
@@ -278,12 +278,12 @@ class BFVBasics: XCTestCase {
          */
         print()
         print("Compute xPlusOneSq ((x+1)^2).")
-        var xPlusOneSq = try evaluator.addPlain(xEncrypted, plain: plainOne, destination: ASLCipherText())
+        var xPlusOneSq = try evaluator.addPlain(xEncrypted, plain: plainOne)
         xPlusOneSq = try evaluator.squareInplace(xPlusOneSq)
         print("    + size of xPlusOneSq: {\(xSqPlusOne.size)}")
         print("    + noise budget in xPlusOneSq: {\(try decryptor.invariantNoiseBudget(xPlusOneSq))} bits")
         print("    + decryption of xPlusOneSq: ")
-        decryptedResult = try decryptor.decrypt(xPlusOneSq, destination: decryptedResult)
+        decryptedResult = try decryptor.decrypt(xPlusOneSq)
         print("0x{\(decryptedResult)} ...... Correct.")
         
         /*
@@ -293,7 +293,7 @@ class BFVBasics: XCTestCase {
         print("Compute encryptedResult (4(x^2+1)(x+1)^2).")
         let plainFour = try ASLPlainText(polynomialString: "4")
         xPlusOneSq = try evaluator.multiplyPlainInplace(xSqPlusOne, plain: plainFour)
-        var encryptedResult = try evaluator.multiply(xSqPlusOne, encrypted2: xPlusOneSq, destination: ASLCipherText())
+        var encryptedResult = try evaluator.multiply(xSqPlusOne, encrypted2: xPlusOneSq)
         print("    + size of encrypted_result: {\(encryptedResult.size)}")
         print("    + noise budget in encrypted_result: {\(try decryptor.invariantNoiseBudget(encryptedResult)))} bits")
         print("NOTE: Decryption can be incorrect if noise budget is zero.")
@@ -336,32 +336,32 @@ class BFVBasics: XCTestCase {
          */
         print()
         print("Compute and relinearize xSquared (x^2) then compute xSqPlusOne (x^2+1)")
-        var xSquared = try evaluator.square(xEncrypted, destination: ASLCipherText())
+        var xSquared = try evaluator.square(xEncrypted)
         print("    + size of xSquared: {\(xSquared.size)}")
         xSquared = try evaluator.relinearizeInplace(xSquared, relinearizationKeys: relinKeys)
         print("    + size of xSquared (after relinearization): {\(xSquared.size)}")
-        xSqPlusOne = try evaluator.addPlain(xSquared, plain: plainOne, destination: xSqPlusOne)
+        xSqPlusOne = try evaluator.addPlain(xSquared, plain: plainOne)
         print("    + noise budget in xSqPlusOne: {\(try decryptor.invariantNoiseBudget(xSqPlusOne))} bits")
         print("    + decryption of xSqPlusOne: ")
-        decryptedResult = try decryptor.decrypt(xSqPlusOne, destination: decryptedResult)
+        decryptedResult = try decryptor.decrypt(xSqPlusOne)
         print("0x{\(decryptedResult)} ...... Correct.")
         
         print()
         
         print("Compute xPlusOne (x+1), 12 then compute and relinearize xPlusOneSq ((x+1)^2).")
-        var xPlusOne = try evaluator.addPlain(xEncrypted, plain: plainOne, destination: ASLCipherText())
-        xPlusOne = try evaluator.square(xPlusOne, destination: xPlusOneSq)
+        var xPlusOne = try evaluator.addPlain(xEncrypted, plain: plainOne)
+        xPlusOneSq = try evaluator.square(xPlusOne)
         print("    + size of xPlusOneSq: {\(xPlusOneSq.size)}")
         xPlusOneSq = try evaluator.relinearizeInplace(xPlusOneSq, relinearizationKeys: relinKeys)
         print("    + noise budget in xPlusOneSq: {\(try decryptor.invariantNoiseBudget(xPlusOneSq))} bits")
         print("    + decryption of xPlusOneSq: ")
-        decryptedResult = try decryptor.decrypt(xPlusOneSq, destination: decryptedResult)
+        decryptedResult = try decryptor.decrypt(xPlusOneSq)
         print("0x{\(decryptedResult)} ...... Correct.")
         
         print()
         print("Compute and relinearize encryptedResult (4(x^2+1)(x+1)^2).")
         xSqPlusOne = try evaluator.multiplyPlainInplace(xSqPlusOne, plain: plainFour)
-        encryptedResult = try evaluator.multiply(xSqPlusOne, encrypted2: xPlusOneSq, destination: encryptedResult)
+        encryptedResult = try evaluator.multiply(xSqPlusOne, encrypted2: xPlusOneSq)
         print("    + size of encryptedResult: {\(encryptedResult.size)}")
         encryptedResult = try evaluator.relinearizeInplace(encryptedResult, relinearizationKeys: relinKeys)
         print("    + size of encryptedResult (after relinearization): {\(encryptedResult.size)}")
@@ -376,7 +376,7 @@ class BFVBasics: XCTestCase {
          */
         print()
         print("Decrypt encrypted_result (4(x^2+1)(x+1)^2).")
-        decryptedResult = try decryptor.decrypt(encryptedResult, destination: decryptedResult)
+        decryptedResult = try decryptor.decrypt(encryptedResult)
         print("    + decryption of 4(x^2+1)(x+1)^2 = 0x{\(decryptedResult)} ...... Correct.")
         
         /*

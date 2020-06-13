@@ -16,7 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_CLOSED_ENUM(NSInteger, ASLCompressionModeType) {
 	CompressionNone = 0,
-	CompressionDeflate = 1,
+    // TODO - replace this after linking z-lib
+    // CompressionDeflate = 1
 };
 
 /*!

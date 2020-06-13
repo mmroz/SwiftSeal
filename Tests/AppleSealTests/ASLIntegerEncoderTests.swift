@@ -33,7 +33,7 @@ final class ASLIntegerEncoderTests: XCTestCase {
     }
     
     func testEncodeUInt64WithDestination() throws {
-        let plain = encoder.encodeUInt64Value(4, destination: ASLPlainText())
+        let plain = encoder.encodeUInt64Value(4)
         XCTAssertEqual(plain, try ASLPlainText(polynomialString: "1x^2"))
     }
     
@@ -59,7 +59,7 @@ final class ASLIntegerEncoderTests: XCTestCase {
     }
     
     func testEncodeInt64WithDestination() throws {
-        let plain = encoder.encodeInt64Value(4, destination: ASLPlainText())
+        let plain = encoder.encodeInt64Value(4)
         let result = try encoder.decodeInt64(withPlain: plain)
         
         XCTAssertEqual(4, result)
@@ -81,7 +81,7 @@ final class ASLIntegerEncoderTests: XCTestCase {
     }
     
     func testEncodeUInt32ValueWithDestination() throws {
-        let plain = encoder.encodeUInt32Value(4, destination: ASLPlainText())
+        let plain = encoder.encodeUInt32Value(4)
         let result = try encoder.decodeUInt32(withPlain: plain)
         XCTAssertEqual(4, result)
     }
@@ -93,7 +93,7 @@ final class ASLIntegerEncoderTests: XCTestCase {
        }
     
     func testEncodeInt32ValueWithDestination() throws {
-        let plain = encoder.encodeInt32Value(4, destination: ASLPlainText())
+        let plain = encoder.encodeInt32Value(4)
         let result = try encoder.decodeInt32(withPlain: plain)
         XCTAssertEqual(4, result)
     }

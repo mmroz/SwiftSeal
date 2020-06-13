@@ -180,8 +180,6 @@ NS_ASSUME_NONNULL_BEGIN
                                               pool:(ASLMemoryPoolHandle *)pool
                                              error:(NSError **)error;
 
-- (BOOL)isEqualToCipherText:(ASLCipherText *)other;
-
 /*!
  Allocates enough memory to accommodate the backing array of a ciphertext
  with given capacity. In addition to the capacity, the allocation size is

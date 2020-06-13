@@ -163,7 +163,7 @@ class ASLValidityCheckerTests: XCTestCase {
         let encryptor = try! ASLEncryptor(context: context, publicKey: publicKey)
         let encoder = try! ASLIntegerEncoder(context: context)
         let plain = encoder.encodeInt32Value(value)
-        return try! encryptor.encrypt(with: plain, destination: ASLCipherText())
+        return try! encryptor.encrypt(with: plain)
     }
     
 }

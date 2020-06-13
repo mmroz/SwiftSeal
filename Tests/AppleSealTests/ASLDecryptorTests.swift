@@ -52,7 +52,7 @@ class ASLDecryptorTests: XCTestCase {
     
     func testInvariantNoiseBudget() throws {
         let xPlain = try ASLPlainText(polynomialString: "\(1)")
-        let xEncrypted = try encryptor.encrypt(with: xPlain, destination: ASLCipherText())
+        let xEncrypted = try encryptor.encrypt(with: xPlain)
         
         let invariantNoiseBudget = try decryptor.invariantNoiseBudget(xEncrypted)
         

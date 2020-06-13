@@ -22,7 +22,8 @@
 
 #pragma mark - Initialization
 
-+ (instancetype)bigUIntWithBitCount:(NSInteger)bitCount error:(NSError **)error {
++ (instancetype)bigUIntWithBitCount:(NSInteger)bitCount
+                              error:(NSError **)error {
     try {
         seal::BigUInt const bigUInt = seal::BigUInt(static_cast<int>(bitCount));
         return [[ASLBigUInt alloc] initWithBigUInt:bigUInt];
@@ -353,25 +354,24 @@
     return [[ASLBigUInt alloc] initWithBigUInt:seal::BigUInt().of(value)];
 }
 
-- (BOOL)duplicateTo:(ASLBigUInt *)destination
-              error:(NSError **)error {
+- (ASLBigUInt *)duplicate:(NSError **)error {
     try {
-        seal::BigUInt sealDestination = destination.sealBigUInt;
-        _bigUInt.duplicate_to(sealDestination);
-        return YES;
+        seal::BigUInt destination = seal::BigUInt();
+        _bigUInt.duplicate_to(destination);
+        return [[ASLBigUInt alloc] initWithBigUInt:destination];
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
-        return NO;
+        return nil;
     }
 }
 
 - (BOOL)duplicateFrom:(ASLBigUInt *)value
                 error:(NSError **)error{
     try {
-        const seal::BigUInt sealDestination = value.sealBigUInt;
-        _bigUInt.duplicate_from(sealDestination);
+        const seal::BigUInt sourceValue = value.sealBigUInt;
+        _bigUInt.duplicate_from(sourceValue);
         return YES;
     } catch (std::logic_error const &e) {
         if (error != nil) {

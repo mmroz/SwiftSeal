@@ -20,12 +20,14 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
 
-+ (instancetype)nttTablesWithCoefficentCountPower:(int)coefficentCountPower
++ (instancetype _Nullable)nttTablesWithCoefficentCountPower:(int)coefficentCountPower
                                           modulus:(ASLModulus *)modulus
-                                             pool:(ASLMemoryPoolHandle *)pool;
+                                             pool:(ASLMemoryPoolHandle *)pool
+                                            error:(NSError **)error;
 
-+ (instancetype)nttTablesWithCoefficentCountPower:(int)coefficentCountPower
-                                          modulus:(ASLModulus *)modulus;
++ (instancetype _Nullable)nttTablesWithCoefficentCountPower:(int)coefficentCountPower
+                                          modulus:(ASLModulus *)modulus
+                                            error:(NSError **)error;
 
 #pragma mark - Static Methods
 
@@ -35,29 +37,25 @@ NS_ASSUME_NONNULL_BEGIN
                             pool:(ASLMemoryPoolHandle *)pool
                             error:(NSError **)error;
 
-+ (ASLNttTables *)nttNegacyclicHarveyLazyWithOperand:(uint64_t)operand
-                                              tables:(ASLNttTables *)tables;
-
-+ (ASLNttTables *)nttNegacyclicHarveyWithOperand:(uint64_t)operand
-                                              tables:(ASLNttTables *)tables;
-
-+ (ASLNttTables *)inverseNttNegacyclicHarveyLazyWithOperand:(uint64_t)operand
-                                              tables:(ASLNttTables *)tables;
-
-+ (ASLNttTables *)inverseNttNegacyclicHarveyWithOperand:(uint64_t)operand
-                                              tables:(ASLNttTables *)tables;
-
 #pragma mark - Public Methods
 
--(NSNumber *)getFromRootPowersWithIndex:(NSNumber *)index;
+-(NSNumber *)getFromRootPowersWithIndex:(NSInteger)index;
 
--(NSNumber *)getFromScaledRootPowersWithIndex:(NSNumber *)index;
+-(NSNumber *)getFromScaledRootPowersWithIndex:(NSInteger)index;
 
--(NSNumber *)getFromInverseRootPowersWithIndex:(NSNumber *)index;
+-(NSNumber *)getFromInverseRootPowersWithIndex:(NSInteger)index;
 
--(NSNumber *)getFromScaledInverseRootPowersWithIndex:(NSNumber *)index;
+-(NSNumber *)getFromScaledInverseRootPowersWithIndex:(NSInteger)index;
 
 -(NSNumber *)getInverseDegreeModulo;
+
+- (void)negacyclicHarveyWithOperand:(uint64_t)operand;
+
+- (void)negacyclicHarveyLazyWithOperand:(uint64_t)operand;
+
+- (void)inverseNegacyclicHarveyWithOperand:(uint64_t)operand;
+
+- (void)inverseNegacyclicHarveyLazyWithOperand:(uint64_t)operand;
 
 #pragma mark - Properties
 

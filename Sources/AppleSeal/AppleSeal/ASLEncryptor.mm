@@ -96,15 +96,14 @@
 #pragma mark - Public Methods
 
 - (ASLCipherText *)encryptWithPlainText:(ASLPlainText *)plainText
-                             destination:(ASLCipherText *)cipherText
                                   error:(NSError **)error {
     NSParameterAssert(plainText != nil);
-    NSParameterAssert(cipherText != nil);
     
-    seal::Ciphertext sealCipherText = cipherText.sealCipherText;
+    seal::Ciphertext destination = seal::Ciphertext();
+    
     try {
-        _encryptor->encrypt(plainText.sealPlainText, sealCipherText);
-        return [[ASLCipherText alloc] initWithCipherText:sealCipherText];
+        _encryptor->encrypt(plainText.sealPlainText, destination);
+        return [[ASLCipherText alloc] initWithCipherText:destination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
@@ -120,17 +119,15 @@
 }
 
 - (ASLCipherText *)encryptWithPlainText:(ASLPlainText *)plainText
-                             destination:(ASLCipherText *)cipherText
                                    pool:(ASLMemoryPoolHandle *)pool
                                   error:(NSError **)error {
     NSParameterAssert(plainText != nil);
-    NSParameterAssert(cipherText != nil);
     NSParameterAssert(pool != nil);
     
-    seal::Ciphertext sealCipherText = cipherText.sealCipherText;
+    seal::Ciphertext destination = seal::Ciphertext();
     try {
-        _encryptor->encrypt(plainText.sealPlainText, sealCipherText, pool.memoryPoolHandle);
-        return [[ASLCipherText alloc] initWithCipherText:sealCipherText];
+        _encryptor->encrypt(plainText.sealPlainText, destination, pool.memoryPoolHandle);
+        return [[ASLCipherText alloc] initWithCipherText:destination];
         
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
@@ -147,7 +144,7 @@
 }
 
 -(ASLCipherText *)encryptZeroWithCipherText:(ASLCipherText *)cipherText
-                           error:(NSError **)error {
+                                      error:(NSError **)error {
     NSParameterAssert(cipherText != nil);
     
     seal::Ciphertext sealCipherText = cipherText.sealCipherText;
@@ -164,8 +161,8 @@
 }
 
 -(ASLCipherText *)encryptZeroWithCipherText:(ASLCipherText *)cipherText
-                            pool:(ASLMemoryPoolHandle *)pool
-                           error:(NSError **)error {
+                                       pool:(ASLMemoryPoolHandle *)pool
+                                      error:(NSError **)error {
     NSParameterAssert(cipherText != nil);
     NSParameterAssert(pool != nil);
     
@@ -183,8 +180,8 @@
 }
 
 -(ASLCipherText *)encryptZeroWithParametersId:(ASLParametersIdType)parametersId
-                        cipherText:(ASLCipherText *)cipherText
-                             error:(NSError **)error {
+                                   cipherText:(ASLCipherText *)cipherText
+                                        error:(NSError **)error {
     NSParameterAssert(cipherText != nil);
     
     seal::parms_id_type sealParametersId = {};
@@ -211,9 +208,9 @@
 }
 
 -(ASLCipherText *)encryptZeroWithParametersId:(ASLParametersIdType)parametersId
-                        cipherText:(ASLCipherText *)cipherText
-                              pool:(ASLMemoryPoolHandle *)pool
-                             error:(NSError **)error {
+                                   cipherText:(ASLCipherText *)cipherText
+                                         pool:(ASLMemoryPoolHandle *)pool
+                                        error:(NSError **)error {
     NSParameterAssert(cipherText != nil);
     NSParameterAssert(pool != nil);
     
@@ -241,8 +238,8 @@
 }
 
 -(ASLCipherText *)encryptSymmetricWithPlainText:(ASLPlainText *)plainText
-                          cipherText:(ASLCipherText *)cipherText
-                               error:(NSError **)error {
+                                     cipherText:(ASLCipherText *)cipherText
+                                          error:(NSError **)error {
     NSParameterAssert(plainText != nil);
     NSParameterAssert(cipherText != nil);
     
@@ -266,9 +263,9 @@
 }
 
 -(ASLCipherText *)encryptSymmetricWithPlainText:(ASLPlainText *)plainText
-                          cipherText:(ASLCipherText *)cipherText
-                                pool:(ASLMemoryPoolHandle *)pool
-                               error:(NSError **)error {
+                                     cipherText:(ASLCipherText *)cipherText
+                                           pool:(ASLMemoryPoolHandle *)pool
+                                          error:(NSError **)error {
     NSParameterAssert(plainText != nil);
     NSParameterAssert(cipherText != nil);
     
@@ -292,7 +289,7 @@
 }
 
 -(ASLCipherText *)encryptZeroSymmetricWithCipherText:(ASLCipherText *)cipherText
-                                    error:(NSError **)error {
+                                               error:(NSError **)error {
     NSParameterAssert(cipherText != nil);
     
     seal::Ciphertext sealCipherText = cipherText.sealCipherText;
@@ -310,8 +307,8 @@
 }
 
 -(ASLCipherText *)encryptZeroSymmetricWithCipherText:(ASLCipherText *)cipherText
-                                     pool:(ASLMemoryPoolHandle *)pool
-                                    error:(NSError **)error {
+                                                pool:(ASLMemoryPoolHandle *)pool
+                                               error:(NSError **)error {
     NSParameterAssert(cipherText != nil);
     NSParameterAssert(pool != nil);
     
@@ -335,15 +332,14 @@
 }
 
 -(ASLCipherText *)encryptZeroSymmetricWithParametersId:(ASLParametersIdType)parametersId
-                                           destination:(ASLCipherText *)destination
                                                  error:(NSError **)error {
-    NSParameterAssert(destination != nil);
     
     seal::parms_id_type sealParametersId = {};
     std::copy(std::begin(parametersId.block),
               std::end(parametersId.block),
               sealParametersId.begin());
-    seal::Ciphertext sealCipherText = destination.sealCipherText;
+    
+    seal::Ciphertext sealCipherText = seal::Ciphertext();
     
     try {
         _encryptor->encrypt_zero_symmetric(sealParametersId, sealCipherText);
@@ -363,17 +359,15 @@
 }
 
 -(ASLCipherText *)encryptZeroSymmetricWithParametersId:(ASLParametersIdType)parametersId
-                                           destination:(ASLCipherText *)destination
                                                   pool:(ASLMemoryPoolHandle *)pool
                                                  error:(NSError **)error {
-    NSParameterAssert(destination != nil);
     NSParameterAssert(pool != nil);
     
     seal::parms_id_type sealParametersId = {};
     std::copy(std::begin(parametersId.block),
               std::end(parametersId.block),
               sealParametersId.begin());
-    seal::Ciphertext sealCipherText = destination.sealCipherText;
+    seal::Ciphertext sealCipherText = seal::Ciphertext();
     
     try {
         _encryptor->encrypt_zero_symmetric(sealParametersId, sealCipherText, pool.memoryPoolHandle);
@@ -392,9 +386,9 @@
     return nil;
 }
 
-- (ASLSerializableCipherText *)encryptSymmetricWithPlain:(ASLPlainText *)plain
-                                                    pool:(ASLMemoryPoolHandle *)pool
-                                                    error:(NSError **)error {
+- (ASLSerializableCipherText *)encryptSerializableSymmetricWithPlain:(ASLPlainText *)plain
+                                                                pool:(ASLMemoryPoolHandle *)pool
+                                                               error:(NSError **)error {
     const seal::Plaintext sealPlainText = plain.sealPlainText;
     try {
         seal::Serializable<seal::Ciphertext> serializableText = _encryptor->encrypt_symmetric(sealPlainText, pool.memoryPoolHandle);
@@ -413,8 +407,8 @@
     return nil;
 }
 
-- (ASLSerializableCipherText *)encryptSymmetricWithPlain:(ASLPlainText *)plain
-                                                    error:(NSError **)error {
+- (ASLSerializableCipherText *)encryptSerializableSymmetricWithPlain:(ASLPlainText *)plain
+                                                               error:(NSError **)error {
     const seal::Plaintext sealPlainText = plain.sealPlainText;
     try {
         seal::Serializable<seal::Ciphertext> serializableText = _encryptor->encrypt_symmetric(sealPlainText);
@@ -433,9 +427,9 @@
     return nil;
 }
 
-- (ASLSerializableCipherText *)encryptZeroSymmetricWithParametersId:(ASLParametersIdType)parametersId
-                                                               pool:(ASLMemoryPoolHandle *)pool
-                                                              error:(NSError **)error {
+- (ASLSerializableCipherText *)encryptSerializableZeroSymmetricWithParametersId:(ASLParametersIdType)parametersId
+                                                                           pool:(ASLMemoryPoolHandle *)pool
+                                                                          error:(NSError **)error {
     seal::parms_id_type sealParametersId = {};
     std::copy(std::begin(parametersId.block),
               std::end(parametersId.block),
@@ -457,8 +451,8 @@
     return nil;
 }
 
-- (ASLSerializableCipherText *)encryptZeroSymmetricWithParametersId:(ASLParametersIdType)parametersId
-                                                              error:(NSError **)error {
+- (ASLSerializableCipherText *)encryptSerializableZeroSymmetricWithParametersId:(ASLParametersIdType)parametersId
+                                                                          error:(NSError **)error {
     seal::parms_id_type sealParametersId = {};
     std::copy(std::begin(parametersId.block),
               std::end(parametersId.block),
@@ -480,8 +474,8 @@
     return nil;
 }
 
--(ASLSerializableCipherText *)encryptZeroSymmetricWithPool:(ASLMemoryPoolHandle *)pool
-                                                               error:(NSError **)error {
+-(ASLSerializableCipherText *)encryptSerializableZeroSymmetricWithPool:(ASLMemoryPoolHandle *)pool
+                                                                 error:(NSError **)error {
     try {
         seal::Serializable<seal::Ciphertext> serializableText = _encryptor->encrypt_zero_symmetric(pool.memoryPoolHandle);
         return [[ASLSerializableCipherText alloc] initWithSerializableCipherText:serializableText];
@@ -499,10 +493,37 @@
     return nil;
 }
 
-- (ASLSerializableCipherText *)encryptZeroSymmetricWithError:(NSError **)error {
+- (ASLSerializableCipherText *)encryptSerializableZeroSymmetricWithError:(NSError **)error {
     try {
         seal::Serializable<seal::Ciphertext> serializableText = _encryptor->encrypt_zero_symmetric();
         return [[ASLSerializableCipherText alloc] initWithSerializableCipherText:serializableText];
+    } catch (std::invalid_argument const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealInvalidParameter:e];
+        }
+        return nil;
+    } catch (std::logic_error const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealLogicError:e];
+        }
+        return nil;
+    }
+    return nil;
+}
+
+- (ASLCipherText *)encryptZeroSymmetricWithPool:(ASLParametersIdType)parametersId
+                                           pool:(ASLMemoryPoolHandle *)pool
+                                          error:(NSError **)error {
+    
+    seal::parms_id_type sealParametersId = {};
+    std::copy(std::begin(parametersId.block),
+              std::end(parametersId.block),
+              sealParametersId.begin());
+    seal::Ciphertext destination = seal::Ciphertext();
+    
+    try {
+        _encryptor->encrypt_zero_symmetric(sealParametersId, destination, pool.memoryPoolHandle);
+        return [[ASLCipherText alloc]initWithCipherText:destination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];

@@ -62,15 +62,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (ASLPlainText*)encodeUInt64Value:(uint64_t)uInt64Value;
 
 /*!
- Encodes an unsigned integer (represented by std::uint64_t) into a plaintext polynomial.
- 
- @param uInt64Value The unsigned integer to encode
- @param destination The plaintext to overwrite with the encoding
- */
-- (ASLPlainText *)encodeUInt64Value:(uint64_t)uInt64Value
-              destination:(ASLPlainText *)destination;
-
-/*!
  Decodes a plaintext polynomial and returns the result as std::uint32_t.
  Mathematically this amounts to evaluating the input polynomial at x=2.
  
@@ -104,35 +95,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (ASLPlainText*)encodeInt64Value:(int64_t)int64Value;
 
 /*!
- Encodes a signed integer (represented by std::int64_t) into a plaintext polynomial.
- 
- Negative Integers
- Negative integers are represented by using -1 instead of 1 in the binary representation,
- and the negative coefficients are stored in the plaintext polynomials as unsigned integers
- that represent them modulo the plaintext modulus. Thus, for example, a coefficient of -1
- would be stored as a polynomial coefficient plain_modulus-1.
- 
- @param int64Value The signed integer to encode
- @param destination The plaintext to overwrite with the encoding
- */
-- (ASLPlainText *)encodeInt64Value:(int64_t)int64Value
-             destination:(ASLPlainText *)destination;
-
-/*!
  Encodes an unsigned integer (represented by BigUInt) into a plaintext polynomial.
  
  @param bigUInt The unsigned integer to encode
  */
 - (ASLPlainText*)encodeBigUInt:(ASLBigUInt *)bigUInt;
-
-/*!
- Encodes an unsigned integer (represented by ASLBigUInt) into a plaintext polynomial.
- 
- @param bigUInt The unsigned integer to encode
- @param destination The plaintext to overwrite with the encoding
- */
-- (ASLPlainText *)encodeBigUInt:(ASLBigUInt *)bigUInt
-          destination:(ASLPlainText *)destination;
 
 /*!
  Decodes a plaintext polynomial and returns the result as std::int32_t.
@@ -179,26 +146,6 @@ NS_ASSUME_NONNULL_BEGIN
  @param int32Value The signed integer to encode
  */
 - (ASLPlainText*)encodeInt32Value:(int32_t)int32Value;
-
-
-/*!
- Encodes an unsigned integer (represented by std::uint32_t) into a plaintext polynomial.
- 
- @param uInt32Value The unsigned integer to encode
- @param destination The plaintext to overwrite with the encoding
- */
-
-- (ASLPlainText *)encodeUInt32Value:(uint32_t)uInt32Value
-              destination:(ASLPlainText *)destination;
-
-/*!
- Encodes an unsigned integer (represented by std::uint32_t) into a plaintext polynomial.
- 
- @param int32Value The unsigned integer to encode
- @param destination The plaintext to overwrite with the encoding
- */
-- (ASLPlainText *)encodeInt32Value:(int32_t)int32Value
-             destination:(ASLPlainText *)destination;
 
 /*!
  Encodes an unsigned integer (represented by std::uint32_t) into a plaintext polynomial.

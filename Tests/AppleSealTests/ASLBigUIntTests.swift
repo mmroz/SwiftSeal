@@ -424,18 +424,19 @@ class ASLBigUIntTests: XCTestCase {
         XCTAssertEqual(bigUInt, try! ASLBigUInt(bitCount: 2, scalarValue: 4))
     }
     
-    func testDuplicateTo() {
+    func testDuplicateTo() throws {
         let bigUInt = ASLBigUInt.createNew(withValue: 4)
-        let otherBigUInt = ASLBigUInt.createNew(withValue: 8)
-        
-        XCTAssertNoThrow(try bigUInt.duplicate(to: otherBigUInt))
+        let duplicated = try XCTUnwrap(bigUInt.duplicate())
+        XCTAssertEqual(bigUInt, duplicated)
     }
     
-    func testDuplicateFrom() {
+    func testDuplicateFrom() throws {
         let bigUInt = ASLBigUInt.createNew(withValue: 4)
-        let otherBigUInt = ASLBigUInt.createNew(withValue: 8)
+        let otherBigUInt = ASLBigUInt.createNew(withValue: 5)
         
-        XCTAssertNoThrow(try bigUInt.duplicate(from: otherBigUInt))
+        try bigUInt.duplicate(from: otherBigUInt)
+        
+        XCTAssertEqual(bigUInt, otherBigUInt)
     }
     
     // tryModuloInvert

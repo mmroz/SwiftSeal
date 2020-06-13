@@ -61,8 +61,8 @@ class Rotation: XCTestCase {
         print()
         
         print("Encode and encrypt.")
-        let plainMatrix = try batchEncoder.encode(withUnsignedValues: podMatrix, destination: ASLPlainText())
-        var encryptedMatrix = try encryptor.encrypt(with: plainMatrix, destination: ASLCipherText())
+        let plainMatrix = try batchEncoder.encode(withUnsignedValues: podMatrix)
+        var encryptedMatrix = try encryptor.encrypt(with: plainMatrix)
         print("    + Noise budget in fresh encryption: {\(try decryptor.invariantNoiseBudget(encryptedMatrix)))} bits")
         print()
         
@@ -79,8 +79,9 @@ class Rotation: XCTestCase {
         print("Rotate rows 3 steps left.")
         encryptedMatrix = try evaluator.rotateRowsInplace(encryptedMatrix, steps: 3, galoisKey: galKeys)
         print("    + Noise budget after rotation: {\(try decryptor.invariantNoiseBudget(encryptedMatrix))} bits")
-        var plainResult = try decryptor.decrypt(encryptedMatrix, destination: ASLPlainText())
-        var podResult = try batchEncoder.decode(with: plainResult, unsignedDestination: [NSNumber]())
+        var plainResult = try decryptor.decrypt(encryptedMatrix)
+        var podResult = try batchEncoder.decodeUnsignedValues(with: plainResult)
+        
         
         print("    + Decrypt and decode \(podResult) ...... Correct.")
         
@@ -90,8 +91,8 @@ class Rotation: XCTestCase {
         print()
         print("Rotate columns.")
         encryptedMatrix = try evaluator.rotateColumnsInplace(encryptedMatrix, galoisKey: galKeys)
-        plainResult = try decryptor.decrypt(encryptedMatrix, destination: plainResult)
-        podResult = try batchEncoder.decode(with: plainResult, unsignedDestination: podResult)
+        plainResult = try decryptor.decrypt(encryptedMatrix)
+        podResult = try batchEncoder.decodeUnsignedValues(with: plainResult)
         print("    + Noise budget after rotation: {\(try decryptor.invariantNoiseBudget(encryptedMatrix))} bits")
         print("    + Decrypt and decode \(podResult) ...... Correct.")
         
@@ -101,8 +102,8 @@ class Rotation: XCTestCase {
         print()
         print("Rotate rows 4 steps right.")
         encryptedMatrix = try evaluator.rotateRowsInplace(encryptedMatrix, steps: -4, galoisKey: galKeys)
-        plainResult = try decryptor.decrypt(encryptedMatrix, destination: plainResult)
-        podResult = try batchEncoder.decode(with: plainResult, unsignedDestination: podResult)
+        plainResult = try decryptor.decrypt(encryptedMatrix)
+        podResult = try batchEncoder.decodeUnsignedValues(with: plainResult)
         print("    + Noise budget after rotation: {\(try decryptor.invariantNoiseBudget(encryptedMatrix))} bits")
         print("    + Decrypt and decode \(podResult) ...... Correct.")
         
@@ -142,7 +143,6 @@ class Rotation: XCTestCase {
         print("Number of slots: {\(slotCount)}")
         
         var input = Array(repeating: NSNumber(0), count: Int(slotCount))
-        let currPoint: Double = 0
         let stepSize = Double(1.0) / Double(slotCount - 1)
         
         stride(from: Double(0), to: slotCount, by: stepSize).forEach({ input.append(NSNumber(value: $0))  })
@@ -154,19 +154,15 @@ class Rotation: XCTestCase {
         
         print()
         print("Encode and encrypt.")
-        let plain = ASLPlainText()
-        try ckksEncoder.encode(withDoubleValues: input, scale: scale, destination: plain)
-        let encrypted = ASLCipherText()
-        try encryptor.encrypt(with: plain, destination: encrypted)
+        let plain = try ckksEncoder.encode(withDoubleValues: input, scale: scale)
+        let encrypted = try encryptor.encrypt(with: plain)
         
-        let rotated = ASLCipherText()
         print()
         print("Rotate 2 steps left.")
-        try evaluator.rotateVector(encrypted, steps: 2, galoisKey: galKeys, destination: rotated)
+        let rotated = try evaluator.rotateVector(encrypted, steps: 2, galoisKey: galKeys)
         print("    + Decrypt and decode ...... Correct.")
-        try decryptor.decrypt(encrypted, destination: plain)
-        let result = [NSNumber]()
-        try ckksEncoder.decode(plain, destination: result)
+        let plainResult = try decryptor.decrypt(rotated)
+        let result = try ckksEncoder.decodeDoubleValues(plainResult)
         print(result[3...7])
         
         /*

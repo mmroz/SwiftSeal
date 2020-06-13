@@ -16,8 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign, readonly) seal::util::NTTTables * sealNttTables;
 
-- (instancetype)initWithNttTables:(seal::util::NTTTables *)NttTables
-freeWhenDone:(BOOL)freeWhenDone;
+- (instancetype)initWithNttTablesNoCopy:(seal::util::NTTTables *)nttTables
+                           freeWhenDone:(BOOL)freeWhenDone;
 
 @end
 

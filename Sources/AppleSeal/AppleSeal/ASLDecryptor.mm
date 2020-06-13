@@ -60,9 +60,8 @@
 #pragma mark - Public Methods
 
 - (ASLPlainText *)decrypt:(ASLCipherText *)encrypted
-    destination:(ASLPlainText *)destination
           error:(NSError **)error {
-    seal::Plaintext sealPlainText = destination.sealPlainText;
+    seal::Plaintext sealPlainText = seal::Plaintext();
     try {
         _decryptor->decrypt(encrypted.sealCipherText, sealPlainText);
         return [[ASLPlainText alloc] initWithPlainText:sealPlainText];

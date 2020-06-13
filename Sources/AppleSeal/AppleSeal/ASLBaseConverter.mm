@@ -22,8 +22,6 @@
     BOOL _freeWhenDone;
 }
 
-// TODO - finish this
-
 # pragma mark - Initialization
 
 + (instancetype)baseConverterWithPool:(ASLMemoryPoolHandle *)pool

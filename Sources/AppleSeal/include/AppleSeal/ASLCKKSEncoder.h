@@ -70,8 +70,6 @@ NS_ASSUME_NONNULL_BEGIN
  @param parametersId parametersId determining the encryption parameters to
  be used by the result plaintext
  @param scale Scaling parameter defining encoding precision
- @param destination The plaintext polynomial to overwrite with the
- result
  @param pool The MemoryPoolHandle pointing to a valid memory pool
  @throws ASL_SealInvalidParameter if values has invalid size
  @throws ASL_SealInvalidParameter if parms_id is not valid for the encryption
@@ -82,11 +80,10 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealInvalidParameter if pool is uninitialized
  */
 - (ASLPlainText * _Nullable)encodeWithComplexValues:(NSArray<ASLComplexType *>*)values
-                   parametersId:(ASLParametersIdType)parametersId
-                          scale:(double)scale
-                    destination:(ASLPlainText *)destination
-                           pool:(ASLMemoryPoolHandle *)pool
-                          error:(NSError **)error;
+                                       parametersId:(ASLParametersIdType)parametersId
+                                              scale:(double)scale
+                                               pool:(ASLMemoryPoolHandle *)pool
+                                              error:(NSError **)error;
 
 /*!
  Encodes a vector of double-precision floating-point real or complex numbers
@@ -98,8 +95,6 @@ NS_ASSUME_NONNULL_BEGIN
  @param parametersId parametersId determining the encryption parameters to
  be used by the result plaintext
  @param scale Scaling parameter defining encoding precision
- @param destination The plaintext polynomial to overwrite with the
- result
  @throws ASL_SealInvalidParameter if values has invalid size
  @throws ASL_SealInvalidParameter if parms_id is not valid for the encryption
  parameters
@@ -108,10 +103,9 @@ NS_ASSUME_NONNULL_BEGIN
  parameters
  */
 - (ASLPlainText * _Nullable)encodeWithComplexValues:(NSArray<ASLComplexType *>*)values
-                   parametersId:(ASLParametersIdType)parametersId
-                          scale:(double)scale
-                    destination:(ASLPlainText *)destination
-                          error:(NSError **)error;
+                                       parametersId:(ASLParametersIdType)parametersId
+                                              scale:(double)scale
+                                              error:(NSError **)error;
 
 /*!
  Encodes a vector of double-precision floating-point real or complex numbers
@@ -123,8 +117,6 @@ NS_ASSUME_NONNULL_BEGIN
  @param values The vector of double-precision floating-point numbers
  (of type ASLComplexType) to encode
  @param scale Scaling parameter defining encoding precision
- @param destination The plaintext polynomial to overwrite with the
- result
  @param pool The MemoryPoolHandle pointing to a valid memory pool
  @throws ASL_SealInvalidParameter if values has invalid size
  @throws ASL_SealInvalidParameter if scale is not strictly positive
@@ -133,10 +125,9 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealInvalidParameter if pool is uninitialized
  */
 - (ASLPlainText * _Nullable)encodeWithComplexValues:(NSArray<ASLComplexType *>*)values
-                          scale:(double)scale
-                    destination:(ASLPlainText *)destination
-                           pool:(ASLMemoryPoolHandle *)pool
-                          error:(NSError **)error;
+                                              scale:(double)scale
+                                               pool:(ASLMemoryPoolHandle *)pool
+                                              error:(NSError **)error;
 
 /*!
  Encodes a vector of double-precision floating-point real or complex numbers
@@ -148,8 +139,6 @@ NS_ASSUME_NONNULL_BEGIN
  @param values The vector of double-precision floating-point numbers
  (of type ASLComplexType) to encode
  @param scale Scaling parameter defining encoding precision
- @param destination The plaintext polynomial to overwrite with the
- result
  @throws ASL_SealInvalidParameter if values has invalid size
  @throws ASL_SealInvalidParameter if scale is not strictly positive
  @throws ASL_SealInvalidParameter if encoding is too large for the encryption
@@ -157,9 +146,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 
 - (ASLPlainText * _Nullable)encodeWithComplexValues:(NSArray<ASLComplexType *>*)values
-                          scale:(double)scale
-                    destination:(ASLPlainText *)destination
-                          error:(NSError **)error;
+                                              scale:(double)scale
+                                              error:(NSError **)error;
 
 /*!
  Encodes a double-precision complex number into a plaintext polynomial.
@@ -170,8 +158,6 @@ NS_ASSUME_NONNULL_BEGIN
  
  @param complexValue The double-precision complex number to encode
  @param scale Scaling parameter defining encoding precision
- @param destination The plaintext polynomial to overwrite with the
- result
  @param pool The MemoryPoolHandle pointing to a valid memory pool
  @throws ASL_SealInvalidParameter if scale is not strictly positive
  @throws ASL_SealInvalidParameter if encoding is too large for the encryption
@@ -180,10 +166,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 
 - (ASLPlainText * _Nullable)encodeWithComplexValue:(ASLComplexType *)complexValue
-                         scale:(double)scale
-                   destination:(ASLPlainText *)destination
-                          pool:(ASLMemoryPoolHandle *)pool
-                         error:(NSError **)error;
+                                             scale:(double)scale
+                                              pool:(ASLMemoryPoolHandle *)pool
+                                             error:(NSError **)error;
 
 
 /*!
@@ -195,16 +180,13 @@ NS_ASSUME_NONNULL_BEGIN
  
  @param complexValue The double-precision complex number to encode
  @param scale Scaling parameter defining encoding precision
- @param destination The plaintext polynomial to overwrite with the
- result
  @throws ASL_SealInvalidParameter if scale is not strictly positive
  @throws ASL_SealInvalidParameter if encoding is too large for the encryption
  parameters
  */
 - (ASLPlainText * _Nullable)encodeWithComplexValue:(ASLComplexType *)complexValue
-                         scale:(double)scale
-                   destination:(ASLPlainText *)destination
-                         error:(NSError **)error;
+                                             scale:(double)scale
+                                             error:(NSError **)error;
 
 /*!
  Encodes a double-precision floating-point real number into a plaintext
@@ -216,8 +198,6 @@ NS_ASSUME_NONNULL_BEGIN
  @param parametersId parms_id determining the encryption parameters to be
  used by the result plaintext
  @param scale Scaling parameter defining encoding precision
- @param destination The plaintext polynomial to overwrite with the
- result
  @throws ASL_SealInvalidParameter if parms_id is not valid for the encryption
  parameters
  @throws ASL_SealInvalidParameter if scale is not strictly positive
@@ -225,10 +205,9 @@ NS_ASSUME_NONNULL_BEGIN
  parameters
  */
 - (ASLPlainText * _Nullable)encodeWithDoubleValue:(double)value
-                 parametersId:(ASLParametersIdType)parametersId
-                        scale:(double)scale
-                  destination:(ASLPlainText *)destination
-                        error:(NSError **)error;
+                                     parametersId:(ASLParametersIdType)parametersId
+                                            scale:(double)scale
+                                            error:(NSError **)error;
 
 /*!
  Encodes a double-precision floating-point real number into a plaintext
@@ -240,8 +219,6 @@ NS_ASSUME_NONNULL_BEGIN
  @param parametersId parms_id determining the encryption parameters to be
  used by the result plaintext
  @param scale Scaling parameter defining encoding precision
- @param destination The plaintext polynomial to overwrite with the
- result
  @param pool The MemoryPoolHandle pointing to a valid memory pool
  @throws ASL_SealInvalidParameter if parms_id is not valid for the encryption
  parameters
@@ -251,11 +228,10 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealInvalidParameter if pool is uninitialized
  */
 - (ASLPlainText * _Nullable)encodeWithDoubleValue:(double)value
-                 parametersId:(ASLParametersIdType)parametersId
-                        scale:(double)scale
-                  destination:(ASLPlainText *)destination
-                         pool:(ASLMemoryPoolHandle *)pool
-                        error:(NSError **)error;
+                                     parametersId:(ASLParametersIdType)parametersId
+                                            scale:(double)scale
+                                             pool:(ASLMemoryPoolHandle *)pool
+                                            error:(NSError **)error;
 
 /*!
  Encodes a double-precision floating-point real number into a plaintext
@@ -266,16 +242,13 @@ NS_ASSUME_NONNULL_BEGIN
  
  @param value The double-precision floating-point number to encode
  @param scale Scaling parameter defining encoding precision
- @param destination The plaintext polynomial to overwrite with the
- result
  @throws ASL_SealInvalidParameter if scale is not strictly positive
  @throws ASL_SealInvalidParameter if encoding is too large for the encryption
  parameters
  */
 - (ASLPlainText * _Nullable)encodeWithDoubleValue:(double)value
-                        scale:(double)scale
-                  destination:(ASLPlainText *)destination
-                        error:(NSError **)error;
+                                            scale:(double)scale
+                                            error:(NSError **)error;
 
 /*!
  Encodes a double-precision floating-point real number into a plaintext
@@ -286,8 +259,6 @@ NS_ASSUME_NONNULL_BEGIN
  
  @param value The double-precision floating-point number to encode
  @param scale Scaling parameter defining encoding precision
- @param destination The plaintext polynomial to overwrite with the
- result
  @param pool The MemoryPoolHandle pointing to a valid memory pool
  @throws ASL_SealInvalidParameter if scale is not strictly positive
  @throws ASL_SealInvalidParameter if encoding is too large for the encryption
@@ -295,10 +266,9 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealInvalidParameter if pool is uninitialized
  */
 - (ASLPlainText * _Nullable)encodeWithDoubleValue:(double)value
-                        scale:(double)scale
-                  destination:(ASLPlainText *)destination
-                         pool:(ASLMemoryPoolHandle *)pool
-                        error:(NSError **)error;
+                                            scale:(double)scale
+                                             pool:(ASLMemoryPoolHandle *)pool
+                                            error:(NSError **)error;
 
 /*!
  Encodes a double-precision complex number into a plaintext polynomial.
@@ -309,8 +279,6 @@ NS_ASSUME_NONNULL_BEGIN
  @param parametersId parms_id determining the encryption parameters to be
  used by the result plaintext
  @param scale Scaling parameter defining encoding precision
- @param destination The plaintext polynomial to overwrite with the
- result
  @throws ASL_SealInvalidParameter if parms_id is not valid for the encryption
  parameters
  @throws ASL_SealInvalidParameter if scale is not strictly positive
@@ -318,10 +286,9 @@ NS_ASSUME_NONNULL_BEGIN
  parameters
  */
 - (ASLPlainText * _Nullable)encodeWithComplexValue:(ASLComplexType *)complexValue
-                  parametersId:(ASLParametersIdType)parametersId
-                         scale:(double)scale
-                   destination:(ASLPlainText *)destination
-                         error:(NSError **)error;
+                                      parametersId:(ASLParametersIdType)parametersId
+                                             scale:(double)scale
+                                             error:(NSError **)error;
 
 /*!
  Encodes a double-precision complex number into a plaintext polynomial.
@@ -332,8 +299,6 @@ NS_ASSUME_NONNULL_BEGIN
  @param parametersId parms_id determining the encryption parameters to be
  used by the result plaintext
  @param scale Scaling parameter defining encoding precision
- @param destination The plaintext polynomial to overwrite with the
- result
  @param pool The MemoryPoolHandle pointing to a valid memory pool
  @throws ASL_SealInvalidParameter if parms_id is not valid for the encryption
  parameters
@@ -343,11 +308,10 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealInvalidParameter if pool is uninitialized
  */
 - (ASLPlainText * _Nullable)encodeWithComplexValue:(ASLComplexType *)complexValue
-                  parametersId:(ASLParametersIdType)parametersId
-                         scale:(double)scale
-                   destination:(ASLPlainText *)destination
-                          pool:(ASLMemoryPoolHandle *)pool
-                         error:(NSError **)error;
+                                      parametersId:(ASLParametersIdType)parametersId
+                                             scale:(double)scale
+                                              pool:(ASLMemoryPoolHandle *)pool
+                                             error:(NSError **)error;
 
 /*!
  Encodes a vector of double-precision floating-point real or complex numbers
@@ -359,8 +323,6 @@ NS_ASSUME_NONNULL_BEGIN
  @param parametersId parms_id determining the encryption parameters to
  be used by the result plaintext
  @param scale Scaling parameter defining encoding precision
- @param destination The plaintext polynomial to overwrite with the
- result
  @throws ASL_SealInvalidParameter if values has invalid size
  @throws ASL_SealInvalidParameter if parms_id is not valid for the encryption
  parameters
@@ -369,10 +331,9 @@ NS_ASSUME_NONNULL_BEGIN
  parameters
  */
 - (ASLPlainText * _Nullable)encodeWithDoubleValues:(NSArray<NSNumber *> *)values
-                  parametersId:(ASLParametersIdType)parametersId
-                         scale:(double)scale
-                   destination:(ASLPlainText *)destination
-                         error:(NSError **)error;
+                                      parametersId:(ASLParametersIdType)parametersId
+                                             scale:(double)scale
+                                             error:(NSError **)error;
 
 /*!
  Encodes a vector of double-precision floating-point real or complex numbers
@@ -384,8 +345,6 @@ NS_ASSUME_NONNULL_BEGIN
  @param parametersId parms_id determining the encryption parameters to
  be used by the result plaintext
  @param scale Scaling parameter defining encoding precision
- @param destination The plaintext polynomial to overwrite with the
- result
  @param pool The MemoryPoolHandle pointing to a valid memory pool
  @throws ASL_SealInvalidParameter if values has invalid size
  @throws ASL_SealInvalidParameter if parms_id is not valid for the encryption
@@ -396,11 +355,10 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealInvalidParameter if pool is uninitialized
  */
 - (ASLPlainText * _Nullable)encodeWithDoubleValues:(NSArray<NSNumber *> *)values
-                  parametersId:(ASLParametersIdType)parametersId
-                         scale:(double)scale
-                   destination:(ASLPlainText *)destination
-                          pool:(ASLMemoryPoolHandle*)pool
-                         error:(NSError **)error;
+                                      parametersId:(ASLParametersIdType)parametersId
+                                             scale:(double)scale
+                                              pool:(ASLMemoryPoolHandle*)pool
+                                             error:(NSError **)error;
 
 /*!
  Encodes a vector of double-precision floating-point real or complex numbers
@@ -411,17 +369,14 @@ NS_ASSUME_NONNULL_BEGIN
  
  @param values The vector of double-precision floating-point numbers to encode
  @param scale Scaling parameter defining encoding precision
- @param destination The plaintext polynomial to overwrite with the
- result
  @throws ASL_SealInvalidParameter if values has invalid size
  @throws ASL_SealInvalidParameter if scale is not strictly positive
  @throws ASL_SealInvalidParameter if encoding is too large for the encryption
  parameters
  */
 - (ASLPlainText * _Nullable)encodeWithDoubleValues:(NSArray<NSNumber *> *)values
-                         scale:(double)scale
-                   destination:(ASLPlainText *)destination
-                         error:(NSError **)error;
+                                             scale:(double)scale
+                                             error:(NSError **)error;
 
 /*!
  Encodes a vector of double-precision floating-point real or complex numbers
@@ -432,8 +387,6 @@ NS_ASSUME_NONNULL_BEGIN
  
  @param values The vector of double-precision floating-point numbers to encode
  @param scale Scaling parameter defining encoding precision
- @param destination The plaintext polynomial to overwrite with the
- result
  @param pool The MemoryPoolHandle pointing to a valid memory pool
  @throws ASL_SealInvalidParameter if values has invalid size
  @throws ASL_SealInvalidParameter if scale is not strictly positive
@@ -442,10 +395,9 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealInvalidParameter if pool is uninitialized
  */
 - (ASLPlainText * _Nullable)encodeWithDoubleValues:(NSArray<NSNumber *> *)values
-                         scale:(double)scale
-                   destination:(ASLPlainText *)destination
-                          pool:(ASLMemoryPoolHandle *)pool
-                         error:(NSError **)error;
+                                             scale:(double)scale
+                                              pool:(ASLMemoryPoolHandle *)pool
+                                             error:(NSError **)error;
 
 /*!
  Encodes an integer number into a plaintext polynomial without any scaling.
@@ -453,15 +405,12 @@ NS_ASSUME_NONNULL_BEGIN
  @param longValue The integer number to encode
  @param parametersId parms_id determining the encryption parameters to be
  used by the result plaintext
- @param destination The plaintext polynomial to overwrite with the
- result
  @throws ASL_SealInvalidParameter if parms_id is not valid for the encryption
  parameters
  */
 - (ASLPlainText * _Nullable)encodeWithLongValue:(NSDecimalNumber*)longValue
-               parametersId:(ASLParametersIdType)parametersId
-                destination:(ASLPlainText *)destination
-                      error:(NSError **)error;
+                                   parametersId:(ASLParametersIdType)parametersId
+                                          error:(NSError **)error;
 
 /*!
  Encodes an integer number into a plaintext polynomial without any scaling.
@@ -469,67 +418,66 @@ NS_ASSUME_NONNULL_BEGIN
  parameters used are the top level parameters for the given context.
  
  @param longValue The integer number to encode
- @param destination The plaintext polynomial to overwrite with the
- result
  */
 - (ASLPlainText * _Nullable)encodeWithLongValue:(NSDecimalNumber*)longValue
-                destination:(ASLPlainText *)destination
-                      error:(NSError **)error;
-
+                                          error:(NSError **)error;
 
 /*!
- Inverse of encode. This function "unbatches" a given plaintext into a matrix
- of integers modulo the plaintext modulus, and stores the result in the destination
- parameter. The input plaintext must have degress less than the polynomial modulus,
- and coefficients less than the plaintext modulus, i.e. it must be a valid plaintext
- for the encryption parameters. Dynamic memory allocations in the process are
- allocated from the memory pool pointed to by the given MemoryPoolHandle.
+ Decodes a plaintext polynomial into double-precision floating-point
+ real.
  
- @param plainText The plaintext polynomial to unbatch
- @param destination The matrix to be overwritten with the values in the slots
- @throws ASL_SealInvalidParameter if plain is not valid for the encryption parameters
- @throws ASL_SealInvalidParameter if plain is in NTT form
- */
-- (NSArray<NSNumber *> * _Nullable)decode:(ASLPlainText *)plainText
-   destination:(NSArray<NSNumber *> *)destination
-         error:(NSError **)error;
-
-/*!
- Inverse of encode. This function "unbatches" a given plaintext into a matrix
- of integers modulo the plaintext modulus, and stores the result in the destination
- parameter. The input plaintext must have degress less than the polynomial modulus,
- and coefficients less than the plaintext modulus, i.e. it must be a valid plaintext
- for the encryption parameters. Dynamic memory allocations in the process are
- allocated from the memory pool pointed to by the given MemoryPoolHandle.
- 
- @param plainText The plaintext polynomial to unbatch
- @param destination The matrix to be overwritten with the values in the slots
+ @param plain The plaintext to decode
+ the slots
  @param pool The MemoryPoolHandle pointing to a valid memory pool
- @throws ASL_SealInvalidParameter if plain is not valid for the encryption parameters
- @throws ASL_SealInvalidParameter if plain is in NTT form
- @throws ASL_SealInvalidParameter if pool is uninitialized
+ @throws ASLInvalidParameter if plain is not in NTT form or is invalid
+ for the encryption parameters
+ @throws ASLInvalidParameter if pool is uninitialized
  */
-- (NSArray<NSNumber *> * _Nullable)decode:(ASLPlainText *)plainText
-   destination:(NSArray<NSNumber *> *)destination
-          pool:(ASLMemoryPoolHandle *)pool
-         error:(NSError **)error;
+
+- (NSArray<NSNumber *> * _Nullable)decodeDoubleValues:(ASLPlainText *)plainText
+                                                error:(NSError **)error;
 
 /*!
- Inverse of encode. This function "unbatches" a given plaintext into a matrix
- of integers modulo the plaintext modulus, and stores the result in the destination
- parameter. The input plaintext must have degress less than the polynomial modulus,
- and coefficients less than the plaintext modulus, i.e. it must be a valid plaintext
- for the encryption parameters. Dynamic memory allocations in the process are
- allocated from the memory pool pointed to by the given MemoryPoolHandle.
+ Decodes a plaintext polynomial into complex numbers.
  
- @param plainText The plaintext polynomial to unbatch
- @param destination The matrix to be overwritten with the values in the slots
- @throws ASL_SealInvalidParameter if plain is not valid for the encryption parameters
- @throws ASL_SealInvalidParameter if plain is in NTT form
+ @param plain The plaintext to decode
+ @param pool The MemoryPoolHandle pointing to a valid memory pool
+ @throws ASLInvalidParameter if plain is not in NTT form or is invalid
+ for the encryption parameters
+ @throws ASLInvalidParameter if pool is uninitialized
  */
-- (NSArray<NSDecimalNumber *> * _Nullable)decodeWithDoubleValues:(ASLPlainText *)plainText
-                   destination:(NSArray<NSDecimalNumber *> *)destination
-                         error:(NSError **)error;
+
+- (NSArray<ASLComplexType *> * _Nullable)decodeComplexDoubleValues:(ASLPlainText *)plainText
+                                                             error:(NSError **)error;
+
+/*!
+Decodes a plaintext polynomial into double-precision floating-point
+real numbers. Dynamic memory allocations in the process are
+allocated from the memory pool pointed to by the given MemoryPoolHandle.
+
+@param plain The plaintext to decode
+@param pool The MemoryPoolHandle pointing to a valid memory pool
+@throws ASLInvalidParameter if plain is not in NTT form or is invalid
+for the encryption parameters
+@throws ASLInvalidParameter if pool is uninitialized
+*/
+- (NSArray<NSNumber *> * _Nullable)decodeDoubleValues:(ASLPlainText *)plainText
+                                                 pool:(ASLMemoryPoolHandle *)pool
+                                                error:(NSError **)error;
+
+/*!
+Decodes a plaintext polynomial into complex numbers. Dynamic memory allocations in the process are
+allocated from the memory pool pointed to by the given MemoryPoolHandle.
+
+@param plain The plaintext to decode
+@param pool The MemoryPoolHandle pointing to a valid memory pool
+@throws ASLInvalidParameter if plain is not in NTT form or is invalid
+for the encryption parameters
+@throws ASLInvalidParameter if pool is uninitialized
+*/
+- (NSArray<ASLComplexType *> * _Nullable)decodeComplexDoubleValues:(ASLPlainText *)plainText
+                                                              pool:(ASLMemoryPoolHandle *)pool
+                                                             error:(NSError **)error;
 @end
 
 NS_ASSUME_NONNULL_END

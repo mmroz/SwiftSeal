@@ -239,18 +239,6 @@
 
 #pragma mark - NSObject
 
-- (BOOL)isEqual:(id)object {
-    if (self == object) {
-        return YES;
-    }
-    
-    if (![object isKindOfClass:[ASLCipherText class]]) {
-        return NO;
-    }
-    
-    return [self isEqualToCipherText:(ASLCipherText *)object];
-}
-
 - (NSString *)description
 {
     auto const parameters = _cipherText.parms_id();
@@ -318,19 +306,6 @@
 }
 
 #pragma mark - Public Methods
-
-- (BOOL)isEqualToCipherText:(ASLCipherText *)other {
-    
-    // TODO - implement this
-    
-    NSParameterAssert(other != nil);
-    if (other == nil) {
-        return NO;
-    } else {
-        return NO;
-        //		return _cipherText == other->_cipherText;
-    }
-}
 
 - (BOOL)reserve:(ASLSealContext *)context
    parametersId:(ASLParametersIdType)parametersId
@@ -472,13 +447,13 @@
     if (!self) {
         return nil;
     }
-    _serializableCipherText = std::move(&serializableCipherText);
+    _serializableCipherText = new seal::Serializable<seal::Ciphertext>(std::move(serializableCipherText));
     return self;
 }
 
 - (void)dealloc {
-//    delete _serializableCipherText;
-//     _serializableCipherText = nullptr;
+    delete _serializableCipherText;
+     _serializableCipherText = nullptr;
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {
@@ -490,6 +465,9 @@
 }
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
-   // Intentially left blank
+    [NSException raise:NSInternalInconsistencyException
+                format:@"Method %s is not implemented, use initWithData:context:error: instead", __PRETTY_FUNCTION__];
+    return nil;
 }
+
 @end

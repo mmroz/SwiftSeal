@@ -51,16 +51,13 @@ class ASLKeyGeneratorTests: XCTestCase {
         archiver.encode(relinKey, forKey: "testObject")
         let data = archiver.encodedData
         
-        let unarchiver = try! NSKeyedUnarchiver(forReadingFrom: data)
-        unarchiver.requiresSecureCoding = false
-        let decodedRelinKey = unarchiver.decodeObject(of: ASLRelinearizationKeys.self, forKey: "testObject")!
+        let decodedRelinKey = try ASLRelinearizationKeys(data: data, context: .bfvDefault())
         
         XCTAssertEqual(relinKey, decodedRelinKey)
     }
     
     func testGaloisKeysLocalWithGaloisElements() throws {
         let result = try keyGenerator.galoisKeysLocal(withGaloisElements: [1,2])
-        
         XCTAssertEqual(result, ASLGaloisKeys())
     }
     

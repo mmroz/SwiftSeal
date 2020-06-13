@@ -181,7 +181,7 @@ class Levels: XCTestCase {
          */
         var plain = try ASLPlainText(polynomialString: "1x^3 + 2x^2 + 3x^1 + 4")
         
-        var encrypted = try encryptor.encrypt(with: plain, destination: ASLCipherText())
+        var encrypted = try encryptor.encrypt(with: plain)
         print("    + plain:      {\(plain.parametersId)} (not set in BFV)")
         print("    + encrypted:  {\(encrypted.parametersId)}")
         print()
@@ -223,7 +223,7 @@ class Levels: XCTestCase {
          */
         print()
         print("Decrypt still works after modulus switching.")
-        plain = try decryptor.decrypt(encrypted, destination: plain)
+        plain = try decryptor.decrypt(encrypted)
         print("    + Decryption of encrypted: {\(plain)} ...... Correct.")
         print()
         
@@ -243,7 +243,7 @@ class Levels: XCTestCase {
         print("Computation is more efficient with modulus switching.")
         print()
         print("Compute the eight power.")
-        encrypted = try encryptor.encrypt(with: plain, destination: encrypted)
+        encrypted = try encryptor.encrypt(with: plain)
         print("    + Noise budget fresh:                  {\(try decryptor.invariantNoiseBudget(encrypted))} bits")
         encrypted = try evaluator.squareInplace(encrypted)
         encrypted = try evaluator.relinearizeInplace(encrypted, relinearizationKeys: relinKeys)
@@ -279,7 +279,7 @@ class Levels: XCTestCase {
          can be used to decrypt a ciphertext at any level in the modulus switching
          chain.
          */
-        plain = try decryptor.decrypt(encrypted, destination: plain)
+        plain = try decryptor.decrypt(encrypted)
         print("    + Decryption of the 8th power (hexadecimal) ...... Correct.")
         print("    {\(plain)}")
         print()

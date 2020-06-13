@@ -153,7 +153,7 @@ class Performance: XCTestCase {
              */
             let plain = try ASLPlainText(capacity: parms.polynomialModulusDegree, coefficientCount: 0)
             try timedEvent {
-                try batchEncoder.encode(withUnsignedValues: podValues, destination: plain)
+                try batchEncoder.encode(withUnsignedValues: podValues)
             }
             
             /*
@@ -163,7 +163,7 @@ class Performance: XCTestCase {
             
             let podList = Array(repeating: NSNumber(0), count: slotCount)
             try timedEvent {
-                try batchEncoder.decode(with: plain, unsignedDestination: podList)
+                try batchEncoder.decode(with: plain)
             }
             
 //            XCTAssertEqual(podList, podValues)
@@ -176,7 +176,7 @@ class Performance: XCTestCase {
              */
             let encrypted = try ASLCipherText(context: context)
             try timedEvent {
-                try encryptor.encrypt(with: plain, destination: encrypted)
+                try encryptor.encrypt(with: plain)
             }
             
             /*
@@ -185,7 +185,7 @@ class Performance: XCTestCase {
              */
             let plain2 = try ASLPlainText(capacity: polyModulusDegree, coefficientCount: 0)
             try timedEvent {
-                try decryptor.decrypt(encrypted, destination: plain2)
+                try decryptor.decrypt(encrypted)
             }
             XCTAssertEqual(plain2, plain)
             
@@ -193,10 +193,10 @@ class Performance: XCTestCase {
              [Add]
              We create two ciphertexts and perform a few additions with them.
              */
-            let encrypted1 = try ASLCipherText(context: context)
-            try encryptor.encrypt(with:  encoder.encodeInt32Value(Int32(i)), destination: encrypted1)
-            let encrypted2 = try ASLCipherText(context: context)
-            try encryptor.encrypt(with: encoder.encodeInt32Value(Int32(i) + 1), destination: encrypted2)
+            var encrypted1 = try ASLCipherText(context: context)
+            encrypted1 = try encryptor.encrypt(with:  encoder.encodeInt32Value(Int32(i)))
+            var encrypted2 = try ASLCipherText(context: context)
+            encrypted2 = try encryptor.encrypt(with: encoder.encodeInt32Value(Int32(i) + 1))
             
             try timedEvent {
                 try evaluator.addInplace(encrypted1, encrypted2: encrypted1)
@@ -360,15 +360,14 @@ class Performance: XCTestCase {
             let scale = sqrt(NSNumber(value: lastValue).floatValue)
             let plain = try ASLPlainText(capacity: parms.polynomialModulusDegree * parms.coefficientModulus.count, coefficientCount: 0)
             try timedEvent {
-                try ckksEncoder.encode(withDoubleValues: podValues, scale: Double(scale), destination: plain)
+                try ckksEncoder.encode(withDoubleValues: podValues, scale: Double(scale))
             }
             
             /*
              [Decoding]
              */
-            let podValues = Array(repeating: NSNumber(0), count: slotCount)
             try timedEvent {
-                try ckksEncoder.decode(plain, destination: podValues)
+                let podValues = try ckksEncoder.decodeDoubleValues(plain)
             }
             
             /*
@@ -376,7 +375,7 @@ class Performance: XCTestCase {
              */
             let encrypted = try ASLCipherText(context: context)
             try timedEvent {
-                try encryptor.encrypt(with: plain, destination: encrypted)
+                try encryptor.encrypt(with: plain)
             }
             
             /*
@@ -384,18 +383,18 @@ class Performance: XCTestCase {
              */
             let plain2 = try ASLPlainText(capacity: polyModulusDegree, coefficientCount: 0)
             try timedEvent {
-                try decryptor.decrypt(encrypted, destination: plain2)
+                try decryptor.decrypt(encrypted)
             }
             
             /*
              [Add]
              */
-            let encrypted1 = try ASLCipherText(context: context)
-            try ckksEncoder.encode(withLongValue: NSDecimalNumber(integerLiteral: i + 1), destination: plain)
-            try encryptor.encrypt(with: plain, destination: encrypted1)
-            let encrypted2 = try ASLCipherText(context: context)
-            try ckksEncoder.encode(withLongValue: NSDecimalNumber(integerLiteral: i + 1), destination: plain2)
-            try encryptor.encrypt(with: plain2, destination: encrypted2)
+            var encrypted1 = try ASLCipherText(context: context)
+            try ckksEncoder.encode(withLongValue: NSDecimalNumber(integerLiteral: i + 1))
+            encrypted1 = try encryptor.encrypt(with: plain)
+            var encrypted2 = try ASLCipherText(context: context)
+            try ckksEncoder.encode(withLongValue: NSDecimalNumber(integerLiteral: i + 1))
+            encrypted2 = try encryptor.encrypt(with: plain2)
             try timedEvent {
                 try evaluator.addInplace(encrypted1, encrypted2: encrypted2)
                 try evaluator.addInplace(encrypted2, encrypted2: encrypted2)

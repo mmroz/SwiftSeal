@@ -120,14 +120,14 @@ class CKKSBasics: XCTestCase {
          We create plaintexts for PI, 0.4, and 1 using an overload of CKKSEncoder.Encode
          that encodes the given floating-point value to every slot in the vector.
          */
-        let plainCoeff3 = try encoder.encode(withDoubleValue: 3.14159265, scale: scale, destination: ASLPlainText())
-        let plainCoeff1 = try encoder.encode(withDoubleValue: 0.4, scale: scale, destination: ASLPlainText())
-        let plainCoeff0 = try encoder.encode(withDoubleValue: 1.0, scale: scale, destination: ASLPlainText())
+        let plainCoeff3 = try encoder.encode(withDoubleValue: 3.14159265, scale: scale)
+        let plainCoeff1 = try encoder.encode(withDoubleValue: 0.4, scale: scale)
+        let plainCoeff0 = try encoder.encode(withDoubleValue: 1.0, scale: scale)
         
         print()
         print("Encode input vectors.")
-        let xPlain = try encoder.encode(withDoubleValues: input, scale: scale, destination: ASLPlainText())
-        let x1Encrypted = try encryptor.encrypt(with: xPlain, destination: ASLCipherText())
+        let xPlain = try encoder.encode(withDoubleValues: input, scale: scale)
+        let x1Encrypted = try encryptor.encrypt(with: xPlain)
         
         /*
          To compute x^3 we first compute x^2 and relinearize. However, the scale has
@@ -136,7 +136,7 @@ class CKKSBasics: XCTestCase {
         
         print()
         print("Compute x^2 and relinearize:")
-        var x3Encrypted = try evaluator.square(x1Encrypted, destination: ASLCipherText())
+        var x3Encrypted = try evaluator.square(x1Encrypted)
         x3Encrypted = try evaluator.relinearizeInplace(x3Encrypted, relinearizationKeys: relinKeys)
         print("    + scale of x^2 before rescale: {\(log(x3Encrypted.scale))} bits")
         
@@ -161,8 +161,7 @@ class CKKSBasics: XCTestCase {
          */
         print()
         print("Compute and rescale PI*x.")
-        let x1EncryptedCoeff3 = ASLCipherText()
-        try evaluator.multiplyPlain(x1Encrypted, plain: plainCoeff3, destination: x1EncryptedCoeff3)
+        let x1EncryptedCoeff3 = try evaluator.multiplyPlain(x1Encrypted, plain: plainCoeff3)
         print("    + scale of PI*x before rescale: {\(log(x1Encrypted.scale))} bits")
         try evaluator.rescale(toNextInplace: x1EncryptedCoeff3)
         print("    + scale of PI*x after rescale: {\(log(x1Encrypted.scale))} bits")
@@ -271,14 +270,12 @@ class CKKSBasics: XCTestCase {
          */
         print()
         print("Compute PI*x^3 + 0.4*x + 1.")
-        let encryptedResult = ASLCipherText()
-        try evaluator.add(x3Encrypted, encrypted2: x1Encrypted, destination: encryptedResult)
+        let encryptedResult = try evaluator.add(x3Encrypted, encrypted2: x1Encrypted)
         try evaluator.addPlainInplace(encryptedResult, plain: plainCoeff0)
         
         /*
          First print the true result.
          */
-        let plainResult = ASLPlainText()
         print()
         print("Decrypt and decode PI * x ^ 3 + 0.4x + 1.")
         print("    + Expected result:")
@@ -294,12 +291,11 @@ class CKKSBasics: XCTestCase {
         /*
          We decrypt, decode, and print the result.
          */
-        try decryptor.decrypt(encryptedResult, destination: plainResult)
-        let result = [NSNumber]()
-        try encoder.decode(plainResult, destination: result)
+        let plainResult = try decryptor.decrypt(encryptedResult)
+        let result = try encoder.decodeDoubleValues(plainResult)
         print("    + Computed result ...... Correct.")
         print(result[3...7])
-        
+
         /*
          While we did not show any computations on complex numbers in these examples,
          the CKKSEncoder would allow us to have done that just as easily. Additions

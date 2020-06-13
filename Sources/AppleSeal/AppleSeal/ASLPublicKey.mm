@@ -23,10 +23,6 @@ static seal::compr_mode_type sealComprModeTypeFromASLCompressionModeType(ASLComp
 	switch(compressionModeType) {
 		case CompressionNone:
 			return seal::compr_mode_type::none;
-		case CompressionDeflate:
-            // TODO - fix this
-            return seal::compr_mode_type::none;
-			//return seal::compr_mode_type::deflate;
 	}
 }
 

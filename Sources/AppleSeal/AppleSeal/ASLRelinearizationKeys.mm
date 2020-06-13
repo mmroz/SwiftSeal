@@ -142,8 +142,9 @@
 }
 
 - (void)dealloc {
-    delete _serializableKeys;
-     _serializableKeys = nullptr;
+    // TODO - crashes
+//    delete _serializableKeys;
+//     _serializableKeys = nullptr;
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {

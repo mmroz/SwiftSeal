@@ -60,12 +60,10 @@
 #pragma mark - Public Methods
 
 - (ASLPlainText *)encodeWithDoubleValues:(NSArray<NSNumber *> *)values
-                  parametersId:(ASLParametersIdType)parametersId
-                         scale:(double)scale
-                   destination:(ASLPlainText *)destination
-                         error:(NSError **)error {
+                            parametersId:(ASLParametersIdType)parametersId
+                                   scale:(double)scale
+                                   error:(NSError **)error {
     NSParameterAssert(values != nil);
-    NSParameterAssert(destination != nil);
     
     std::vector<double> doubleValuesList;
     for (NSNumber * const value in values) {
@@ -78,11 +76,11 @@
               std::end(parametersId.block),
               sealParametersId.begin());
     
-    auto sealPlainText = destination.sealPlainText;
+    seal::Plaintext destination = seal::Plaintext();
     
     try {
-        _ckksEncoder->encode(constDoubleValues, sealParametersId, scale, sealPlainText);
-        return [[ASLPlainText alloc] initWithPlainText:sealPlainText];
+        _ckksEncoder->encode(constDoubleValues, sealParametersId, scale, destination);
+        return [[ASLPlainText alloc] initWithPlainText:destination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
@@ -93,13 +91,11 @@
 }
 
 - (ASLPlainText *)encodeWithDoubleValues:(NSArray<NSNumber *> *)values
-                  parametersId:(ASLParametersIdType)parametersId
-                         scale:(double)scale
-                   destination:(ASLPlainText *)destination
-                          pool:(ASLMemoryPoolHandle*)pool
-                         error:(NSError **)error {
+                            parametersId:(ASLParametersIdType)parametersId
+                                   scale:(double)scale
+                                    pool:(ASLMemoryPoolHandle*)pool
+                                   error:(NSError **)error {
     NSParameterAssert(values != nil);
-    NSParameterAssert(destination != nil);
     NSParameterAssert(pool != nil);
     
     std::vector<double> doubleValuesList;
@@ -113,11 +109,11 @@
               std::end(parametersId.block),
               sealParametersId.begin());
     
-    auto sealPlainText = destination.sealPlainText;
+    seal::Plaintext destination = seal::Plaintext();
     
     try {
-        _ckksEncoder->encode(constDoubleValues, sealParametersId, scale, sealPlainText, pool.memoryPoolHandle);
-         return [[ASLPlainText alloc] initWithPlainText:sealPlainText];
+        _ckksEncoder->encode(constDoubleValues, sealParametersId, scale, destination, pool.memoryPoolHandle);
+        return [[ASLPlainText alloc] initWithPlainText:destination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
@@ -128,12 +124,10 @@
 }
 
 - (ASLPlainText *)encodeWithComplexValues:(NSArray<ASLComplexType *>*)values
-                   parametersId:(ASLParametersIdType)parametersId
-                          scale:(double)scale
-                    destination:(ASLPlainText *)destination
-                          error:(NSError **)error {
+                             parametersId:(ASLParametersIdType)parametersId
+                                    scale:(double)scale
+                                    error:(NSError **)error {
     NSParameterAssert(values != nil);
-    NSParameterAssert(destination != nil);
     
     std::vector<std::complex<double>> doubleValuesList;
     for (ASLComplexType * const value in values) {
@@ -145,11 +139,11 @@
               std::end(parametersId.block),
               sealParametersId.begin());
     
-    auto sealPlainText = destination.sealPlainText;
+    seal::Plaintext destination = seal::Plaintext();
     
     try {
-        _ckksEncoder->encode(doubleValuesList, sealParametersId, scale, sealPlainText);
-         return [[ASLPlainText alloc] initWithPlainText:sealPlainText];
+        _ckksEncoder->encode(doubleValuesList, sealParametersId, scale, destination);
+        return [[ASLPlainText alloc] initWithPlainText:destination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
@@ -160,13 +154,11 @@
 }
 
 - (ASLPlainText *)encodeWithComplexValues:(NSArray<ASLComplexType *>*)values
-                   parametersId:(ASLParametersIdType)parametersId
-                          scale:(double)scale
-                    destination:(ASLPlainText *)destination
-                           pool:(ASLMemoryPoolHandle *)pool
-                          error:(NSError **)error {
+                             parametersId:(ASLParametersIdType)parametersId
+                                    scale:(double)scale
+                                     pool:(ASLMemoryPoolHandle *)pool
+                                    error:(NSError **)error {
     NSParameterAssert(values != nil);
-    NSParameterAssert(destination != nil);
     NSParameterAssert(pool != nil);
     
     std::vector<std::complex<double>> doubleValuesList;
@@ -179,11 +171,11 @@
               std::end(parametersId.block),
               sealParametersId.begin());
     
-    auto sealPlainText = destination.sealPlainText;
+    seal::Plaintext destination = seal::Plaintext();
     
     try {
-        _ckksEncoder->encode(doubleValuesList, sealParametersId, scale, sealPlainText, pool.memoryPoolHandle);
-         return [[ASLPlainText alloc] initWithPlainText:sealPlainText];
+        _ckksEncoder->encode(doubleValuesList, sealParametersId, scale, destination, pool.memoryPoolHandle);
+        return [[ASLPlainText alloc] initWithPlainText:destination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
@@ -194,11 +186,9 @@
 }
 
 - (ASLPlainText *)encodeWithDoubleValues:(NSArray<NSNumber *> *)values
-                         scale:(double)scale
-                   destination:(ASLPlainText *)destination
-                         error:(NSError **)error {
+                                   scale:(double)scale
+                                   error:(NSError **)error {
     NSParameterAssert(values != nil);
-    NSParameterAssert(destination != nil);
     
     std::vector<double> doubleValuesList;
     for (NSNumber * const value in values) {
@@ -206,11 +196,11 @@
     }
     const std::vector<double> constDoubleValues = doubleValuesList;
     
-    auto sealPlainText = destination.sealPlainText;
+    seal::Plaintext destination = seal::Plaintext();
     
     try {
-        _ckksEncoder->encode(constDoubleValues, scale, sealPlainText);
-         return [[ASLPlainText alloc] initWithPlainText:sealPlainText];
+        _ckksEncoder->encode(constDoubleValues, scale, destination);
+        return [[ASLPlainText alloc] initWithPlainText:destination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
@@ -221,12 +211,10 @@
 }
 
 - (ASLPlainText *)encodeWithDoubleValues:(NSArray<NSNumber *> *)values
-                         scale:(double)scale
-                   destination:(ASLPlainText *)destination
-                          pool:(ASLMemoryPoolHandle *)pool
-                         error:(NSError **)error {
+                                   scale:(double)scale
+                                    pool:(ASLMemoryPoolHandle *)pool
+                                   error:(NSError **)error {
     NSParameterAssert(values != nil);
-    NSParameterAssert(destination != nil);
     NSParameterAssert(pool != nil);
     
     std::vector<double> doubleValuesList;
@@ -235,11 +223,11 @@
     }
     const std::vector<double> constDoubleValues = doubleValuesList;
     
-    auto sealPlainText = destination.sealPlainText;
+    seal::Plaintext destination = seal::Plaintext();
     
     try {
-        _ckksEncoder->encode(constDoubleValues, scale, sealPlainText, pool.memoryPoolHandle);
-         return [[ASLPlainText alloc] initWithPlainText:sealPlainText];
+        _ckksEncoder->encode(constDoubleValues, scale, destination, pool.memoryPoolHandle);
+        return [[ASLPlainText alloc] initWithPlainText:destination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
@@ -250,22 +238,20 @@
 }
 
 - (ASLPlainText *)encodeWithComplexValues:(NSArray<ASLComplexType *>*)values
-                          scale:(double)scale
-                    destination:(ASLPlainText *)destination
-                          error:(NSError **)error {
+                                    scale:(double)scale
+                                    error:(NSError **)error {
     NSParameterAssert(values != nil);
-    NSParameterAssert(destination != nil);
-    
+
     std::vector<std::complex<double>> doubleValuesList;
     for (ASLComplexType * const value in values) {
         doubleValuesList.push_back(value.complex);
     }
     
-    auto sealPlainText = destination.sealPlainText;
+    seal::Plaintext destination = seal::Plaintext();
     
     try {
-        _ckksEncoder->encode(doubleValuesList, scale, sealPlainText);
-         return [[ASLPlainText alloc] initWithPlainText:sealPlainText];
+        _ckksEncoder->encode(doubleValuesList, scale, destination);
+        return [[ASLPlainText alloc] initWithPlainText:destination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
@@ -276,12 +262,12 @@
 }
 
 - (ASLPlainText *)encodeWithComplexValues:(NSArray<ASLComplexType *>*)values
-                          scale:(double)scale
-                    destination:(ASLPlainText *)destination
-                           pool:(ASLMemoryPoolHandle *)pool
-                          error:(NSError **)error {
+                                    scale:(double)scale
+                              
+                                     pool:(ASLMemoryPoolHandle *)pool
+                                    error:(NSError **)error {
     NSParameterAssert(values != nil);
-    NSParameterAssert(destination != nil);
+    
     NSParameterAssert(pool != nil);
     
     std::vector<std::complex<double>> doubleValuesList;
@@ -289,11 +275,11 @@
         doubleValuesList.push_back(value.complex);
     }
     
-    auto sealPlainText = destination.sealPlainText;
+    seal::Plaintext destination = seal::Plaintext();
     
     try {
-        _ckksEncoder->encode(doubleValuesList, scale, sealPlainText, pool.memoryPoolHandle);
-         return [[ASLPlainText alloc] initWithPlainText:sealPlainText];
+        _ckksEncoder->encode(doubleValuesList, scale, destination, pool.memoryPoolHandle);
+        return [[ASLPlainText alloc] initWithPlainText:destination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
@@ -304,22 +290,22 @@
 }
 
 - (ASLPlainText *)encodeWithDoubleValue:(double)value
-                 parametersId:(ASLParametersIdType)parametersId
-                        scale:(double)scale
-                  destination:(ASLPlainText *)destination
-                        error:(NSError **)error {
-    NSParameterAssert(destination != nil);
+                           parametersId:(ASLParametersIdType)parametersId
+                                  scale:(double)scale
+                            
+                                  error:(NSError **)error {
+    
     
     seal::parms_id_type sealParametersId = {};
     std::copy(std::begin(parametersId.block),
               std::end(parametersId.block),
               sealParametersId.begin());
     
-    auto sealPlainText = destination.sealPlainText;
+    seal::Plaintext destination = seal::Plaintext();
     
     try {
-        _ckksEncoder->encode(value, sealParametersId, scale, sealPlainText);
-         return [[ASLPlainText alloc] initWithPlainText:sealPlainText];
+        _ckksEncoder->encode(value, sealParametersId, scale, destination);
+        return [[ASLPlainText alloc] initWithPlainText:destination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
@@ -330,12 +316,12 @@
 }
 
 - (ASLPlainText *)encodeWithDoubleValue:(double)value
-                 parametersId:(ASLParametersIdType)parametersId
-                        scale:(double)scale
-                  destination:(ASLPlainText *)destination
-                         pool:(ASLMemoryPoolHandle *)pool
-                        error:(NSError **)error {
-    NSParameterAssert(destination != nil);
+                           parametersId:(ASLParametersIdType)parametersId
+                                  scale:(double)scale
+                            
+                                   pool:(ASLMemoryPoolHandle *)pool
+                                  error:(NSError **)error {
+    
     NSParameterAssert(pool != nil);
     
     seal::parms_id_type sealParametersId = {};
@@ -343,11 +329,11 @@
               std::end(parametersId.block),
               sealParametersId.begin());
     
-    auto sealPlainText = destination.sealPlainText;
+    seal::Plaintext destination = seal::Plaintext();
     
     try {
-        _ckksEncoder->encode(value, sealParametersId, scale, sealPlainText);
-         return [[ASLPlainText alloc] initWithPlainText:sealPlainText];
+        _ckksEncoder->encode(value, sealParametersId, scale, destination);
+        return [[ASLPlainText alloc] initWithPlainText:destination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
@@ -358,15 +344,15 @@
 }
 
 - (ASLPlainText *)encodeWithDoubleValue:(double)value
-                        scale:(double)scale
-                  destination:(ASLPlainText *)destination
-                        error:(NSError **)error {
-    NSParameterAssert(destination != nil);
+                                  scale:(double)scale
+                            
+                                  error:(NSError **)error {
     
-    auto sealPlainText = destination.sealPlainText;
+    
+    seal::Plaintext destination = seal::Plaintext();
     try {
-        _ckksEncoder->encode(value, scale, sealPlainText);
-         return [[ASLPlainText alloc] initWithPlainText:sealPlainText];
+        _ckksEncoder->encode(value, scale, destination);
+        return [[ASLPlainText alloc] initWithPlainText:destination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
@@ -377,17 +363,18 @@
 }
 
 - (ASLPlainText *)encodeWithDoubleValue:(double)value
-                        scale:(double)scale
-                  destination:(ASLPlainText *)destination
-                         pool:(ASLMemoryPoolHandle *)pool
-                        error:(NSError **)error {
-    NSParameterAssert(destination != nil);
+                                  scale:(double)scale
+                            
+                                   pool:(ASLMemoryPoolHandle *)pool
+                                  error:(NSError **)error {
+    
     NSParameterAssert(pool != nil);
     
-    auto sealPlainText = destination.sealPlainText;
+    seal::Plaintext destination = seal::Plaintext();
+    
     try {
-        _ckksEncoder->encode(value, scale, sealPlainText, pool.memoryPoolHandle);
-         return [[ASLPlainText alloc] initWithPlainText:sealPlainText];
+        _ckksEncoder->encode(value, scale, destination, pool.memoryPoolHandle);
+        return [[ASLPlainText alloc] initWithPlainText:destination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
@@ -398,23 +385,22 @@
 }
 
 - (ASLPlainText *)encodeWithComplexValue:(ASLComplexType *)complexValue
-                  parametersId:(ASLParametersIdType)parametersId
-                         scale:(double)scale
-                   destination:(ASLPlainText *)destination
-                         error:(NSError **)error {
+                            parametersId:(ASLParametersIdType)parametersId
+                                   scale:(double)scale
+                                   error:(NSError **)error {
     NSParameterAssert(complexValue != nil);
-    NSParameterAssert(destination != nil);
+    
     
     seal::parms_id_type sealParametersId = {};
     std::copy(std::begin(parametersId.block),
               std::end(parametersId.block),
               sealParametersId.begin());
     
-    auto sealPlainText = destination.sealPlainText;
+    seal::Plaintext destination = seal::Plaintext();
     
     try {
-        _ckksEncoder->encode(complexValue.complex, sealParametersId, scale, sealPlainText);
-         return [[ASLPlainText alloc] initWithPlainText:sealPlainText];
+        _ckksEncoder->encode(complexValue.complex, sealParametersId, scale, destination);
+        return [[ASLPlainText alloc] initWithPlainText:destination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
@@ -425,13 +411,12 @@
 }
 
 - (ASLPlainText *)encodeWithComplexValue:(ASLComplexType *)complexValue
-                  parametersId:(ASLParametersIdType)parametersId
-                         scale:(double)scale
-                   destination:(ASLPlainText *)destination
-                          pool:(ASLMemoryPoolHandle *)pool
-                         error:(NSError **)error {
+                            parametersId:(ASLParametersIdType)parametersId
+                                   scale:(double)scale
+                                    pool:(ASLMemoryPoolHandle *)pool
+                                   error:(NSError **)error {
     NSParameterAssert(complexValue != nil);
-    NSParameterAssert(destination != nil);
+    
     NSParameterAssert(pool != nil);
     
     seal::parms_id_type sealParametersId = {};
@@ -439,11 +424,11 @@
               std::end(parametersId.block),
               sealParametersId.begin());
     
-    auto sealPlainText = destination.sealPlainText;
+    seal::Plaintext destination = seal::Plaintext();
     
     try {
-        _ckksEncoder->encode(complexValue.complex, sealParametersId, scale, sealPlainText, pool.memoryPoolHandle);
-         return [[ASLPlainText alloc] initWithPlainText:sealPlainText];
+        _ckksEncoder->encode(complexValue.complex, sealParametersId, scale, destination, pool.memoryPoolHandle);
+        return [[ASLPlainText alloc] initWithPlainText:destination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
@@ -454,17 +439,16 @@
 }
 
 - (ASLPlainText *)encodeWithComplexValue:(ASLComplexType *)complexValue
-                         scale:(double)scale
-                   destination:(ASLPlainText *)destination
-                         error:(NSError **)error {
+                                   scale:(double)scale
+                                   error:(NSError **)error {
     NSParameterAssert(complexValue != nil);
-    NSParameterAssert(destination != nil);
     
-    auto sealPlainText = destination.sealPlainText;
+    
+    seal::Plaintext destination = seal::Plaintext();
     
     try {
-        _ckksEncoder->encode(complexValue.complex, scale, sealPlainText);
-         return [[ASLPlainText alloc] initWithPlainText:sealPlainText];
+        _ckksEncoder->encode(complexValue.complex, scale, destination);
+        return [[ASLPlainText alloc] initWithPlainText:destination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
@@ -475,19 +459,17 @@
 }
 
 - (ASLPlainText *)encodeWithComplexValue:(ASLComplexType *)complexValue
-                         scale:(double)scale
-                   destination:(ASLPlainText *)destination
-                          pool:(ASLMemoryPoolHandle *)pool
-                         error:(NSError **)error {
+                                   scale:(double)scale
+                                    pool:(ASLMemoryPoolHandle *)pool
+                                   error:(NSError **)error {
     NSParameterAssert(complexValue != nil);
-    NSParameterAssert(destination != nil);
     NSParameterAssert(pool != nil);
     
-    auto sealPlainText = destination.sealPlainText;
+    seal::Plaintext destination = seal::Plaintext();
     
     try {
-        _ckksEncoder->encode(complexValue.complex, scale, sealPlainText, pool.memoryPoolHandle);
-         return [[ASLPlainText alloc] initWithPlainText:sealPlainText];
+        _ckksEncoder->encode(complexValue.complex, scale, destination, pool.memoryPoolHandle);
+        return [[ASLPlainText alloc] initWithPlainText:destination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
@@ -498,22 +480,19 @@
 }
 
 - (ASLPlainText *)encodeWithLongValue:(NSDecimalNumber *)longValue
-               parametersId:(ASLParametersIdType)parametersId
-                destination:(ASLPlainText *)destination
-                      error:(NSError **)error {
-    NSParameterAssert(destination != nil);
+                         parametersId:(ASLParametersIdType)parametersId
+                                error:(NSError **)error {
     
     seal::parms_id_type sealParametersId = {};
     std::copy(std::begin(parametersId.block),
               std::end(parametersId.block),
               sealParametersId.begin());
     
-    auto sealPlainText = destination.sealPlainText;
+    seal::Plaintext destination = seal::Plaintext();
     
     try {
-        
-        _ckksEncoder->encode(longValue.longValue, sealParametersId, sealPlainText);
-         return [[ASLPlainText alloc] initWithPlainText:sealPlainText];
+        _ckksEncoder->encode(longValue.longValue, sealParametersId, destination);
+        return [[ASLPlainText alloc] initWithPlainText:destination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
@@ -524,14 +503,13 @@
 }
 
 - (ASLPlainText *)encodeWithLongValue:(NSDecimalNumber *)longValue
-                destination:(ASLPlainText *)destination
-                      error:(NSError **)error {
-    NSParameterAssert(destination != nil);
+                                error:(NSError **)error {
     
-    auto sealPlainText = destination.sealPlainText;
+    seal::Plaintext destination = seal::Plaintext();
+    
     try {
-        _ckksEncoder->encode(longValue.longValue, sealPlainText);
-         return [[ASLPlainText alloc] initWithPlainText:sealPlainText];
+        _ckksEncoder->encode(longValue.longValue, destination);
+        return [[ASLPlainText alloc] initWithPlainText:destination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
@@ -541,80 +519,79 @@
     return nil;
 }
 
-- (NSArray<NSNumber *> *)decode:(ASLPlainText *)plainText
-   destination:(NSArray<NSNumber *> *)destination
-         error:(NSError **)error {
-    NSParameterAssert(plainText != nil);
-    NSParameterAssert(destination != nil);
-    
-    std::vector<double> doubleList;
-    for (NSNumber * value in destination) {
-        doubleList.push_back(value.doubleValue);
-    }
+- (NSArray<NSNumber *> *)decodeDoubleValues:(ASLPlainText *)plainText
+                                      error:(NSError **)error {
+    std::vector<double> doubleList = {};
     try {
         _ckksEncoder->decode(plainText.sealPlainText, doubleList);
-        NSMutableArray<NSNumber *> * results = [[NSMutableArray alloc] initWithCapacity:doubleList.size()];
-        for (double & value : doubleList) {
-            [results addObject:[[NSNumber alloc]initWithFloat:value]];
+        NSMutableArray<NSNumber *> * const result = [NSMutableArray arrayWithCapacity:doubleList.size()];
+        for (double value : doubleList) {
+            [result addObject:@(value)];
         }
-         return results;
+        return result;
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
         return nil;
     }
-    return nil;
+}
+    
+-(NSArray<ASLComplexType *> *)decodeComplexDoubleValues:(ASLPlainText *)plainText
+                                                  error:(NSError **)error {
+    std::vector<std::complex<double>> doubleList = {};
+    try {
+        _ckksEncoder->decode(plainText.sealPlainText, doubleList);
+        NSMutableArray<ASLComplexType *> * const result = [NSMutableArray arrayWithCapacity:doubleList.size()];
+        for (std::complex<double> value : doubleList) {
+            ASLComplexType * complexValue = [[ASLComplexType alloc] initWithReal:value.real() imaginary:value.imag()];
+            [result addObject:complexValue];
+        }
+        return result;
+    } catch (std::invalid_argument const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealInvalidParameter:e];
+        }
+        return nil;
+    }
 }
 
-- (NSArray<NSNumber *> *)decode:(ASLPlainText *)plainText
-   destination:(NSArray<NSNumber *> *)destination
-          pool:(ASLMemoryPoolHandle *)pool
-         error:(NSError **)error {
-    NSParameterAssert(plainText != nil);
-    NSParameterAssert(destination != nil);
-    
-    std::vector<std::uint64_t> destinationValues;
-    for (NSNumber * const value in destination) {
-        destinationValues.push_back(value.intValue);
-    }
-    
-    auto const sealPlainText = plainText.sealPlainText;
+- (NSArray<NSNumber *> *)decodeDoubleValues:(ASLPlainText *)plainText
+                                       pool:(ASLMemoryPoolHandle *)pool
+                                      error:(NSError **)error {
+    std::vector<double> doubleList = {};
     try {
-        // TODO - fix this
-        //_ckksEncoder->decode(sealPlainText, destinationValues, pool.memoryPoolHandle)
-        // return [[ASLPlainText alloc] initWithPlainText:sealPlainText];
+        _ckksEncoder->decode(plainText.sealPlainText, doubleList, pool.memoryPoolHandle);
+        NSMutableArray<NSNumber *> * const result = [NSMutableArray arrayWithCapacity:doubleList.size()];
+        for (double value : doubleList) {
+            [result addObject:@(value)];
+        }
+        return result;
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
         return nil;
     }
-    return nil;
 }
 
-- (NSArray<NSDecimalNumber *> *)decodeWithDoubleValues:(ASLPlainText *)plainText
-                   destination:(NSArray<NSDecimalNumber *> *)destination
-                         error:(NSError **)error {
-    NSParameterAssert(plainText != nil);
-    NSParameterAssert(destination != nil);
-    
-    std::vector<std::uint64_t> destinationValues;
-    for (NSNumber * const value in destination) {
-        destinationValues.push_back(value.intValue);
-    }
-    
-    auto const sealPlainText = plainText.sealPlainText;
+-(NSArray<ASLComplexType *> *)decodeComplexDoubleValues:(ASLPlainText *)plainText
+                                                   pool:(ASLMemoryPoolHandle *)pool
+                                                  error:(NSError **)error {
+    std::vector<std::complex<double>> doubleList = {};
     try {
-        // TODO - fix this
-        //_ckksEncoder->decode(sealPlainText, destinationValues)
-        // return [[ASLPlainText alloc] initWithPlainText:sealPlainText];
+        _ckksEncoder->decode(plainText.sealPlainText, doubleList, pool.memoryPoolHandle);
+        NSMutableArray<ASLComplexType *> * const result = [NSMutableArray arrayWithCapacity:doubleList.size()];
+        for (std::complex<double> value : doubleList) {
+            ASLComplexType * complexValue = [[ASLComplexType alloc] initWithReal:value.real() imaginary:value.imag()];
+            [result addObject:complexValue];
+        }
+        return result;
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
         }
         return nil;
     }
-    return nil;
 }
 @end

@@ -240,6 +240,11 @@ static std::uint8_t sealSchemeFromASLSchemeType(ASLSchemeType schemeType) {
      return NO;
 }
 
+- (BOOL)setRandomGenerator {
+    // TODO - implement this class
+    //_encryptionParameters.set_random_generator(<#std::shared_ptr<UniformRandomGeneratorFactory> random_generator#>)
+}
+
 #pragma mark - ASLEncrytionParameters_Internal
 
 - (instancetype)initWithEncryptionParameters:(seal::EncryptionParameters)encryptionParameters {

@@ -11,95 +11,91 @@ import XCTest
 
 class ASLNttTablesTests: XCTestCase {
     func testWithCoefficentCountPowerAndModulus() throws {
-        XCTAssertNoThrow(ASLNttTables(coefficentCountPower: 8, modulus: try ASLModulus(value: 1024)))
+        let modulus = try XCTUnwrap(ASLCoefficientModulus.create(8192, bitSizes: [40,40,40,40]).first)
+        try XCTAssertNoThrow(ASLNttTables(coefficentCountPower: 8, modulus: modulus))
     }
     
-    func testWithCoefficentCountPowerAndModulusAndPool() {
-        XCTAssertNoThrow(ASLNttTables(coefficentCountPower: 8, modulus: try ASLModulus(value: 1024), pool: .global()))
+    func testWithCoefficentCountPowerAndModulusAndPool() throws {
+        let modulus = try XCTUnwrap(ASLCoefficientModulus.create(8192, bitSizes: [40,40,40,40]).first)
+        try XCTAssertNoThrow(ASLNttTables(coefficentCountPower: 8, modulus: modulus, pool: .global()))
     }
     
     func testCreateWithCoefficentCountPower() throws {
-        let polyModulusDegree = 8192
-        let modulus = try ASLCoefficientModulus.create(polyModulusDegree, bitSizes: [40, 40, 40, 40, 40])
-        let otherTable = ASLNttTables(coefficentCountPower: 8, modulus: try ASLModulus(value: 1024))
-        
+        let modulus = try ASLCoefficientModulus.create(8192, bitSizes: [40, 40, 40, 40, 40])
+        let otherTable = try ASLNttTables(coefficentCountPower: 8, modulus: modulus.first!)
         XCTAssertNoThrow(try ASLNttTables.create(withCoefficentCountPower: 4, modulus: modulus, tables: otherTable, pool: .global()))
     }
     
-    func testNttNegacyclicHarveyLazyWithOperand() throws {
-        let otherTable = ASLNttTables(coefficentCountPower: 8, modulus: try ASLModulus(value: 1024))
-        
-        XCTAssertNoThrow(ASLNttTables.nttNegacyclicHarvey(withOperand: 4, tables: otherTable))
+    func testNttNegacyclicHarveyWithOperand() throws {
+        let tables = ASLSealContext.bfvDefault().firstContextData.smallNttTables
+        XCTAssertNoThrow(tables.negacyclicHarvey(withOperand: 8))
     }
     
-    func testNttNegacyclicHarveyWithOperand() throws {
-        let otherTable = ASLNttTables(coefficentCountPower: 8, modulus: try ASLModulus(value: 1024))
-        
-        XCTAssertNoThrow(ASLNttTables.nttNegacyclicHarvey(withOperand: 4, tables: otherTable))
+    func testNttNegacyclicHarveyLazyWithOperand() throws {
+        let tables = ASLSealContext.bfvDefault().firstContextData.smallNttTables
+        XCTAssertNoThrow(tables.negacyclicHarveyLazy(withOperand: 8))
     }
     
     func testInverseNttNegacyclicHarveyLazyWithOperand() throws {
-        let otherTable = ASLNttTables(coefficentCountPower: 8, modulus: try ASLModulus(value: 1024))
-        XCTAssertNoThrow(ASLNttTables.inverseNttNegacyclicHarveyLazy(withOperand: 4, tables: otherTable))
+        let tables = ASLSealContext.bfvDefault().firstContextData.smallNttTables
+        XCTAssertNoThrow(tables.inverseNegacyclicHarvey(withOperand: 8))
     }
     
     func testInverseNttNegacyclicHarveyWithOperand() throws {
-        let otherTable = ASLNttTables(coefficentCountPower: 8, modulus: try ASLModulus(value: 1024))
-        XCTAssertNoThrow(ASLNttTables.inverseNttNegacyclicHarvey(withOperand: 4, tables: otherTable))
+        let tables = ASLSealContext.bfvDefault().firstContextData.smallNttTables
+        XCTAssertNoThrow(tables.inverseNegacyclicHarveyLazy(withOperand: 8))
     }
     
     func testGetFromRootPowersWithIndex() throws {
-        let tables = ASLNttTables(coefficentCountPower: 8, modulus: try ASLModulus(value: 1024))
-        let result = tables.getFromRootPowers(withIndex: 0)
-        XCTAssertEqual(result, 0)
+        let tables = ASLSealContext.bfvDefault().firstContextData.plainNttTables
+        let _ = tables.getFromRootPowers(with: 0)
     }
     
     func testGetFromScaledRootPowersWithIndex() throws {
-        let tables = ASLNttTables(coefficentCountPower: 8, modulus: try ASLModulus(value: 1024))
-        let result = tables.getFromScaledRootPowers(withIndex: 0)
-        XCTAssertEqual(result, 0)
+        let modulus = try ASLCoefficientModulus.create(8192, bitSizes: [40, 40, 40, 40, 40])
+        let table = try ASLNttTables(coefficentCountPower: 8, modulus: modulus.first!)
+        XCTAssertEqual(16777240, table.getFromScaledRootPowers(with: 0))
     }
     
     func testGetFromInverseRootPowersWithIndex() throws {
-        let tables = ASLNttTables(coefficentCountPower: 8, modulus: try ASLModulus(value: 1024))
-        let result = tables.getFromInverseRootPowers(withIndex: 0)
-        XCTAssertEqual(result, 0)
+        let modulus = try ASLCoefficientModulus.create(8192, bitSizes: [40, 40, 40, 40, 40])
+        let table = try ASLNttTables(coefficentCountPower: 8, modulus: modulus.first!)
+        XCTAssertEqual(1, table.getFromInverseRootPowers(with: 0))
     }
     
     func testGetFromScaledInverseRootPowersWithIndex() throws {
-        let tables = ASLNttTables(coefficentCountPower: 8, modulus: try ASLModulus(value: 1024))
-        let result = tables.getFromScaledInverseRootPowers(withIndex: 0)
-        XCTAssertEqual(result, 0)
+        let modulus = try ASLCoefficientModulus.create(8192, bitSizes: [40, 40, 40, 40, 40])
+        let table = try ASLNttTables(coefficentCountPower: 8, modulus: modulus.first!)
+        XCTAssertEqual(16777240, table.getFromScaledInverseRootPowers(with: 0))
     }
     
     func testGetInverseDegreeModulo() throws {
-        let tables = ASLNttTables(coefficentCountPower: 8, modulus: try ASLModulus(value: 1024))
-        let result = tables.getInverseDegreeModulo()
-        XCTAssertEqual(result, 0)
+        let modulus = try ASLCoefficientModulus.create(8192, bitSizes: [40, 40, 40, 40, 40])
+        let table = try ASLNttTables(coefficentCountPower: 8, modulus: modulus.first!)
+        XCTAssertEqual(1095215044801, table.getInverseDegreeModulo())
     }
     
     func testRoot() throws {
-        let tables = ASLNttTables(coefficentCountPower: 8, modulus: try ASLModulus(value: 1024))
-        let result = tables.root
-        XCTAssertEqual(result, 0)
+        let modulus = try ASLCoefficientModulus.create(8192, bitSizes: [40, 40, 40, 40, 40])
+        let table = try ASLNttTables(coefficentCountPower: 8, modulus: modulus.first!)
+        XCTAssertEqual(table.root, 914223477)
     }
     
     func testModulus() throws {
-        let modulus = try ASLModulus(value: 1024)
-        let tables = ASLNttTables(coefficentCountPower: 8, modulus: modulus)
-        let result = tables.modulus
-        XCTAssertEqual(result, modulus)
+        let modulus = try ASLCoefficientModulus.create(8192, bitSizes: [40, 40, 40, 40, 40])
+        let table = try ASLNttTables(coefficentCountPower: 8, modulus: modulus.first!)
+        XCTAssertEqual(table.modulus, try ASLModulus(value: 1099510005761))
     }
     
     func testCoefficentCountPower() throws {
-        let tables = ASLNttTables(coefficentCountPower: 8, modulus: try ASLModulus(value: 1024))
-        let result = tables.coefficentCountPower
-        XCTAssertEqual(result, 0)
+        let modulus = try ASLCoefficientModulus.create(8192, bitSizes: [40, 40, 40, 40, 40])
+        let table = try ASLNttTables(coefficentCountPower: 8, modulus: modulus.first!)
+        XCTAssertEqual(table.coefficentCountPower, 8)
     }
     
     func testCoefficentCount() throws {
-        let tables = ASLNttTables(coefficentCountPower: 8, modulus: try ASLModulus(value: 1024))
-        let result = tables.coefficentCount
-        XCTAssertEqual(result, 0)
+        let modulus = try ASLCoefficientModulus.create(8192, bitSizes: [40, 40, 40, 40, 40])
+        let table = try ASLNttTables(coefficentCountPower: 8, modulus: modulus.first!)
+        XCTAssertEqual(table.coefficentCount, 256)
     }
 }
