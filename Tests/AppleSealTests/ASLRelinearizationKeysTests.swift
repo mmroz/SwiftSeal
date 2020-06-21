@@ -45,7 +45,7 @@ class ASLRelinearizationKeysTests: XCTestCase {
 		XCTAssertEqual(dataMatrix, matrix)
 	}
 	
-	func testParameterIdool() {
+	func testParameterId() {
 		let relinearizationKeys = ASLRelinearizationKeys()
 		XCTAssertEqual(relinearizationKeys.parametersId, ASLParametersIdType(block: (0,0,0,0)))
 	}

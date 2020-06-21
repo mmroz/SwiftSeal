@@ -87,8 +87,8 @@
 
 - (ASLRelinearizationKeys *)relinearizationKeysLocal:(NSError **)error {
     try {
-        ASLRelinearizationKeys * keys = [[ASLRelinearizationKeys alloc] initWithRelinearizationKeys:_keyGenerator->relin_keys_local()];
-        return keys;
+        seal::RelinKeys keys = _keyGenerator->relin_keys_local();
+        return [[ASLRelinearizationKeys alloc] initWithRelinearizationKeys:keys];
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];

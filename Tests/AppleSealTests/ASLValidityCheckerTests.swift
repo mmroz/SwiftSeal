@@ -46,14 +46,28 @@ class ASLValidityCheckerTests: XCTestCase {
         XCTAssertFalse(ASLValidityChecker.isMetaDataValid(for: ASLKSwitchKeys(), context: bfvContext(1024)))
     }
     
-    func testIsMetaDataValidForRelinearizationKeys() {
-        XCTAssertTrue(ASLValidityChecker.isMetaDataValid(for: try keyGen(bfvContext(1024)).relinearizationKeysLocal(), context: bfvContext(1024)))
-        XCTAssertFalse(ASLValidityChecker.isMetaDataValid(for: try keyGen(bfvContext(4096)).relinearizationKeysLocal(), context: bfvContext(1024)))
+    func testIsMetaDataValidForRelinearizationKeys() throws {
+        let params = ASLEncryptionParameters(schemeType: .BFV)
+        let plainModulus = try ASLModulus(value: 257)
+        try params.setPolynomialModulusDegree(8)
+        try params.setPlainModulus(plainModulus)
+        try params.setCoefficientModulus(ASLCoefficientModulus.create(8, bitSizes: [40, 40]))
+        let context = try ASLSealContext(encrytionParameters: params, expandModChain: false, securityLevel: .None, memoryPoolHandle: .global())
+        let relinKey = try ASLKeyGenerator(context: context).relinearizationKeysLocal()
+        XCTAssertTrue(ASLValidityChecker.isMetaDataValid(for: relinKey, context: context))
+        XCTAssertFalse(ASLValidityChecker.isMetaDataValid(for: ASLRelinearizationKeys(), context: context))
     }
     
-    func testIsMetaDataValidForGaloisKeys() {
-        XCTAssertTrue(ASLValidityChecker.isMetaDataValid(for: try keyGen(bfvContext(1024)).galoisKeysLocal(), context: bfvContext(1024)))
-        XCTAssertFalse(ASLValidityChecker.isMetaDataValid(for: try keyGen(bfvContext(4096)).galoisKeysLocal(), context: bfvContext(1024)))
+    func testIsMetaDataValidForGaloisKeys() throws {
+        let params = ASLEncryptionParameters(schemeType: .BFV)
+        let plainModulus = try ASLModulus(value: 257)
+        try params.setPolynomialModulusDegree(8)
+        try params.setPlainModulus(plainModulus)
+        try params.setCoefficientModulus(ASLCoefficientModulus.create(8, bitSizes: [40, 40]))
+        let context = try ASLSealContext(encrytionParameters: params, expandModChain: false, securityLevel: .None, memoryPoolHandle: .global())
+        let galoisKey = try ASLKeyGenerator(context: context).galoisKeysLocal()
+        XCTAssertTrue(ASLValidityChecker.isMetaDataValid(for: galoisKey, context: context))
+        XCTAssertFalse(ASLValidityChecker.isMetaDataValid(for: ASLGaloisKeys(), context: context))
     }
     
     func testIsBufferValidForCipherText() throws {
@@ -78,7 +92,15 @@ class ASLValidityCheckerTests: XCTestCase {
     }
     
     func testIsBufferValidForGaloisKeys() throws {
-        XCTAssertTrue(ASLValidityChecker.isBufferValid(for: try keyGen(bfvContext(4096)).galoisKeysLocal()))
+        let params = ASLEncryptionParameters(schemeType: .BFV)
+        let plainModulus = try ASLModulus(value: 257)
+        try params.setPolynomialModulusDegree(8)
+        try params.setPlainModulus(plainModulus)
+        try params.setCoefficientModulus(ASLCoefficientModulus.create(8, bitSizes: [40, 40]))
+        let context = try ASLSealContext(encrytionParameters: params, expandModChain: false, securityLevel: .None, memoryPoolHandle: .global())
+        let galoisKey = try ASLKeyGenerator(context: context).galoisKeysLocal()
+        XCTAssertTrue(ASLValidityChecker.isDataValid(for: galoisKey, context: context))
+        XCTAssertTrue(ASLValidityChecker.isBufferValid(for: ASLGaloisKeys()))
     }
     
     func testIsDataValidForPlainText() throws {
@@ -110,8 +132,15 @@ class ASLValidityCheckerTests: XCTestCase {
     }
     
     func testIsDataValidForGaloisKeys() throws {
-        XCTAssertFalse(ASLValidityChecker.isDataValid(for: try keyGen(bfvContext(4096)).galoisKeysLocal(), context: bfvContext(4096)))
-        XCTAssertFalse(ASLValidityChecker.isDataValid(for: try keyGen(bfvContext(1024)).galoisKeysLocal(), context: bfvContext(4096)))
+        let params = ASLEncryptionParameters(schemeType: .BFV)
+        let plainModulus = try ASLModulus(value: 257)
+        try params.setPolynomialModulusDegree(8)
+        try params.setPlainModulus(plainModulus)
+        try params.setCoefficientModulus(ASLCoefficientModulus.create(8, bitSizes: [40, 40]))
+        let context = try ASLSealContext(encrytionParameters: params, expandModChain: false, securityLevel: .None, memoryPoolHandle: .global())
+        let galoisKey = try ASLKeyGenerator(context: context).galoisKeysLocal()
+        XCTAssertTrue(ASLValidityChecker.isDataValid(for: galoisKey, context: context))
+        XCTAssertFalse(ASLValidityChecker.isDataValid(for: ASLGaloisKeys(), context: context))
     }
     
     func testIsValidForPlainText() throws {
@@ -142,7 +171,15 @@ class ASLValidityCheckerTests: XCTestCase {
     }
     
     func testIsValidForGaloisKeys() throws {
-         XCTAssertFalse(ASLValidityChecker.isValid(for: try keyGen(bfvContext(4096)).galoisKeysLocal(), context: bfvContext(4096)))
+        let params = ASLEncryptionParameters(schemeType: .BFV)
+        let plainModulus = try ASLModulus(value: 257)
+        try params.setPolynomialModulusDegree(8)
+        try params.setPlainModulus(plainModulus)
+        try params.setCoefficientModulus(ASLCoefficientModulus.create(8, bitSizes: [40, 40]))
+        let context = try ASLSealContext(encrytionParameters: params, expandModChain: false, securityLevel: .None, memoryPoolHandle: .global())
+        let galoisKey = try ASLKeyGenerator(context: context).galoisKeysLocal()
+        XCTAssertTrue(ASLValidityChecker.isValid(for: galoisKey, context: context))
+        XCTAssertFalse(ASLValidityChecker.isValid(for: ASLGaloisKeys(), context: context))
     }
     
     private func bfvContext(_ polyModulusDegree: Int) -> ASLSealContext {

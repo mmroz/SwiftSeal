@@ -57,6 +57,6 @@ class ASLDecryptorTests: XCTestCase {
         let invariantNoiseBudget = try decryptor.invariantNoiseBudget(xEncrypted)
         
         XCTAssertNotNil(invariantNoiseBudget)
-        XCTAssertEqual(invariantNoiseBudget, 55)
+        XCTAssertGreaterThanOrEqual(invariantNoiseBudget.intValue, 54)
     }
 }

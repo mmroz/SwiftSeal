@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ASLKSwitchKeys ()
 
+- (instancetype)initWithKSwitchKeys:(seal::KSwitchKeys)kSwitckKeys;
+
 @property (nonatomic, assign, readonly) seal::KSwitchKeys sealKSwitchKeys;
 
 @end

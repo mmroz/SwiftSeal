@@ -119,7 +119,7 @@
 
 /* Begin PBXFileReference section */
 		"AppleSeal::AppleSeal::Product" /* AppleSeal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AppleSeal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		"AppleSeal::AppleSealTests::Product" /* AppleSealTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppleSealTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		"AppleSeal::AppleSealTests::Product" /* AppleSealTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = AppleSealTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_101 /* ASLMemoryManagerProfile_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLMemoryManagerProfile_Internal.h; sourceTree = "<group>"; };
 		OBJ_102 /* ASLMemoryManagerProfileThreadLocal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLMemoryManagerProfileThreadLocal.h; sourceTree = "<group>"; };
 		OBJ_103 /* ASLRnsBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASLRnsBase.h; sourceTree = "<group>"; };
@@ -580,6 +580,11 @@
 			attributes = {
 				LastSwiftMigration = 9999;
 				LastUpgradeCheck = 9999;
+				TargetAttributes = {
+					"AppleSeal::AppleSeal" = {
+						LastSwiftMigration = 1150;
+					};
+				};
 			};
 			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "AppleSeal" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -719,7 +724,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++1z";
-				DEFINES_MODULE = NO;
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -752,6 +758,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = AppleSeal;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
@@ -762,7 +770,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "c++1z";
-				DEFINES_MODULE = NO;
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -795,6 +804,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
 				TARGET_NAME = AppleSeal;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;

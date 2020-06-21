@@ -30,6 +30,13 @@ static seal::compr_mode_type sealComprModeTypeFromASLCompressionModeType(ASLComp
 	seal::PublicKey _publicKey;
 }
 
+#pragma mark - NSObject
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"pubicKey: %@, params: %@", [self cipherTextData], ASLParametersIdTypeDescription([self parametersId])];
+}
+
 #pragma mark - Initiaiziation
 
 - (instancetype)init {

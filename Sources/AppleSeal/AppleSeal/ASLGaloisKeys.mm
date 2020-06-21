@@ -10,6 +10,7 @@
 
 #include "seal/galoiskeys.h"
 
+#import "ASLKSwitchKeys_Internal.h"
 #import "ASLPublicKey_Internal.h"
 #import "ASLGaloisKeys_Internal.h"
 #import "NSString+CXXAdditions.h"
@@ -99,7 +100,7 @@
 }
 
 - (instancetype)initWithGaloisKeys:(seal::GaloisKeys)sealGaloisKeys {
-    self = [super init];
+    self = [super initWithKSwitchKeys:sealGaloisKeys];
        if (self == nil) {
            return nil;
        }
@@ -138,7 +139,8 @@
 }
 
 - (nullable instancetype)initWithCoder:(nonnull NSCoder *)coder {
-    // Intentially left blank
+    [NSException raise:NSInternalInconsistencyException
+    format:@"Method %s is not implemented, use initWithData:context:error: instead", __PRETTY_FUNCTION__];
     return nil;
 }
 

@@ -41,15 +41,9 @@ class Rotation: XCTestCase {
         let rowSize = slotCount / 2
         print("let matrix row size: {\(rowSize)}")
         
-        var podMatrix = Array(repeating: NSNumber(0), count: slotCount)
-        podMatrix.insert(0, at: 0)
-        podMatrix.insert(1, at: 1)
-        podMatrix.insert(2, at: 2)
-        podMatrix.insert(3, at: 3)
-        podMatrix.insert(4, at: rowSize)
-        podMatrix.insert(5, at: rowSize + 1)
-        podMatrix.insert(6, at: rowSize + 2)
-        podMatrix.insert(7, at: rowSize + 3)
+        var podMatrix = Array(repeating: NSNumber(value: 0), count: slotCount)
+        let replacedValues: [NSNumber] = [.init(value: 0), .init(value: 1), .init(value: 2), .init(value: 3), NSNumber(value: rowSize), .init(value: rowSize + 1), .init(value: rowSize + 2), .init(value: rowSize + 3)]
+        podMatrix.replaceSubrange(0...7, with: replacedValues)
         
         print("Input plaintext matrix: \(podMatrix)")
         print()
@@ -117,58 +111,56 @@ class Rotation: XCTestCase {
     }
     
     func testExampleRotationCKKS() throws {
-        print("Example: Rotation / Rotation in CKKS")
-        
+        print("Example: Rotation / Rotation in CKKS");
+
+        /*
+        Rotations in the CKKS scheme work very similarly to rotations in BFV.
+        */
         let parms = ASLEncryptionParameters(schemeType: .CKKS)
-        
         let polyModulusDegree = 8192
         try parms.setPolynomialModulusDegree(polyModulusDegree)
         try parms.setCoefficientModulus(ASLCoefficientModulus.create(polyModulusDegree, bitSizes: [40, 40, 40, 40, 40]))
-        
+
         let context = try ASLSealContext(parms)
         print(context)
-        print()
         
-        let keygen = try ASLKeyGenerator(context: context)
-        let publicKey = keygen.publicKey
-        let secretKey = keygen.secretKey
+        let keygen = try ASLKeyGenerator(context: context);
+        let publicKey = keygen.publicKey;
+        let secretKey = keygen.secretKey;
         let galKeys = try keygen.galoisKeysLocal()
         let encryptor = try ASLEncryptor(context: context, publicKey: publicKey)
         let evaluator = try ASLEvaluator(context)
         let decryptor = try ASLDecryptor(context: context, secretKey: secretKey)
+
+        let ckksEncoder = try ASLCKKSEncoder(context: context);
+
+        let slotCount = ckksEncoder.slotCount;
+        print("Number of slots: \(slotCount)")
         
-        let ckksEncoder = try ASLCKKSEncoder(context: context)
+        let stepSize = 1.0 / Double(slotCount - 1)
+        let input: [NSNumber] = (0..<slotCount).map({
+            return NSNumber(value: Double($0) * stepSize)
+        })
         
-        let slotCount: Double = Double(ckksEncoder.slotCount)
-        print("Number of slots: {\(slotCount)}")
+        print("Input vector: \(input[3..<7])")
         
-        var input = Array(repeating: NSNumber(0), count: Int(slotCount))
-        let stepSize = Double(1.0) / Double(slotCount - 1)
-        
-        stride(from: Double(0), to: slotCount, by: stepSize).forEach({ input.append(NSNumber(value: $0))  })
-        
-        print("Input vector:")
-        print(input[3...7])
-        
-        let scale: Double = pow(2.0, 50)
-        
-        print()
+        let scale = pow(2.0, 50.0)
+
         print("Encode and encrypt.")
-        let plain = try ckksEncoder.encode(withDoubleValues: input, scale: scale)
+        var plain = try ckksEncoder.encode(withDoubleValues: input, scale: scale)
         let encrypted = try encryptor.encrypt(with: plain)
-        
-        print()
+
         print("Rotate 2 steps left.")
-        let rotated = try evaluator.rotateVector(encrypted, steps: 2, galoisKey: galKeys)
+        let rotated = try evaluator.rotateVector(encrypted, steps: 2, galoisKey: galKeys);
         print("    + Decrypt and decode ...... Correct.")
-        let plainResult = try decryptor.decrypt(rotated)
-        let result = try ckksEncoder.decodeDoubleValues(plainResult)
-        print(result[3...7])
-        
+        plain = try decryptor.decrypt(rotated)
+        let result = try ckksEncoder.decodeDoubleValues(plain)
+        print(result[3..<7])
+
         /*
-         With the CKKS scheme it is also possible to evaluate a complex conjugation on
-         a vector of encrypted complex numbers, using Evaluator.ComplexConjugate. This
-         is in fact a kind of rotation, and requires also Galois keys.
-         */
+        With the CKKS scheme it is also possible to evaluate a complex conjugation on
+        a vector of encrypted complex numbers, using Evaluator::complex_conjugate.
+        This is in fact a kind of rotation, and requires also Galois keys.
+        */
     }
 }

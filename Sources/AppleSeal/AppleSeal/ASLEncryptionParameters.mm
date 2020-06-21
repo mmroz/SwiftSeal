@@ -241,7 +241,7 @@ static std::uint8_t sealSchemeFromASLSchemeType(ASLSchemeType schemeType) {
 }
 
 - (BOOL)setRandomGenerator {
-    // TODO - implement this class
+    // @markrmoz: TODO - implement this class when UniformRandomGeneratorFactory is added
     //_encryptionParameters.set_random_generator(<#std::shared_ptr<UniformRandomGeneratorFactory> random_generator#>)
 }
 

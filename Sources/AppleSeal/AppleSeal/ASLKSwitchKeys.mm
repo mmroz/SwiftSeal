@@ -25,17 +25,6 @@
 
 #pragma mark - initializers
 
-- (instancetype)initWithKSwitchKeys:(seal::KSwitchKeys)kSwitckKeys {
-	self = [super init];
-	if (self == nil) {
-		return nil;
-	}
-	
-	_kSiwtchKeys = std::move(kSwitckKeys);
-	
-	return self;
-}
-
 - (instancetype)init {
 	self = [super init];
 	if (!self) {
@@ -49,8 +38,26 @@
 
 #pragma mark - ASLKSwitchKeys_Internal
 
+- (instancetype)initWithKSwitchKeys:(seal::KSwitchKeys)kSwitckKeys {
+    self = [super init];
+    if (self == nil) {
+        return nil;
+    }
+    
+    _kSiwtchKeys = std::move(kSwitckKeys);
+    
+    return self;
+}
+
 - (seal::KSwitchKeys)sealKSwitchKeys {
 	return _kSiwtchKeys;
+}
+
+#pragma mark - NSObject
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@", [self data]];
 }
 
 #pragma mark - NSCopying

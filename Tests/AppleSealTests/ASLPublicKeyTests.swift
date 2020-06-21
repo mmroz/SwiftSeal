@@ -25,28 +25,27 @@ class ASLPublicKeyTests: XCTestCase {
 		XCTAssertNoThrow(publicKey.cipherTextData)
 	}
     
-    func testCoding() throws {
-        let publicKey = ASLPublicKey()
-        
+    func testEncoding() throws {
+        let secretKey = ASLPublicKey()
         let archiver = NSKeyedArchiver(requiringSecureCoding: false)
-        archiver.encode(publicKey, forKey: "testObject")
+        XCTAssertNoThrow(archiver.encode(secretKey, forKey: "testObject"))
+    }
+    
+    func testCoding() throws {
+        let secretKey = ASLPublicKey()
+        let archiver = NSKeyedArchiver(requiringSecureCoding: false)
+        archiver.encode(secretKey, forKey: "testObject")
         let data = archiver.encodedData
-        
-        let decodedSecretKey = try ASLPublicKey(data: data, context: try context())
-
-        XCTAssertEqual(publicKey, decodedSecretKey)
+        let decodedSecretKey = try ASLPublicKey(data: data, context: .bfvDefault())
+        XCTAssertEqual(secretKey, decodedSecretKey)
     }
     
     func context() throws -> ASLSealContext {
         let parms = ASLEncryptionParameters(schemeType: .BFV)
-        
         let polyModulusDegree = 4096
         try parms.setPolynomialModulusDegree(polyModulusDegree)
-        
         try parms.setCoefficientModulus(ASLCoefficientModulus.bfvDefault(polyModulusDegree))
-        
         try parms.setPlainModulus(ASLModulus(value: 1024))
-        
         return try ASLSealContext(parms)
     }
 }

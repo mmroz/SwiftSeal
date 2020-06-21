@@ -10,30 +10,33 @@ import AppleSeal
 import XCTest
 
 class ASLSecretKeyTests: XCTestCase {
-	
-	func testDefaultInitializer() {
-		let _ = ASLSecretKey()
-	}
-	
-	func testSecretKeyParameters() {
-		let secretKey = ASLSecretKey()
-		XCTAssertEqual(secretKey.parametersId, ASLParametersIdType(block: (0,0,0,0)))
-	}
-	
-	func testSecretKeyMemoryPoolHandle() {
-		let secretKey = ASLSecretKey()
-		XCTAssertEqual(secretKey.plainTextData, ASLPlainText())
-	}
+    
+    func testDefaultInitializer() {
+        let _ = ASLSecretKey()
+    }
+    
+    func testSecretKeyParameters() {
+        let secretKey = ASLSecretKey()
+        XCTAssertEqual(secretKey.parametersId, ASLParametersIdType(block: (0,0,0,0)))
+    }
+    
+    func testSecretKeyMemoryPoolHandle() {
+        let secretKey = ASLSecretKey()
+        XCTAssertEqual(secretKey.plainTextData, ASLPlainText())
+    }
+    
+    func testEncoding() throws {
+        let secretKey = ASLSecretKey()
+        let archiver = NSKeyedArchiver(requiringSecureCoding: false)
+        XCTAssertNoThrow(archiver.encode(secretKey, forKey: "testObject"))
+    }
     
     func testCoding() throws {
         let secretKey = ASLSecretKey()
-        
         let archiver = NSKeyedArchiver(requiringSecureCoding: false)
         archiver.encode(secretKey, forKey: "testObject")
         let data = archiver.encodedData
-        
         let decodedSecretKey = try ASLSecretKey(data: data, context: .bfvDefault())
-
         XCTAssertEqual(secretKey, decodedSecretKey)
     }
 }

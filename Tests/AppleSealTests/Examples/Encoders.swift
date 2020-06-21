@@ -200,15 +200,9 @@ class Encoders: XCTestCase {
          [ 0,  1,  2,  3,  0,  0, ...,  0 ]
          [ 4,  5,  6,  7,  0,  0, ...,  0 ]
          */
-        var podMatrix: [NSNumber] = Array(repeating: 0, count: slotCount)
-        podMatrix.insert(0, at: 0)
-        podMatrix.insert(1, at: 1)
-        podMatrix.insert(2, at: 2)
-        podMatrix.insert(3, at: 3)
-        podMatrix.insert(4, at: rowSize)
-        podMatrix.insert(5, at: rowSize + 1)
-        podMatrix.insert(6, at: rowSize + 2)
-        podMatrix.insert(7, at: rowSize + 3)
+        var podMatrix = Array(repeating: NSNumber(value: 0), count: slotCount)
+        let replacedValues: [NSNumber] = [.init(value: 0), .init(value: 1), .init(value: 2), .init(value: 3), NSNumber(value: rowSize), .init(value: rowSize + 1), .init(value: rowSize + 2), .init(value: rowSize + 3)]
+        podMatrix.replaceSubrange(0...7, with: replacedValues)
         
         print("Input plaintext matrix:")
         print(podMatrix)

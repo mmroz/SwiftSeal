@@ -28,8 +28,8 @@
     NSParameterAssert(context != nil);
     
     try {
-        seal::IntegerEncoder* encryptor = new seal::IntegerEncoder(context.sealContext);
-        return [[ASLIntegerEncoder alloc] initWithIntegerEncoder:encryptor];
+        seal::IntegerEncoder* integerEncoder = new seal::IntegerEncoder(context.sealContext);
+        return [[ASLIntegerEncoder alloc] initWithIntegerEncoder:integerEncoder];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
@@ -103,7 +103,8 @@
     NSParameterAssert(plain != nil);
     seal::Plaintext sealPlainText = plain.sealPlainText;
     try {
-        return  [[NSNumber alloc] initWithFloat:_integerEncoder->decode_int32(sealPlainText)];
+        std::int32_t value = _integerEncoder->decode_int32(sealPlainText);
+        return [[NSNumber alloc] initWithInt:value];
     }  catch (std::invalid_argument const &e) {
            if (error != nil) {
                *error = [NSError ASL_SealInvalidParameter:e];

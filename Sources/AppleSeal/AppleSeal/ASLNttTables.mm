@@ -55,7 +55,7 @@
 
 - (void)dealloc {
     if (_freeWhenDone) {
-       delete _nttTables;
+        delete _nttTables;
     }
     _nttTables = nullptr;
 }

@@ -13,3 +13,10 @@ extension ASLParametersIdType: Equatable {
         return ASLParametersIdTypeIsEqual(lhs, rhs)
     }
 }
+
+extension ASLParametersIdType: CustomStringConvertible {
+    public var description: String {
+        ASLParametersIdTypeDescription(self)
+    }
+}
+

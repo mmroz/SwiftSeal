@@ -37,12 +37,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, assign) ASLRnsBase* oBase;
 
 -(NSNumber *)fastConvert:(NSNumber*)input
-                  output:(NSNumber*)output
                     pool:(ASLMemoryPoolHandle *)pool;
 
 -(NSNumber *)fastConvertArray:(NSNumber*)input
                     size:(size_t)size
-                       output:(NSNumber*)output
                          pool:(ASLMemoryPoolHandle *)pool;
 
 @end

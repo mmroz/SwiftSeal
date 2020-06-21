@@ -11,6 +11,7 @@
 #include "seal/relinkeys.h"
 
 #import "ASLPublicKey_Internal.h"
+#import "ASLKSwitchKeys_Internal.h"
 #import "ASLRelinearizationKeys_Internal.h"
 #import "NSError+CXXAdditions.h"
 
@@ -91,7 +92,7 @@
 }
 
 - (instancetype)initWithRelinearizationKeys:(seal::RelinKeys)relinearizationKeys {
-    self = [super init];
+    self = [super initWithKSwitchKeys:relinearizationKeys];
     if (self == nil) {
         return nil;
     }
@@ -111,21 +112,6 @@
     [coder encodeDataObject:data];
 }
 
-// TODO - see if I need this
-//- (instancetype)initWithCoder:(NSCoder *)coder {
-//    NSData * const encodedValueData = [coder decodeDataObject];
-//    if (encodedValueData.length == 0) {
-//        return nil;
-//    }
-//
-//    seal::RelinKeys encodedRelinearizationKeysy;
-//    std::byte const * bytes = static_cast<std::byte const *>(encodedValueData.bytes);
-//    std::size_t const length = static_cast<std::size_t const>(encodedValueData.length);
-//    //encodedRelinearizationKeysy.load(<#std::shared_ptr<SEALContext> context#>, <#std::istream &stream#>)
-//    return [self initWithRelinearizationKeys:encodedRelinearizationKeysy];
-//}
-
-
 @end
 
 @implementation ASLSerializableRelineraizationKeys {
@@ -142,9 +128,9 @@
 }
 
 - (void)dealloc {
-    // TODO - crashes
 //    delete _serializableKeys;
-//     _serializableKeys = nullptr;
+    _serializableKeys = nullptr;
+    
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {
@@ -156,6 +142,6 @@
 }
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
-   // Intentially left blank
+    // Intentially left blank
 }
 @end

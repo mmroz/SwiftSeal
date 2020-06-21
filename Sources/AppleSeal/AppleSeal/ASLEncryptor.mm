@@ -180,15 +180,14 @@
 }
 
 -(ASLCipherText *)encryptZeroWithParametersId:(ASLParametersIdType)parametersId
-                                   cipherText:(ASLCipherText *)cipherText
                                         error:(NSError **)error {
-    NSParameterAssert(cipherText != nil);
     
     seal::parms_id_type sealParametersId = {};
     std::copy(std::begin(parametersId.block),
               std::end(parametersId.block),
               sealParametersId.begin());
-    seal::Ciphertext sealCipherText = cipherText.sealCipherText;
+    
+    seal::Ciphertext sealCipherText = seal::Ciphertext();
     
     try {
         _encryptor->encrypt_zero(sealParametersId, sealCipherText);
@@ -208,17 +207,15 @@
 }
 
 -(ASLCipherText *)encryptZeroWithParametersId:(ASLParametersIdType)parametersId
-                                   cipherText:(ASLCipherText *)cipherText
                                          pool:(ASLMemoryPoolHandle *)pool
                                         error:(NSError **)error {
-    NSParameterAssert(cipherText != nil);
     NSParameterAssert(pool != nil);
     
     seal::parms_id_type sealParametersId = {};
     std::copy(std::begin(parametersId.block),
               std::end(parametersId.block),
               sealParametersId.begin());
-    seal::Ciphertext sealCipherText = cipherText.sealCipherText;
+    seal::Ciphertext sealCipherText = seal::Ciphertext();
     
     try {
         _encryptor->encrypt_zero(sealParametersId, sealCipherText, pool.memoryPoolHandle);
@@ -238,12 +235,10 @@
 }
 
 -(ASLCipherText *)encryptSymmetricWithPlainText:(ASLPlainText *)plainText
-                                     cipherText:(ASLCipherText *)cipherText
                                           error:(NSError **)error {
     NSParameterAssert(plainText != nil);
-    NSParameterAssert(cipherText != nil);
     
-    seal::Ciphertext sealCipherText = cipherText.sealCipherText;
+    seal::Ciphertext sealCipherText = seal::Ciphertext();
     
     try {
         _encryptor->encrypt_symmetric(plainText.sealPlainText, sealCipherText);
@@ -263,13 +258,11 @@
 }
 
 -(ASLCipherText *)encryptSymmetricWithPlainText:(ASLPlainText *)plainText
-                                     cipherText:(ASLCipherText *)cipherText
                                            pool:(ASLMemoryPoolHandle *)pool
                                           error:(NSError **)error {
     NSParameterAssert(plainText != nil);
-    NSParameterAssert(cipherText != nil);
     
-    seal::Ciphertext sealCipherText = cipherText.sealCipherText;
+    seal::Ciphertext sealCipherText = seal::Ciphertext();
     
     try {
         _encryptor->encrypt_symmetric(plainText.sealPlainText, sealCipherText, pool.memoryPoolHandle);

@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, assign, readonly) const NSNumber * totalCoefficientModulus;
 
-// TODO - add tool
+// // @markrmoz: TODO - implement this class when Tool is added
 
 @property (nonatomic, readonly, assign) ASLNttTables* smallNttTables;
 

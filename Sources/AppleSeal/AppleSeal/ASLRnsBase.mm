@@ -14,6 +14,8 @@
 #import "ASLModulus_Internal.h"
 #import "ASLRnsBase_Internal.h"
 #import "ASLModulus_Internal.h"
+#import "NSString+CXXAdditions.h"
+#import "NSError+CXXAdditions.h"
 
 @implementation ASLRnsBase {
     seal::util::RNSBase *_rnsBase;
@@ -32,11 +34,10 @@
     return [[ASLRnsBase alloc] initWithRnsBase:base freeWhenDone:true];
 }
 
-// TODO - 💩 this is never deleted
 - (void)dealloc {
-    //    if (_freeWhenDone) {
-    //       delete _rnsBase;
-    //    }
+    if (_freeWhenDone) {
+        delete _rnsBase;
+    }
     _rnsBase = nullptr;
 }
 
@@ -60,8 +61,18 @@
 # pragma mark - Public Methods
 
 - (ASLRnsBase *)getAtIndex:(std::size_t)index {
-    seal::util::RNSBase * result = new seal::util::RNSBase(_rnsBase[index]);;
-    return [[ASLRnsBase alloc] initWithRnsBase:result freeWhenDone:true];
+    try {
+        seal::util::RNSBase * result = new seal::util::RNSBase(_rnsBase[index]);;
+        return [[ASLRnsBase alloc] initWithRnsBase:result freeWhenDone:true];
+    } catch (...) {
+        [NSException raise:NSRangeException
+                    format:@"Index %@ out of bounds", @(index)];
+    }
+    return 0;
+}
+
+- (ASLRnsBase *)objectForKeyedSubscript:(size_t)key {
+   return [self getAtIndex:key];
 }
 
 - (BOOL)contains:(ASLModulus *)modulus {
@@ -89,20 +100,59 @@
     return[[ASLRnsBase alloc] initWithRnsBase:base freeWhenDone:true];
 }
 
-- (ASLRnsBase *)extendWithRnsBase:(ASLRnsBase *)rnsBase {
-    seal::util::RNSBase base = *rnsBase.rnsBase;
-    seal::util::RNSBase * extendedBase = new seal::util::RNSBase(_rnsBase->extend(base));
-    return [[ASLRnsBase alloc] initWithRnsBase:extendedBase freeWhenDone:false];
+- (ASLRnsBase *)extendWithRnsBase:(ASLRnsBase *)rnsBase
+                            error:(NSError **)error {
+    try {
+        seal::util::RNSBase base = *rnsBase.rnsBase;
+        seal::util::RNSBase * extendedBase = new seal::util::RNSBase(_rnsBase->extend(base));
+        return [[ASLRnsBase alloc] initWithRnsBase:extendedBase freeWhenDone:false];
+    } catch (std::invalid_argument const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealInvalidParameter:e];
+        }
+        return nil;
+    } catch (std::logic_error const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealLogicError:e];
+        }
+        return nil;
+    }
 }
 
-- (ASLRnsBase *)drop {
-    seal::util::RNSBase * base = new seal::util::RNSBase(_rnsBase->drop());
-    return [[ASLRnsBase alloc] initWithRnsBase:base freeWhenDone:true];
+- (ASLRnsBase *)dropAllWithError:(NSError **)error {
+    try {
+        seal::util::RNSBase * base = new seal::util::RNSBase(_rnsBase->drop());
+         return [[ASLRnsBase alloc] initWithRnsBase:base freeWhenDone:true];
+    } catch (std::invalid_argument const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealInvalidParameter:e];
+        }
+        return nil;
+    } catch (std::logic_error const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealLogicError:e];
+        }
+        return nil;
+    }
 }
 
-- (ASLRnsBase *)dropWithModulus:(ASLModulus *)modulus {
-    seal::util::RNSBase * base = new seal::util::RNSBase(_rnsBase->drop(modulus.modulus));
-    return [[ASLRnsBase alloc] initWithRnsBase:base freeWhenDone:true];
+- (ASLRnsBase *)dropWithModulus:(ASLModulus *)modulus
+                          error:(NSError **)error {
+    try {
+        seal::util::RNSBase * base = new seal::util::RNSBase(_rnsBase->drop(modulus.modulus));
+        return [[ASLRnsBase alloc] initWithRnsBase:base freeWhenDone:true];
+    } catch (std::invalid_argument const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealInvalidParameter:e];
+        }
+        return nil;
+    } catch (std::logic_error const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealLogicError:e];
+        }
+        return nil;
+    }
+    return nil;
 }
 
 - (NSNumber *)decomposeValue:(NSNumber *)value

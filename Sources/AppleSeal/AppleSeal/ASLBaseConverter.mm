@@ -45,7 +45,6 @@
     }
 }
 
-// TODO - 💩 this class has its memory handled by another class
 - (void)dealloc {
     if (_freeWhenDone) {
         delete _baseConverter;
@@ -93,20 +92,18 @@
 }
 
 - (NSNumber *)fastConvert:(NSNumber *)input
-                   output:(NSNumber *)output
                      pool:(ASLMemoryPoolHandle *)pool {
     const std::uint64_t * inputPointer = new std::uint64_t(input.unsignedLongLongValue);
-    std::uint64_t * outputPointer = new std::uint64_t(output.unsignedLongLongValue);
+    std::uint64_t * outputPointer = new std::uint64_t();
     _baseConverter->fast_convert(inputPointer, outputPointer, pool.memoryPoolHandle);
     return [[NSNumber alloc] initWithUnsignedLongLong:static_cast<unsigned long long>(*outputPointer)];
 }
 
 - (NSNumber *)fastConvertArray:(NSNumber *)input
                           size:(size_t)size
-                        output:(NSNumber *)output
                           pool:(ASLMemoryPoolHandle *)pool {
     const std::uint64_t * inputPointer = new std::uint64_t(input.unsignedLongLongValue);
-    std::uint64_t * outputPointer = new std::uint64_t(output.unsignedLongLongValue);
+    std::uint64_t * outputPointer = new std::uint64_t();
     _baseConverter->fast_convert_array(inputPointer, size, outputPointer, pool.memoryPoolHandle);
     return [[NSNumber alloc] initWithUnsignedLongLong:static_cast<unsigned long long>(*outputPointer)];
 }

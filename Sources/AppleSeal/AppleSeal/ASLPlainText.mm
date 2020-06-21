@@ -161,36 +161,37 @@
 #pragma mark - NSCoding
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
-   // Intentially left blank
+    [NSException raise:NSInternalInconsistencyException
+                format:@"Method %s is not implemented, use initWithData:context:error: instead", __PRETTY_FUNCTION__];
     return nil;
 }
 
 - (instancetype)initWithData:(NSData *)data
                      context:(ASLSealContext *)context
                        error:(NSError **)error{
-     seal::Plaintext encodedPlainText;
-     std::byte const * bytes = static_cast<std::byte const *>(data.bytes);
-     std::size_t const length = static_cast<std::size_t const>(data.length);
-
+    seal::Plaintext encodedPlainText;
+    std::byte const * bytes = static_cast<std::byte const *>(data.bytes);
+    std::size_t const length = static_cast<std::size_t const>(data.length);
+    
     try {
         encodedPlainText.load(context.sealContext, bytes, length);
-         return [self initWithPlainText:encodedPlainText];
+        return [self initWithPlainText:encodedPlainText];
     } catch (std::logic_error const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealLogicError:e];
         }
         return nil;
     } catch (std::invalid_argument const &e) {
-           if (error != nil) {
-               *error = [NSError ASL_SealInvalidParameter:e];
-           }
-           return nil;
-       }  catch (std::runtime_error const &e) {
-           if (error != nil) {
-               *error = [NSError ASL_SealRuntimeError:e];
-           }
-           return nil;
-       }
+        if (error != nil) {
+            *error = [NSError ASL_SealInvalidParameter:e];
+        }
+        return nil;
+    }  catch (std::runtime_error const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealRuntimeError:e];
+        }
+        return nil;
+    }
     return nil;
 }
 
@@ -356,7 +357,5 @@
 - (seal::Plaintext)sealPlainText {
     return _plainText;
 }
-
-
 
 @end

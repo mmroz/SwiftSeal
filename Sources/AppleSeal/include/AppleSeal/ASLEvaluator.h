@@ -197,7 +197,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 -(ASLCipherText * _Nullable)sub:(ASLCipherText *)encrypted1
                      encrypted2:(ASLCipherText *)encrypted2
-
                           error:(NSError **)error;
 
 /*!
@@ -333,7 +332,6 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)square:(ASLCipherText *)encrypted
-
                               pool:(ASLMemoryPoolHandle *)pool
                              error:(NSError **)error;
 
@@ -352,7 +350,6 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)square:(ASLCipherText *)encrypted
-
                              error:(NSError **)error;
 
 /*!
@@ -421,7 +418,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 -(ASLCipherText * _Nullable)relinearize:(ASLCipherText *)encrypted
                     relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
-
                                   error:(NSError **)error;
 
 /*!
@@ -446,7 +442,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 -(ASLCipherText * _Nullable)relinearize:(ASLCipherText *)encrypted
                     relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
-
                                    pool:(ASLMemoryPoolHandle *)pool
                                   error:(NSError **)error;
 
@@ -479,7 +474,6 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)modSwitchToNext:(ASLCipherText *)encrypted
-
                                        pool:(ASLMemoryPoolHandle *)pool
                                       error:(NSError **)error;
 
@@ -597,7 +591,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 -(ASLCipherText * _Nullable)modSwitchTo:(ASLCipherText *)encrypted
                            parametersId:(ASLParametersIdType)parametersId
-
                                    pool:(ASLMemoryPoolHandle *)pool
                                   error:(NSError **)error;
 
@@ -620,7 +613,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 -(ASLCipherText * _Nullable)modSwitchTo:(ASLCipherText *)encrypted
                            parametersId:(ASLParametersIdType)parametersId
-
                                   error:(NSError **)error;
 
 /*!
@@ -1016,7 +1008,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 -(ASLCipherText * _Nullable)addPlain:(ASLCipherText *)encrypted
                                plain:(ASLPlainText *)plain
-
                                error:(NSError **)error;
 
 /*!
@@ -1048,7 +1039,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 -(ASLCipherText * _Nullable)subPlain:(ASLCipherText *)encrypted
                                plain:(ASLPlainText *)plain
-
                                error:(NSError **)error;
 
 /*!
@@ -1207,7 +1197,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 -(ASLCipherText * _Nullable)transformToNtt:(ASLPlainText *)plain
                               parametersId:(ASLParametersIdType)parametersId
-                            destinationNtt:(ASLPlainText *)destinationNtt
                                       pool:(ASLMemoryPoolHandle *)pool
                                      error:(NSError **)error;
 
@@ -1232,7 +1221,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 -(ASLCipherText * _Nullable)transformToNtt:(ASLPlainText *)plain
                               parametersId:(ASLParametersIdType)parametersId
-                            destinationNtt:(ASLPlainText *)destinationNtt
                                      error:(NSError **)error;
 
 /*!
@@ -1260,7 +1248,6 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealLogicError if result ciphertext is transparent
  */
 -(ASLCipherText * _Nullable)transformToNtt:(ASLCipherText *)encrypted
-                            destinationNtt:(ASLCipherText *)destinationNtt
                                      error:(NSError **)error;
 
 /*!

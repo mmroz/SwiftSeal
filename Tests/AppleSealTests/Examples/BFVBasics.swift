@@ -229,7 +229,7 @@ class BFVBasics: XCTestCase {
          demonstrate correctness of the encryption.
          */
         let xDecrypted = try decryptor.decrypt(xEncrypted)
-        print("    + decryption of encrypted_x: \(xDecrypted) 0x{\(xDecrypted)} ...... Correct.")
+        print("    + decryption of encrypted_x: \(xEncrypted) 0x{\(xDecrypted)} ...... Correct.")
         
         /*
          When using Microsoft SEAL, it is typically advantageous to compute in a way

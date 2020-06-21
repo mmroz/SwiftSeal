@@ -55,9 +55,16 @@
     _batchEncoder = nullptr;
 }
 
+#pragma mark - NSObject
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"{slotCount: %zu}", [self slotCount]];
+}
+
 #pragma mark - Properties
 
-- (size_t)slot_count {
+- (size_t)slotCount {
     return _batchEncoder->slot_count();
 }
 
@@ -102,7 +109,7 @@
     
     try {
         _batchEncoder->encode(constValuesValues, sealPlainText);
-         return [[ASLPlainText alloc] initWithPlainText:sealPlainText];
+        return [[ASLPlainText alloc] initWithPlainText:sealPlainText];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
@@ -113,7 +120,7 @@
 }
 
 - (ASLPlainText *)encodeWithPlainText:(ASLPlainText*)plainText
-                      error:(NSError **)error {
+                                error:(NSError **)error {
     NSParameterAssert(plainText != nil);
     seal::Plaintext sealPlainText = plainText.sealPlainText;
     try {
@@ -129,8 +136,8 @@
 }
 
 - (ASLPlainText *)encodeWithPlainText:(ASLPlainText*)plainText
-                       pool:(ASLMemoryPoolHandle *)pool
-                      error:(NSError **)error {
+                                 pool:(ASLMemoryPoolHandle *)pool
+                                error:(NSError **)error {
     NSParameterAssert(plainText != nil);
     NSParameterAssert(pool != nil);
     
@@ -148,10 +155,32 @@
 }
 
 - (NSArray<NSNumber *> *)decodeUnsignedValuesWithPlainText:(ASLPlainText*)plainText
-                                       error:(NSError **)error {
+                                                     error:(NSError **)error {
     NSParameterAssert(plainText != nil);
     
     std::vector<std::uint64_t> destinationValuesList = {};
+    
+    try {
+        _batchEncoder->decode(plainText.sealPlainText, destinationValuesList);
+        NSMutableArray<NSNumber *> * results = [[NSMutableArray alloc] initWithCapacity:destinationValuesList.size()];
+        for (std::uint64_t & value : destinationValuesList) {
+            [results addObject:@(value)];
+        }
+        return results;
+    } catch (std::invalid_argument const &e) {
+        if (error != nil) {
+            *error = [NSError ASL_SealInvalidParameter:e];
+        }
+        return nil;
+    }
+    return nil;
+}
+
+- (NSArray<NSNumber *> *)decodeSignedValuesWithPlainText:(ASLPlainText*)plainText
+                                                   error:(NSError **)error {
+    NSParameterAssert(plainText != nil);
+    
+    std::vector<std::uint64_t> destinationValuesList;
     
     try {
         _batchEncoder->decode(plainText.sealPlainText, destinationValuesList);
@@ -169,31 +198,9 @@
     return nil;
 }
 
-- (NSArray<NSNumber *> *)decodeSignedValuesWithPlainText:(ASLPlainText*)plainText
-                                       error:(NSError **)error {
-    NSParameterAssert(plainText != nil);
-    
-    std::vector<std::uint64_t> destinationValuesList;
-
-    try {
-        _batchEncoder->decode(plainText.sealPlainText, destinationValuesList);
-         NSMutableArray<NSNumber *> * results = [[NSMutableArray alloc] initWithCapacity:destinationValuesList.size()];
-           for (std::uint64_t & value : destinationValuesList) {
-               [results addObject:[[NSNumber alloc]initWithFloat:value]];
-           }
-           return results;
-    } catch (std::invalid_argument const &e) {
-        if (error != nil) {
-            *error = [NSError ASL_SealInvalidParameter:e];
-        }
-        return nil;
-    }
-    return nil;
-}
-
 
 - (ASLPlainText*)decodeWithPlainText:(ASLPlainText*)plainText
-                      error:(NSError **)error {
+                               error:(NSError **)error {
     NSParameterAssert(plainText != nil);
     
     seal::Plaintext sealPlainText = plainText.sealPlainText;
@@ -211,8 +218,8 @@
 }
 
 - (ASLPlainText*)decodeWithPlainText:(ASLPlainText*)plainText
-                       pool:(ASLMemoryPoolHandle *)pool
-                      error:(NSError **)error {
+                                pool:(ASLMemoryPoolHandle *)pool
+                               error:(NSError **)error {
     NSParameterAssert(plainText != nil);
     NSParameterAssert(pool != nil);
     

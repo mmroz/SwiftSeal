@@ -190,7 +190,8 @@
 #pragma mark - NSCoding
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
-   // Intentially left blank
+    [NSException raise:NSInternalInconsistencyException
+    format:@"Method %s is not implemented, use initWithData:context:error: instead", __PRETTY_FUNCTION__];
     return nil;
 }
 

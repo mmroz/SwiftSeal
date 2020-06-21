@@ -179,9 +179,17 @@ class ASLCKKSEncoderTests: XCTestCase {
 
     func testDecodeWithPool() throws {
         let encoder = try createEncoder()
-        let plain = try XCTUnwrap(encoder.encode(withDoubleValues: [1.1, 1.2], scale: 2))
-        let results = try XCTUnwrap(try encoder.decodeDoubleValues(plain, pool: .global()))
-        XCTAssertEqual(results, [2.0])
+        let plain = try XCTUnwrap(encoder.encode(withDoubleValues: [0.0, 1.1, 2.2, 3.3], scale: Double(pow((2.0), 30))))
+        let result = try XCTUnwrap(try encoder.decodeDoubleValues(plain, pool: .global()))
+        
+        XCTAssertEqual(result[0].doubleValue, 0.0, accuracy: 0.0000001);
+        XCTAssertEqual(result[1].doubleValue, 1.1, accuracy: 0.0000001);
+        XCTAssertEqual(result[2].doubleValue, 2.2, accuracy: 0.0000001);
+        XCTAssertEqual(result[3].doubleValue, 3.3, accuracy: 0.0000001);
+        
+        for value in result[4 ..< result.endIndex] {
+            XCTAssertEqual(value.doubleValue, 0.0, accuracy: 0.0000001);
+        }
     }
     
     func createEncoder() throws -> ASLCKKSEncoder {

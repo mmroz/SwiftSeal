@@ -45,71 +45,69 @@ class ASLKeyGeneratorTests: XCTestCase {
     }
     
     func testRelinearizationKeys() throws {
-       let relinKey = try keyGenerator.relinearizationKeys()
-        
-        let archiver = NSKeyedArchiver(requiringSecureCoding: false)
-        archiver.encode(relinKey, forKey: "testObject")
-        let data = archiver.encodedData
-        
-        let decodedRelinKey = try ASLRelinearizationKeys(data: data, context: .bfvDefault())
-        
-        XCTAssertEqual(relinKey, decodedRelinKey)
+        XCTAssertNoThrow( try keyGenerator.relinearizationKeys())
     }
     
     func testGaloisKeysLocalWithGaloisElements() throws {
-        let result = try keyGenerator.galoisKeysLocal(withGaloisElements: [1,2])
-        XCTAssertEqual(result, ASLGaloisKeys())
+        let params = ASLEncryptionParameters(schemeType: .BFV)
+        let plainModulus = try ASLModulus(value: 257)
+        try params.setPolynomialModulusDegree(8)
+        try params.setPlainModulus(plainModulus)
+        try params.setCoefficientModulus(ASLCoefficientModulus.create(8, bitSizes: [40, 40]))
+        let context = try ASLSealContext(encrytionParameters: params, expandModChain: false, securityLevel: .None, memoryPoolHandle: .global())
+        let result = try ASLKeyGenerator(context: context).galoisKeysLocal(withGaloisElements: [1, 3, 5, 15])
+        XCTAssertEqual(try result.getIndex(3), 1)
     }
     
     func testGaloisKeysWithGaloisElements() throws {
-        let galoisKey = try keyGenerator.galoisKeys(withGaloisElements: [4,16,256])
-        
-        let archiver = NSKeyedArchiver(requiringSecureCoding: false)
-        archiver.encode(galoisKey, forKey: "testObject")
-        let data = archiver.encodedData
-        
-        let unarchiver = try! NSKeyedUnarchiver(forReadingFrom: data)
-        unarchiver.requiresSecureCoding = false
-        let decodedGaloisKey = unarchiver.decodeObject(of: ASLGaloisKeys.self, forKey: "testObject")!
-        
-        XCTAssertEqual(galoisKey, decodedGaloisKey)
+        let params = ASLEncryptionParameters(schemeType: .BFV)
+        let plainModulus = try ASLModulus(value: 257)
+        try params.setPolynomialModulusDegree(8)
+        try params.setPlainModulus(plainModulus)
+        try params.setCoefficientModulus(ASLCoefficientModulus.create(8, bitSizes: [40, 40]))
+        let context = try ASLSealContext(encrytionParameters: params, expandModChain: false, securityLevel: .None, memoryPoolHandle: .global())
+        XCTAssertNoThrow(try ASLKeyGenerator(context: context).galoisKeys(withGaloisElements: [1, 3, 5, 15]))
     }
     
     func testGaloisKeysLocalWithSteps() throws {
-        let result = try keyGenerator.galoisKeysLocal(withSteps: [1,2])
+        let params = ASLEncryptionParameters(schemeType: .BFV)
+        let plainModulus = try ASLModulus(value: 257)
+        try params.setPolynomialModulusDegree(8)
+        try params.setPlainModulus(plainModulus)
+        try params.setCoefficientModulus(ASLCoefficientModulus.create(8, bitSizes: [40, 40]))
+        let context = try ASLSealContext(encrytionParameters: params, expandModChain: false, securityLevel: .None, memoryPoolHandle: .global())
+        let result = try ASLKeyGenerator(context: context).galoisKeysLocal(withSteps: [1, 3])
+        XCTAssertEqual(try result.getIndex(3), 1)
         
-        XCTAssertEqual(result, ASLGaloisKeys())
     }
     
     func testGaloisKeysWithSteps() throws {
-        let galoisKey = try keyGenerator.galoisKeys(withSteps: [4,16,256])
-        
-        let archiver = NSKeyedArchiver(requiringSecureCoding: false)
-        archiver.encode(galoisKey, forKey: "testObject")
-        let data = archiver.encodedData
-        
-        let unarchiver = try! NSKeyedUnarchiver(forReadingFrom: data)
-        unarchiver.requiresSecureCoding = false
-        let decodedGaloisKey = unarchiver.decodeObject(of: ASLGaloisKeys.self, forKey: "testObject")!
-        
-        XCTAssertEqual(galoisKey, decodedGaloisKey)
+        let params = ASLEncryptionParameters(schemeType: .BFV)
+        let plainModulus = try ASLModulus(value: 257)
+        try params.setPolynomialModulusDegree(8)
+        try params.setPlainModulus(plainModulus)
+        try params.setCoefficientModulus(ASLCoefficientModulus.create(8, bitSizes: [40, 40]))
+        let context = try ASLSealContext(encrytionParameters: params, expandModChain: false, securityLevel: .None, memoryPoolHandle: .global())
+        XCTAssertNoThrow(try ASLKeyGenerator(context: context).galoisKeys(withSteps: [1, 3]))
     }
     
     func testGaloisKeys() throws {
-        let galoisKey = try keyGenerator.galoisKeys()
-        
-        let archiver = NSKeyedArchiver(requiringSecureCoding: false)
-        archiver.encode(galoisKey, forKey: "testObject")
-        let data = archiver.encodedData
-        
-        let unarchiver = try! NSKeyedUnarchiver(forReadingFrom: data)
-        unarchiver.requiresSecureCoding = false
-        let decodedGaloisKey = unarchiver.decodeObject(of: ASLGaloisKeys.self, forKey: "testObject")!
-        
-        XCTAssertEqual(galoisKey, decodedGaloisKey)
+        let params = ASLEncryptionParameters(schemeType: .BFV)
+        let plainModulus = try ASLModulus(value: 257)
+        try params.setPolynomialModulusDegree(8)
+        try params.setPlainModulus(plainModulus)
+        try params.setCoefficientModulus(ASLCoefficientModulus.create(8, bitSizes: [40, 40]))
+        let context = try ASLSealContext(encrytionParameters: params, expandModChain: false, securityLevel: .None, memoryPoolHandle: .global())
+        XCTAssertNoThrow(try ASLKeyGenerator(context: context).galoisKeys())
     }
     
     func testGaloisKeysWithLocal() throws {
-        XCTAssertNoThrow(try keyGenerator.galoisKeysLocal())
+        let params = ASLEncryptionParameters(schemeType: .BFV)
+        let plainModulus = try ASLModulus(value: 257)
+        try params.setPolynomialModulusDegree(8)
+        try params.setPlainModulus(plainModulus)
+        try params.setCoefficientModulus(ASLCoefficientModulus.create(8, bitSizes: [40, 40]))
+        let context = try ASLSealContext(encrytionParameters: params, expandModChain: false, securityLevel: .None, memoryPoolHandle: .global())
+        XCTAssertNoThrow(try ASLKeyGenerator(context: context).galoisKeysLocal())
     }
 }

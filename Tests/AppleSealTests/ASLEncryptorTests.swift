@@ -44,86 +44,33 @@ class ASLEncryptorTests: XCTestCase {
     
     func testEncryptZeroWithParametersId() throws {
         let params = ASLSealContext.bfvDefault().firstParameterIds
-        let encryptedText = try encryptor.encrypt(with: ASLPlainText(polynomialString: "4"))
-        XCTAssertNoThrow(try encryptor.encryptZero(with: params, cipherText: encryptedText))
+        XCTAssertNoThrow(try encryptor.encryptZero(with: params))
     }
     
-    // TODO - crashing?
     func testEncryptZeroWithParametersIdWithPool() throws {
-        //        let encryptedText = try ASLCipherText(context: ASLSealContext.bfvDefault())
-        //        XCTAssertNoThrow(try encryptor.encryptZeroSymmetric(with: encryptedText, pool: .global()))
+        let encryptedText = try ASLCipherText(context: ASLSealContext.bfvDefault())
+        XCTAssertNoThrow(try encryptor.encryptZeroSymmetric(with: encryptedText, pool: .global()))
     }
     
-    // TODO - crashing?
     func testEncryptZeroSymmetricWithParametersId() throws {
-        //        XCTAssertNoThrow(try encryptor.encryptZeroSymmetric(withPool: ASLParametersIdType(block: (4, 4, 4, 4)), destination: ASLCipherText(), pool: .global()))
+        let params = ASLSealContext.bfvDefault().firstParameterIds
+        XCTAssertNoThrow(try encryptor.encryptZeroSymmetric(withPool: params, pool: .global()))
     }
     
-    // TODO - crashing?
-    func testEncryptSymmetricWithPlainAndPool() throws {
-//        let encyrpted = try encryptor.encryptSymmetric(withPlain: ASLPlainText(), pool: .global())
-//        let archiver = NSKeyedArchiver(requiringSecureCoding: false)
-//        archiver.encode(encyrpted, forKey: "testObject")
-//        let data = archiver.encodedData
-//
-//        let unarchiver = try! NSKeyedUnarchiver(forReadingFrom: data)
-//        unarchiver.requiresSecureCoding = false
-//
-//        XCTAssertNotNil(unarchiver.decodeObject(of: ASLCipherText.self, forKey: "testObject"))
+    func testEncryptSerializableSymmetric() throws {
+        XCTAssertNoThrow(try encryptor.encryptSerializableSymmetric(withPlain: ASLPlainText(), pool: .global()))
     }
     
     func testEncryptSymmetricWithPlain() throws {
-        // TODO - fix this
-//        let encyrpted = try encryptor.encryptSymmetric(withPlain: ASLPlainText())
-//        let archiver = NSKeyedArchiver(requiringSecureCoding: false)
-//        archiver.encode(encyrpted, forKey: "testObject")
-//        let data = archiver.encodedData
-//        XCTAssertNoThrow(try ASLCipherText(data: data, context: .bfvDefault()))
+        XCTAssertNoThrow(try encryptor.encryptSymmetric(with: ASLPlainText()))
     }
     
     func testEncryptSymmetricWithParametersAndPool() throws {
-        // TODO - fix this
-//        let params = ASLSealContext.bfvDefault().firstParameterIds
-//        let encyrpted = try encryptor.encryptZeroSymmetric(with: params, pool: .global())
-//        let archiver = NSKeyedArchiver(requiringSecureCoding: false)
-//        archiver.encode(encyrpted, forKey: "testObject")
-//        let data = archiver.encodedData
-//        XCTAssertNoThrow(try ASLCipherText(data: data, context: .bfvDefault()))
+        XCTAssertNoThrow(try encryptor.encryptSymmetric(with: ASLPlainText(), pool: .global()))
     }
     
-    func testEncryptSymmetricWithParameters() throws {
-        let params = ASLSealContext.bfvDefault().firstParameterIds
-        let encyrpted = try encryptor.encryptZeroSymmetric(with: params)
-        let archiver = NSKeyedArchiver(requiringSecureCoding: false)
-        archiver.encode(encyrpted, forKey: "testObject")
-        let data = archiver.encodedData
-        XCTAssertNoThrow(try ASLCipherText(data: data, context: .bfvDefault()))
-    }
-    
-    // TODO - crashing?
-    func testEncryptSymmetricWithPool() throws {
-        //        let encyrpted = try encryptor.encryptZeroSymmetric(withPool: .global())
-        //        let archiver = NSKeyedArchiver(requiringSecureCoding: false)
-        //        archiver.encode(encyrpted, forKey: "testObject")
-        //        let data = archiver.encodedData
-        //
-        //        let unarchiver = try! NSKeyedUnarchiver(forReadingFrom: data)
-        //        unarchiver.requiresSecureCoding = false
-        //
-        //        XCTAssertNotNil(unarchiver.decodeObject(of: ASLCipherText.self, forKey: "testObject"))
-    }
-    
-    // TODO - crashing?
-    func testEncryptSymmetric() throws {
-        //        let encyrpted = try encryptor.encryptZeroSymmetric()
-        //        let archiver = NSKeyedArchiver(requiringSecureCoding: false)
-        //        archiver.encode(encyrpted, forKey: "testObject")
-        //        let data = archiver.encodedData
-        //
-        //        let unarchiver = try! NSKeyedUnarchiver(forReadingFrom: data)
-        //        unarchiver.requiresSecureCoding = false
-        //
-        //        XCTAssertNotNil(unarchiver.decodeObject(of: ASLCipherText.self, forKey: "testObject"))
+    func testSerializableEncryptZero() {
+        XCTAssertNoThrow(try encryptor.encryptSerializableZeroSymmetric())
     }
     
     func testSetPublicKey() {

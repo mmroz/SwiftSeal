@@ -44,7 +44,7 @@ final class ASLBatchEncoderTests: XCTestCase {
     // MARK: - Tests
     
     func testSlotCount() throws {
-        XCTAssertEqual(batchEncoder.slotCount, 0)
+        XCTAssertEqual(batchEncoder.slotCount, 8192)
     }
     
     func testEncodeWithUnsignedValues() throws {

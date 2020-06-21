@@ -21,11 +21,13 @@ NS_ASSUME_NONNULL_BEGIN
 # pragma mark - Initialization
 
 + (instancetype)rnsBaseWithModuluses:(NSArray<ASLModulus *> *)moduluses
-                                      pool:(ASLMemoryPoolHandle *)pool;;
+                                      pool:(ASLMemoryPoolHandle *)pool;
 
 # pragma mark - Public Methods
 
 -(ASLRnsBase *)getAtIndex:(size_t)index;
+
+- (ASLRnsBase *)objectForKeyedSubscript:(size_t)key;
 
 -(BOOL)contains:(ASLModulus *)modulus;
 
@@ -39,11 +41,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(ASLRnsBase *)extendWithModulus:(ASLModulus *)modulus;
 
--(ASLRnsBase *)extendWithRnsBase:(ASLRnsBase *)rnsBase;
+-(ASLRnsBase * _Nullable)extendWithRnsBase:(ASLRnsBase *)rnsBase
+                                     error:(NSError **)error;
 
--(ASLRnsBase *)dropWithModulus:(ASLModulus *)modulus;
+-(ASLRnsBase * _Nullable)dropWithModulus:(ASLModulus *)modulus
+                         error:(NSError **)error;
 
--(ASLRnsBase *)drop;
+-(ASLRnsBase * _Nullable)dropAllWithError:(NSError **)error;
 
 -(NSNumber *)decomposeValue:(NSNumber *)value
                  pool:(ASLMemoryPoolHandle *)pool;

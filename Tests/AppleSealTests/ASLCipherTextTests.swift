@@ -117,15 +117,19 @@ class ASLCipherTextTests: XCTestCase {
         XCTAssertEqual(cipherText.pool, ASLMemoryPoolHandle.global())
     }
     
-    func testCoding() throws {
-        let cipherText = ASLCipherText()
+    func testEncoding() throws {
+        let cipherText = try ASLCipherText(context: .bfvDefault())
+        let archiver = NSKeyedArchiver(requiringSecureCoding: false)
+        XCTAssertNoThrow(archiver.encode(cipherText, forKey: "testObject"))
+    }
+    
+    func testDecoding() throws {
+        let cipherText = try ASLCipherText(context: .bfvDefault())
         
         let archiver = NSKeyedArchiver(requiringSecureCoding: false)
         archiver.encode(cipherText, forKey: "testObject")
         let data = archiver.encodedData
-        
         let decodedCipherText = try ASLCipherText(data: data, context: .bfvDefault())
-        
         XCTAssertEqual(cipherText, decodedCipherText)
     }
 }

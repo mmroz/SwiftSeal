@@ -61,7 +61,7 @@
 #pragma Public Methods
 
 - (ASLCipherText *)negate:(ASLCipherText *)encrypted
-         error:(NSError **)error {
+                    error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     
     try {
@@ -74,11 +74,11 @@
         }
         return nil;
     }
-     return nil;
+    return nil;
 }
 
 -(ASLCipherText *)negateInplace:(ASLCipherText *)encrypted
-               error:(NSError **)error {
+                          error:(NSError **)error {
     
     NSParameterAssert(encrypted != nil);
     
@@ -96,8 +96,8 @@
 }
 
 -(ASLCipherText *)addInplace:(ASLCipherText *)encrypted1
-       encrypted2:(ASLCipherText *)encrypted2
-            error:(NSError **)error {
+                  encrypted2:(ASLCipherText *)encrypted2
+                       error:(NSError **)error {
     
     NSParameterAssert(encrypted1 != nil);
     NSParameterAssert(encrypted2 != nil);
@@ -120,8 +120,8 @@
 }
 
 -(ASLCipherText * _Nullable)add:(ASLCipherText *)encrypted1
-encrypted2:(ASLCipherText *)encrypted2
-     error:(NSError **)error {
+                     encrypted2:(ASLCipherText *)encrypted2
+                          error:(NSError **)error {
     
     NSParameterAssert(encrypted1 != nil);
     NSParameterAssert(encrypted2 != nil);
@@ -145,7 +145,7 @@ encrypted2:(ASLCipherText *)encrypted2
 }
 
 -(ASLCipherText * _Nullable)addMany:(NSArray<ASLCipherText *> *)encrypteds
-         error:(NSError **)error {
+                              error:(NSError **)error {
     
     NSParameterAssert(encrypteds != nil);
     
@@ -157,7 +157,7 @@ encrypted2:(ASLCipherText *)encrypted2
     seal::Ciphertext destination = seal::Ciphertext();
     try {
         _evaluator->add_many(vectorEncrypteds, destination);
-       return [[ASLCipherText alloc]initWithCipherText:destination];
+        return [[ASLCipherText alloc]initWithCipherText:destination];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
@@ -173,8 +173,8 @@ encrypted2:(ASLCipherText *)encrypted2
 }
 
 -(ASLCipherText *)subInplace:(ASLCipherText *)encrypted1
-       encrypted2:(ASLCipherText *)encrypted2
-            error:(NSError **)error {
+                  encrypted2:(ASLCipherText *)encrypted2
+                       error:(NSError **)error {
     NSParameterAssert(encrypted1 != nil);
     NSParameterAssert(encrypted2 != nil);
     
@@ -196,8 +196,8 @@ encrypted2:(ASLCipherText *)encrypted2
 }
 
 -(ASLCipherText * _Nullable)sub:(ASLCipherText *)encrypted1
-encrypted2:(ASLCipherText *)encrypted2
-     error:(NSError **)error {
+                     encrypted2:(ASLCipherText *)encrypted2
+                          error:(NSError **)error {
     NSParameterAssert(encrypted1 != nil);
     NSParameterAssert(encrypted2 != nil);
     
@@ -219,8 +219,8 @@ encrypted2:(ASLCipherText *)encrypted2
 }
 
 -(ASLCipherText *)multiplyInplace:(ASLCipherText *)encrypted1
-            encrypted2:(ASLCipherText *)encrypted2
-                 error:(NSError **)error {
+                       encrypted2:(ASLCipherText *)encrypted2
+                            error:(NSError **)error {
     NSParameterAssert(encrypted1 != nil);
     NSParameterAssert(encrypted2 != nil);
     
@@ -242,9 +242,9 @@ encrypted2:(ASLCipherText *)encrypted2
 }
 
 -(ASLCipherText *)multiplyInplace:(ASLCipherText *)encrypted1
-            encrypted2:(ASLCipherText *)encrypted2
-                  pool:(ASLMemoryPoolHandle *)pool
-                 error:(NSError **)error {
+                       encrypted2:(ASLCipherText *)encrypted2
+                             pool:(ASLMemoryPoolHandle *)pool
+                            error:(NSError **)error {
     NSParameterAssert(encrypted1 != nil);
     NSParameterAssert(encrypted2 != nil);
     NSParameterAssert(pool != nil);
@@ -267,9 +267,9 @@ encrypted2:(ASLCipherText *)encrypted2
 }
 
 -(ASLCipherText * _Nullable)multiply:(ASLCipherText *)encrypted1
-     encrypted2:(ASLCipherText *)encrypted2
-           pool:(ASLMemoryPoolHandle *)pool
-          error:(NSError **)error {
+                          encrypted2:(ASLCipherText *)encrypted2
+                                pool:(ASLMemoryPoolHandle *)pool
+                               error:(NSError **)error {
     
     NSParameterAssert(encrypted1 != nil);
     NSParameterAssert(encrypted2 != nil);
@@ -294,9 +294,9 @@ encrypted2:(ASLCipherText *)encrypted2
 }
 
 -(ASLCipherText * _Nullable)multiply:(ASLCipherText *)encrypted1
-     encrypted2:(ASLCipherText *)encrypted2
-    
-          error:(NSError **)error {
+                          encrypted2:(ASLCipherText *)encrypted2
+
+                               error:(NSError **)error {
     NSParameterAssert(encrypted1 != nil);
     NSParameterAssert(encrypted2 != nil);
     
@@ -318,7 +318,7 @@ encrypted2:(ASLCipherText *)encrypted2
 }
 
 -(ASLCipherText *)squareInplace:(ASLCipherText *)encrypted
-               error:(NSError **)error {
+                          error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     
     seal::Ciphertext sealEncrypted = encrypted.sealCipherText;
@@ -339,15 +339,15 @@ encrypted2:(ASLCipherText *)encrypted2
 }
 
 -(ASLCipherText *)squareInplace:(ASLCipherText *)encrypted
-                pool:(ASLMemoryPoolHandle *)pool
-               error:(NSError **)error {
+                           pool:(ASLMemoryPoolHandle *)pool
+                          error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(pool != nil);
     
     seal::Ciphertext sealEncrypted = encrypted.sealCipherText;
     try {
         _evaluator->square_inplace(sealEncrypted, pool.memoryPoolHandle);
-         return [[ASLCipherText alloc] initWithCipherText:sealEncrypted];
+        return [[ASLCipherText alloc] initWithCipherText:sealEncrypted];
     } catch (std::invalid_argument const &e) {
         if (error != nil) {
             *error = [NSError ASL_SealInvalidParameter:e];
@@ -362,9 +362,9 @@ encrypted2:(ASLCipherText *)encrypted2
 }
 
 -(ASLCipherText * _Nullable)square:(ASLCipherText *)encrypted
-  
-         pool:(ASLMemoryPoolHandle *)pool
-        error:(NSError **)error {
+
+                              pool:(ASLMemoryPoolHandle *)pool
+                             error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(pool != nil);
     
@@ -386,7 +386,7 @@ encrypted2:(ASLCipherText *)encrypted2
 }
 
 -(ASLCipherText * _Nullable)square:(ASLCipherText *)encrypted
-        error:(NSError **)error {
+                             error:(NSError **)error {
     
     NSParameterAssert(encrypted != nil);
     
@@ -408,8 +408,8 @@ encrypted2:(ASLCipherText *)encrypted2
 }
 
 -(ASLCipherText *)relinearizeInplace:(ASLCipherText *)encrypted
-      relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
-                    error:(NSError **)error {
+                 relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
+                               error:(NSError **)error {
     
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(relinearizationKeys != nil);
@@ -433,9 +433,9 @@ encrypted2:(ASLCipherText *)encrypted2
 }
 
 -(ASLCipherText *)relinearizeInplace:(ASLCipherText *)encrypted
-      relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
-                     pool:(ASLMemoryPoolHandle *)pool
-                    error:(NSError **)error {
+                 relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
+                                pool:(ASLMemoryPoolHandle *)pool
+                               error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(relinearizationKeys != nil);
     NSParameterAssert(pool != nil);
@@ -459,8 +459,8 @@ encrypted2:(ASLCipherText *)encrypted2
 }
 
 -(ASLCipherText * _Nullable)relinearize:(ASLCipherText *)encrypted
-relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
-             error:(NSError **)error {
+                    relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
+                                  error:(NSError **)error {
     
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(relinearizationKeys != nil);
@@ -484,10 +484,10 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
 }
 
 -(ASLCipherText * _Nullable)relinearize:(ASLCipherText *)encrypted
-relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
-       
-              pool:(ASLMemoryPoolHandle *)pool
-             error:(NSError **)error {
+                    relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
+
+                                   pool:(ASLMemoryPoolHandle *)pool
+                                  error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(relinearizationKeys != nil);
     NSParameterAssert(pool != nil);
@@ -510,8 +510,8 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
 }
 
 -(ASLCipherText * _Nullable)modSwitchToNext:(ASLCipherText *)encrypted
-           
-                 error:(NSError **)error {
+
+                                      error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     
     seal::Ciphertext sealEncrypted = encrypted.sealCipherText;
@@ -533,9 +533,9 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
 }
 
 -(ASLCipherText * _Nullable)modSwitchToNext:(ASLCipherText *)encrypted
-           
-                  pool:(ASLMemoryPoolHandle *)pool
-                 error:(NSError **)error {
+
+                                       pool:(ASLMemoryPoolHandle *)pool
+                                      error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(pool != nil);
     
@@ -558,8 +558,8 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
 }
 
 -(ASLCipherText *)modSwitchToNextInplace:(ASLCipherText *)encrypted
-                         pool:(ASLMemoryPoolHandle *)pool
-                        error:(NSError **)error {
+                                    pool:(ASLMemoryPoolHandle *)pool
+                                   error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(pool != nil);
     
@@ -581,7 +581,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
 }
 
 -(ASLCipherText * _Nullable)modSwitchToNextInplace:(ASLCipherText *)encrypted
-                        error:(NSError **)error {
+                                             error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     
     seal::Ciphertext sealEncrypted = encrypted.sealCipherText;
@@ -602,7 +602,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
 }
 
 -(ASLPlainText * _Nullable)modSwitchToNextWithPlain:(ASLPlainText *)plain
-                 error:(NSError **)error {
+                                              error:(NSError **)error {
     NSParameterAssert(plain != nil);
     
     seal::Plaintext sealPlainText = plain.sealPlainText;
@@ -623,9 +623,9 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
 }
 
 -(ASLCipherText *)modSwitchToInplace:(ASLCipherText *)encrypted
-             parametersId:(ASLParametersIdType)parametersId
-                     pool:(ASLMemoryPoolHandle *)pool
-                    error:(NSError **)error {
+                        parametersId:(ASLParametersIdType)parametersId
+                                pool:(ASLMemoryPoolHandle *)pool
+                               error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(pool != nil);
     
@@ -652,8 +652,8 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
 }
 
 -(ASLCipherText *)modSwitchToInplace:(ASLCipherText *)encrypted
-             parametersId:(ASLParametersIdType)parametersId
-                    error:(NSError **)error {
+                        parametersId:(ASLParametersIdType)parametersId
+                               error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     
     
@@ -680,10 +680,10 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
 }
 
 -(ASLCipherText * _Nullable)modSwitchTo:(ASLCipherText *)encrypted
-      parametersId:(ASLParametersIdType)parametersId
-       
-              pool:(ASLMemoryPoolHandle *)pool
-             error:(NSError **)error {
+                           parametersId:(ASLParametersIdType)parametersId
+
+                                   pool:(ASLMemoryPoolHandle *)pool
+                                  error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     
     NSParameterAssert(pool != nil);
@@ -711,9 +711,9 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
 }
 
 -(ASLCipherText * _Nullable)modSwitchTo:(ASLCipherText *)encrypted
-      parametersId:(ASLParametersIdType)parametersId
-       
-             error:(NSError **)error {
+                           parametersId:(ASLParametersIdType)parametersId
+
+                                  error:(NSError **)error {
     
     NSParameterAssert(encrypted != nil);
     
@@ -741,8 +741,8 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
 }
 
 -(ASLPlainText *)modSwitchToInplaceWithPlain:(ASLPlainText *)plain
-                      parametersId:(ASLParametersIdType)parametersId
-                             error:(NSError **)error {
+                                parametersId:(ASLParametersIdType)parametersId
+                                       error:(NSError **)error {
     NSParameterAssert(plain != nil);
     
     
@@ -769,8 +769,8 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
 }
 
 -(ASLPlainText * _Nullable)modSwitchToWithPlain:(ASLPlainText *)plain
-               parametersId:(ASLParametersIdType)parametersId
-                      error:(NSError **)error {
+                                   parametersId:(ASLParametersIdType)parametersId
+                                          error:(NSError **)error {
     NSParameterAssert(plain != nil);
     
     seal::parms_id_type sealParametersId = {};
@@ -798,8 +798,8 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
 }
 
 -(ASLCipherText * _Nullable)rescaleToNext:(ASLCipherText *)encrypted
-                pool:(ASLMemoryPoolHandle *)pool
-               error:(NSError **)error {
+                                     pool:(ASLMemoryPoolHandle *)pool
+                                    error:(NSError **)error {
     
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(pool != nil);
@@ -823,8 +823,8 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
 }
 
 -(ASLCipherText * _Nullable)rescaleToNext:(ASLCipherText *)encrypted
-         
-               error:(NSError **)error {
+
+                                    error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     
     seal::Ciphertext sealEncrypted = encrypted.sealCipherText;
@@ -846,8 +846,8 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
 }
 
 -(ASLCipherText *)rescaleToNextInplace:(ASLCipherText *)encrypted
-                       pool:(ASLMemoryPoolHandle *)pool
-                      error:(NSError **)error {
+                                  pool:(ASLMemoryPoolHandle *)pool
+                                 error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(pool != nil);
     
@@ -869,7 +869,7 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
 }
 
 -(ASLCipherText *)rescaleToNextInplace:(ASLCipherText *)encrypted
-                      error:(NSError **)error {
+                                 error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     
     seal::Ciphertext sealEncrypted = encrypted.sealCipherText;
@@ -890,9 +890,9 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
 }
 
 -(ASLCipherText *)rescaleToInplace:(ASLCipherText *)encrypted
-           parametersId:(ASLParametersIdType)parametersId
-                   pool:(ASLMemoryPoolHandle *)pool
-                  error:(NSError **)error {
+                      parametersId:(ASLParametersIdType)parametersId
+                              pool:(ASLMemoryPoolHandle *)pool
+                             error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(pool != nil);
     
@@ -919,8 +919,8 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
 }
 
 -(ASLCipherText *)rescaleToInplace:(ASLCipherText *)encrypted
-           parametersId:(ASLParametersIdType)parametersId
-                  error:(NSError **)error {
+                      parametersId:(ASLParametersIdType)parametersId
+                             error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     
     seal::parms_id_type sealParametersId = {};
@@ -946,10 +946,10 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
 }
 
 -(ASLCipherText * _Nullable)rescaleTo:(ASLCipherText *)encrypted
-    parametersId:(ASLParametersIdType)parametersId
-     
-            pool:(ASLMemoryPoolHandle *)pool
-           error:(NSError **)error {
+                         parametersId:(ASLParametersIdType)parametersId
+
+                                 pool:(ASLMemoryPoolHandle *)pool
+                                error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(pool != nil);
     
@@ -977,9 +977,9 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
 }
 
 -(ASLCipherText * _Nullable)rescaleTo:(ASLCipherText *)encrypted
-    parametersId:(ASLParametersIdType)parametersId
-     
-           error:(NSError **)error {
+                         parametersId:(ASLParametersIdType)parametersId
+
+                                error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     
     seal::parms_id_type sealParametersId = {};
@@ -1006,10 +1006,10 @@ relinearizationKeys:(ASLRelinearizationKeys *)relinearizationKeys
 }
 
 -(ASLCipherText * _Nullable)multiplyMany:(NSArray<ASLCipherText*>*)encrypteds
-relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
-        
-               pool:(ASLMemoryPoolHandle *)pool
-              error:(NSError **)error {
+                     relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
+
+                                    pool:(ASLMemoryPoolHandle *)pool
+                                   error:(NSError **)error {
     NSParameterAssert(encrypteds != nil);
     NSParameterAssert(relinearizationKeys != nil);
     NSParameterAssert(pool != nil);
@@ -1037,9 +1037,9 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText * _Nullable)multiplyMany:(NSArray<ASLCipherText*>*)encrypteds
-relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
-        
-              error:(NSError **)error {
+                     relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
+
+                                   error:(NSError **)error {
     NSParameterAssert(encrypteds != nil);
     NSParameterAssert(relinearizationKeys != nil);
     
@@ -1066,10 +1066,10 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText *)exponentiateInplace:(ASLCipherText *)encrypted
-                  exponent:(uint64_t)exponent
-       relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
-                      pool:(ASLMemoryPoolHandle *)pool
-                     error:(NSError **)error {
+                             exponent:(uint64_t)exponent
+                  relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
+                                 pool:(ASLMemoryPoolHandle *)pool
+                                error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(relinearizationKeys != nil);
     NSParameterAssert(pool != nil);
@@ -1092,9 +1092,9 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText *)exponentiateInplace:(ASLCipherText *)encrypted
-                  exponent:(uint64_t)exponent
-       relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
-                     error:(NSError **)error {
+                             exponent:(uint64_t)exponent
+                  relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
+                                error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(relinearizationKeys != nil);
     
@@ -1116,11 +1116,11 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText * _Nullable)exponentiate:(ASLCipherText *)encrypted
-           exponent:(uint64_t)exponent
-relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
-        
-               pool:(ASLMemoryPoolHandle *)pool
-              error:(NSError **)error {
+                                exponent:(uint64_t)exponent
+                     relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
+
+                                    pool:(ASLMemoryPoolHandle *)pool
+                                   error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(relinearizationKeys != nil);
     NSParameterAssert(pool != nil);
@@ -1144,10 +1144,10 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText * _Nullable)exponentiate:(ASLCipherText *)encrypted
-           exponent:(uint64_t)exponent
-relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
-        
-              error:(NSError **)error {
+                                exponent:(uint64_t)exponent
+                     relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
+
+                                   error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(relinearizationKeys != nil);
     
@@ -1170,8 +1170,8 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText *)addPlainInplace:(ASLCipherText *)encrypted
-                 plain:(ASLPlainText *)plain
-                 error:(NSError **)error {
+                            plain:(ASLPlainText *)plain
+                            error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(plain != nil);
     
@@ -1194,9 +1194,8 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText * _Nullable)addPlain:(ASLCipherText *)encrypted
-          plain:(ASLPlainText *)plain
-    
-          error:(NSError **)error {
+                               plain:(ASLPlainText *)plain
+                               error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(plain != nil);
     
@@ -1219,8 +1218,8 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText *)subPlainInplace:(ASLCipherText *)encrypted
-                 plain:(ASLPlainText *)plain
-                 error:(NSError **)error {
+                            plain:(ASLPlainText *)plain
+                            error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(plain != nil);
     
@@ -1242,9 +1241,9 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText * _Nullable)subPlain:(ASLCipherText *)encrypted
-          plain:(ASLPlainText *)plain
-    
-          error:(NSError **)error {
+                               plain:(ASLPlainText *)plain
+
+                               error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(plain != nil);
     
@@ -1267,9 +1266,9 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText *)multiplyPlainInplace:(ASLCipherText *)encrypted
-                      plain:(ASLPlainText *)plain
-                       pool:(ASLMemoryPoolHandle *)pool
-                      error:(NSError **)error {
+                                 plain:(ASLPlainText *)plain
+                                  pool:(ASLMemoryPoolHandle *)pool
+                                 error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(plain != nil);
     NSParameterAssert(pool != nil);
@@ -1292,8 +1291,8 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText *)multiplyPlainInplace:(ASLCipherText *)encrypted
-                      plain:(ASLPlainText *)plain
-                      error:(NSError **)error {
+                                 plain:(ASLPlainText *)plain
+                                 error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(plain != nil);
     
@@ -1316,10 +1315,10 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 
 
 -(ASLCipherText * _Nullable)multiplyPlain:(ASLCipherText *)encrypted
-               plain:(ASLPlainText *)plain
-         
-                pool:(ASLMemoryPoolHandle *)pool
-               error:(NSError **)error {
+                                    plain:(ASLPlainText *)plain
+
+                                     pool:(ASLMemoryPoolHandle *)pool
+                                    error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(plain != nil);
     NSParameterAssert(pool != nil);
@@ -1343,9 +1342,9 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText * _Nullable)multiplyPlain:(ASLCipherText *)encrypted
-               plain:(ASLPlainText *)plain
-         
-               error:(NSError **)error {
+                                    plain:(ASLPlainText *)plain
+
+                                    error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(plain != nil);
     
@@ -1368,9 +1367,9 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLPlainText *)transformToNttInplace:(ASLPlainText *)plain
-                parametersId:(ASLParametersIdType)parametersId
-                        pool:(ASLMemoryPoolHandle *)pool
-                       error:(NSError **)error {
+                          parametersId:(ASLParametersIdType)parametersId
+                                  pool:(ASLMemoryPoolHandle *)pool
+                                 error:(NSError **)error {
     NSParameterAssert(plain != nil);
     NSParameterAssert(pool != nil);
     
@@ -1397,8 +1396,8 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLPlainText *)transformToNttInplace:(ASLPlainText *)plain
-                parametersId:(ASLParametersIdType)parametersId
-                       error:(NSError **)error {
+                          parametersId:(ASLParametersIdType)parametersId
+                                 error:(NSError **)error {
     NSParameterAssert(plain != nil);
     
     seal::parms_id_type sealParametersId = {};
@@ -1424,12 +1423,10 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLPlainText *)transformToNtt:(ASLPlainText *)plain
-         parametersId:(ASLParametersIdType)parametersId
-       destinationNtt:(ASLPlainText *)destinationNtt
-                 pool:(ASLMemoryPoolHandle *)pool
-                error:(NSError **)error {
+                   parametersId:(ASLParametersIdType)parametersId
+                           pool:(ASLMemoryPoolHandle *)pool
+                          error:(NSError **)error {
     NSParameterAssert(plain != nil);
-    NSParameterAssert(destinationNtt != nil);
     NSParameterAssert(pool != nil);
     
     seal::parms_id_type sealParametersId = {};
@@ -1438,7 +1435,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
               sealParametersId.begin());
     
     seal::Plaintext sealPlainText = plain.sealPlainText;
-    seal::Plaintext sealNttPlainText = destinationNtt.sealPlainText;
+    seal::Plaintext sealNttPlainText = seal::Plaintext();
     try {
         _evaluator->transform_to_ntt(sealPlainText, sealParametersId, sealNttPlainText, pool.memoryPoolHandle);
         return [[ASLPlainText alloc] initWithPlainText:sealNttPlainText];
@@ -1456,11 +1453,9 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLPlainText *)transformToNtt:(ASLPlainText *)plain
-         parametersId:(ASLParametersIdType)parametersId
-       destinationNtt:(ASLPlainText *)destinationNtt
-                error:(NSError **)error {
+                   parametersId:(ASLParametersIdType)parametersId
+                          error:(NSError **)error {
     NSParameterAssert(plain != nil);
-    NSParameterAssert(destinationNtt != nil);
     
     seal::parms_id_type sealParametersId = {};
     std::copy(std::begin(parametersId.block),
@@ -1468,7 +1463,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
               sealParametersId.begin());
     
     seal::Plaintext sealPlainText = plain.sealPlainText;
-    seal::Plaintext sealNttPlainText = destinationNtt.sealPlainText;
+    seal::Plaintext sealNttPlainText = seal::Plaintext();
     try {
         _evaluator->transform_to_ntt(sealPlainText, sealParametersId, sealNttPlainText);
         return [[ASLPlainText alloc] initWithPlainText:sealNttPlainText];
@@ -1486,7 +1481,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText *)transformToNttInplace:(ASLCipherText *)encrypted
-                       error:(NSError **)error {
+                                  error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     
     seal::Ciphertext sealEncrypted = encrypted.sealCipherText;
@@ -1507,13 +1502,12 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText *)transformToNtt:(ASLCipherText *)encrypted
-       destinationNtt:(ASLCipherText *)destinationNtt
-                error:(NSError **)error {
+                           error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
-    NSParameterAssert(destinationNtt != nil);
     
     seal::Ciphertext sealEncrypted = encrypted.sealCipherText;
-    seal::Ciphertext sealNttCipherText = destinationNtt.sealCipherText;
+    seal::Ciphertext sealNttCipherText = seal::Ciphertext();
+    
     try {
         _evaluator->transform_to_ntt(sealEncrypted, sealNttCipherText);
         return [[ASLCipherText alloc] initWithCipherText:sealNttCipherText];
@@ -1531,7 +1525,7 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText *)transformFromNttInplace:(ASLCipherText *)encryptedNtt
-                         error:(NSError **)error {
+                                    error:(NSError **)error {
     NSParameterAssert(encryptedNtt != nil);
     
     seal::Ciphertext sealNttCipherText = encryptedNtt.sealCipherText;
@@ -1552,8 +1546,8 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText * _Nullable)transformFromNtt:(ASLCipherText *)encryptedNtt
-            
-                  error:(NSError **)error {
+
+                                       error:(NSError **)error {
     NSParameterAssert(encryptedNtt != nil);
     
     seal::Ciphertext destination = seal::Ciphertext();
@@ -1574,10 +1568,10 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText *)applyGaloisInplace:(ASLCipherText *)encrypted
-            galoisElement:(uint64_t)galoisElement
-                galoisKey:(ASLGaloisKeys *)galoisKey
-                     pool:(ASLMemoryPoolHandle *)pool
-                    error:(NSError **)error {
+                       galoisElement:(uint64_t)galoisElement
+                           galoisKey:(ASLGaloisKeys *)galoisKey
+                                pool:(ASLMemoryPoolHandle *)pool
+                               error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(galoisKey != nil);
     NSParameterAssert(pool != nil);
@@ -1600,9 +1594,9 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText *)applyGaloisInplace:(ASLCipherText *)encrypted
-            galoisElement:(uint64_t)galoisElement
-                galoisKey:(ASLGaloisKeys *)galoisKey
-                    error:(NSError **)error {
+                       galoisElement:(uint64_t)galoisElement
+                           galoisKey:(ASLGaloisKeys *)galoisKey
+                               error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(galoisKey != nil);
     
@@ -1624,11 +1618,11 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText * _Nullable)applyGalois:(ASLCipherText *)encrypted
-     galoisElement:(uint64_t)galoisElement
-         galoisKey:(ASLGaloisKeys *)galoisKey
-       
-              pool:(ASLMemoryPoolHandle *)pool
-             error:(NSError **)error {
+                          galoisElement:(uint64_t)galoisElement
+                              galoisKey:(ASLGaloisKeys *)galoisKey
+
+                                   pool:(ASLMemoryPoolHandle *)pool
+                                  error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(galoisKey != nil);
     NSParameterAssert(pool != nil);
@@ -1652,10 +1646,10 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText * _Nullable)applyGalois:(ASLCipherText *)encrypted
-     galoisElement:(uint64_t)galoisElement
-         galoisKey:(ASLGaloisKeys *)galoisKey
-       
-             error:(NSError **)error {
+                          galoisElement:(uint64_t)galoisElement
+                              galoisKey:(ASLGaloisKeys *)galoisKey
+
+                                  error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(galoisKey != nil);
     
@@ -1678,10 +1672,10 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText *)rotateRowsInplace:(ASLCipherText *)encrypted
-                   steps:(int)steps
-               galoisKey:(ASLGaloisKeys *)galoisKey
-                    pool:(ASLMemoryPoolHandle *)pool
-                   error:(NSError **)error {
+                              steps:(int)steps
+                          galoisKey:(ASLGaloisKeys *)galoisKey
+                               pool:(ASLMemoryPoolHandle *)pool
+                              error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(galoisKey != nil);
     NSParameterAssert(pool != nil);
@@ -1704,9 +1698,9 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText *)rotateRowsInplace:(ASLCipherText *)encrypted
-                   steps:(int)steps
-               galoisKey:(ASLGaloisKeys *)galoisKey
-                   error:(NSError **)error {
+                              steps:(int)steps
+                          galoisKey:(ASLGaloisKeys *)galoisKey
+                              error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(galoisKey != nil);
     
@@ -1728,11 +1722,11 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText * _Nullable)rotateRows:(ASLCipherText *)encrypted
-            steps:(int)steps
-        galoisKey:(ASLGaloisKeys *)galoisKey
-      
-             pool:(ASLMemoryPoolHandle *)pool
-            error:(NSError **)error {
+                                 steps:(int)steps
+                             galoisKey:(ASLGaloisKeys *)galoisKey
+
+                                  pool:(ASLMemoryPoolHandle *)pool
+                                 error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(galoisKey != nil);
     NSParameterAssert(pool != nil);
@@ -1756,10 +1750,10 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText * _Nullable)rotateRows:(ASLCipherText *)encrypted
-            steps:(int)steps
-        galoisKey:(ASLGaloisKeys *)galoisKey
-      
-            error:(NSError **)error {
+                                 steps:(int)steps
+                             galoisKey:(ASLGaloisKeys *)galoisKey
+
+                                 error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(galoisKey != nil);
     
@@ -1782,9 +1776,9 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText *)rotateColumnsInplace:(ASLCipherText *)encrypted
-                  galoisKey:(ASLGaloisKeys *)galoisKey
-                       pool:(ASLMemoryPoolHandle *)pool
-                      error:(NSError **)error {
+                             galoisKey:(ASLGaloisKeys *)galoisKey
+                                  pool:(ASLMemoryPoolHandle *)pool
+                                 error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(galoisKey != nil);
     
@@ -1806,8 +1800,8 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText *)rotateColumnsInplace:(ASLCipherText *)encrypted
-                  galoisKey:(ASLGaloisKeys *)galoisKey
-                      error:(NSError **)error {
+                             galoisKey:(ASLGaloisKeys *)galoisKey
+                                 error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(galoisKey != nil);
     
@@ -1829,10 +1823,10 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText * _Nullable)rotateColumns:(ASLCipherText *)encrypted
-           galoisKey:(ASLGaloisKeys *)galoisKey
-         
-                pool:(ASLMemoryPoolHandle *)pool
-               error:(NSError **)error {
+                                galoisKey:(ASLGaloisKeys *)galoisKey
+
+                                     pool:(ASLMemoryPoolHandle *)pool
+                                    error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(galoisKey != nil);
     NSParameterAssert(pool != nil);
@@ -1856,9 +1850,9 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText * _Nullable)rotateColumns:(ASLCipherText *)encrypted
-           galoisKey:(ASLGaloisKeys *)galoisKey
-         
-               error:(NSError **)error {
+                                galoisKey:(ASLGaloisKeys *)galoisKey
+
+                                    error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(galoisKey != nil);
     
@@ -1881,10 +1875,10 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText *)rotateVectorInplace:(ASLCipherText *)encrypted
-                     steps:(int)steps
-                 galoisKey:(ASLGaloisKeys *)galoisKey
-                      pool:(ASLMemoryPoolHandle *)pool
-                     error:(NSError **)error {
+                                steps:(int)steps
+                            galoisKey:(ASLGaloisKeys *)galoisKey
+                                 pool:(ASLMemoryPoolHandle *)pool
+                                error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(galoisKey != nil);
     NSParameterAssert(pool != nil);
@@ -1907,9 +1901,9 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText *)rotateVectorInplace:(ASLCipherText *)encrypted
-                     steps:(int)steps
-                 galoisKey:(ASLGaloisKeys *)galoisKey
-                     error:(NSError **)error {
+                                steps:(int)steps
+                            galoisKey:(ASLGaloisKeys *)galoisKey
+                                error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(galoisKey != nil);
     
@@ -1931,11 +1925,11 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText * _Nullable)rotateVector:(ASLCipherText *)encrypted
-              steps:(int)steps
-          galoisKey:(ASLGaloisKeys *)galoisKey
-        
-               pool:(ASLMemoryPoolHandle *)pool
-              error:(NSError **)error {
+                                   steps:(int)steps
+                               galoisKey:(ASLGaloisKeys *)galoisKey
+
+                                    pool:(ASLMemoryPoolHandle *)pool
+                                   error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(galoisKey != nil);
     NSParameterAssert(pool != nil);
@@ -1959,10 +1953,10 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText * _Nullable)rotateVector:(ASLCipherText *)encrypted
-              steps:(int)steps
-          galoisKey:(ASLGaloisKeys *)galoisKey
-        
-              error:(NSError **)error {
+                                   steps:(int)steps
+                               galoisKey:(ASLGaloisKeys *)galoisKey
+
+                                   error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(galoisKey != nil);
     
@@ -1985,9 +1979,9 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText *)complexConjugateInplace:(ASLCipherText *)encrypted
-                     galoisKey:(ASLGaloisKeys *)galoisKey
-                          pool:(ASLMemoryPoolHandle *)pool
-                         error:(NSError **)error {
+                                galoisKey:(ASLGaloisKeys *)galoisKey
+                                     pool:(ASLMemoryPoolHandle *)pool
+                                    error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(galoisKey != nil);
     NSParameterAssert(pool != nil);
@@ -2010,8 +2004,8 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText *)complexConjugateInplace:(ASLCipherText *)encrypted
-                     galoisKey:(ASLGaloisKeys *)galoisKey
-                         error:(NSError **)error {
+                                galoisKey:(ASLGaloisKeys *)galoisKey
+                                    error:(NSError **)error {
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(galoisKey != nil);
     
@@ -2033,9 +2027,9 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText * _Nullable)complexConjugate:(ASLCipherText *)encrypted
-              galoisKey:(ASLGaloisKeys *)galoisKey
-                   pool:(ASLMemoryPoolHandle *)pool
-                  error:(NSError **)error {
+                                   galoisKey:(ASLGaloisKeys *)galoisKey
+                                        pool:(ASLMemoryPoolHandle *)pool
+                                       error:(NSError **)error {
     
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(galoisKey != nil);
@@ -2060,8 +2054,8 @@ relinearizationKeys:(ASLRelinearizationKeys*)relinearizationKeys
 }
 
 -(ASLCipherText * _Nullable)complexConjugate:(ASLCipherText *)encrypted
-              galoisKey:(ASLGaloisKeys *)galoisKey
-                  error:(NSError **)error {
+                                   galoisKey:(ASLGaloisKeys *)galoisKey
+                                       error:(NSError **)error {
     
     NSParameterAssert(encrypted != nil);
     NSParameterAssert(galoisKey != nil);

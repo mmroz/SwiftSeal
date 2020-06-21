@@ -185,7 +185,6 @@ NS_ASSUME_NONNULL_BEGIN
  parameters
  */
 -(ASLCipherText * _Nullable)encryptZeroWithParametersId:(ASLParametersIdType)parametersId
-                                             cipherText:(ASLCipherText *)cipherText
                                                   error:(NSError **)error;
 
 /*!
@@ -204,7 +203,6 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealInvalidParameter if pool is uninitialized
  */
 -(ASLCipherText * _Nullable)encryptZeroWithParametersId:(ASLParametersIdType)parametersId
-                                             cipherText:(ASLCipherText *)cipherText
                                                    pool:(ASLMemoryPoolHandle *)pool
                                                   error:(NSError **)error;
 
@@ -227,7 +225,6 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealInvalidParameter if pool is uninitialized
  */
 -(ASLCipherText * _Nullable)encryptSymmetricWithPlainText:(ASLPlainText *)plainText
-                                               cipherText:(ASLCipherText *)cipherText
                                                     error:(NSError **)error;
 
 /*!
@@ -250,7 +247,6 @@ NS_ASSUME_NONNULL_BEGIN
  @throws ASL_SealInvalidParameter if pool is uninitialized
  */
 -(ASLCipherText * _Nullable)encryptSymmetricWithPlainText:(ASLPlainText *)plainText
-                                               cipherText:(ASLCipherText *)cipherText
                                                      pool:(ASLMemoryPoolHandle *)pool
                                                     error:(NSError **)error;
 

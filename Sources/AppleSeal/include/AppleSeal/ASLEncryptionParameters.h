@@ -176,7 +176,8 @@ typedef NS_CLOSED_ENUM(NSInteger, ASLSchemeType) {
 - (BOOL)setPlainModulusWithInteger:(uint64_t)plainModulus
                              error:(NSError **)error;
 
-// TODO - fix this
+// @markrmoz: TODO - implement this class when UniformRandomGeneratorFactory is added
+
 -(BOOL)setRandomGenerator;
 
 @end
