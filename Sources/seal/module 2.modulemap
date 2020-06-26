@@ -1,5 +1,0 @@
-module SEAL {
-    umbrella header "shim.h"
-	link "seal"
-	export *
-}
