@@ -17,7 +17,7 @@ An Objective-C++ wrapper around  [Microsoft Seal](https://github.com/microsoft/S
    * [ASLBatchEncoder](#asl-batchEncoder)
    * [ASLCKKSEncoder](#asl-ckksEncoder)
    * [ASLIntegerEncoder](#asl-integerEncoder)
-   * [ASLEncryptor](#asl-Encrypto)
+   * [ASLEncryptor](#asl-encryptor)
    * [ASLEvaluator](#asl-evaluator)
    * [ASLDecryptor](#asl-decryptor)
 * [Learn More](#learn-more)
@@ -48,24 +48,24 @@ Then install AppleSeal via SPM. Create a new Xcode project and navigate to `File
 
 ### Examples <a name="asl-examples"></a>
 
-AppleSeal has a number of examples that are used to show basic usage of Swift Seal. The [Examples in AppleSeal](https://github.com/mmroz/AppleSeal/tree/master/Tests/AppleSealTests/Examples). These are meant to replicate the [Exaples in SEAL](https://github.com/microsoft/SEAL/tree/master/native/examples) 
+AppleSeal has a number of examples that are used to show basic usage of Swift Seal. The [Examples in AppleSeal](https://github.com/mmroz/AppleSeal/tree/master/Tests/AppleSealTests/Examples). These are meant to replicate the [Examples in SEAL](https://github.com/microsoft/SEAL/tree/master/native/examples) 
 
 # Components <a name="components"></a>
 
 ### ASLSchemeType  <a name="asl-schemeType"></a>
-Supports BFV and CKKS encoding types through ASLSchemeTypeBFV and  ASLSchemeTypeCKKS, respectivly.
+Supports BFV and CKKS encoding types through ASLSchemeTypeBFV and  ASLSchemeTypeCKKS, respectively.
 
 ### ASLEncryptionParameters  <a name="asl-encryption-parameters"></a>
 
-The parameters used for the encryption most importantly polynomialModulus, coefficeintModulus and plainModulus.
+The parameters used for the encryption most importantly polynomialModulus, coefficientModulus and plainModulus.
 
 ### ASLSealContext  <a name="asl-seal-context"></a>
 
-A heavyweight class constructucted from the ASLEncryptionParameters.
+A heavyweight class constructed from the ASLEncryptionParameters.
 
 ### ASLKeyGenerator  <a name="asl-key-generator"></a>
 
-Generates matching secret key and public key also used to construct Galois Keys and Relineraization Keys.
+Generates matching secret key and public key also used to construct Galois Keys and Relinearization Keys.
 
 ### ASLPlainText  <a name="asl-plain-text"></a>
 
@@ -86,7 +86,7 @@ plaintext polynomials to be encrypted and computed on using the CKKS scheme.
 
 ### ASLIntegerEncoder <a name="asl-integerEncoder"></a>
 
-Encodes integers into plaintext polynomials that Encryptor can encryp
+Encodes integers into plaintext polynomials that Encryptor can encrypt
 
 ### ASLEncryptor  <a name="asl-encryptor"></a>
 
@@ -106,4 +106,4 @@ Learn more about Homomorphic Encrytion and [Seal](https://www.microsoft.com/en-u
 
 # Getting Help <a name="getting-help"></a>
 
-Feel free to open up issues about questions, problems, or ideas. Aleays looking for more contributions!
+Feel free to open up issues about questions, problems, or ideas. Always looking for more contributions!
