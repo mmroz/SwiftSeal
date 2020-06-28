@@ -32,7 +32,7 @@ The framework has no minimum version.
 
 * [Microsoft Seal](https://github.com/microsoft/SEAL) 
 
-### Installation <a name=installation"></a>
+### Installation <a name="installation"></a>
 
 Checkout the Microsoft Seal libaray on the `contrib` branch
 
