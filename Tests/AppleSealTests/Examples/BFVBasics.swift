@@ -349,7 +349,7 @@ class BFVBasics: XCTestCase {
         print()
         
         print("Compute xPlusOne (x+1), 12 then compute and relinearize xPlusOneSq ((x+1)^2).")
-        var xPlusOne = try evaluator.addPlain(xEncrypted, plain: plainOne)
+        let xPlusOne = try evaluator.addPlain(xEncrypted, plain: plainOne)
         xPlusOneSq = try evaluator.square(xPlusOne)
         print("    + size of xPlusOneSq: {\(xPlusOneSq.size)}")
         xPlusOneSq = try evaluator.relinearizeInplace(xPlusOneSq, relinearizationKeys: relinKeys)
