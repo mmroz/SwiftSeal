@@ -1,6 +1,6 @@
 # Swift Seal
 
-An Objective-C++ wrapper around  [Microsoft Seal](https://github.com/microsoft/SEAL) with ergonomic Swift bindings. The framework prodvides out of the box Swift functionality to perofm homorphic encrytions and perform arithmetic operations on encoded data. It is written as a swift package and currently supported on iOS.
+An Objective-C++ wrapper around  [Microsoft Seal](https://github.com/microsoft/SEAL) with ergonomic Swift bindings. The framework prodvides out of the box Swift functionality to perform homomorphic encryptions and perform arithmetic operations on encoded data. It is written as a swift package and currently supported on iOS.
 
 # Table of Contents
 * [Requirements](#requirements)
@@ -40,7 +40,7 @@ Checkout the Microsoft Seal libaray on the `contrib` branch
 git clone -b contrib https://github.com/microsoft/SEAL.git
 cd SEAL
 make .
-cmake . -DSEAL_USE_ZLIB=OFF -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Debug
+cmake . -DBUILD_SHARED_LIBS=ON -DCMAKE_BUILD_TYPE=Debug
 ```
 This will build SEAL without ZLIB and in Debug mode and generate PKGConfig file.
 
