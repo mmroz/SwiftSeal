@@ -48,7 +48,7 @@ Then install AppleSeal via SPM. Create a new Xcode project and navigate to `File
 
 ### Examples <a name="asl-examples"></a>
 
-AppleSeal has a number of examples that are used to show basic usage of Swift Seal. The [Examples in AppleSeal](https://github.com/mmroz/AppleSeal/tree/master/Tests/AppleSealTests/Examples). These are meant to replicate the [Examples in SEAL](https://github.com/microsoft/SEAL/tree/master/native/examples) 
+AppleSeal has a number of examples that are used to show basic usage of Swift Seal. The [Examples in AppleSeal](https://github.com/mmroz/SwiftSeal/tree/master/Tests/AppleSealTests/Examples). These are meant to replicate the [Examples in SEAL](https://github.com/microsoft/SEAL/tree/master/native/examples)
 
 # Components <a name="components"></a>
 
